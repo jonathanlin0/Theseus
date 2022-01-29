@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 # the player's movement speed
-const SPEED = 75
+const SPEED = 10000
 
 # velocity is the player's movement
 var velocity = Vector2()
@@ -13,16 +13,20 @@ var direction = "right"
 
 func _physics_process(delta):
 	
+	# update the master_data values
+	master_data.player_x = position.x
+	master_data.player_y = position.y
+	
 	# movement logic
 	if Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a"):
 		direction = "right"
 		$CharacterAnimatedSprite.play("run_right")
-		velocity.x = SPEED
+		velocity.x = SPEED * delta
 	
 	if Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
 		direction = "left"
 		$CharacterAnimatedSprite.play("run_left")
-		velocity.x = -SPEED
+		velocity.x = -SPEED * delta
 		
 	elif !Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
 		velocity.x = 0
@@ -32,13 +36,13 @@ func _physics_process(delta):
 		if !Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
 			$CharacterAnimatedSprite.play("run_up")
 			direction = "up"
-		velocity.y = -SPEED
+		velocity.y = -SPEED * delta
 	
 	if Input.is_action_pressed("ui_s"):
 		if !Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
 			$CharacterAnimatedSprite.play("run_down")
 			direction = "down"
-		velocity.y = SPEED
+		velocity.y = SPEED * delta
 		
 	elif !Input.is_action_pressed("ui_w") and !Input.is_action_pressed("ui_s"):
 		velocity.y = 0

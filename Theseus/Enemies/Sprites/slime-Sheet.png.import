@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/theseus_walk_front.png-025d93a0cbed027644196d7dba657294.stex"
+path="res://.import/slime-Sheet.png-28d2238268c01cfa5e469d8363e57fe6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Sprites/theseus_walk_front.png"
-dest_files=[ "res://.import/theseus_walk_front.png-025d93a0cbed027644196d7dba657294.stex" ]
+source_file="res://Enemies/Sprites/slime-Sheet.png"
+dest_files=[ "res://.import/slime-Sheet.png-28d2238268c01cfa5e469d8363e57fe6.stex" ]
 
 [params]
 
