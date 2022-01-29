@@ -218,7 +218,6 @@ script = ExtResource( 5 )
 [node name="CharacterAnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
 animation = "run_right"
-frame = 3
 playing = true
 
 [node name="MainCollisionBox" type="CollisionShape2D" parent="."]
