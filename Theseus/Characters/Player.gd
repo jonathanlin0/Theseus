@@ -10,18 +10,16 @@ var sword_swinging = false
 var direction = "right"
 
 
+
 const FIREBALL = preload("res://Weapons/Fireball.tscn")
 
 func _input(event):
 	
 	if event is InputEventMouseButton:
-		var fireball = FIREBALL.instance()
-		get_parent().add_child(fireball)
-		fireball.position = $Weapon_Holder.global_position
-		#print(position.distance_to(event.position))
-		#print(global_position)
+		pass
 
 func _physics_process(delta):
+	
 	
 	
 	var speed = master_data.player_speed
@@ -30,7 +28,13 @@ func _physics_process(delta):
 	master_data.player_x = position.x
 	master_data.player_y = position.y
 	
-	$CanvasLayer/MarginContainer/TextureProgress.value = 5
+	# update the health & mana bars
+	
+	$CanvasLayer/MarginContainer/VBoxContainer/HealthBar.value = master_data.health
+	$CanvasLayer/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + "100"
+	
+	$CanvasLayer/MarginContainer/VBoxContainer/ManaBar.value = master_data.mana
+	$CanvasLayer/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + "100"
 	
 	# movement logic
 	if Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a"):
@@ -85,6 +89,24 @@ func _physics_process(delta):
 		if direction == "right":
 			$SwordAnimation.play("right")
 	
+	if Input.is_action_just_pressed("mouse_left_click") and master_data.mana > master_data.fireball_cost:
+		master_data.mana -= master_data.fireball_cost
+		
+		var fireball = FIREBALL.instance()
+		get_parent().add_child(fireball)
+		fireball.position = $Weapon_Holder.global_position
+		
+		# rotate the fireball to face the direction of the mouse
+		var mouseX = get_local_mouse_position().x
+		var mouseY = get_local_mouse_position().y
+		
+		# fireball is backwards when x is neg
+		var rad = atan(mouseY/mouseX)
+		if mouseX<0:
+			rad += PI
+		
+		fireball.rotate(rad)
+	
 	if $SwordAnimation.is_playing():
 		# will put code here to damage enemies
 		pass
@@ -96,3 +118,8 @@ func _on_SwordAnimation_animation_finished():
 	sword_swinging = false
 	$SwordAnimation.playing = false
 	$SwordAnimation.visible = false
+
+
+func _on_ManaRecharge_timeout():
+	if master_data.mana < 100:
+		master_data.mana += 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Characters/Sprites/theseus_walk_left.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Sprites/theseus_idle_right.png" type="Texture" id=2]
@@ -14,8 +14,9 @@
 [ext_resource path="res://Characters/Sprites/theseus_sword_up.png" type="Texture" id=12]
 [ext_resource path="res://Characters/Sprites/theseus_walk_up.png" type="Texture" id=13]
 [ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=14]
-[ext_resource path="res://Misc/Sprites/white_bar.png" type="Texture" id=15]
+[ext_resource path="res://Misc/Sprites/blue_bar.png" type="Texture" id=15]
 [ext_resource path="res://Misc/Sprites/black_bar.png" type="Texture" id=16]
+[ext_resource path="res://Misc/Sprites/red_bar.png" type="Texture" id=17]
 
 [sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 8 )
@@ -216,6 +217,7 @@ animations = [ {
 } ]
 
 [sub_resource type="DynamicFont" id=57]
+size = 10
 font_data = ExtResource( 14 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -232,7 +234,6 @@ shape = SubResource( 18 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 smoothing_enabled = true
-smoothing_speed = 3.0
 
 [node name="SwordAnimation" type="AnimatedSprite" parent="."]
 visible = false
@@ -243,31 +244,66 @@ playing = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-margin_right = 480.0
-margin_bottom = 270.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 485.0
+margin_bottom = 275.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
 margin_right = 480.0
 margin_bottom = 270.0
+rect_min_size = Vector2( 100, 10 )
+
+[node name="HealthBar" type="TextureProgress" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+margin_right = 480.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 200, 0 )
+value = 20.0
+texture_under = ExtResource( 16 )
+texture_progress = ExtResource( 17 )
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HealthBar"]
+margin_left = 103.0
+margin_top = -6.0
+margin_right = 203.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 57 )
+text = "5/20"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaBar" type="TextureProgress" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+margin_top = 14.0
+margin_right = 480.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 200, 0 )
 value = 20.0
 texture_under = ExtResource( 16 )
 texture_progress = ExtResource( 15 )
 
-[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/TextureProgress"]
-margin_right = 100.0
-margin_bottom = 20.0
+[node name="ManaLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/ManaBar"]
+margin_left = 103.0
+margin_top = -6.0
+margin_right = 203.0
+margin_bottom = 14.0
 custom_fonts/font = SubResource( 57 )
 text = "5/20"
-align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Weapon_Holder" type="Position2D" parent="."]
+position = Vector2( 0, 4 )
+
+[node name="ManaRecharge" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
 
 [connection signal="animation_finished" from="SwordAnimation" to="." method="_on_SwordAnimation_animation_finished"]
+[connection signal="timeout" from="ManaRecharge" to="." method="_on_ManaRecharge_timeout"]

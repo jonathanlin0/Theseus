@@ -13,6 +13,16 @@ extents = Vector2( 8, 8 )
 [node name="2x_Speed" type="Area2D"]
 script = ExtResource( 2 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label" type="Label" parent="."]
 margin_left = -8.0
 margin_top = -8.0
@@ -28,6 +38,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
