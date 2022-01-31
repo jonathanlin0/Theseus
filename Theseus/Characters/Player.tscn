@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Characters/Sprites/theseus_walk_left.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Sprites/theseus_idle_right.png" type="Texture" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://Characters/Sprites/theseus_sword_left.png" type="Texture" id=11]
 [ext_resource path="res://Characters/Sprites/theseus_sword_up.png" type="Texture" id=12]
 [ext_resource path="res://Characters/Sprites/theseus_walk_up.png" type="Texture" id=13]
+[ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://Misc/Sprites/white_bar.png" type="Texture" id=15]
+[ext_resource path="res://Misc/Sprites/black_bar.png" type="Texture" id=16]
 
 [sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 8 )
@@ -212,6 +215,9 @@ animations = [ {
 "speed": 8.0
 } ]
 
+[sub_resource type="DynamicFont" id=57]
+font_data = ExtResource( 14 )
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 5 )
 
@@ -232,7 +238,36 @@ smoothing_speed = 3.0
 visible = false
 frames = SubResource( 24 )
 animation = "left"
-frame = 2
 playing = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+margin_right = 480.0
+margin_bottom = 270.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/MarginContainer"]
+margin_right = 480.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 200, 0 )
+value = 20.0
+texture_under = ExtResource( 16 )
+texture_progress = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/TextureProgress"]
+margin_right = 100.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 57 )
+text = "5/20"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon_Holder" type="Position2D" parent="."]
 
 [connection signal="animation_finished" from="SwordAnimation" to="." method="_on_SwordAnimation_animation_finished"]

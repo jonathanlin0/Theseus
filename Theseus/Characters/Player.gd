@@ -9,13 +9,28 @@ var sword_swinging = false
 
 var direction = "right"
 
+
+const FIREBALL = preload("res://Weapons/Fireball.tscn")
+
+func _input(event):
+	
+	if event is InputEventMouseButton:
+		var fireball = FIREBALL.instance()
+		get_parent().add_child(fireball)
+		fireball.position = $Weapon_Holder.global_position
+		#print(position.distance_to(event.position))
+		#print(global_position)
+
 func _physics_process(delta):
+	
 	
 	var speed = master_data.player_speed
 	
 	# update the master_data values
 	master_data.player_x = position.x
 	master_data.player_y = position.y
+	
+	$CanvasLayer/MarginContainer/TextureProgress.value = 5
 	
 	# movement logic
 	if Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a"):

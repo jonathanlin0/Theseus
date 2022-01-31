@@ -1,8 +1,8 @@
 [gd_scene load_steps=54 format=2]
 
-[ext_resource path="res://TileSets/Sprites/3x3_minimal_autotiles.png" type="Texture" id=1]
+[ext_resource path="res://Tile_Sets/Sprites/3x3_minimal_autotiles.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://TileSets/green_tiles.tres" type="TileSet" id=3]
+[ext_resource path="res://Tile_Sets/green_tiles.tres" type="TileSet" id=3]
 [ext_resource path="res://Enemies/Slime.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Power_Ups/2x_Speed.tscn" type="PackedScene" id=5]
 

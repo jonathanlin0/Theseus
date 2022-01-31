@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/3x3_minimal_autotiles.png-9b8b2e0fb7eedd07a029282065659897.stex"
+path="res://.import/white_bar.png-9723e92c619c587027be4ccd679049d1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TileSets/Sprites/3x3_minimal_autotiles.png"
-dest_files=[ "res://.import/3x3_minimal_autotiles.png-9b8b2e0fb7eedd07a029282065659897.stex" ]
+source_file="res://Misc/Sprites/white_bar.png"
+dest_files=[ "res://.import/white_bar.png-9723e92c619c587027be4ccd679049d1.stex" ]
 
 [params]
 
