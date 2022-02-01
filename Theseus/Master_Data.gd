@@ -13,10 +13,13 @@ var player_y = 0
 
 # collection of all the speeds
 var player_speed = 7500
-var fireball_speed = 170
+var fireball_speed = 180
 
 # how much energy each attack costs
 var fireball_cost = 5
+
+# how much damage each attack does
+var fireball_damage = 10
 
 func x_direction(x_body, x_other_object):
 	var out = 0
