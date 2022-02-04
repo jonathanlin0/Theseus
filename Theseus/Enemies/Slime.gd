@@ -57,6 +57,7 @@ func damage(dmg):
 func dead():
 	currently_popping = true
 	previous_animation = "pop"
+	$CollisionShape2D.disabled = true
 	$AnimatedSprite.play("pop")
 
 func _on_AnimatedSprite_animation_finished():

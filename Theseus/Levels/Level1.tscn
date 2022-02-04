@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Tile_Sets/tileset_blue.tres" type="TileSet" id=1]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enemies/Slime.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Misc/Pause.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Power_Ups/2x_Speed.tscn" type="PackedScene" id=5]
 
-[node name="Stage1" type="Node2D"]
+[node name="Level1" type="Node2D"]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 4 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )

@@ -51,4 +51,10 @@ func damage(dmg):
 	health -= dmg
 
 func dead():
-	queue_free()
+	$AnimatedSprite.play("death")
+	$CollisionShape2D.disabled = true
+	is_dead = true
+
+func _on_AnimatedSprite_animation_finished():
+	if is_dead == true:
+		queue_free()

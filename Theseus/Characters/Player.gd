@@ -32,11 +32,11 @@ func _physics_process(delta):
 	
 	# update the health & mana bars
 	
-	$CanvasLayer/MarginContainer/VBoxContainer/HealthBar.value = master_data.health
-	$CanvasLayer/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + "100"
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar.value = master_data.health
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + "100"
 	
-	$CanvasLayer/MarginContainer/VBoxContainer/ManaBar.value = master_data.mana
-	$CanvasLayer/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + "100"
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar.value = master_data.mana
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + "100"
 	
 	# movement logic
 	if Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a"):

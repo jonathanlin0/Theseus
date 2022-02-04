@@ -83,7 +83,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 15 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -96,3 +96,5 @@ margin_top = -10.0
 margin_right = 90.0
 margin_bottom = 30.0
 rect_scale = Vector2( 0.2, 0.2 )
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

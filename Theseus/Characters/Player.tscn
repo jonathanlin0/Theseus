@@ -238,7 +238,7 @@ script = ExtResource( 5 )
 [node name="CharacterAnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
 animation = "run_right"
-frame = 2
+frame = 3
 playing = true
 
 [node name="MainCollisionBox" type="CollisionShape2D" parent="."]
@@ -253,7 +253,6 @@ smoothing_enabled = true
 visible = false
 frames = SubResource( 24 )
 animation = "down"
-frame = 1
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]
@@ -283,9 +282,9 @@ shape = SubResource( 80 )
 position = Vector2( 0, -15 )
 shape = SubResource( 81 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="StatusBars" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="MarginContainer" type="MarginContainer" parent="StatusBars"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 485.0
@@ -294,12 +293,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StatusBars/MarginContainer"]
 margin_right = 480.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 100, 10 )
 
-[node name="HealthBar" type="TextureProgress" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="HealthBar" type="TextureProgress" parent="StatusBars/MarginContainer/VBoxContainer"]
 margin_right = 480.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 200, 0 )
@@ -307,7 +306,7 @@ value = 20.0
 texture_under = ExtResource( 16 )
 texture_progress = ExtResource( 17 )
 
-[node name="HealthLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HealthBar"]
+[node name="HealthLabel" type="Label" parent="StatusBars/MarginContainer/VBoxContainer/HealthBar"]
 margin_left = 103.0
 margin_top = -6.0
 margin_right = 203.0
@@ -319,7 +318,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ManaBar" type="TextureProgress" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="ManaBar" type="TextureProgress" parent="StatusBars/MarginContainer/VBoxContainer"]
 margin_top = 14.0
 margin_right = 480.0
 margin_bottom = 24.0
@@ -328,7 +327,7 @@ value = 20.0
 texture_under = ExtResource( 16 )
 texture_progress = ExtResource( 15 )
 
-[node name="ManaLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/ManaBar"]
+[node name="ManaLabel" type="Label" parent="StatusBars/MarginContainer/VBoxContainer/ManaBar"]
 margin_left = 103.0
 margin_top = -6.0
 margin_right = 203.0
