@@ -15,6 +15,7 @@ var player_y = 0
 
 # collection of all the enemies' health
 var slime_health = 50
+var small_slime_health = 30
 
 # collection of all the speeds
 var player_speed = 7500

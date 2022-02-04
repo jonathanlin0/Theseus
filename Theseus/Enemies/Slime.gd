@@ -14,7 +14,13 @@ var previous_animation = "idle"
 # makes sure that the player can't damage the slime while it's dying
 var currently_popping = false
 
+func _ready():
+	$Health_Bar.setMax(master_data.slime_health)
+
 func _physics_process(delta):
+	
+	$Health_Bar.setValue(health)
+	
 	
 	if currently_popping == false:
 	

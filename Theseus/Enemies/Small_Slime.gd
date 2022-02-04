@@ -3,7 +3,7 @@ extends KinematicBody2D
 # the velocity vector that changes to try to chase the player around
 var velocity = Vector2(10,0)
 
-var health = master_data.slime_health
+var health = master_data.small_slime_health
 var is_dead = false
 
 var previous_animation = "idle"
@@ -11,7 +11,12 @@ var previous_animation = "idle"
 # makes sure that the player can't damage the slime while it's dying
 var currently_popping = false
 
+func _ready():
+	$Health_Bar.setMax(master_data.small_slime_health)
+
 func _physics_process(delta):
+	
+	$Health_Bar.setValue(health)
 	
 	if currently_popping == false:
 	
@@ -46,6 +51,4 @@ func damage(dmg):
 	health -= dmg
 
 func dead():
-	currently_popping = true
-	previous_animation = "pop"
-	$AnimatedSprite.play("pop")
+	queue_free()
