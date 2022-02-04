@@ -6,9 +6,6 @@ var velocity = Vector2(10,0)
 var health = master_data.slime_health
 var is_dead = false
 
-# the object used to spawn the 2 children slime
-const SMALL_SLIME = preload("res://Enemies/Small_Slime.tscn")
-
 var previous_animation = "idle"
 
 # makes sure that the player can't damage the slime while it's dying
@@ -52,17 +49,3 @@ func dead():
 	currently_popping = true
 	previous_animation = "pop"
 	$AnimatedSprite.play("pop")
-
-func _on_AnimatedSprite_animation_finished():
-	if previous_animation == "pop":
-		
-		# spawns two slimes after death
-		var small_slime_left = SMALL_SLIME.instance()
-		get_parent().add_child(small_slime_left)
-		small_slime_left.position = $SlimeSpawnLeft.global_position
-		
-		var small_slime_right = SMALL_SLIME.instance()
-		get_parent().add_child(small_slime_right)
-		small_slime_right.position = $SlimeSpawnRight.global_position
-		
-		queue_free()
