@@ -26,5 +26,8 @@ func _physics_process(delta):
 
 
 func _on_Fireball_body_entered(body):
-	if body.name.find("Player") == -1:
-		queue_free()
+	if body.name != "Player":
+		for enemy in master_data.enemy_names:
+			if body.name.find(enemy) != -1:
+				body.damage(master_data.fireball_damage)
+				queue_free()

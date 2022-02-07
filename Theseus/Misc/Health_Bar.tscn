@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Misc/Sprites/dark_red_bar.png" type="Texture" id=1]
+[ext_resource path="res://Misc/Sprites/green_bar.png" type="Texture" id=2]
+[ext_resource path="res://Misc/Health_Bar.gd" type="Script" id=3]
+
+[node name="Health_Bar" type="TextureProgress"]
+margin_right = 40.0
+margin_bottom = 40.0
+value = 80.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

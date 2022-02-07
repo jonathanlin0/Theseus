@@ -9,6 +9,8 @@ var sword_swinging = false
 
 var direction = "right"
 
+# used so that the player can only damage an enemy once per swing
+var can_damage = true
 
 
 const FIREBALL = preload("res://Weapons/Fireball.tscn")
@@ -30,11 +32,11 @@ func _physics_process(delta):
 	
 	# update the health & mana bars
 	
-	$CanvasLayer/MarginContainer/VBoxContainer/HealthBar.value = master_data.health
-	$CanvasLayer/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + "100"
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar.value = master_data.health
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + "100"
 	
-	$CanvasLayer/MarginContainer/VBoxContainer/ManaBar.value = master_data.mana
-	$CanvasLayer/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + "100"
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar.value = master_data.mana
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + "100"
 	
 	# movement logic
 	if Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a"):
@@ -107,15 +109,31 @@ func _physics_process(delta):
 		
 		fireball.rotate(rad)
 	
-	if $SwordAnimation.is_playing():
-		# will put code here to damage enemies
-		pass
+	if $SwordAnimation.is_playing() and can_damage == true:
+		can_damage = false
+		
+		var area = $SwordSwingAreas/LeftSwordArea
+		
+		if $SwordAnimation.animation == "left":
+			area = $SwordSwingAreas/LeftSwordArea
+		if $SwordAnimation.animation == "right":
+			area = $SwordSwingAreas/RightSwordArea
+		if $SwordAnimation.animation == "down":
+			area = $SwordSwingAreas/DownSwordArea
+		if $SwordAnimation.animation == "up":
+			area = $SwordSwingAreas/UpSwordArea
+		
+		for obj in area.get_overlapping_bodies():
+			for enemy_name in master_data.enemy_names:
+				if enemy_name in obj.name:
+					obj.damage(master_data.sword_damage)
 		
 	velocity = move_and_slide(velocity)
 
 
 func _on_SwordAnimation_animation_finished():
 	sword_swinging = false
+	can_damage = true
 	$SwordAnimation.playing = false
 	$SwordAnimation.visible = false
 

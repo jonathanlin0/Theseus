@@ -4,12 +4,18 @@ extends Node
 # used to hold information and other global, useful functions
 # similar attributes grouped together for easier balance changes
 
+var enemy_names = ["Slime", "Small_Slime"]
+
 var health = 100
 var mana = 100
 var level = 1
 
 var player_x = 0
 var player_y = 0
+
+# collection of all the enemies' health
+var slime_health = 50
+var small_slime_health = 30
 
 # collection of all the speeds
 var player_speed = 7500
@@ -19,6 +25,7 @@ var fireball_speed = 180
 var fireball_cost = 5
 
 # how much damage each attack does
+var sword_damage = 10
 var fireball_damage = 10
 
 func x_direction(x_body, x_other_object):
