@@ -1,7 +1,11 @@
 extends KinematicBody2D
 
 # the velocity vector that changes to try to chase the player around
-var velocity = Vector2(10,0)
+var velocity = Vector2(100,0)
+
+
+
+
 
 func _physics_process(delta):
 	var difference_x = master_data.player_x - position.x

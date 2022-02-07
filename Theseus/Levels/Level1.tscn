@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Tile_Sets/tileset_blue.tres" type="TileSet" id=1]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemies/Slime.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Power_Ups/2x_Speed.tscn" type="PackedScene" id=5]
 
 [node name="Stage1" type="Node2D"]
@@ -17,3 +18,9 @@ position = Vector2( 45, 47 )
 
 [node name="2x_Speed" parent="." instance=ExtResource( 5 )]
 position = Vector2( 106, 69 )
+
+[node name="Slime" parent="." instance=ExtResource( 3 )]
+position = Vector2( 230, 55 )
+
+[node name="Slime2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 286, -54 )
