@@ -30,4 +30,8 @@ func _on_Fireball_body_entered(body):
 		for enemy in master_data.enemy_names:
 			if body.name.find(enemy) != -1:
 				body.damage(master_data.fireball_damage)
+				
 				queue_free()
+	if body.name == "black00" or body.name == "black01":
+		$AnimatedSprite.play("fireStop")
+		queue_free()
