@@ -61,7 +61,7 @@ animations = [ {
 "frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
 "name": "fireStop",
-"speed": 3.0
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=9]
@@ -72,7 +72,7 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 8 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -83,3 +83,4 @@ shape = SubResource( 9 )
 visible = false
 
 [connection signal="body_entered" from="." to="." method="_on_Fireball_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
