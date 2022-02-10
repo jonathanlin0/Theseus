@@ -25,7 +25,7 @@ var fireball_speed = 180
 var fireball_cost = 5
 
 # how much damage each attack does
-var sword_damage = 10
+var sword_damage = 20
 var fireball_damage = 10
 
 func x_direction(x_body, x_other_object):

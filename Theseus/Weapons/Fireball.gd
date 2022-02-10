@@ -6,7 +6,7 @@ var unit_vector = Vector2(0,0)
 var mouse_position = position
 
 var hitSomething = false;
-var previous_animation = "";
+#var previous_animation = "";
 
 
 
@@ -45,12 +45,13 @@ func _on_Fireball_body_entered(body):
 				queue_free()
 	if body.name == "TileMap":
 		hitSomething = true;
-		previous_animation = "fireStop"
+		#previous_animation = "fireStop"
 		$AnimatedSprite.play("fireStop")
+		$CollisionShape2D.disabled = true
 		velocity = Vector2(0,0);
 		#queue_free()
 
 func _on_AnimatedSprite_animation_finished():
-	print("REEEE");
+	#print("REEEE");
 	if hitSomething:
 		queue_free()
