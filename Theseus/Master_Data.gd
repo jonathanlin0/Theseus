@@ -17,6 +17,8 @@ var player_y = 0
 var slime_health = 50
 var small_slime_health = 30
 
+var snake_health = 40
+
 # collection of all the speeds
 var player_speed = 7500
 var fireball_speed = 180
