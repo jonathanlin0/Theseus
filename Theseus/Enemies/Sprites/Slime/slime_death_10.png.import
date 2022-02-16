@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/big_slime.png-d3351c3c01003b1f653241f6e372dd7e.stex"
+path="res://.import/slime_death_10.png-53fa1aaf8ac1c3288ad946f2b6a32180.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemies/Sprites/big_slime.png"
-dest_files=[ "res://.import/big_slime.png-d3351c3c01003b1f653241f6e372dd7e.stex" ]
+source_file="res://Enemies/Sprites/Slime/slime_death_10.png"
+dest_files=[ "res://.import/slime_death_10.png-53fa1aaf8ac1c3288ad946f2b6a32180.stex" ]
 
 [params]
 

@@ -11,7 +11,7 @@ var health = master_data.slime_health
 var is_dead = false
 
 # the object used to spawn the 2 children slime
-const SMALL_SLIME = preload("res://Enemies/Small_Slime.tscn")
+const SMALL_SLIME = preload("res://Enemies/Slime/Small_Slime.tscn")
 
 var previous_animation = "idle"
 
