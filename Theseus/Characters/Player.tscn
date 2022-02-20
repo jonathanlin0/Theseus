@@ -1,0 +1,350 @@
+[gd_scene load_steps=58 format=2]
+
+[ext_resource path="res://Characters/Sprites/theseus_walk_down_shadow.png" type="Texture" id=1]
+[ext_resource path="res://Characters/Sprites/theseus_walk_up_shadow.png" type="Texture" id=2]
+[ext_resource path="res://Characters/Sprites/theseus_idle_right_shadow.png" type="Texture" id=3]
+[ext_resource path="res://Characters/Sprites/theseus_walk_right_shadow.png" type="Texture" id=4]
+[ext_resource path="res://Characters/Player.gd" type="Script" id=5]
+[ext_resource path="res://Characters/Sprites/theseus_idle_back_shadow.png" type="Texture" id=6]
+[ext_resource path="res://Characters/Sprites/theseus_sword_down.png" type="Texture" id=7]
+[ext_resource path="res://Characters/Sprites/theseus_walk_left_shadow.png" type="Texture" id=8]
+[ext_resource path="res://Characters/Sprites/theseus_idle_left_shadow.png" type="Texture" id=9]
+[ext_resource path="res://Characters/Sprites/theseus_sword_right.png" type="Texture" id=10]
+[ext_resource path="res://Characters/Sprites/theseus_sword_left.png" type="Texture" id=11]
+[ext_resource path="res://Characters/Sprites/theseus_sword_up.png" type="Texture" id=12]
+[ext_resource path="res://Characters/Sprites/theseus_idle_front_shadow.png" type="Texture" id=13]
+[ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://Misc/Sprites/blue_bar.png" type="Texture" id=15]
+[ext_resource path="res://Misc/Sprites/black_bar.png" type="Texture" id=16]
+[ext_resource path="res://Misc/Sprites/red_bar.png" type="Texture" id=17]
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=76]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 8 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 8 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 8 )
+region = Rect2( 48, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=77]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=72]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=73]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=74]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=75]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 16, 32 )
+
+[sub_resource type="SpriteFrames" id=17]
+animations = [ {
+"frames": [ SubResource( 58 ) ],
+"loop": true,
+"name": "idle_left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 76 ) ],
+"loop": true,
+"name": "idle_right",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ) ],
+"loop": true,
+"name": "run_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ) ],
+"loop": true,
+"name": "run_left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 67 ) ],
+"loop": true,
+"name": "idle_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 77 ) ],
+"loop": true,
+"name": "idle_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ) ],
+"loop": true,
+"name": "run_right",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ) ],
+"loop": true,
+"name": "run_up",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=18]
+radius = 8.0
+height = 11.0
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 46, 41 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 41, 46, 41 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 82, 46, 41 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 46, 41 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 41, 46, 41 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 82, 46, 41 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 41, 46 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 12 )
+region = Rect2( 41, 0, 41, 46 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 12 )
+region = Rect2( 82, 0, 41, 46 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 41, 46 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 7 )
+region = Rect2( 41, 0, 41, 46 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 7 )
+region = Rect2( 82, 0, 41, 46 )
+
+[sub_resource type="SpriteFrames" id=24]
+animations = [ {
+"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
+"loop": true,
+"name": "left",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": true,
+"name": "right",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
+"loop": true,
+"name": "up",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"loop": true,
+"name": "down",
+"speed": 8.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=78]
+extents = Vector2( 8, 20 )
+
+[sub_resource type="RectangleShape2D" id=79]
+extents = Vector2( 8, 20 )
+
+[sub_resource type="RectangleShape2D" id=80]
+extents = Vector2( 20, 8 )
+
+[sub_resource type="RectangleShape2D" id=81]
+extents = Vector2( 20, 8 )
+
+[sub_resource type="DynamicFont" id=57]
+size = 10
+font_data = ExtResource( 14 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 5 )
+
+[node name="CharacterAnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 17 )
+animation = "run_right"
+frame = 2
+playing = true
+
+[node name="MainCollisionBox" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 18 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+
+[node name="SwordAnimation" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 24 )
+animation = "down"
+playing = true
+
+[node name="SwordSwingAreas" type="Position2D" parent="."]
+visible = false
+
+[node name="LeftSwordArea" type="Area2D" parent="SwordSwingAreas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwingAreas/LeftSwordArea"]
+position = Vector2( -15, 0 )
+shape = SubResource( 78 )
+
+[node name="RightSwordArea" type="Area2D" parent="SwordSwingAreas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwingAreas/RightSwordArea"]
+position = Vector2( 15, 0 )
+shape = SubResource( 79 )
+
+[node name="DownSwordArea" type="Area2D" parent="SwordSwingAreas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwingAreas/DownSwordArea"]
+position = Vector2( 0, 15 )
+shape = SubResource( 80 )
+
+[node name="UpSwordArea" type="Area2D" parent="SwordSwingAreas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwingAreas/UpSwordArea"]
+position = Vector2( 0, -15 )
+shape = SubResource( 81 )
+
+[node name="StatusBars" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="StatusBars"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 485.0
+margin_bottom = 275.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatusBars/MarginContainer"]
+margin_right = 480.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 100, 10 )
+
+[node name="HealthBar" type="TextureProgress" parent="StatusBars/MarginContainer/VBoxContainer"]
+margin_right = 480.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 200, 0 )
+value = 20.0
+texture_under = ExtResource( 16 )
+texture_progress = ExtResource( 17 )
+
+[node name="HealthLabel" type="Label" parent="StatusBars/MarginContainer/VBoxContainer/HealthBar"]
+margin_left = 103.0
+margin_top = -6.0
+margin_right = 203.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 57 )
+text = "20/100"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaBar" type="TextureProgress" parent="StatusBars/MarginContainer/VBoxContainer"]
+margin_top = 14.0
+margin_right = 480.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 200, 0 )
+value = 20.0
+texture_under = ExtResource( 16 )
+texture_progress = ExtResource( 15 )
+
+[node name="ManaLabel" type="Label" parent="StatusBars/MarginContainer/VBoxContainer/ManaBar"]
+margin_left = 103.0
+margin_top = -6.0
+margin_right = 203.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 57 )
+text = "20/100"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon_Holder" type="Position2D" parent="."]
+position = Vector2( 0, 4 )
+
+[node name="ManaRecharge" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="animation_finished" from="SwordAnimation" to="." method="_on_SwordAnimation_animation_finished"]
+[connection signal="timeout" from="ManaRecharge" to="." method="_on_ManaRecharge_timeout"]
