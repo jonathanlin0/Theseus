@@ -66,46 +66,6 @@ flags = 8
 atlas = ExtResource( 3 )
 region = Rect2( 480, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=13]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=14]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 96, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=15]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 192, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=16]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 288, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=17]
-flags = 8
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=18]
-flags = 8
-atlas = ExtResource( 5 )
-region = Rect2( 96, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=19]
-flags = 8
-atlas = ExtResource( 5 )
-region = Rect2( 192, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=20]
-flags = 8
-atlas = ExtResource( 5 )
-region = Rect2( 288, 0, 96, 96 )
-
 [sub_resource type="AtlasTexture" id=21]
 flags = 8
 atlas = ExtResource( 1 )
@@ -151,6 +111,46 @@ flags = 8
 atlas = ExtResource( 1 )
 region = Rect2( 768, 0, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=13]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 288, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 8
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 8
+atlas = ExtResource( 5 )
+region = Rect2( 96, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 8
+atlas = ExtResource( 5 )
+region = Rect2( 192, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 8
+atlas = ExtResource( 5 )
+region = Rect2( 288, 0, 96, 96 )
+
 [sub_resource type="SpriteFrames" id=30]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
@@ -163,6 +163,11 @@ animations = [ {
 "name": "Attack",
 "speed": 7.0
 }, {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"loop": true,
+"name": "Death",
+"speed": 2.0
+}, {
 "frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
 "name": "Slither Dmg",
@@ -172,11 +177,6 @@ animations = [ {
 "loop": true,
 "name": "Slither",
 "speed": 7.0
-}, {
-"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
-"name": "Death",
-"speed": 2.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=31]
@@ -185,12 +185,12 @@ extents = Vector2( 24.75, 6.5625 )
 [sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 6, 7.5 )
 
-[node name="Node2D" type="KinematicBody2D"]
+[node name="SnakeDmg" type="KinematicBody2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 30 )
 animation = "Slither"
-frame = 3
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

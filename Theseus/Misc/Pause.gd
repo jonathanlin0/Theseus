@@ -26,4 +26,4 @@ func _on_Restart_pressed():
 
 func _on_Exit_pressed():
 	pause()
-	get_tree().change_scene("res://Misc/Title_Screen.tscn")
+	get_tree().change_scene("res://Menu/Title_Screen.tscn")

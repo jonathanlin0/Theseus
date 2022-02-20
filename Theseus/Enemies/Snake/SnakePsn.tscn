@@ -6,26 +6,6 @@
 [ext_resource path="res://Enemies/Sprites/Snake/snake_poison_attack_6.png" type="Texture" id=4]
 [ext_resource path="res://Enemies/Sprites/Snake/snake_poison_damaged_slither_4.png" type="Texture" id=5]
 
-[sub_resource type="AtlasTexture" id=6]
-flags = 8
-atlas = ExtResource( 5 )
-region = Rect2( 96, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=7]
-flags = 8
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=8]
-flags = 8
-atlas = ExtResource( 5 )
-region = Rect2( 192, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=9]
-flags = 8
-atlas = ExtResource( 5 )
-region = Rect2( 288, 0, 96, 96 )
-
 [sub_resource type="AtlasTexture" id=10]
 flags = 8
 atlas = ExtResource( 4 )
@@ -55,6 +35,51 @@ region = Rect2( 384, 0, 96, 96 )
 flags = 8
 atlas = ExtResource( 4 )
 region = Rect2( 480, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 8
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 8
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 8
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 8
+atlas = ExtResource( 2 )
+region = Rect2( 288, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 8
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 8
+atlas = ExtResource( 2 )
+region = Rect2( 480, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 8
+atlas = ExtResource( 2 )
+region = Rect2( 576, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 8
+atlas = ExtResource( 2 )
+region = Rect2( 672, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 8
+atlas = ExtResource( 2 )
+region = Rect2( 768, 0, 96, 96 )
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 8
@@ -106,61 +131,36 @@ flags = 8
 atlas = ExtResource( 3 )
 region = Rect2( 480, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=6]
 flags = 8
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=23]
-flags = 8
-atlas = ExtResource( 2 )
+atlas = ExtResource( 5 )
 region = Rect2( 96, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=7]
 flags = 8
-atlas = ExtResource( 2 )
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 8
+atlas = ExtResource( 5 )
 region = Rect2( 192, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=9]
 flags = 8
-atlas = ExtResource( 2 )
+atlas = ExtResource( 5 )
 region = Rect2( 288, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=26]
-flags = 8
-atlas = ExtResource( 2 )
-region = Rect2( 384, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=27]
-flags = 8
-atlas = ExtResource( 2 )
-region = Rect2( 480, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=28]
-flags = 8
-atlas = ExtResource( 2 )
-region = Rect2( 576, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=29]
-flags = 8
-atlas = ExtResource( 2 )
-region = Rect2( 672, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=30]
-flags = 8
-atlas = ExtResource( 2 )
-region = Rect2( 768, 0, 96, 96 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
-"loop": true,
-"name": "SlitherDmg",
-"speed": 7.0
-}, {
 "frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "Attack",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": true,
+"name": "Death",
 "speed": 7.0
 }, {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
@@ -173,13 +173,13 @@ animations = [ {
 "name": "AttackDmg",
 "speed": 7.0
 }, {
-"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
-"name": "Death",
+"name": "SlitherDmg",
 "speed": 7.0
 } ]
 
-[node name="Node2D" type="KinematicBody2D"]
+[node name="SnakePsn" type="KinematicBody2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
