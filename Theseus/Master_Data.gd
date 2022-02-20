@@ -17,6 +17,8 @@ var player_y = 0
 var slime_health = 50
 var small_slime_health = 30
 
+var snake_health = 40
+
 # collection of all the speeds
 var player_speed = 7500
 var fireball_speed = 180
@@ -25,7 +27,7 @@ var fireball_speed = 180
 var fireball_cost = 5
 
 # how much damage each attack does
-var sword_damage = 10
+var sword_damage = 20
 var fireball_damage = 10
 
 func x_direction(x_body, x_other_object):
