@@ -35,7 +35,7 @@ func _physics_process(delta):
 
 
 func _on_Fireball_body_entered(body):
-	print(body.name);
+	#print(body.name);
 	
 	if body.name != "Player":
 		for enemy in master_data.enemy_names:

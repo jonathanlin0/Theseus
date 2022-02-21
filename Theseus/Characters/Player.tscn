@@ -62,10 +62,6 @@ region = Rect2( 48, 0, 16, 32 )
 atlas = ExtResource( 13 )
 region = Rect2( 0, 0, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=77]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 16, 32 )
-
 [sub_resource type="AtlasTexture" id=72]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 32 )
@@ -98,6 +94,10 @@ region = Rect2( 32, 0, 16, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 48, 0, 16, 32 )
 
+[sub_resource type="AtlasTexture" id=77]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 16, 32 )
+
 [sub_resource type="SpriteFrames" id=17]
 animations = [ {
 "frames": [ SubResource( 58 ) ],
@@ -125,11 +125,6 @@ animations = [ {
 "name": "idle_down",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 77 ) ],
-"loop": true,
-"name": "idle_up",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ) ],
 "loop": true,
 "name": "run_right",
@@ -139,23 +134,16 @@ animations = [ {
 "loop": true,
 "name": "run_up",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 77 ) ],
+"loop": true,
+"name": "idle_up",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=18]
 radius = 8.0
 height = 11.0
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 0, 46, 41 )
-
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 41, 46, 41 )
-
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 82, 46, 41 )
 
 [sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 10 )
@@ -167,6 +155,18 @@ region = Rect2( 0, 41, 46, 41 )
 
 [sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 10 )
+region = Rect2( 0, 82, 46, 41 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 46, 41 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 41, 46, 41 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 11 )
 region = Rect2( 0, 82, 46, 41 )
 
 [sub_resource type="AtlasTexture" id=34]
@@ -195,14 +195,14 @@ region = Rect2( 82, 0, 41, 46 )
 
 [sub_resource type="SpriteFrames" id=24]
 animations = [ {
-"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
-"loop": true,
-"name": "left",
-"speed": 8.0
-}, {
 "frames": [ SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
 "loop": true,
 "name": "right",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
+"loop": true,
+"name": "left",
 "speed": 8.0
 }, {
 "frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
@@ -253,6 +253,7 @@ smoothing_enabled = true
 visible = false
 frames = SubResource( 24 )
 animation = "down"
+frame = 1
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]
