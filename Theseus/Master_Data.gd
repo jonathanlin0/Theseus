@@ -16,8 +16,10 @@ var player_y = 0
 # collection of all the enemies' health
 var slime_health = 50
 var small_slime_health = 30
-
 var snake_health = 40
+
+# collection of the distance threshhold for player tracking from enemies
+var slime_distance = 150
 
 # collection of all the speeds
 var player_speed = 7500
