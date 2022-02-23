@@ -22,7 +22,7 @@ var snake_health = 40
 var small_lizard_health = 30
 
 # collection of the distance threshhold for player tracking from enemies
-var slime_distance = 150
+var slime_distance = 225
 
 # collection of the attack range of the enemies
 var small_lizard_attack_range = 150
