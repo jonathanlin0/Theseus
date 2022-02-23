@@ -27,9 +27,6 @@ func _physics_process(delta):
 	if !hitSomething:
 		velocity.x = unit_vector.x * master_data.fireball_speed * delta
 		velocity.y = unit_vector.y * master_data.fireball_speed * delta
-	#else:
-		#velocity.x = 0
-		#velocity.y = 0
 	
 	translate(velocity)
 

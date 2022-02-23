@@ -4,9 +4,6 @@ extends KinematicBody2D
 var velocity = Vector2(100,0)
 
 
-
-
-
 var health = master_data.slime_health
 var is_dead = false
 
