@@ -18,6 +18,5 @@ func _ready():
 
 func _on_Area2D_body_entered(body):
 	if body.name.find("Player") != -1:
-		master_data.health = master_data.health + 10
+		master_data.health = master_data.health + 20
 		queue_free()
-	

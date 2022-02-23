@@ -16,8 +16,7 @@ func _ready():
 #	pass
 
 
-func _on_Area2D_body_entered(body):
+func _on_manacanister_common_body_entered(body):
 	if body.name.find("Player") != -1:
-		master_data.health = master_data.health + 10
+		master_data.mana = master_data.mana + 10
 		queue_free()
-	
