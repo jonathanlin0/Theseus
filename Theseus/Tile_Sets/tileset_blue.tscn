@@ -144,7 +144,6 @@ __meta__ = {
 }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="black01"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="black01/StaticBody2D"]
 shape = SubResource( 1 )
