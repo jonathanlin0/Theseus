@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Tile_Sets/tileset_blue.tres" type="TileSet" id=1]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Misc/Pause.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Power_Ups/2x_Speed.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemies/Lizard/Small_Lizard.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Power_Ups/Dmg_Boost/Dmg_Boost.tscn" type="PackedScene" id=7]
 
 [node name="Level1" type="Node2D"]
 
@@ -29,3 +30,6 @@ position = Vector2( 415, 294 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 45, 47 )
+
+[node name="Node2D" parent="." instance=ExtResource( 7 )]
+position = Vector2( 308, 63 )
