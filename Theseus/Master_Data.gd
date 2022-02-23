@@ -6,10 +6,12 @@ extends Node
 
 var enemy_names = ["Slime", "Small_Slime", "Small_Lizard"]
 
+# player info
 var health = 100
 var mana = 100
 var level = 1
 
+# player location
 var player_x = 0
 var player_y = 0
 
@@ -27,7 +29,7 @@ var small_lizard_attack_range = 150
 
 # collection of all the speeds
 var player_speed = 7500
-var fireball_speed = 180
+var fireball_speed = 200
 var lizard_spit_speed = 180
 
 # how much energy each attack costs
