@@ -30,6 +30,7 @@ var small_lizard_health = 30
 # collection of the distance threshhold for player tracking from enemies
 var slime_distance = 225
 var chest_distance = 35
+var sign_distance = 25
 
 # collection of the attack range of the enemies
 var small_lizard_attack_range = 150
@@ -46,6 +47,11 @@ var fireball_cost = 5
 var sword_damage = 20
 var fireball_damage = 10
 var lizard_spit_damage = 10
+
+# the rare powerup spawn chances
+var rare_chance_in_basic_chest = 0.2
+var rare_chance_in_rare_chest = 0.4
+
 
 func x_direction(x_body, x_other_object):
 	var out = 0

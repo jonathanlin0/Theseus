@@ -23,7 +23,6 @@ func _input(event):
 func _physics_process(delta):
 	
 	
-	
 	var speed = master_data.player_speed
 	
 	# update the master_data values

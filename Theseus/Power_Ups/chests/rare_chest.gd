@@ -9,8 +9,10 @@ var last_anim
 
 var powOne
 var powTwo
+var powThree
+var powFour
 
-var rare_chance = master_data.rare_chance_in_basic_chest
+var rare_chance = master_data.rare_chance_in_rare_chest
 var rand = RandomNumberGenerator.new()
 
 var opened = false
@@ -47,6 +49,22 @@ func _ready():
 		powTwo = (pow_array_rare[randi() % pow_array_rare.size()]).instance()
 	else:
 		powTwo = (pow_array_common[randi() % pow_array_common.size()]).instance()
+		
+	rand.randomize()
+	rand_num = rand.randf_range(0, 1.0)
+	
+	if (rand_num <= rare_chance):
+		powThree = (pow_array_rare[randi() % pow_array_rare.size()]).instance()
+	else:
+		powThree = (pow_array_common[randi() % pow_array_common.size()]).instance()
+	
+	rand.randomize()
+	rand_num = rand.randf_range(0, 1.0)
+	
+	if (rand_num <= rare_chance):
+		powFour = (pow_array_rare[randi() % pow_array_rare.size()]).instance()
+	else:
+		powFour = (pow_array_common[randi() % pow_array_common.size()]).instance()
 	
 
 
@@ -63,6 +81,12 @@ func _process(delta):
 			last_anim = "opening"
 
 
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
 func _on_AnimatedSprite_animation_finished():
 	if (last_anim == "opening" && !opened):
 		$AnimatedSprite.play("opened")
@@ -71,5 +95,9 @@ func _on_AnimatedSprite_animation_finished():
 		powOne.position = $powPosOne.global_position
 		get_parent().add_child(powTwo)
 		powTwo.position = $powPosTwo.global_position
-		opened = true
 		
+		get_parent().add_child(powThree)
+		powThree.position = $powPosThree.global_position
+		get_parent().add_child(powFour)
+		powFour.position = $powPosFour.global_position
+		opened = true
