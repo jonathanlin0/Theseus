@@ -13,6 +13,10 @@ var max_mana = 100
 var mana = 100
 var level = 1
 
+# powerup multipliers
+var ranged_multiplier = 1.0
+var melee_multiplier = 1.0
+
 # player location
 var player_x = 0
 var player_y = 0

@@ -128,7 +128,7 @@ func _physics_process(delta):
 		for obj in area.get_overlapping_bodies():
 			for enemy_name in master_data.enemy_names:
 				if enemy_name in obj.name:
-					obj.damage(master_data.sword_damage)
+					obj.damage(master_data.sword_damage * master_data.melee_multiplier)
 		
 	velocity = move_and_slide(velocity)
 

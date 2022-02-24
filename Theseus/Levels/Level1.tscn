@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Tile_Sets/tileset_blue.tres" type="TileSet" id=1]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
@@ -13,6 +13,10 @@
 [ext_resource path="res://Power_Ups/manacanister_rare.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Power_Ups/wings_common.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Power_Ups/wings_rare.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Power_Ups/cutler_common.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Power_Ups/cutler_rare.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Power_Ups/rangedeye_common.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Power_Ups/rangedeye_rare.tscn" type="PackedScene" id=17]
 
 [node name="Level1" type="Node2D"]
 
@@ -38,7 +42,7 @@ position = Vector2( 57, 57 )
 position = Vector2( 303, 26 )
 
 [node name="2x_Speed" parent="." instance=ExtResource( 5 )]
-position = Vector2( 106, 69 )
+position = Vector2( 159, 109 )
 
 [node name="manacanister_common" parent="." instance=ExtResource( 10 )]
 position = Vector2( 62, 144 )
@@ -66,3 +70,15 @@ position = Vector2( 266, 61 )
 
 [node name="wings_rare4" parent="." instance=ExtResource( 13 )]
 position = Vector2( 290, 57 )
+
+[node name="cutler_common" parent="." instance=ExtResource( 14 )]
+position = Vector2( 323, 130 )
+
+[node name="cutler_rare" parent="." instance=ExtResource( 15 )]
+position = Vector2( 362, 168 )
+
+[node name="ranged_eye" parent="." instance=ExtResource( 16 )]
+position = Vector2( 453, 169 )
+
+[node name="rangedeye_rare" parent="." instance=ExtResource( 17 )]
+position = Vector2( 508, 171 )
