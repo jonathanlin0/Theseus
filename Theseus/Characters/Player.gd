@@ -32,11 +32,13 @@ func _physics_process(delta):
 	
 	# update the health & mana bars
 	
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar.max_value = master_data.max_health
 	$StatusBars/MarginContainer/VBoxContainer/HealthBar.value = master_data.health
-	$StatusBars/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + "100"
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + str(master_data.max_health)
 	
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar.max_value = master_data.max_mana
 	$StatusBars/MarginContainer/VBoxContainer/ManaBar.value = master_data.mana
-	$StatusBars/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + "100"
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + str(master_data.max_mana)
 	
 	# movement logic
 	if Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a"):
@@ -139,5 +141,5 @@ func _on_SwordAnimation_animation_finished():
 
 
 func _on_ManaRecharge_timeout():
-	if master_data.mana < 100:
+	if master_data.mana < master_data.max_mana:
 		master_data.mana += 1

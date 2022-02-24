@@ -17,6 +17,6 @@ func _ready():
 
 
 func _on_wings_common_body_entered(body):
-	if body.name.find("Player") != -1 && master_data.player_speed < 10000:
+	if body.name.find("Player") != -1 && master_data.player_speed < 12500:
 		master_data.player_speed = master_data.player_speed + 200
 		queue_free()

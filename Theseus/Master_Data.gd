@@ -7,7 +7,9 @@ extends Node
 var enemy_names = ["Slime", "Small_Slime", "Small_Lizard"]
 
 # player info
+var max_health = 100
 var health = 100
+var max_mana = 100
 var mana = 100
 var level = 1
 
