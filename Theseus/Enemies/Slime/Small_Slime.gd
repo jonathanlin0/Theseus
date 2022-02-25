@@ -6,6 +6,8 @@ var velocity = Vector2(10,0)
 var health = master_data.small_slime_health
 var is_dead = false
 
+var knockback = false
+
 var previous_animation = "idle"
 
 # makes sure that the player can't damage the slime while it's dying
@@ -48,11 +50,17 @@ func _physics_process(delta):
 					elif difference_y < 0:
 						sign_y = -1
 				
-				velocity = Vector2(sign_x * 50,sign_y * 50)
 				
-				velocity = move_and_slide(velocity)
+				if !knockback:
+					velocity = Vector2(sign_x * 50,sign_y * 50)
+					velocity = move_and_slide(velocity)
+				elif knockback:
+					velocity = -Vector2(sign_x * 50,sign_y * 50) * (master_data.knockback_power * 1.5) * pow($knockback.time_left, 2)
+					velocity = move_and_slide(velocity)
 
 func damage(dmg):
+	$knockback.start()
+	knockback = true
 	health -= dmg
 
 func dead():
@@ -63,3 +71,7 @@ func dead():
 func _on_AnimatedSprite_animation_finished():
 	if is_dead == true:
 		queue_free()
+
+
+func _on_knockback_timeout():
+	knockback = false

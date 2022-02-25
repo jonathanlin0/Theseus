@@ -6,8 +6,8 @@
 [ext_resource path="res://Misc/Pause.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Misc/sign.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemies/Lizard/Small_Lizard.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Misc/sign_two.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Power_Ups/chests/basic_chest.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Power_Ups/chests/rare_chest.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Enemies/Slime/Small_Slime.tscn" type="PackedScene" id=20]
 
 [node name="Level1" type="Node2D"]
@@ -25,22 +25,22 @@ tile_data = PoolIntArray( -4325419, 7, 0, -4325418, 7, 0, -4325417, 7, 0, -43254
 position = Vector2( 61, 74 )
 
 [node name="Slime" parent="." instance=ExtResource( 3 )]
-position = Vector2( 408, -5 )
+position = Vector2( 520, -74 )
 
 [node name="Small_Lizard" parent="." instance=ExtResource( 6 )]
-position = Vector2( 452, 59 )
+position = Vector2( 505, 148 )
 
 [node name="basic_chest" parent="." instance=ExtResource( 18 )]
-position = Vector2( -33, -31 )
+position = Vector2( 535, -118 )
 
 [node name="Small_Slime" parent="." instance=ExtResource( 20 )]
-position = Vector2( 465, -55 )
+position = Vector2( 483, -37 )
 
 [node name="Small_Slime2" parent="." instance=ExtResource( 20 )]
-position = Vector2( 464, -107 )
+position = Vector2( 460, -87 )
 
 [node name="Small_Slime3" parent="." instance=ExtResource( 20 )]
-position = Vector2( 567, -57 )
+position = Vector2( 548, -31 )
 
 [node name="StaticBody2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 170, 30 )
@@ -108,5 +108,5 @@ position = Vector2( 995, -267 )
 [node name="Small_Slime10" parent="." instance=ExtResource( 20 )]
 position = Vector2( 939, -286 )
 
-[node name="rare_chest" parent="." instance=ExtResource( 19 )]
-position = Vector2( 139, -14 )
+[node name="sign_two" parent="." instance=ExtResource( 7 )]
+position = Vector2( 489, -110 )
