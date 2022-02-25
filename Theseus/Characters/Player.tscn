@@ -209,16 +209,16 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=78]
-extents = Vector2( 8, 20 )
+extents = Vector2( 10.5, 20 )
 
 [sub_resource type="RectangleShape2D" id=79]
-extents = Vector2( 8, 20 )
+extents = Vector2( 10.5, 20 )
 
 [sub_resource type="RectangleShape2D" id=80]
-extents = Vector2( 20, 8 )
+extents = Vector2( 20, 10 )
 
 [sub_resource type="RectangleShape2D" id=81]
-extents = Vector2( 20, 8 )
+extents = Vector2( 20, 10.5 )
 
 [sub_resource type="DynamicFont" id=57]
 size = 10
@@ -230,7 +230,7 @@ script = ExtResource( 5 )
 [node name="CharacterAnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
 animation = "run_right"
-frame = 1
+frame = 2
 playing = true
 
 [node name="MainCollisionBox" type="CollisionShape2D" parent="."]
@@ -243,37 +243,37 @@ smoothing_enabled = true
 
 [node name="SwordAnimation" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( -2.38419e-07, 0 )
-scale = Vector2( 0.9375, 0.833333 )
+position = Vector2( -0.500003, 1.19209e-06 )
+scale = Vector2( 0.697917, 0.708333 )
 frames = SubResource( 24 )
 animation = "down"
+frame = 1
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]
-visible = false
 
 [node name="LeftSwordArea" type="Area2D" parent="SwordSwingAreas"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwingAreas/LeftSwordArea"]
-position = Vector2( -19, -1 )
+position = Vector2( -21.5, -1 )
 shape = SubResource( 78 )
 
 [node name="RightSwordArea" type="Area2D" parent="SwordSwingAreas"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwingAreas/RightSwordArea"]
-position = Vector2( 19, -1 )
+position = Vector2( 21.5, -1 )
 shape = SubResource( 79 )
 
 [node name="DownSwordArea" type="Area2D" parent="SwordSwingAreas"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwingAreas/DownSwordArea"]
-position = Vector2( 0, 20 )
+position = Vector2( 0, 22 )
 shape = SubResource( 80 )
 
 [node name="UpSwordArea" type="Area2D" parent="SwordSwingAreas"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwingAreas/UpSwordArea"]
-position = Vector2( 0, -19 )
+position = Vector2( 0, -21.5 )
 shape = SubResource( 81 )
 
 [node name="StatusBars" type="CanvasLayer" parent="."]

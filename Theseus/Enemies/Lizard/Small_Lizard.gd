@@ -3,6 +3,10 @@ extends KinematicBody2D
 # the velocity vector that changes to try to chase the player around
 var velocity = Vector2(100,0)
 
+var rand = RandomNumberGenerator.new()
+var rand_x_vel = 0
+var rand_y_vel = 0
+
 const SPIT = preload("res://Enemies/Lizard/Lizard_Spit.tscn")
 
 var health = master_data.small_lizard_health
@@ -11,10 +15,16 @@ var is_dead = false
 
 var can_shoot = true
 
+func _randomize():
+	rand.randomize()
+	rand_x_vel = rand.randf_range(-100, 100)
+	rand_y_vel = rand.randf_range(-100, 100)
+
 func _ready():
 	$Health_Bar.setMax(master_data.small_lizard_health)
 
 func _physics_process(delta):
+	
 	
 	$Health_Bar.setValue(health)
 	

@@ -80,7 +80,7 @@ func _physics_process(delta):
 			if direction == "down":
 				$CharacterAnimatedSprite.play("idle_down")
 		
-	if Input.is_action_pressed("ui_x") and !sword_swinging:
+	if Input.is_mouse_button_pressed(BUTTON_RIGHT) and !sword_swinging:
 		sword_swinging = true
 		$SwordAnimation.visible = true
 		if direction == "down":

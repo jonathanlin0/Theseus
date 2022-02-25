@@ -51,6 +51,7 @@ animations = [ {
 extents = Vector2( 11, 9.5 )
 
 [node name="basic_chest" type="StaticBody2D"]
+position = Vector2( 63, 36 )
 script = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -63,9 +64,9 @@ position = Vector2( 2, 4.5 )
 shape = SubResource( 8 )
 
 [node name="powPosTwo" type="Position2D" parent="."]
-position = Vector2( -22, 6 )
+position = Vector2( -2, 5 )
 
 [node name="powPosOne" type="Position2D" parent="."]
-position = Vector2( 26, 6 )
+position = Vector2( 6, 5 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

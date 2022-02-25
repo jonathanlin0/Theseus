@@ -3,6 +3,7 @@ extends KinematicBody2D
 # the velocity vector that changes to try to chase the player around
 var velocity = Vector2(100,0)
 
+var knockback = false
 
 var health = master_data.slime_health
 var is_dead = false
@@ -54,12 +55,17 @@ func _physics_process(delta):
 					elif difference_y < 0:
 						sign_y = -1
 				
-				velocity = Vector2(sign_x * 50,sign_y * 50)
-				
-				velocity = move_and_slide(velocity)
+				if !knockback:
+					velocity = Vector2(sign_x * 50,sign_y * 50)
+					velocity = move_and_slide(velocity)
+				elif knockback:
+					velocity = -Vector2(sign_x * 50,sign_y * 50) * master_data.knockback_power * pow($knockback.time_left, 2)
+					velocity = move_and_slide(velocity)
 
 func damage(dmg):
 	health -= dmg
+	$knockback.start()
+	knockback = true
 
 func dead():
 	currently_popping = true
@@ -80,3 +86,7 @@ func _on_AnimatedSprite_animation_finished():
 		small_slime_right.position = $SlimeSpawnRight.global_position
 		
 		queue_free()
+
+
+func _on_knockback_timeout():
+	knockback = false

@@ -93,11 +93,15 @@ func _on_AnimatedSprite_animation_finished():
 		last_anim = "opened"
 		get_parent().add_child(powOne)
 		powOne.position = $powPosOne.global_position
+		powOne.direction = -1
 		get_parent().add_child(powTwo)
 		powTwo.position = $powPosTwo.global_position
+		powTwo.direction = 1
 		
 		get_parent().add_child(powThree)
 		powThree.position = $powPosThree.global_position
+		powThree.direction = -1
 		get_parent().add_child(powFour)
 		powFour.position = $powPosFour.global_position
+		powFour.direction = 1
 		opened = true

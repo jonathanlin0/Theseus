@@ -107,7 +107,7 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -127,4 +127,8 @@ margin_right = 75.0
 margin_bottom = 18.0
 rect_scale = Vector2( 0.5, 0.4 )
 
+[node name="knockback" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="knockback" to="." method="_on_knockback_timeout"]

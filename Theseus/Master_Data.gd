@@ -52,6 +52,9 @@ var lizard_spit_damage = 10
 var rare_chance_in_basic_chest = 0.2
 var rare_chance_in_rare_chest = 0.4
 
+# power of knockback
+var knockback_power = 20
+
 
 func x_direction(x_body, x_other_object):
 	var out = 0

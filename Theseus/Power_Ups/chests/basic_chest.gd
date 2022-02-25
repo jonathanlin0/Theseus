@@ -57,10 +57,12 @@ func _process(delta):
 	
 	net_distance = sqrt((difference_x * difference_x) + (difference_y * difference_y))
 	
-	if (net_distance <= master_data.chest_distance && !opened):
+	if (net_distance <= master_data.chest_distance && !opened or Input.is_action_just_pressed("ui_up")):
 		if (Input.is_action_just_pressed("ui_accept")):
 			$AnimatedSprite.play("opening")
 			last_anim = "opening"
+			
+
 
 
 func _on_AnimatedSprite_animation_finished():
@@ -69,7 +71,9 @@ func _on_AnimatedSprite_animation_finished():
 		last_anim = "opened"
 		get_parent().add_child(powOne)
 		powOne.position = $powPosOne.global_position
+		powOne.direction = 1
 		get_parent().add_child(powTwo)
 		powTwo.position = $powPosTwo.global_position
+		powTwo.direction = -1
 		opened = true
 		
