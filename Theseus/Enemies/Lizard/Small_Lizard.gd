@@ -1,11 +1,17 @@
 extends KinematicBody2D
 
 # the velocity vector that changes to try to chase the player around
-var velocity = Vector2(100,0)
+var velocity = Vector2()
+
+var triggered = false
+var dir = "left"
+
+var moving = false
 
 var rand = RandomNumberGenerator.new()
 var rand_x_vel = 0
 var rand_y_vel = 0
+var x_vel = 0
 
 const SPIT = preload("res://Enemies/Lizard/Lizard_Spit.tscn")
 
@@ -15,16 +21,42 @@ var is_dead = false
 
 var can_shoot = true
 
+var prev_anim
+
+var knockback = false
+
+var collision
+
 func _randomize():
-	rand.randomize()
-	rand_x_vel = rand.randf_range(-100, 100)
-	rand_y_vel = rand.randf_range(-100, 100)
+	if triggered:
+		rand.randomize()
+		rand_x_vel = rand.randf_range(-50, 50)
+		rand_y_vel = rand.randf_range(-20, 20)
+		velocity.x += rand_x_vel
+		velocity.y += rand_y_vel
+		
+		if velocity.x > 50:
+			velocity.x = 50
+		
+		if velocity.x < -50:
+			velocity.x = -50
+		
+		if velocity.y > 20:
+			velocity.y = 20
+		
+		if velocity.y < -20:
+			velocity.y = -20
+		
+		if velocity.x < 0:
+			dir = "left"
+		elif velocity.x > 0:
+			dir = "right"
+		
 
 func _ready():
 	$Health_Bar.setMax(master_data.small_lizard_health)
 
 func _physics_process(delta):
-	
 	
 	$Health_Bar.setValue(health)
 	
@@ -36,23 +68,37 @@ func _physics_process(delta):
 		# used for player tracking
 		var difference_x = master_data.player_x - position.x
 		var difference_y = master_data.player_y - position.y
-
 		
-		
-		if difference_x < 0:
-			# facing left
+		if dir == "left":
 			$AnimatedSprite.flip_h = false
-			$spit_spawn_location.position.x = -18
-		if difference_x > 0:
-			# facing right
+		else:
 			$AnimatedSprite.flip_h = true
-			$spit_spawn_location.position.x = 18
-			
-			
+		
+		collision = move_and_collide(velocity * delta)
+		if collision:
+			velocity = velocity.bounce(collision.normal)
+			_randomize()
+		
 		var net_distance = 0
 		net_distance = sqrt((difference_x * difference_x) + (difference_y * difference_y))
 		
+		if net_distance <= master_data.small_lizard_attack_range * 2:
+			triggered = true
+		
 		if net_distance <= master_data.small_lizard_attack_range:
+			$AnimatedSprite.play("load_attack")
+			prev_anim = "load_attack"
+			if difference_x < 0:
+			# facing left
+				$AnimatedSprite.flip_h = false
+				$spit_spawn_location.position.x = -18
+			if difference_x > 0:
+			# facing right
+				$AnimatedSprite.flip_h = true
+				$spit_spawn_location.position.x = 18
+			moving = false
+			velocity.x = 0
+			velocity.y = 0
 			if can_shoot == true:
 				
 				var spit = SPIT.instance()
@@ -63,6 +109,9 @@ func _physics_process(delta):
 				
 				can_shoot = false
 				$ShootingCooldown.start()
+		elif !moving:
+			moving = true
+			_randomize()
 
 func dead():
 	$AnimatedSprite.play("death")
@@ -74,9 +123,22 @@ func _on_ShootingCooldown_timeout():
 	can_shoot = true
 
 func damage(dmg):
+	triggered = true
+	_randomize()
 	health -= dmg
 
 
 func _on_AnimatedSprite_animation_finished():
+	if moving:
+		$AnimatedSprite.play("run")
+		prev_anim = "run"
+	else:
+		$AnimatedSprite.play("idle")
+		prev_anim = "idle"
+	
 	if is_dead == true:
 		queue_free()
+
+
+func _on_knockback_timeout():
+	knockback = false

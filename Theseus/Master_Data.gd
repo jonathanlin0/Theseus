@@ -25,7 +25,7 @@ var player_y = 0
 var slime_health = 50
 var small_slime_health = 30
 var snake_health = 40
-var small_lizard_health = 30
+var small_lizard_health = 35
 
 # collection of the distance threshhold for player tracking from enemies
 var slime_distance = 225
@@ -53,7 +53,7 @@ var rare_chance_in_basic_chest = 0.2
 var rare_chance_in_rare_chest = 0.4
 
 # power of knockback
-var knockback_power = 20
+var knockback_power = 10
 
 
 func x_direction(x_body, x_other_object):
