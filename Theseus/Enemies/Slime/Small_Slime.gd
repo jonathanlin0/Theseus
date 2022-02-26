@@ -28,8 +28,8 @@ func _physics_process(delta):
 		if is_dead == false:
 			
 			# used for player tracking
-			var difference_x = master_data.player_x - position.x
-			var difference_y = master_data.player_y - position.y
+			var difference_x = master_data.player_x - global_position.x
+			var difference_y = master_data.player_y - global_position.y
 			
 			var net_distance = 0
 			net_distance = sqrt((difference_x * difference_x) + (difference_y * difference_y))
