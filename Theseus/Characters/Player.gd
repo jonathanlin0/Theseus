@@ -12,6 +12,7 @@ var direction = "right"
 # used so that the player can only damage an enemy once per swing
 var can_damage = true
 
+var sprint = false
 
 const FIREBALL = preload("res://Weapons/Fireball.tscn")
 
@@ -40,15 +41,27 @@ func _physics_process(delta):
 	$StatusBars/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + str(master_data.max_mana)
 	
 	# movement logic
+	
+	if Input.is_key_pressed(KEY_SHIFT):
+		sprint = true
+	else:
+		sprint = false
+	
 	if Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a"):
 		direction = "right"
 		$CharacterAnimatedSprite.play("run_right")
-		velocity.x = speed * delta
+		if sprint:
+			velocity.x = speed * delta * 1.2
+		else:
+			velocity.x = speed * delta
 	
 	if Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
 		direction = "left"
 		$CharacterAnimatedSprite.play("run_left")
-		velocity.x = -speed * delta
+		if sprint:
+			velocity.x = -speed * delta * 1.2
+		else:
+			velocity.x = -speed * delta
 		
 	elif !Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
 		velocity.x = 0
@@ -58,13 +71,19 @@ func _physics_process(delta):
 		if !Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
 			$CharacterAnimatedSprite.play("run_up")
 			direction = "up"
-		velocity.y = -speed * delta
+		if sprint:
+			velocity.y = -speed * delta * 1.2
+		else:
+			velocity.y = -speed * delta 
 	
 	if Input.is_action_pressed("ui_s"):
 		if !Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
 			$CharacterAnimatedSprite.play("run_down")
 			direction = "down"
-		velocity.y = speed * delta
+		if sprint:
+			velocity.y = speed * delta * 1.2
+		else:
+			velocity.y = speed * delta
 		
 	elif !Input.is_action_pressed("ui_w") and !Input.is_action_pressed("ui_s"):
 		velocity.y = 0

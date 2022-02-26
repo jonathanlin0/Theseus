@@ -113,12 +113,12 @@ animations = [ {
 "frames": [ SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ) ],
 "loop": true,
 "name": "run_down",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ) ],
 "loop": true,
 "name": "run_right",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [ SubResource( 77 ) ],
 "loop": true,
@@ -133,12 +133,12 @@ animations = [ {
 "frames": [ SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ) ],
 "loop": true,
 "name": "run_left",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [ SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ) ],
 "loop": true,
 "name": "run_up",
-"speed": 5.0
+"speed": 10.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=18]
@@ -247,6 +247,7 @@ position = Vector2( -0.500003, 1.19209e-06 )
 scale = Vector2( 0.697917, 0.708333 )
 frames = SubResource( 24 )
 animation = "down"
+frame = 2
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]

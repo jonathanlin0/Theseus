@@ -36,12 +36,12 @@ var sign_distance = 25
 var small_lizard_attack_range = 150
 
 # collection of all the speeds
-var player_speed = 7500
+var player_speed = 7000
 var fireball_speed = 200
 var lizard_spit_speed = 180
 
 # how much energy each attack costs
-var fireball_cost = 5
+var fireball_cost = 10
 
 # how much damage each attack does
 var sword_damage = 20
