@@ -82,36 +82,36 @@ func _physics_process(delta):
 		var net_distance = 0
 		net_distance = sqrt((difference_x * difference_x) + (difference_y * difference_y))
 		
-		if net_distance <= master_data.small_lizard_attack_range * 2:
+		if net_distance <= master_data.small_lizard_attack_range * 1.5:
 			triggered = true
-		
-		if net_distance <= master_data.small_lizard_attack_range:
-			$AnimatedSprite.play("load_attack")
-			prev_anim = "load_attack"
-			if difference_x < 0:
-			# facing left
-				$AnimatedSprite.flip_h = false
-				$spit_spawn_location.position.x = -18
-			if difference_x > 0:
-			# facing right
-				$AnimatedSprite.flip_h = true
-				$spit_spawn_location.position.x = 18
-			moving = false
-			velocity.x = 0
-			velocity.y = 0
-			if can_shoot == true:
-				
-				var spit = SPIT.instance()
-				get_parent().add_child(spit)
-				spit.position = $spit_spawn_location.global_position
-				
-				spit.set_coords(position.x, position.y)
-				
-				can_shoot = false
-				$ShootingCooldown.start()
-		elif !moving:
-			moving = true
-			_randomize()
+			if net_distance <= master_data.small_lizard_attack_range:
+				$AnimatedSprite.play("load_attack")
+				prev_anim = "load_attack"
+				if difference_x < 0:
+				# facing left
+					$AnimatedSprite.flip_h = false
+					$spit_spawn_location.position.x = -18
+				if difference_x > 0:
+				# facing right
+					$AnimatedSprite.flip_h = true
+					$spit_spawn_location.position.x = 18
+				moving = false
+				triggered = true
+				velocity.x = 0
+				velocity.y = 0
+				if can_shoot == true:
+					
+					var spit = SPIT.instance()
+					get_parent().add_child(spit)
+					spit.position = $spit_spawn_location.global_position
+					
+					spit.set_coords(position.x, position.y)
+					
+					can_shoot = false
+					$ShootingCooldown.start()
+			elif !moving:
+				moving = true
+				_randomize()
 
 func dead():
 	$AnimatedSprite.play("death")
