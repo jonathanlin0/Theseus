@@ -11,7 +11,6 @@ var moving = false
 var rand = RandomNumberGenerator.new()
 var rand_x_vel = 0
 var rand_y_vel = 0
-var x_vel = 0
 
 const SPIT = preload("res://Enemies/Lizard/Lizard_Spit.tscn")
 

@@ -91,10 +91,10 @@ position = Vector2( 0, 1 )
 shape = SubResource( 16 )
 
 [node name="Health_Bar" parent="." instance=ExtResource( 1 )]
-margin_left = -10.0
-margin_top = -10.0
-margin_right = 90.0
-margin_bottom = 30.0
+margin_left = -50.0
+margin_top = -12.0
+margin_right = 50.0
+margin_bottom = 28.0
 rect_scale = Vector2( 0.2, 0.2 )
 
 [node name="knockback" type="Timer" parent="."]

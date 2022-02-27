@@ -22,6 +22,22 @@
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 32 )
 
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 16, 32 )
+
 [sub_resource type="AtlasTexture" id=68]
 atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 16, 32 )
@@ -38,10 +54,6 @@ region = Rect2( 32, 0, 16, 32 )
 atlas = ExtResource( 8 )
 region = Rect2( 48, 0, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=67]
-atlas = ExtResource( 13 )
-region = Rect2( 0, 0, 16, 32 )
-
 [sub_resource type="AtlasTexture" id=59]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 32 )
@@ -57,6 +69,26 @@ region = Rect2( 32, 0, 16, 32 )
 [sub_resource type="AtlasTexture" id=62]
 atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=72]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=73]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=74]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=75]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=77]
 atlas = ExtResource( 6 )
@@ -112,13 +144,28 @@ animations = [ {
 }, {
 "frames": [ SubResource( 67 ) ],
 "loop": true,
-"name": "idle_down",
-"speed": 5.0
+"name": "run_up",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ) ],
+"loop": true,
+"name": "run_left",
+"speed": 10.0
 }, {
 "frames": [ SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ) ],
 "loop": true,
 "name": "run_down",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ) ],
+"loop": true,
+"name": "run_right",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 67 ) ],
+"loop": true,
+"name": "idle_down",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 77 ) ],
 "loop": true,
@@ -341,5 +388,9 @@ position = Vector2( 0, 4 )
 wait_time = 0.1
 autostart = true
 
+[node name="knockback" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="animation_finished" from="SwordAnimation" to="." method="_on_SwordAnimation_animation_finished"]
 [connection signal="timeout" from="ManaRecharge" to="." method="_on_ManaRecharge_timeout"]
+[connection signal="timeout" from="knockback" to="." method="_on_knockback_timeout"]
