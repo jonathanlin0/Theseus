@@ -107,7 +107,7 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "idle"
-frame = 1
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -121,9 +121,9 @@ position = Vector2( -10, 0 )
 position = Vector2( 10, 0 )
 
 [node name="Health_Bar" parent="." instance=ExtResource( 4 )]
-margin_left = -25.0
+margin_left = -51.0
 margin_top = -22.0
-margin_right = 75.0
+margin_right = 49.0
 margin_bottom = 18.0
 rect_scale = Vector2( 0.5, 0.4 )
 

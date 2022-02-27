@@ -4,7 +4,7 @@ extends Node
 # used to hold information and other global, useful functions
 # similar attributes grouped together for easier balance changes
 
-var enemy_names = ["Slime", "Small_Slime", "Small_Lizard"]
+var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss"]
 
 # player info
 var max_health = 100
@@ -26,6 +26,7 @@ var slime_health = 50
 var small_slime_health = 30
 var snake_health = 40
 var small_lizard_health = 35
+var lizard_boss_health = 300
 
 # collection of the distance threshhold for player tracking from enemies
 var slime_distance = 225
@@ -47,6 +48,7 @@ var fireball_cost = 10
 var sword_damage = 20
 var fireball_damage = 10
 var lizard_spit_damage = 10
+var lizard_boss_slap_damage = 20
 
 # the rare powerup spawn chances
 var rare_chance_in_basic_chest = 0.2

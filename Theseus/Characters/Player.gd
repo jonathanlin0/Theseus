@@ -16,6 +16,10 @@ var sprint = false
 
 const FIREBALL = preload("res://Weapons/Fireball.tscn")
 
+var knockback = false
+var knockback_dir = "left"
+var kb_power
+
 func _input(event):
 	
 	if event is InputEventMouseButton:
@@ -42,12 +46,17 @@ func _physics_process(delta):
 	
 	# movement logic
 	
+	if knockback && knockback_dir == "left":
+		velocity.x = -speed * kb_power * delta * $knockback.time_left
+	if knockback && knockback_dir == "right":
+		velocity.x = speed * kb_power * delta * $knockback.time_left
+	
 	if Input.is_key_pressed(KEY_SHIFT):
 		sprint = true
 	else:
 		sprint = false
 	
-	if Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a"):
+	if Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a") and !knockback:
 		direction = "right"
 		$CharacterAnimatedSprite.play("run_right")
 		if sprint:
@@ -55,7 +64,7 @@ func _physics_process(delta):
 		else:
 			velocity.x = speed * delta
 	
-	if Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
+	if Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d") and !knockback:
 		direction = "left"
 		$CharacterAnimatedSprite.play("run_left")
 		if sprint:
@@ -63,7 +72,7 @@ func _physics_process(delta):
 		else:
 			velocity.x = -speed * delta
 		
-	elif !Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
+	elif !Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d") and !knockback:
 		velocity.x = 0
 		
 	# horizontal animiations take priority over vertical animations
@@ -150,6 +159,11 @@ func _physics_process(delta):
 		
 	velocity = move_and_slide(velocity)
 
+func _knockback(var dir, var powa):
+	kb_power = powa
+	knockback_dir = dir
+	knockback = true
+	$knockback.start()
 
 func _on_SwordAnimation_animation_finished():
 	sword_swinging = false
@@ -161,3 +175,7 @@ func _on_SwordAnimation_animation_finished():
 func _on_ManaRecharge_timeout():
 	if master_data.mana < master_data.max_mana:
 		master_data.mana += 1
+
+
+func _on_knockback_timeout():
+	knockback = false
