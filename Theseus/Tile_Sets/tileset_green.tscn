@@ -173,6 +173,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground00/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground01" type="Sprite" parent="."]
 position = Vector2( 44, 44 )
@@ -189,6 +190,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground01/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground02" type="Sprite" parent="."]
 position = Vector2( 62, 44 )
@@ -205,6 +207,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground02/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground03" type="Sprite" parent="."]
 position = Vector2( 80, 44 )
@@ -221,6 +224,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground03/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground04" type="Sprite" parent="."]
 position = Vector2( 8, 62 )
@@ -237,6 +241,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground04/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground05" type="Sprite" parent="."]
 position = Vector2( 26, 62 )
@@ -253,6 +258,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground05/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground06" type="Sprite" parent="."]
 position = Vector2( 44, 62 )
@@ -269,6 +275,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground06/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground07" type="Sprite" parent="."]
 position = Vector2( 62, 62 )
@@ -285,6 +292,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground07/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground08" type="Sprite" parent="."]
 position = Vector2( 80, 62 )
@@ -301,6 +309,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground08/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground09" type="Sprite" parent="."]
 position = Vector2( 8, 80 )
@@ -317,6 +326,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground09/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground10" type="Sprite" parent="."]
 position = Vector2( 26, 80 )
@@ -333,6 +343,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground10/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground11" type="Sprite" parent="."]
 position = Vector2( 44, 80 )
@@ -349,6 +360,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground11/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground12" type="Sprite" parent="."]
 position = Vector2( 62, 80 )
@@ -365,6 +377,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground12/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 
 [node name="ground13" type="Sprite" parent="."]
 position = Vector2( 80, 80 )
@@ -381,3 +394,4 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground13/StaticBody2D"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
