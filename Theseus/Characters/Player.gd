@@ -12,8 +12,13 @@ var direction = "right"
 # used so that the player can only damage an enemy once per swing
 var can_damage = true
 
+var sprint = false
 
 const FIREBALL = preload("res://Weapons/Fireball.tscn")
+
+var knockback = false
+var knockback_dir = "left"
+var kb_power
 
 func _input(event):
 	
@@ -21,7 +26,6 @@ func _input(event):
 		pass
 
 func _physics_process(delta):
-	
 	
 	
 	var speed = master_data.player_speed
@@ -32,24 +36,43 @@ func _physics_process(delta):
 	
 	# update the health & mana bars
 	
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar.max_value = master_data.max_health
 	$StatusBars/MarginContainer/VBoxContainer/HealthBar.value = master_data.health
-	$StatusBars/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + "100"
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + str(master_data.max_health)
 	
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar.max_value = master_data.max_mana
 	$StatusBars/MarginContainer/VBoxContainer/ManaBar.value = master_data.mana
-	$StatusBars/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + "100"
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + str(master_data.max_mana)
 	
 	# movement logic
-	if Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a"):
+	
+	if knockback && knockback_dir == "left":
+		velocity.x = -speed * kb_power * delta * $knockback.time_left
+	if knockback && knockback_dir == "right":
+		velocity.x = speed * kb_power * delta * $knockback.time_left
+	
+	if Input.is_key_pressed(KEY_SHIFT):
+		sprint = true
+	else:
+		sprint = false
+	
+	if Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a") and !knockback:
 		direction = "right"
 		$CharacterAnimatedSprite.play("run_right")
-		velocity.x = speed * delta
+		if sprint:
+			velocity.x = speed * delta * 1.2
+		else:
+			velocity.x = speed * delta
 	
-	if Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
+	if Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d") and !knockback:
 		direction = "left"
 		$CharacterAnimatedSprite.play("run_left")
-		velocity.x = -speed * delta
+		if sprint:
+			velocity.x = -speed * delta * 1.2
+		else:
+			velocity.x = -speed * delta
 		
-	elif !Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
+	elif !Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d") and !knockback:
 		velocity.x = 0
 		
 	# horizontal animiations take priority over vertical animations
@@ -57,13 +80,19 @@ func _physics_process(delta):
 		if !Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
 			$CharacterAnimatedSprite.play("run_up")
 			direction = "up"
-		velocity.y = -speed * delta
+		if sprint:
+			velocity.y = -speed * delta * 1.2
+		else:
+			velocity.y = -speed * delta 
 	
 	if Input.is_action_pressed("ui_s"):
 		if !Input.is_action_pressed("ui_a") and !Input.is_action_pressed("ui_d"):
 			$CharacterAnimatedSprite.play("run_down")
 			direction = "down"
-		velocity.y = speed * delta
+		if sprint:
+			velocity.y = speed * delta * 1.2
+		else:
+			velocity.y = speed * delta
 		
 	elif !Input.is_action_pressed("ui_w") and !Input.is_action_pressed("ui_s"):
 		velocity.y = 0
@@ -79,7 +108,7 @@ func _physics_process(delta):
 			if direction == "down":
 				$CharacterAnimatedSprite.play("idle_down")
 		
-	if Input.is_action_pressed("ui_x") and !sword_swinging:
+	if Input.is_mouse_button_pressed(BUTTON_RIGHT) and !sword_swinging:
 		sword_swinging = true
 		$SwordAnimation.visible = true
 		if direction == "down":
@@ -126,10 +155,15 @@ func _physics_process(delta):
 		for obj in area.get_overlapping_bodies():
 			for enemy_name in master_data.enemy_names:
 				if enemy_name in obj.name:
-					obj.damage(master_data.sword_damage)
+					obj.damage(master_data.sword_damage * master_data.melee_multiplier)
 		
 	velocity = move_and_slide(velocity)
 
+func _knockback(var dir, var powa):
+	kb_power = powa
+	knockback_dir = dir
+	knockback = true
+	$knockback.start()
 
 func _on_SwordAnimation_animation_finished():
 	sword_swinging = false
@@ -139,5 +173,9 @@ func _on_SwordAnimation_animation_finished():
 
 
 func _on_ManaRecharge_timeout():
-	if master_data.mana < 100:
+	if master_data.mana < master_data.max_mana:
 		master_data.mana += 1
+
+
+func _on_knockback_timeout():
+	knockback = false
