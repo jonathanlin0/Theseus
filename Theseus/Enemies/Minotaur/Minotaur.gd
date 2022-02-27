@@ -19,12 +19,20 @@ func _physics_process(delta):
 				previous_animation = "charge_up"
 				$AnimatedSprite.play("charge_up")
 	
+	if axe_swinging == false:
+		for obj in $Attack_Areas/jab_area.get_overlapping_bodies():
+			if obj.name.find("Player") != -1:
+				previous_animation = "jab"
+				$AnimatedSprite.play("jab")
+	
 	# ensures the player can only take damage once per axe swing
 	if can_player_take_damage == true and $AnimatedSprite.animation == "axe_swing":
 		for obj in $Attack_Areas/axe_area.get_overlapping_bodies():
 			if obj.name.find("Player") != -1:
 				master_data.health -= master_data.minotaur_axe_damage
 				can_player_take_damage = false
+				
+	# code for minotaur jab
 
 
 func _on_AnimatedSprite_animation_finished():
@@ -38,4 +46,6 @@ func _on_AnimatedSprite_animation_finished():
 		previous_animation = "idle"
 		$AnimatedSprite.play("idle")
 		axe_swinging = false
-
+	elif previous_animation == "jab":
+		previous_animation = "idle"
+		$AnimatedSprite.play("idle")

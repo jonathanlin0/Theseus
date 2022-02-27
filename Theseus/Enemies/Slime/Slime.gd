@@ -79,11 +79,11 @@ func _on_AnimatedSprite_animation_finished():
 		# spawns two slimes after death
 		var small_slime_left = SMALL_SLIME.instance()
 		get_parent().add_child(small_slime_left)
-		small_slime_left.position = $SlimeSpawnLeft.global_position
+		small_slime_left.global_position = $SlimeSpawnLeft.global_position
 		
 		var small_slime_right = SMALL_SLIME.instance()
 		get_parent().add_child(small_slime_right)
-		small_slime_right.position = $SlimeSpawnRight.global_position
+		small_slime_right.global_position = $SlimeSpawnRight.global_position
 		
 		queue_free()
 
