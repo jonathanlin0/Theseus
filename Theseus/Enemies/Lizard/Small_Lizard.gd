@@ -65,8 +65,8 @@ func _physics_process(delta):
 	if is_dead == false:
 		
 		# used for player tracking
-		var difference_x = master_data.player_x - position.x
-		var difference_y = master_data.player_y - position.y
+		var difference_x = master_data.player_x - global_position.x
+		var difference_y = master_data.player_y - global_position.y
 		
 		if dir == "left":
 			$AnimatedSprite.flip_h = false
@@ -102,9 +102,9 @@ func _physics_process(delta):
 					
 					var spit = SPIT.instance()
 					get_parent().add_child(spit)
-					spit.position = $spit_spawn_location.global_position
+					spit.global_position = $spit_spawn_location.global_position
 					
-					spit.set_coords(position.x, position.y)
+					spit.set_coords(global_position.x, global_position.y)
 					
 					can_shoot = false
 					$ShootingCooldown.start()

@@ -223,7 +223,7 @@ script = ExtResource( 12 )
 position = Vector2( 240, 135 )
 scale = Vector2( 1.0125, 1.02963 )
 frames = SubResource( 1 )
-frame = 8
+frame = 30
 playing = true
 
 [node name="Play" type="TextureButton" parent="."]
@@ -248,13 +248,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Credits" type="TextureButton" parent="."]
-margin_left = 364.0
-margin_top = 247.0
-margin_right = 477.0
-margin_bottom = 267.0
-texture_normal = ExtResource( 11 )
-texture_hover = ExtResource( 9 )
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 146.0
+margin_top = 217.0
+margin_right = 339.0
+margin_bottom = 237.0
+texture_normal = ExtResource( 5 )
+texture_hover = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -270,15 +270,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="."]
-margin_left = 146.0
-margin_top = 217.0
-margin_right = 339.0
-margin_bottom = 237.0
-texture_normal = ExtResource( 5 )
-texture_hover = ExtResource( 7 )
+[node name="Credits" type="TextureButton" parent="."]
+margin_left = 364.0
+margin_top = 247.0
+margin_right = 477.0
+margin_bottom = 267.0
+texture_normal = ExtResource( 11 )
+texture_hover = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Controls" to="." method="_on_Controls_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]

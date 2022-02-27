@@ -49,6 +49,7 @@ var sword_damage = 20
 var fireball_damage = 10
 var lizard_spit_damage = 10
 var lizard_boss_slap_damage = 20
+var minotaur_axe_damage = 50
 
 # the rare powerup spawn chances
 var rare_chance_in_basic_chest = 0.2
