@@ -16,10 +16,40 @@ var previous_animation = "idle"
 # makes sure that the player can't damage the slime while it's dying
 var currently_popping = false
 
+#vars for rays so to give the slime "vision"
+var vision_angle_total = deg2rad(360)
+var ray_diff = deg2rad(5)
+var vision = master_data.slime_distance
+
+func make_ray():
+	var i = 0
+	while i <= vision_angle_total/ray_diff:
+		var ray = RayCast2D.new()
+		var angle = ray_diff*i
+		ray.cast_to = Vector2.UP.rotated(angle)*vision
+		add_child(ray)
+		ray.enabled = true
+		i=i+1
+	
+
+func _draw():
+	for ray in get_children():
+		if ray.is_class("RayCast2D"):
+			draw_line(Vector2(0,0), ray.get_cast_to(), Color(1,0,0,1), 1)
+			#print(global_position)
+		#print(ray)
+	
+	
 func _ready():
 	$Health_Bar.setMax(master_data.slime_health)
+	make_ray()
+	#draw the rays for debugging
+	#print(position)
 
 func _physics_process(delta):
+	
+	
+	
 	
 	$Health_Bar.setValue(health)
 	
