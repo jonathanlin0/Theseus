@@ -342,7 +342,7 @@ script = ExtResource( 8 )
 position = Vector2( -14, 10 )
 frames = SubResource( 74 )
 animation = "idle"
-frame = 5
+frame = 7
 playing = true
 
 [node name="spitpos" type="Position2D" parent="."]
@@ -373,6 +373,9 @@ value = 100.0
 
 [node name="regen" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="chestpos" type="Position2D" parent="."]
+position = Vector2( 6, 47 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]

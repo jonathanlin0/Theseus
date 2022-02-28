@@ -30,6 +30,8 @@ const BOSS_GATE = preload("res://Bosses/boss_gate.tscn")
 const STAIRS = preload("res://Bosses/stairs.tscn")
 const SIGN_FIVE = preload("res://Misc/sign_five.tscn")
 
+const CHEST = preload("res://Power_Ups/chests/rare_chest.tscn")
+
 func _randomize():
 	if triggered:
 		rand.randomize()
@@ -131,6 +133,9 @@ func _on_slap_body_entered(body):
 func _on_AnimatedSprite_animation_finished():
 	
 	if dead:
+		var chest = CHEST.instance()
+		chest.position = $chestpos.global_position
+		get_parent().add_child(chest)
 		var sign_five = SIGN_FIVE.instance()
 		sign_five.position.x = 2649
 		sign_five.position.y = 340
