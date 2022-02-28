@@ -26,6 +26,9 @@ var moving = false
 var regen = true
 
 const SPIT = preload("res://Bosses/Lizard_Boss/Big_Spit.tscn")
+const BOSS_GATE = preload("res://Bosses/boss_gate.tscn")
+const STAIRS = preload("res://Bosses/stairs.tscn")
+const SIGN_FIVE = preload("res://Misc/sign_five.tscn")
 
 func _randomize():
 	if triggered:
@@ -52,6 +55,10 @@ func _ready():
 	$Health_Bar.setMax(master_data.lizard_boss_health)
 
 func _physics_process(delta):
+	
+	if !triggered:
+		if master_data.player_x > 2346:
+			trigger()
 	
 	if regen:
 		health += 0.5
@@ -90,14 +97,21 @@ func _physics_process(delta):
 			prev_anim = "spit"
 			$spit_attack.start()
 			spit_cooldown = true
-			triggered = true
+			trigger()
 			_randomize()
 
+func trigger():
+	if !triggered:
+		triggered = true
+		var block = BOSS_GATE.instance()
+		block.position.x = 2320
+		block.position.y = 224
+		get_parent().add_child(block)
+
 func damage(dmg):
-	if !dead:
+	if !dead && triggered:
 		$regen.start()
 		regen = false
-		triggered = true
 		_randomize()
 		health -= dmg
 	if health <= 0:
@@ -117,6 +131,15 @@ func _on_slap_body_entered(body):
 func _on_AnimatedSprite_animation_finished():
 	
 	if dead:
+		var sign_five = SIGN_FIVE.instance()
+		sign_five.position.x = 2649
+		sign_five.position.y = 340
+		get_parent().add_child(sign_five)
+		var next = STAIRS.instance()
+		next._set_destination("stage_two")
+		next.position.x = 2759
+		next.position.y = 341
+		get_parent().add_child(next)
 		queue_free()
 	if !dead && health > 0:
 		if prev_anim == "slap":
