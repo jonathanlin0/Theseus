@@ -4,7 +4,7 @@ extends Node
 # used to hold information and other global, useful functions
 # similar attributes grouped together for easier balance changes
 
-var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss"]
+var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Snake_Goddess"]
 
 # player info
 var max_health = 100
@@ -27,6 +27,7 @@ var small_slime_health = 30
 var snake_health = 40
 var small_lizard_health = 35
 var lizard_boss_health = 300
+var snake_goddess_health = 2000
 
 # collection of the distance threshhold for player tracking from enemies
 var slime_distance = 225
