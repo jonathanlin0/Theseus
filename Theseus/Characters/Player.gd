@@ -12,6 +12,7 @@ var direction = "right"
 # used so that the player can only damage an enemy once per swing
 var can_damage = true
 
+# if player is currently sprinting or not
 var sprint = false
 
 const FIREBALL = preload("res://Weapons/Fireball.tscn")
@@ -20,6 +21,9 @@ const LIGHTNING = preload("res://Weapons/Lightning.tscn")
 var knockback = false
 var knockback_dir = "left"
 var kb_power
+
+# used to track changes in player health
+var previous_health = master_data.health
 
 func _input(event):
 	
@@ -190,7 +194,20 @@ func _physics_process(delta):
 				if enemy_name in obj.name:
 					obj.damage(master_data.sword_damage * master_data.melee_multiplier)
 		
+	if master_data.health != previous_health:
+		flash()
+	previous_health = master_data.health
+		
+		
 	velocity = move_and_slide(velocity)
+
+func flash():
+	# good flash shader tutorial
+	# https://www.youtube.com/watch?v=ctevHwoRl24
+	$CharacterAnimatedSprite.material.set_shader_param("flash_modifier", 1)
+	$SwordAnimation.material.set_shader_param("flash_modifier", 1)
+	$flash_timer.start()
+	
 
 func _knockback(var dir, var powa):
 	kb_power = powa
@@ -212,3 +229,8 @@ func _on_ManaRecharge_timeout():
 
 func _on_knockback_timeout():
 	knockback = false
+
+
+func _on_flash_timer_timeout():
+	$CharacterAnimatedSprite.material.set_shader_param("flash_modifier", 0)
+	$SwordAnimation.material.set_shader_param("flash_modifier", 0)

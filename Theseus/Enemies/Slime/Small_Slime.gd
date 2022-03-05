@@ -62,6 +62,11 @@ func damage(dmg):
 	$knockback.start()
 	knockback = true
 	health -= dmg
+	flash()
+	
+func flash():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
+	$flash_timer.start()
 
 func dead():
 	$AnimatedSprite.play("death")
@@ -75,3 +80,7 @@ func _on_AnimatedSprite_animation_finished():
 
 func _on_knockback_timeout():
 	knockback = false
+
+
+func _on_flash_timer_timeout():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)

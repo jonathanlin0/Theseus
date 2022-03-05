@@ -35,7 +35,14 @@ func net_distance (current_x, dest_x, current_y, dest_y):
 	return sqrt((net_x * net_x) + (net_y * net_y))
 
 func _on_Lightning_body_entered(body):
-	if body.name != "Player" and body.name.find("TileMap") == -1:
+	
+	var is_enemy = false
+	for enemy_name in master_data.enemy_names:
+		if body.name.find(enemy_name) != -1:
+			is_enemy = true
+	
+	if body.name != "Player" and is_enemy == true:
+		
 		# add the current object that the lightning hit to the list of objects that have been hit
 		# do this so that current obj isn't considered when analyzing which obj is the closest to lightning
 		hit_objects.append(body.name)
@@ -70,6 +77,8 @@ func _on_Lightning_body_entered(body):
 				
 				# change unit vectorf
 				unit_vector = master_data.get_unit_vector(closest_obj.global_position.x - global_position.x, closest_obj.global_position.y - global_position.y)
+				
+				# add the current obj to list of hit objects so that lightning won
 				hit_objects.append(closest_obj.name)
 			if closest_obj == null:
 				queue_free()
