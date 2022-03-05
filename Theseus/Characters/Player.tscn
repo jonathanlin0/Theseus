@@ -304,6 +304,7 @@ position = Vector2( -0.500003, 1.19209e-06 )
 scale = Vector2( 0.697917, 0.708333 )
 frames = SubResource( 24 )
 animation = "down"
+frame = 1
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]
@@ -417,7 +418,6 @@ __meta__ = {
 [node name="Fire_animation" type="AnimatedSprite" parent="Hotbar"]
 position = Vector2( 222, 252 )
 frames = SubResource( 101 )
-frame = 2
 playing = true
 
 [node name="lightning_animation" type="AnimatedSprite" parent="Hotbar"]

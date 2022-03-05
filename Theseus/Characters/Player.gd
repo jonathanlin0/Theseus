@@ -157,7 +157,7 @@ func _physics_process(delta):
 			
 			fireball.rotate(rad)
 			
-		if master_data.selected_weapon == 2:
+		if master_data.selected_weapon == 2 and master_data.mana > master_data.lightning_cost:
 			master_data.mana -= master_data.lightning_cost
 			
 			var lightning = LIGHTNING.instance()
