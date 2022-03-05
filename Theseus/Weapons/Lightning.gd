@@ -21,8 +21,8 @@ func _ready():
 func _physics_process(delta):
 	
 	
-	velocity.x = unit_vector.x * master_data.fireball_speed * delta
-	velocity.y = unit_vector.y * master_data.fireball_speed * delta
+	velocity.x = unit_vector.x * master_data.lightning_speed * delta
+	velocity.y = unit_vector.y * master_data.lightning_speed * delta
 	
 	translate(velocity)
 
