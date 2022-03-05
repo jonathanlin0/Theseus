@@ -205,7 +205,7 @@ position = Vector2( 2250, 222 )
 position = Vector2( 2057, 71 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 2202, 254 )
+position = Vector2( 135, 58 )
 z_index = 100
 
 [node name="Lizard_Boss" parent="." instance=ExtResource( 11 )]

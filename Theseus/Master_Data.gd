@@ -12,6 +12,7 @@ var health = 100
 var max_mana = 100
 var mana = 100
 var level = 1
+var selected_weapon = 1
 
 # powerup multipliers
 var ranged_multiplier = 1.0
@@ -43,10 +44,12 @@ var lizard_spit_speed = 180
 
 # how much energy each attack costs
 var fireball_cost = 10
+var lightning_cost = 25
 
 # how much damage each attack does
 var sword_damage = 20
 var fireball_damage = 10
+var lightning_damage = 30
 var lizard_spit_damage = 10
 var lizard_boss_slap_damage = 20
 var minotaur_axe_damage = 50

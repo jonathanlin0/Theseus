@@ -15,6 +15,7 @@ var can_damage = true
 var sprint = false
 
 const FIREBALL = preload("res://Weapons/Fireball.tscn")
+const LIGHTNING = preload("res://Weapons/Lightning.tscn")
 
 var knockback = false
 var knockback_dir = "left"
@@ -43,6 +44,18 @@ func _physics_process(delta):
 	$StatusBars/MarginContainer/VBoxContainer/ManaBar.max_value = master_data.max_mana
 	$StatusBars/MarginContainer/VBoxContainer/ManaBar.value = master_data.mana
 	$StatusBars/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + str(master_data.max_mana)
+	
+	# hotbar logic
+	if Input.is_action_pressed("ui_1"):
+		master_data.selected_weapon = 1
+	if Input.is_action_pressed("ui_2"):
+		master_data.selected_weapon = 2
+		
+	if master_data.selected_weapon == 1:
+		$Hotbar/Select_border.rect_position.x = 204
+	if master_data.selected_weapon == 2:
+		$Hotbar/Select_border.rect_position.x = 204 + 36
+	
 	
 	# movement logic
 	
@@ -120,23 +133,43 @@ func _physics_process(delta):
 		if direction == "right":
 			$SwordAnimation.play("right")
 	
-	if Input.is_action_just_pressed("mouse_left_click") and master_data.mana > master_data.fireball_cost:
-		master_data.mana -= master_data.fireball_cost
-		
-		var fireball = FIREBALL.instance()
-		get_parent().add_child(fireball)
-		fireball.position = $Weapon_Holder.global_position
-		
-		# rotate the fireball to face the direction of the mouse
-		var mouseX = get_local_mouse_position().x
-		var mouseY = get_local_mouse_position().y
-		
-		# fireball is backwards when x is neg
-		var rad = atan(mouseY/mouseX)
-		if mouseX<0:
-			rad += PI
-		
-		fireball.rotate(rad)
+	if Input.is_action_just_pressed("mouse_left_click"):
+		if master_data.selected_weapon == 1 and master_data.mana > master_data.fireball_cost:
+			
+			master_data.mana -= master_data.fireball_cost
+			
+			var fireball = FIREBALL.instance()
+			get_parent().add_child(fireball)
+			fireball.position = $Weapon_Holder.global_position
+			
+			# rotate the fireball to face the direction of the mouse
+			var mouseX = get_local_mouse_position().x
+			var mouseY = get_local_mouse_position().y
+			
+			# fireball is backwards when x is neg
+			var rad = atan(mouseY/mouseX)
+			if mouseX<0:
+				rad += PI
+			
+			fireball.rotate(rad)
+			
+		if master_data.selected_weapon == 2:
+			master_data.mana -= master_data.lightning_cost
+			
+			var lightning = LIGHTNING.instance()
+			get_parent().add_child(lightning)
+			lightning.position = $Weapon_Holder.global_position
+			
+			# rotate the lightning to face the direction of the mouse
+			var mouseX = get_local_mouse_position().x
+			var mouseY = get_local_mouse_position().y
+			
+			# lightning is backwards when x is neg
+			var rad = atan(mouseY/mouseX)
+			if mouseX<0:
+				rad += PI
+			
+			lightning.rotate(rad)
 	
 	if $SwordAnimation.is_playing() and can_damage == true:
 		can_damage = false
