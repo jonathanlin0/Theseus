@@ -418,6 +418,7 @@ __meta__ = {
 [node name="Fire_animation" type="AnimatedSprite" parent="Hotbar"]
 position = Vector2( 222, 252 )
 frames = SubResource( 101 )
+frame = 3
 playing = true
 
 [node name="lightning_animation" type="AnimatedSprite" parent="Hotbar"]

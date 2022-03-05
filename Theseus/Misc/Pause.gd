@@ -23,6 +23,8 @@ func _on_Resume_pressed():
 func _on_Restart_pressed():
 	pause()
 	get_tree().change_scene("res://Levels/" + get_tree().get_current_scene().name + ".tscn")
+	master_data.health = master_data.max_health
+	master_data.mana = master_data.max_mana
 
 func _on_Exit_pressed():
 	pause()

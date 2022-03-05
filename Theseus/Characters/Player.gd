@@ -125,6 +125,8 @@ func _physics_process(delta):
 			if direction == "down":
 				$CharacterAnimatedSprite.play("idle_down")
 		
+	# animation part of melee logic
+	
 	if Input.is_mouse_button_pressed(BUTTON_RIGHT) and !sword_swinging:
 		sword_swinging = true
 		$SwordAnimation.visible = true
@@ -136,6 +138,27 @@ func _physics_process(delta):
 			$SwordAnimation.play("left")
 		if direction == "right":
 			$SwordAnimation.play("right")
+	
+	# damage part of melee logic
+	
+	if $SwordAnimation.is_playing() and can_damage == true:
+		can_damage = false
+		
+		var area = $SwordSwingAreas/LeftSwordArea
+		
+		if $SwordAnimation.animation == "left":
+			area = $SwordSwingAreas/LeftSwordArea
+		if $SwordAnimation.animation == "right":
+			area = $SwordSwingAreas/RightSwordArea
+		if $SwordAnimation.animation == "down":
+			area = $SwordSwingAreas/DownSwordArea
+		if $SwordAnimation.animation == "up":
+			area = $SwordSwingAreas/UpSwordArea
+		
+		for obj in area.get_overlapping_bodies():
+			for enemy_name in master_data.enemy_names:
+				if enemy_name in obj.name:
+					obj.damage(master_data.sword_damage * master_data.melee_multiplier)
 	
 	if Input.is_action_just_pressed("mouse_left_click"):
 		if master_data.selected_weapon == 1 and master_data.mana > master_data.fireball_cost:
@@ -175,24 +198,7 @@ func _physics_process(delta):
 			
 			lightning.rotate(rad)
 	
-	if $SwordAnimation.is_playing() and can_damage == true:
-		can_damage = false
-		
-		var area = $SwordSwingAreas/LeftSwordArea
-		
-		if $SwordAnimation.animation == "left":
-			area = $SwordSwingAreas/LeftSwordArea
-		if $SwordAnimation.animation == "right":
-			area = $SwordSwingAreas/RightSwordArea
-		if $SwordAnimation.animation == "down":
-			area = $SwordSwingAreas/DownSwordArea
-		if $SwordAnimation.animation == "up":
-			area = $SwordSwingAreas/UpSwordArea
-		
-		for obj in area.get_overlapping_bodies():
-			for enemy_name in master_data.enemy_names:
-				if enemy_name in obj.name:
-					obj.damage(master_data.sword_damage * master_data.melee_multiplier)
+	
 		
 	if master_data.health != previous_health:
 		flash()

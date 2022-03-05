@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Tile_Sets/tileset_blue.tres" type="TileSet" id=1]
-[ext_resource path="res://Enemies/Slime/Small_Slime.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemies/Snake/Snake_Dmg.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Misc/Pause.tscn" type="PackedScene" id=4]
 
@@ -18,8 +18,4 @@ tile_data = PoolIntArray( 131073, 2, 0, 131074, 2, 0, 131075, 2, 0, 131076, 2, 0
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 83, 142 )
 
-[node name="Small_Slime" parent="." instance=ExtResource( 2 )]
-position = Vector2( -133, 171 )
-
-[node name="Small_Slime2" parent="." instance=ExtResource( 2 )]
-position = Vector2( -136, 114 )
+[node name="Snake_Dmg" parent="." instance=ExtResource( 2 )]
