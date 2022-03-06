@@ -46,7 +46,7 @@ func _on_Lightning_body_entered(body):
 		# add the current object that the lightning hit to the list of objects that have been hit
 		# do this so that current obj isn't considered when analyzing which obj is the closest to lightning
 		hit_objects.append(body.name)
-		body.damage(master_data.lightning_damage)
+		body.damage(master_data.lightning_damage * master_data.ranged_multiplier)
 
 		if $Range.get_overlapping_bodies().size() > 0:
 			
