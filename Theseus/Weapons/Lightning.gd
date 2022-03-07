@@ -7,6 +7,8 @@ var mouse_position = position
 
 var hit_objects = []
 
+var hit_something = false
+
 func _ready():
 	
 	mouse_position = get_global_mouse_position()
@@ -20,9 +22,9 @@ func _ready():
 	
 func _physics_process(delta):
 	
-	
-	velocity.x = unit_vector.x * master_data.lightning_speed * delta
-	velocity.y = unit_vector.y * master_data.lightning_speed * delta
+	if !hit_something:
+		velocity.x = unit_vector.x * master_data.lightning_speed * delta
+		velocity.y = unit_vector.y * master_data.lightning_speed * delta
 	
 	translate(velocity)
 
@@ -35,7 +37,6 @@ func net_distance (current_x, dest_x, current_y, dest_y):
 	return sqrt((net_x * net_x) + (net_y * net_y))
 
 func _on_Lightning_body_entered(body):
-	
 	var is_enemy = false
 	for enemy_name in master_data.enemy_names:
 		if body.name.find(enemy_name) != -1:
@@ -82,10 +83,13 @@ func _on_Lightning_body_entered(body):
 				hit_objects.append(closest_obj.name)
 			if closest_obj == null:
 				queue_free()
-		"""
-		var have_other_objs_overlapping = false
-		for obj in $Range.get_overlapping_bodies():
-			if obj.name != self.name and hit_objects.find(obj.name) == -1:
-				have_other_objs_overlapping = true
-		if have_other_objs_overlapping == false:
-			queue_free()"""
+	if body.name == "TileMap":
+			hit_something = true
+			$AnimatedSprite.play("pop")
+			$CollisionShape2D.disabled = true
+			velocity = Vector2(0,0)
+
+
+func _on_AnimatedSprite_animation_finished():
+	if hit_something:
+		queue_free()
