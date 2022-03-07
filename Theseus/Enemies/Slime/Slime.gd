@@ -29,7 +29,7 @@ func make_ray():
 		var ray = RayCast2D.new()
 		var angle = ray_diff*i
 		ray.cast_to = Vector2.UP.rotated(angle)*vision
-		ray.add_exception(SMALL_SLIME)
+		#ray.add_exception(SMALL_SLIME)
 		ray.enabled = true
 		ray.collision_mask = 2
 		add_child(ray)
@@ -59,7 +59,6 @@ func _physics_process(delta):
 			if ray.get_collider() != null:
 				#print(ray.get_collider().to_string())
 				if ray.get_collider().to_string() == "Player:[KinematicBody2D:2187]":
-					
 					sees_player = true
 					break
 				else:

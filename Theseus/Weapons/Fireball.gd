@@ -40,6 +40,7 @@ func _on_Fireball_body_entered(body):
 				body.damage(master_data.fireball_damage * master_data.ranged_multiplier)
 				$AnimatedSprite.play("fireStop")
 				hitSomething = true
+	
 	if body.name == "TileMap":
 		hitSomething = true;
 		#previous_animation = "fireStop"
