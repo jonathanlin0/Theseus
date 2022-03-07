@@ -21,14 +21,18 @@ var vision_angle_total = deg2rad(360)
 var ray_diff = deg2rad(5)
 var vision = master_data.slime_distance
 
+var sees_player = false
+
 func make_ray():
 	var i = 0
 	while i <= vision_angle_total/ray_diff:
 		var ray = RayCast2D.new()
 		var angle = ray_diff*i
 		ray.cast_to = Vector2.UP.rotated(angle)*vision
-		add_child(ray)
+		ray.add_exception(SMALL_SLIME)
 		ray.enabled = true
+		ray.collision_mask = 2
+		add_child(ray)
 		i=i+1
 	
 
@@ -36,6 +40,8 @@ func _draw():
 	for ray in get_children():
 		if ray.is_class("RayCast2D"):
 			draw_line(Vector2(0,0), ray.get_cast_to(), Color(1,0,0,1), 1)
+			
+			#print(ray.get_collider().to_string())
 			#print(global_position)
 		#print(ray)
 	
@@ -48,7 +54,16 @@ func _ready():
 
 func _physics_process(delta):
 	
-	
+	for ray in get_children():
+		if ray.is_class("RayCast2D"):
+			if ray.get_collider() != null:
+				#print(ray.get_collider().to_string())
+				if ray.get_collider().to_string() == "Player:[KinematicBody2D:2187]":
+					
+					sees_player = true
+					break
+				else:
+					sees_player = false
 	
 	
 	$Health_Bar.setValue(health)
@@ -69,8 +84,10 @@ func _physics_process(delta):
 			var net_distance = 0
 			net_distance = sqrt((difference_x * difference_x) + (difference_y * difference_y))
 			
-			if net_distance <= master_data.slime_distance:
+			#if net_distance <= master_data.slime_distance:
 			
+			if sees_player:
+				
 				var sign_x = 0
 				var sign_y = 0
 				
