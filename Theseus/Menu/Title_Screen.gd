@@ -11,7 +11,7 @@ func _ready():
 
 
 func _on_Play_pressed():
-	get_tree().change_scene("res://Levels/Level1.tscn")
+	get_tree().change_scene("res://Misc/intro.tscn")
 
 
 func _on_Controls_pressed():

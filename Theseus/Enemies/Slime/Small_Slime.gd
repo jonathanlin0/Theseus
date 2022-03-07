@@ -59,10 +59,11 @@ func _physics_process(delta):
 					velocity = move_and_slide(velocity)
 
 func damage(dmg):
-	$knockback.start()
-	knockback = true
-	health -= dmg
-	flash()
+	if health > 0:
+		$knockback.start()
+		knockback = true
+		health -= dmg
+		flash()
 	
 func flash():
 	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
