@@ -36,10 +36,10 @@ func make_ray():
 		i=i+1
 	
 
-func _draw():
-	for ray in get_children():
-		if ray.is_class("RayCast2D"):
-			draw_line(Vector2(0,0), ray.get_cast_to(), Color(1,0,0,1), 1)
+#func _draw():
+	#for ray in get_children():
+		#if ray.is_class("RayCast2D"):
+			#draw_line(Vector2(0,0), ray.get_cast_to(), Color(1,0,0,1), 1)
 			
 			#print(ray.get_collider().to_string())
 			#print(global_position)
