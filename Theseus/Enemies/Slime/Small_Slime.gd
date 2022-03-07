@@ -22,7 +22,7 @@ func _physics_process(delta):
 	
 	if currently_popping == false:
 	
-		if health <= 0:
+		if health <= 0 && !knockback:
 			dead()
 		
 		if is_dead == false:

@@ -26,7 +26,7 @@ func _physics_process(delta):
 	
 	if currently_popping == false:
 	
-		if health <= 0:
+		if health <= 0 && !knockback:
 			dead()
 		
 		if is_dead == false:
@@ -63,9 +63,10 @@ func _physics_process(delta):
 					velocity = move_and_slide(velocity)
 
 func damage(dmg):
-	health -= dmg
-	$knockback.start()
-	knockback = true
+	if health > 0:
+		health -= dmg
+		$knockback.start()
+		knockback = true
 
 func dead():
 	currently_popping = true
