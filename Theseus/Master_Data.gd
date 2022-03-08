@@ -57,6 +57,7 @@ var lightning_damage = 30
 var lizard_spit_damage = 10
 var lizard_boss_slap_damage = 20
 var minotaur_axe_damage = 50
+var minotaur_jab_damage = 20
 var snake_dmg_damage = 20
 
 # the rare powerup spawn chances
