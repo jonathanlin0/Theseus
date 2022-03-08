@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Misc/controls.png" type="Texture" id=1]
-[ext_resource path="res://Misc/space.png" type="Texture" id=2]
+[ext_resource path="res://Misc/Sprites/controls.png" type="Texture" id=1]
+[ext_resource path="res://Misc/Sprites/space.png" type="Texture" id=2]
 [ext_resource path="res://Misc/single_controls.gd" type="Script" id=3]
 
 [node name="single_controls" type="Node2D"]

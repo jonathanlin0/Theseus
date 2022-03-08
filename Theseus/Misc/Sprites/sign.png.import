@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/guide_three.png-3461729e2f0f44197f1973f4e9f9c89c.stex"
+path="res://.import/sign.png-823f799323e6c354ebc5c2c84c71ed7b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Misc/guide_three.png"
-dest_files=[ "res://.import/guide_three.png-3461729e2f0f44197f1973f4e9f9c89c.stex" ]
+source_file="res://Misc/Sprites/sign.png"
+dest_files=[ "res://.import/sign.png-823f799323e6c354ebc5c2c84c71ed7b.stex" ]
 
 [params]
 
