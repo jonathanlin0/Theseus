@@ -10,6 +10,7 @@ var previous_animation = "idle"
 var can_player_take_damage = true
 
 var direction = "left"
+var previous_direction = "left"
 
 func _physics_process(delta):
 	
@@ -20,18 +21,33 @@ func _physics_process(delta):
 	var difference_x = master_data.player_x - global_position.x
 	var difference_y = master_data.player_y - global_position.y
 	
-	if difference_x > 0:
-		direction = "right"
-	if difference_x < 0:
-		direction = "left"
-	
-	if direction == "right":
-		scale.x = -1
-		#position.x = 28
+	if abs(difference_x) > 32:
 		
-	if direction == "left":
-		scale.x = 1
-		#position.x = -28
+		# set of conditions to ensure that the minotaur can move/change directions
+		var can_move = true
+		if axe_swinging == true or $AnimatedSprite.animation == "charge_up":
+			can_move = false
+		if jabbing == true:
+			can_move = false
+		
+		if can_move == true:
+		
+			if difference_x > 0:
+				direction = "right"
+			if difference_x < 0:
+				direction = "left"
+			
+			if direction == "right":
+				if previous_direction == "left":
+					global_position.x += 64
+				scale.x = -1
+				
+			if direction == "left":
+				if previous_direction == "right":
+					global_position.x -= 64
+				scale.x = 1
+	
+	previous_direction = direction
 	
 	# start the charge up animation if the player is within the minotaur's range
 	if previous_animation != "charge_up" and previous_animation != "axe_swing":
