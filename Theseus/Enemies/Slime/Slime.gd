@@ -22,6 +22,7 @@ var ray_diff = deg2rad(5)
 var vision = master_data.slime_distance
 
 var sees_player = false
+var can_see = false
 
 func make_ray():
 	var i = 0
@@ -53,16 +54,16 @@ func _ready():
 	#print(position)
 
 func _physics_process(delta):
-	
-	for ray in get_children():
-		if ray.is_class("RayCast2D"):
-			if ray.get_collider() != null:
-				#print(ray.get_collider().to_string())
-				if ray.get_collider().to_string() == "Player:[KinematicBody2D:2187]":
-					sees_player = true
-					break
-				else:
-					sees_player = false
+	if can_see:
+		for ray in get_children():
+			if ray.is_class("RayCast2D"):
+				if ray.get_collider() != null:
+					#print(ray.get_collider().to_string())
+					if ray.get_collider().to_string().substr(0, 6) == "Player":
+						sees_player = true
+						break
+					else:
+						sees_player = false
 	
 	
 	$Health_Bar.setValue(health)
@@ -136,3 +137,9 @@ func _on_AnimatedSprite_animation_finished():
 
 func _on_knockback_timeout():
 	knockback = false
+
+func _on_VisibilityEnabler2D_screen_entered():
+	can_see = true
+
+func _on_VisibilityEnabler2D_screen_exited():
+	can_see = false
