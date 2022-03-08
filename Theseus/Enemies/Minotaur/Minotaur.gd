@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
+var velocity = Vector2()
+
 var axe_swinging = false
+var jabbing = false
 
 var previous_animation = "idle"
 
@@ -8,7 +11,7 @@ var can_player_take_damage = true
 
 func _physics_process(delta):
 	
-	if axe_swinging == false:
+	if axe_swinging == false and jabbing == false:
 		$AnimatedSprite.play("idle")
 	
 	# start the charge up animation if the player is within the minotaur's range
@@ -19,11 +22,7 @@ func _physics_process(delta):
 				previous_animation = "charge_up"
 				$AnimatedSprite.play("charge_up")
 	
-	if axe_swinging == false:
-		for obj in $Attack_Areas/jab_area.get_overlapping_bodies():
-			if obj.name.find("Player") != -1:
-				previous_animation = "jab"
-				$AnimatedSprite.play("jab")
+	
 	
 	# ensures the player can only take damage once per axe swing
 	if can_player_take_damage == true and $AnimatedSprite.animation == "axe_swing":
@@ -32,7 +31,20 @@ func _physics_process(delta):
 				master_data.health -= master_data.minotaur_axe_damage
 				can_player_take_damage = false
 				
+	# flying animation for the axe swing
+	if $AnimatedSprite.animation == "axe_swing" and $AnimatedSprite.frame == 0:
+		velocity.x = -50000 * delta
+		velocity.y = 0
+		velocity = move_and_slide(velocity)
+				
 	# code for minotaur jab
+	if axe_swinging == false and previous_animation != "jab":
+		for obj in $Attack_Areas/jab_area.get_overlapping_bodies():
+			if obj.name.find("Player") != -1:
+				previous_animation = "jab"
+				$AnimatedSprite.play("jab")
+				jabbing = true
+
 
 
 func _on_AnimatedSprite_animation_finished():
@@ -40,12 +52,12 @@ func _on_AnimatedSprite_animation_finished():
 	if previous_animation == "charge_up":
 		previous_animation = "axe_swing"
 		$AnimatedSprite.play("axe_swing")
-		
 	elif previous_animation == "axe_swing":
 		can_player_take_damage = true
 		previous_animation = "idle"
 		$AnimatedSprite.play("idle")
 		axe_swinging = false
 	elif previous_animation == "jab":
+		jabbing = false
 		previous_animation = "idle"
 		$AnimatedSprite.play("idle")

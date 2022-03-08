@@ -349,7 +349,6 @@ material = SubResource( 85 )
 position = Vector2( -14, 10 )
 frames = SubResource( 74 )
 animation = "idle"
-frame = 4
 playing = true
 
 [node name="spitpos" type="Position2D" parent="."]
