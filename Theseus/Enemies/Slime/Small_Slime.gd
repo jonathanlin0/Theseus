@@ -13,9 +13,8 @@ var previous_animation = "idle"
 # makes sure that the player can't damage the slime while it's dying
 var currently_popping = false
 
-var diff_x = master_data.player_x - global_position.x
-var diff_y = master_data.player_y - global_position.y
-
+var diff_x = master_data.player_global_x - global_position.x
+var diff_y = master_data.player_global_y - global_position.y
 
 var player_angle = 0
 
@@ -69,13 +68,16 @@ func _ready():
 	make_ray()
 
 func update_player():
+	diff_x = master_data.player_global_x - global_position.x
+	diff_y = master_data.player_global_y - global_position.y
+	
 	if diff_x == 0:
 		if diff_y <0:
 			player_angle = -PI/2
 		if diff_y >0:
 			player_angle = PI/2
 	else:
-		player_angle = atan(diff_y/diff_x)
+		player_angle = atan(diff_y/-diff_x)
 
 
 func _physics_process(delta):

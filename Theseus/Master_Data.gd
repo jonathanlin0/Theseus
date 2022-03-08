@@ -20,6 +20,10 @@ var melee_multiplier = 1.0
 # player location
 var player_x = 0
 var player_y = 0
+#global pos
+var player_global_x = 0
+var player_globla_y = 0
+
 
 # collection of all the enemies' health
 var slime_health = 50

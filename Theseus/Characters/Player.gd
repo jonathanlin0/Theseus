@@ -33,6 +33,12 @@ func _physics_process(delta):
 	# update the master_data values
 	master_data.player_x = position.x
 	master_data.player_y = position.y
+	if is_inside_tree():
+		print(global_position.x)
+		master_data.player_global_x = global_position.x
+		master_data.player_global_y = global_position.y
+		
+	
 	
 	# update the health & mana bars
 	
