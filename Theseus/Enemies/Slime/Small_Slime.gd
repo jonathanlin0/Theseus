@@ -67,7 +67,7 @@ func damage(dmg):
 	
 func flash():
 	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
-	$flash_timer.start()
+	$flash_timer.start(master_data.flash_time)
 
 func dead():
 	$AnimatedSprite.play("death")

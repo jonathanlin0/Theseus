@@ -125,7 +125,11 @@ func damage(dmg):
 	triggered = true
 	_randomize()
 	health -= dmg
+	flash()
 
+func flash():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
+	$flash_timer.start(master_data.flash_time)
 
 func _on_AnimatedSprite_animation_finished():
 	if moving:
@@ -141,3 +145,7 @@ func _on_AnimatedSprite_animation_finished():
 
 func _on_knockback_timeout():
 	knockback = false
+
+
+func _on_flash_timer_timeout():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)

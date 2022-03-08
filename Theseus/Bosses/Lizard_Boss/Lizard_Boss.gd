@@ -28,7 +28,7 @@ var regen = true
 const SPIT = preload("res://Bosses/Lizard_Boss/Big_Spit.tscn")
 const BOSS_GATE = preload("res://Bosses/boss_gate.tscn")
 const STAIRS = preload("res://Bosses/stairs.tscn")
-const SIGN_FIVE = preload("res://Misc/sign_five.tscn")
+const SIGN_FIVE = preload("res://Misc/Signs/sign_five.tscn")
 
 const CHEST = preload("res://Power_Ups/chests/rare_chest.tscn")
 
@@ -116,6 +116,7 @@ func damage(dmg):
 		regen = false
 		_randomize()
 		health -= dmg
+		flash()
 	if health <= 0:
 		moving = false
 		triggered = false
@@ -123,6 +124,11 @@ func damage(dmg):
 		dead = true
 		$AnimatedSprite.play("death")
 		prev_anim = "death"
+		
+
+func flash():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
+	$flash_timer.start(master_data.flash_time)
 
 func _on_slap_body_entered(body):
 	if body.name.find("Player") != -1:
@@ -202,3 +208,7 @@ func _on_spit_attack_timeout():
 
 func _on_regen_timeout():
 	regen = true
+
+
+func _on_flash_timer_timeout():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)
