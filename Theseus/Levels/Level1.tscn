@@ -193,10 +193,10 @@ position = Vector2( 1169, 193 )
 position = Vector2( 1359, 498 )
 
 [node name="sign_two" parent="." instance=ExtResource( 7 )]
-position = Vector2( 482, 141 )
+position = Vector2( 460.8, 84.722 )
 
 [node name="sign_three" parent="." instance=ExtResource( 8 )]
-position = Vector2( 508, 141 )
+position = Vector2( 507, 158 )
 
 [node name="sign_four" parent="." instance=ExtResource( 12 )]
 position = Vector2( 2250, 222 )
@@ -205,7 +205,7 @@ position = Vector2( 2250, 222 )
 position = Vector2( 2057, 71 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 135, 58 )
+position = Vector2( 92, 57 )
 z_index = 100
 
 [node name="Lizard_Boss" parent="." instance=ExtResource( 11 )]

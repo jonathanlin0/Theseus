@@ -159,6 +159,7 @@ func _physics_process(delta):
 			for enemy_name in master_data.enemy_names:
 				if enemy_name in obj.name:
 					obj.damage(master_data.sword_damage * master_data.melee_multiplier)
+
 	
 	if Input.is_action_just_pressed("mouse_left_click"):
 		if master_data.selected_weapon == 1 and master_data.mana > master_data.fireball_cost:

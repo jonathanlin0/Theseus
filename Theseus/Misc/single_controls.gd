@@ -14,4 +14,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
-		get_tree().change_scene("res://Levels/Level1.tscn")
+		if master_data.previous_scene == "title":
+			get_tree().change_scene("res://Menu/Title_Screen.tscn")
+		else: 
+			get_tree().change_scene("res://Levels/Level1.tscn")

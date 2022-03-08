@@ -67,6 +67,8 @@ var rare_chance_in_rare_chest = 0.4
 # power of knockback
 var knockback_power = 10
 
+# scene ordering
+var previous_scene = "title"
 
 func x_direction(x_body, x_other_object):
 	var out = 0

@@ -3,7 +3,7 @@ extends Node2D
 
 
 func _ready():
-	pass
+	master_data.previous_scene = "title"
 
 
 #func _process(delta):
@@ -15,7 +15,7 @@ func _on_Play_pressed():
 
 
 func _on_Controls_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene("res://Misc/single_controls.tscn")
 
 
 func _on_TextureButton_pressed():
