@@ -244,13 +244,14 @@ size = 10
 font_data = ExtResource( 14 )
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource( 5 )
 
 [node name="CharacterAnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 104 )
 frames = SubResource( 17 )
 animation = "run_right"
-frame = 2
 playing = true
 
 [node name="MainCollisionBox" type="CollisionShape2D" parent="."]
