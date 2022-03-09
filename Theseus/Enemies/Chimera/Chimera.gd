@@ -30,22 +30,22 @@ var attacking = false
 func _randomize():
 	if triggered:
 		rand.randomize()
-		rand_x_vel = rand.randf_range(-100, 100)
+		rand_x_vel = rand.randf_range(-60, 60)
 		rand_y_vel = rand.randf_range(-30, 30)
 		velocity.x += rand_x_vel
 		velocity.y += rand_y_vel
 		
-		if velocity.x > 50:
-			velocity.x = 50
+		if velocity.x > 60:
+			velocity.x = 60
 		
-		if velocity.x < -50:
-			velocity.x = -50
+		if velocity.x < -60:
+			velocity.x = -60
 		
-		if velocity.y > 20:
-			velocity.y = 20
+		if velocity.y > 30:
+			velocity.y = 30
 		
-		if velocity.y < -20:
-			velocity.y = -20
+		if velocity.y < -30:
+			velocity.y = -30
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -53,10 +53,9 @@ func _ready():
 	prev_anim = "idle"
 	$Health_Bar.setMax(master_data.chimera_health)
 
-
+var attack_time_started = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(prev_anim)
 	$Health_Bar.setValue(health)
 	if health <= 0:
 		dead()
@@ -68,8 +67,20 @@ func _process(delta):
 			moving = false
 		# used for player tracking
 		
+		if prev_anim == "lion_attack":
+			if !attack_time_started:
+				$lion_attack.start()
+				attack_time_started = true
+			position += transform.x * 1500 * delta * (($lion_attack.wait_time / 2) - ($lion_attack.time_left))
+		
+		if prev_anim == "goat_attack":
+			if !attack_time_started:
+				$goat_attack.start()
+				attack_time_started = true
+			position += transform.x * -2000 * delta * (($goat_attack.wait_time / 2) - ($goat_attack.time_left))
+		
 		collision = move_and_collide(velocity * delta)
-		if collision:
+		if collision && moving:
 			velocity = velocity.bounce(collision.normal)
 			_randomize()
 
@@ -83,7 +94,6 @@ func damage(dmg):
 	_randomize()
 	health -= dmg
 
-var done_charging = false
 func _on_AnimatedSprite_animation_finished():
 	if moving:
 		$AnimatedSprite.play("walk")
@@ -95,11 +105,12 @@ func _on_AnimatedSprite_animation_finished():
 		$AnimatedSprite.play("lion_chargeup")
 		prev_anim = "lion_chargeup"
 		attacking = true
-		done_charging = false
-	if lion_attack && attacking && !done_charging:
-		done_charging = true
-	if lion_attack && done_charging:
-		$AnimatedSprite.play("lion_attack")
+		$lion_charge.start()
+	if goat_attack:
+		$AnimatedSprite.play("goat_chargeup")
+		prev_anim = "goat_chargeup"
+		attacking = true
+		$goat_charge.start()
 	if is_dead:
 		queue_free()
 
@@ -123,6 +134,9 @@ func _on_goat_box_body_entered(body):
 
 
 func _on_attack_timeout():
+	if !triggered:
+			triggered = true
+			_randomize()
 	attacking = false
 	_randomize()
 
@@ -139,3 +153,32 @@ func _on_goat_box_body_exited(body):
 		lion_attack = false
 		goat_attack = false
 		attacking = false
+
+
+func _on_lion_charge_timeout():
+	if lion_attack:
+		$AnimatedSprite.play("lion_attack")
+		prev_anim = "lion_attack"
+	
+
+func _on_goat_charge_timeout():
+	if goat_attack:
+		$AnimatedSprite.play("goat_attack")
+		prev_anim = "goat_attack"
+
+
+func _on_lion_attack_timeout():
+	attack_time_started = false
+
+
+func _on_goat_attack_timeout():
+	attack_time_started = false
+
+
+func _on_bump_area_body_entered(body):
+	if prev_anim == "lion_attack" && body.name.find("Player") != -1:
+		master_data.health = master_data.health - master_data.chimera_lion_damage
+		body._knockback("left", 5)
+	if prev_anim == "goat_attack" && body.name.find("Player") != -1:
+		master_data.health = master_data.health - master_data.chimera_goat_damage
+		body._knockback("right", 7)
