@@ -34,9 +34,10 @@ func _physics_process(delta):
 	master_data.player_x = position.x
 	master_data.player_y = position.y
 	if is_inside_tree():
-		#print(global_position.x)
-		master_data.player_x = global_position.x
-		master_data.player_y = global_position.y
+		#print(master_data.player_global_y)
+		#print(get_global_position().y)
+		master_data.player_global_x = get_global_position().x
+		master_data.player_global_y = get_global_position().y
 		
 	
 	

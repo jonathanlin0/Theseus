@@ -54,6 +54,7 @@ func _ready():
 	#print(position)
 
 func _physics_process(delta):
+	
 	if can_see:
 		for ray in get_children():
 			if ray.is_class("RayCast2D"):
@@ -75,10 +76,11 @@ func _physics_process(delta):
 			dead()
 		
 		if is_dead == false:
-			
+			#print(master_data.player_global_x)
+			#print(global_position.x)
 			# used for player tracking
-			var difference_x = master_data.player_x - global_position.x
-			var difference_y = master_data.player_y - global_position.y
+			var difference_x = master_data.player_global_x - global_position.x
+			var difference_y = master_data.player_global_y - global_position.y
 			
 			
 			var net_distance = 0
