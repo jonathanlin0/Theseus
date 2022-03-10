@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Misc/Leaderboard.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 28
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 2 )
+
+[node name="Leaderboard" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 480.0
+margin_bottom = 270.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HTTPRequest_test" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest_leaderboard" type="HTTPRequest" parent="."]
+
+[node name="LEADERBOARD" type="Label" parent="."]
+margin_top = 20.0
+margin_right = 480.0
+margin_bottom = 55.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "LEADERBOARD"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1st place" type="Label" parent="."]
+margin_top = 70.0
+margin_right = 480.0
+margin_bottom = 90.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "1st: GreenOnion - 3600 seconds"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2nd place" type="Label" parent="."]
+margin_top = 100.0
+margin_right = 480.0
+margin_bottom = 120.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "2nd: BlueSky - 33894 seconds"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="3rd place" type="Label" parent="."]
+margin_top = 130.0
+margin_right = 480.0
+margin_bottom = 150.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "3rd: YellowLightning - 992374 seconds"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="request_completed" from="HTTPRequest_test" to="." method="_on_HTTPRequest_test_request_completed"]
+[connection signal="request_completed" from="HTTPRequest_leaderboard" to="." method="_on_HTTPRequest_leaderboard_request_completed"]

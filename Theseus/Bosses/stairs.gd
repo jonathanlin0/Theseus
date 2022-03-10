@@ -1,9 +1,6 @@
 extends Area2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
 var dest = ""
 
@@ -13,10 +10,6 @@ func _ready():
 
 func _set_destination(target):
 	dest = target
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 
 func _on_stairs_body_entered(body):

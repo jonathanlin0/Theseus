@@ -6,8 +6,14 @@ extends Node
 
 var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit"]
 
+var username = "testinglol"
+
 # length of flash when a character gets damaged
 var flash_time = 0.1
+
+# used for score calculations
+var start_time
+var end_time
 
 # player info
 var max_health = 100

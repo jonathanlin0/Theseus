@@ -273,6 +273,7 @@ script = ExtResource( 5 )
 material = SubResource( 104 )
 frames = SubResource( 17 )
 animation = "death"
+frame = 2
 playing = true
 
 [node name="MainCollisionBox" type="CollisionShape2D" parent="."]
@@ -290,7 +291,7 @@ position = Vector2( -0.500003, 1.19209e-06 )
 scale = Vector2( 0.697917, 0.708333 )
 frames = SubResource( 24 )
 animation = "down"
-frame = 2
+frame = 1
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]

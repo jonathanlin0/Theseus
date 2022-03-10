@@ -1,10 +1,7 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+const STAIRS = preload("res://Bosses/stairs.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +12,10 @@ func _ready():
 	master_data.ranged_multiplier = 1.0
 	master_data.melee_multiplier = 1.0
 	master_data.player_speed = 7000
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	
+	master_data.start_time = OS.get_unix_time()
+	
+func _process(delta):
+	# temporary, only for testing
+	if Input.is_action_just_pressed("ui_n"):
+		get_tree().change_scene("res://Levels/Level2.tscn")
