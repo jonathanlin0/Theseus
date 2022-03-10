@@ -255,4 +255,4 @@ func _on_flash_timer_timeout():
 
 func _on_CharacterAnimatedSprite_animation_finished():
 	if is_dead == true:
-		get_tree().change_scene("res://Levels/Level1.tscn")
+		get_tree().change_scene("res://Misc/Game_Over.tscn")
