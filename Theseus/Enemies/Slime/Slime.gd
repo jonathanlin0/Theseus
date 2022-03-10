@@ -18,23 +18,46 @@ var currently_popping = false
 
 #vars for rays so to give the slime "vision"
 var vision_angle_total = deg2rad(360)
-var ray_diff = deg2rad(5)
+var ray_diff = deg2rad(2)
 var vision = master_data.slime_distance
+var player_angle = 0
+
+var diff_x = 0
+var diff_y = 0
+
 
 var sees_player = false
 var can_see = false
 
 func make_ray():
 	var i = 0
-	while i <= vision_angle_total/ray_diff:
-		var ray = RayCast2D.new()
-		var angle = ray_diff*i
-		ray.cast_to = Vector2.UP.rotated(angle)*vision
+	
+	var ray_main = RayCast2D.new()
+	var ray1 = RayCast2D.new()
+	var ray2 = RayCast2D.new()
+	ray_main.cast_to = Vector2.UP.rotated(player_angle)*vision
+	ray1.cast_to = Vector2.UP.rotated(player_angle+ray_diff)*vision
+	ray2.cast_to = Vector2.UP.rotated(player_angle-ray_diff)*vision
+	ray_main.enabled = true
+	ray1.enabled = true
+	ray2.enabled = true
+	ray_main.collision_mask = 2
+	ray1.collision_mask = 2
+	ray2.collision_mask = 2
+	add_child(ray1)
+	add_child(ray2)
+	add_child(ray_main)
+	
+	#var i = 0
+	#while i <= vision_angle_total/ray_diff:
+		#var ray = RayCast2D.new()
+		#var angle = ray_diff*i
+		#ray.cast_to = Vector2.UP.rotated(angle)*vision
 		#ray.add_exception(SMALL_SLIME)
-		ray.enabled = true
-		ray.collision_mask = 2
-		add_child(ray)
-		i=i+1
+		#ray.enabled = true
+		#ray.collision_mask = 2
+		#add_child(ray)
+		#i=i+1
 	
 
 #func _draw():
@@ -46,7 +69,20 @@ func make_ray():
 			#print(global_position)
 		#print(ray)
 	
-	
+
+func update_player():
+	diff_x = master_data.player_global_x - global_position.x
+	diff_y = master_data.player_global_y - global_position.y
+	#print(diff_y)
+	if diff_x == 0:
+		if diff_y <0:
+			player_angle = -PI/2
+		if diff_y >0:
+			player_angle = PI/2
+	else:
+		player_angle = atan2(diff_y, diff_x)+PI/2
+
+
 func _ready():
 	$Health_Bar.setMax(master_data.slime_health)
 	make_ray()
@@ -55,7 +91,15 @@ func _ready():
 
 func _physics_process(delta):
 	
+	var i = -1
+	for ray in get_children():
+		if ray.is_class("RayCast2D"):
+			ray.cast_to = Vector2.UP.rotated(player_angle+ray_diff*i)*vision
+			i=i+1
+	
+	
 	if can_see:
+		update_player()
 		for ray in get_children():
 			if ray.is_class("RayCast2D"):
 				if ray.get_collider() != null:
@@ -65,6 +109,8 @@ func _physics_process(delta):
 						break
 					else:
 						sees_player = false
+				else:
+					sees_player = false
 	
 	
 	$Health_Bar.setValue(health)

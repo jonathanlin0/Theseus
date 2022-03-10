@@ -70,7 +70,7 @@ func _ready():
 func update_player():
 	diff_x = master_data.player_global_x - global_position.x
 	diff_y = master_data.player_global_y - global_position.y
-	print(diff_y)
+	#print(diff_y)
 	if diff_x == 0:
 		if diff_y <0:
 			player_angle = -PI/2
@@ -101,10 +101,14 @@ func _physics_process(delta):
 					#print(ray.get_collider().to_string())
 					if ray.get_collider().to_string().substr(0,6) == "Player":
 						sees_player = true
-						print("see player")
+						#print("see")
 						break
 					else:
+						print("REE")
 						sees_player = false
+				else:
+					sees_player = false
+					#print("no see")
 	
 	
 	$Health_Bar.setValue(health)
@@ -165,9 +169,9 @@ func _on_knockback_timeout():
 	knockback = false
 
 func _on_VisibilityEnabler2D_screen_entered():
-	print("I can seeeee")
+	#print("I can seeeee")
 	can_see = true
 
 func _on_VisibilityEnabler2D_screen_exited():
-	print("no more seeeee")
+	#print("no more seeeee")
 	can_see = false
