@@ -1,10 +1,15 @@
 {
-  "Team Members": "Jonathan Lin, Matthew Xu, Hao Zheng",
-  "Leaderboard": {
-    "Jeff":{
-      "start_time": 1646931404.340801,
-      "end_time": 1646931414.340801,
-      "time_elapsed":10
+    "Team Members": "Jonathan Lin, Matthew Xu, Hao Zheng",
+    "Leaderboard": {
+        "Jeff": {
+            "start_time": 1646931404.340801,
+            "end_time": 1646931414.340801,
+            "time_elapsed": 10
+        },
+        "john_cena": {
+            "start_time": "8",
+            "end_time": "10",
+            "time_elapsed": 2.0
+        }
     }
-  }
 }

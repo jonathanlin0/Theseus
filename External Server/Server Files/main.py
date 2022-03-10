@@ -19,6 +19,25 @@ def leaderboard():
   f.close()
   return data
 
+@app.route("/<username>/<start_time>/<end_time>/")
+def add(username,start_time,end_time):
+  f = open("data.json")
+  data = json.load(f)
+  f.close()
+
+  new_data = {
+    "start_time":start_time,
+    "end_time":end_time,
+    "time_elapsed":float(end_time) - float(start_time)
+  }
+  
+  data["Leaderboard"][username] = new_data
+
+  with open('data.json', 'w') as outfile:
+    json.dump(data, outfile, indent=4)
+
+  return "complete"
+
 if __name__ == "__main__":
     #app.debug = True
     #app.run(debug = True)
