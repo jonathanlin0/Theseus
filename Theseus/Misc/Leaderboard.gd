@@ -15,7 +15,6 @@ func _ready():
 	
 	$HTTPRequest_test.request("https://theseusleaderboardserver.jonathanlin04.repl.co/test")
 
-	
 
 # overall function to fill leaderboard with data from internet
 func fill_leaderboard():
