@@ -3,6 +3,8 @@ extends KinematicBody2D
 # the velocity vector that changes to try to chase the player around
 var velocity = Vector2(10,0)
 
+const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
+
 var health = master_data.small_slime_health
 var is_dead = false
 
@@ -64,7 +66,9 @@ func damage(dmg):
 		knockback = true
 		health -= dmg
 		flash()
-		$Damage_Text.activate(dmg)
+		var text = DAMAGE_TEXT.instance()
+		text.amount = dmg
+		add_child(text)
 	
 func flash():
 	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)

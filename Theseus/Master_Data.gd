@@ -12,7 +12,7 @@ var username = "testinglol"
 var flash_time = 0.1
 
 # length of text that appears above an enemy when they get damaged
-var damage_text_time = 0.7
+var damage_text_time = 0.4
 
 # used for score calculations
 var start_time

@@ -14,6 +14,8 @@ var rand_y_vel = 0
 
 const SPIT = preload("res://Enemies/Lizard/Lizard_Spit.tscn")
 
+const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
+
 var health = master_data.small_lizard_health
 
 var is_dead = false
@@ -126,6 +128,9 @@ func damage(dmg):
 	_randomize()
 	health -= dmg
 	flash()
+	var text = DAMAGE_TEXT.instance()
+	text.amount = dmg
+	add_child(text)
 
 func flash():
 	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
