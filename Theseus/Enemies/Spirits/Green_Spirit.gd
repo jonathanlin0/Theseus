@@ -19,11 +19,9 @@ func _ready():
 	$Health_Bar.setMax(master_data.spirit_health)
 	rand.randomize();
 	var num = rand.randf_range(0, 1)
-	print(num)
 	if num <= 0.75:
 		drop_one = true
 	num = rand.randf_range(0, 1)
-	print(num)
 	if num <= 0.75:
 		drop_two = true
 
@@ -42,7 +40,7 @@ func _process(delta):
 		var net_distance = 0
 		net_distance = sqrt((difference_x * difference_x) + (difference_y * difference_y))
 		
-		if net_distance <= master_data.slime_distance:
+		if net_distance <= master_data.spirit_distance:
 			
 			var sign_x = 0
 			var sign_y = 0
