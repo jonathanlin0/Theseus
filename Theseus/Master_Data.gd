@@ -87,6 +87,22 @@ var chimeras_def = 0  # each contributes to 100% of a gold spirit
 # scene ordering
 var previous_scene = "title"
 
+func _reset_all():
+	max_health = 100
+	health = 100
+	max_mana = 100
+	mana = 100
+	level = 1
+	selected_weapon = 1
+	ranged_multiplier = 1.0
+	melee_multiplier = 1.0
+	player_speed = 7000
+	slimes_def = 0
+	lizards_def = 0
+	snakes_def = 0
+	chimeras_def = 0
+	
+
 func x_direction(x_body, x_other_object):
 	var out = 0
 	
