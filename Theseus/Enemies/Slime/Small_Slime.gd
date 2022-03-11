@@ -64,6 +64,7 @@ func damage(dmg):
 		knockback = true
 		health -= dmg
 		flash()
+		$Damage_Text.activate(dmg)
 	
 func flash():
 	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)

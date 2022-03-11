@@ -51,6 +51,14 @@ region = Rect2( 48, 0, 16, 32 )
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 32 )
 
+[sub_resource type="AtlasTexture" id=77]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 16, 32 )
+
 [sub_resource type="AtlasTexture" id=68]
 atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 16, 32 )
@@ -83,10 +91,6 @@ region = Rect2( 32, 0, 16, 32 )
 atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=77]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 16, 32 )
-
 [sub_resource type="AtlasTexture" id=72]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 32 )
@@ -102,10 +106,6 @@ region = Rect2( 32, 0, 16, 32 )
 [sub_resource type="AtlasTexture" id=75]
 atlas = ExtResource( 4 )
 region = Rect2( 48, 0, 16, 32 )
-
-[sub_resource type="AtlasTexture" id=58]
-atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=67]
 atlas = ExtResource( 13 )
@@ -139,6 +139,16 @@ animations = [ {
 "name": "idle_right",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 77 ) ],
+"loop": true,
+"name": "idle_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 58 ) ],
+"loop": true,
+"name": "idle_left",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ) ],
 "loop": true,
 "name": "run_left",
@@ -149,20 +159,10 @@ animations = [ {
 "name": "run_down",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 77 ) ],
-"loop": true,
-"name": "idle_up",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ) ],
 "loop": true,
 "name": "run_right",
 "speed": 10.0
-}, {
-"frames": [ SubResource( 58 ) ],
-"loop": true,
-"name": "idle_left",
-"speed": 5.0
 }, {
 "frames": [ SubResource( 67 ) ],
 "loop": true,
@@ -290,6 +290,7 @@ position = Vector2( -0.500003, 1.19209e-06 )
 scale = Vector2( 0.697917, 0.708333 )
 frames = SubResource( 24 )
 animation = "down"
+frame = 1
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]
