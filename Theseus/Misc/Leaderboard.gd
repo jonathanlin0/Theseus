@@ -30,15 +30,15 @@ func fill_leaderboard():
 		if inserted == false:
 			sorted_scores.push_back(dict["Leaderboard"].get(player_name).get("time_elapsed"))
 			sorted_names.push_back(player_name)
-	
-	print(sorted_names)
 
+
+	# place the players onto the leaderboard
+	var display_text = ""
 	if len(sorted_names) > 0:
-		$place_1.text = "1st: " + sorted_names[0] + " - " + str(sorted_scores[0]) + " points"
-	if len(sorted_names) > 1:
-		$place_2.text = "2nd: " + sorted_names[1] + " - " + str(sorted_scores[1]) + " points"
-	if len(sorted_names) > 2:
-		$place_3.text = "3rd: " + sorted_names[2] + " - " + str(sorted_scores[2]) + " points"
+		for i in range(0, len(sorted_names)):
+			display_text = display_text + "#" + str(i+1) + ": " + sorted_names[i] + " - " + str(sorted_scores[i]) + " " + " seconds" + "\n"
+		
+		$ScrollContainer/Label.text = display_text.substr(0, len(display_text) -1)
 
 # assign the dict using the local leaderboard file
 func load_local_data():
