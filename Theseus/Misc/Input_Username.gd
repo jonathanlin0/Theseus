@@ -8,14 +8,14 @@ func _unhandled_input (event:InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		var typed_event = event as InputEventKey
 		var key_typed = PoolByteArray([typed_event.unicode]).get_string_from_utf8()
-		if user_input.length() >= 20 and $Warnings.visible == false:
-			# gives a warning if the user's username is over 20 characters
+		if user_input.length() >= 30 and $Warnings.visible == false:
+			# gives a warning if the user's username is over 30 characters
 			# doesn't give warning if the currnt input is a backspace
 			if str(PoolByteArray([typed_event.unicode])).find("[0]") != 0:
-				$Warnings.text = "Warning: 20 character limit"
+				$Warnings.text = "Warning: 30 character limit"
 				$Warnings.visible = true
 				$Warning_Timer.start()
-		if user_input.length() < 20:
+		if user_input.length() < 30:
 			user_input = user_input + key_typed
 			$Player_Name_Input.text = user_input
 

@@ -1,14 +1,16 @@
 extends Control
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var showing_controls = false
 
 
 func _input(event):
 	if event.is_action_pressed("ui_pause") or event.is_action_pressed("ui_cancel"):
-		pause()
+		if showing_controls == false:
+			pause()
+	if event.is_action_pressed("ui_cancel") and showing_controls == true:
+		showing_controls = false
+		$Controls.visible = false
 
 func pause():
 	var new_pause_state = not get_tree().paused
@@ -29,3 +31,8 @@ func _on_Restart_pressed():
 func _on_Exit_pressed():
 	pause()
 	get_tree().change_scene("res://Menu/Title_Screen.tscn")
+
+
+func _on_Controls_pressed():
+	showing_controls = true
+	$Controls.visible = true
