@@ -4,7 +4,7 @@ extends Node
 # used to hold information and other global, useful functions
 # similar attributes grouped together for easier balance changes
 
-var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit"]
+var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit", "Red_Spirit"]
 
 var username = "testinglol"
 
