@@ -42,7 +42,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="1st place" type="Label" parent="."]
+[node name="place_1" type="Label" parent="."]
 margin_top = 70.0
 margin_right = 480.0
 margin_bottom = 90.0
@@ -54,7 +54,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="2nd place" type="Label" parent="."]
+[node name="place_2" type="Label" parent="."]
 margin_top = 100.0
 margin_right = 480.0
 margin_bottom = 120.0
@@ -66,7 +66,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="3rd place" type="Label" parent="."]
+[node name="place_3" type="Label" parent="."]
 margin_top = 130.0
 margin_right = 480.0
 margin_bottom = 150.0
