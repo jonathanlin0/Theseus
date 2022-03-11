@@ -1,19 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Misc/Leaderboard.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scroll_bar.theme" type="Theme" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 28
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 2 )
 
 [node name="Leaderboard" type="Node2D"]
@@ -42,41 +37,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="place_1" type="Label" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 40.0
 margin_top = 70.0
-margin_right = 480.0
-margin_bottom = 90.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 2 )
-text = "1st: GreenOnion - 3600 seconds"
-align = 1
+margin_right = 440.0
+margin_bottom = 220.0
+theme = ExtResource( 3 )
+scroll_horizontal_enabled = false
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="place_2" type="Label" parent="."]
-margin_top = 100.0
-margin_right = 480.0
-margin_bottom = 120.0
+[node name="Label" type="Label" parent="ScrollContainer"]
+margin_right = 388.0
+margin_bottom = 181.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 3 )
-text = "2nd: BlueSky - 33894 seconds"
+custom_fonts/font = SubResource( 5 )
+text = "1st: BlueSky - 200 seconds
+2nd: GreenLeaf - 300 seconds
+3rd: PurpleOnions (you) - 400 seconds
+4th: RedApple - 500 seconds
+5th: YellowSun - 600 points
+6th: OrangeYam - 700 points
+7th: BlackDog - 800 points
+8th: WhitePaint - 900 points"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="place_3" type="Label" parent="."]
-margin_top = 130.0
-margin_right = 480.0
-margin_bottom = 150.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 4 )
-text = "3rd: YellowLightning - 992374 seconds"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="request_completed" from="HTTPRequest_test" to="." method="_on_HTTPRequest_test_request_completed"]
 [connection signal="request_completed" from="HTTPRequest_leaderboard" to="." method="_on_HTTPRequest_leaderboard_request_completed"]
