@@ -69,6 +69,7 @@ func damage(dmg):
 		var text = DAMAGE_TEXT.instance()
 		text.amount = dmg
 		add_child(text)
+		$AudioStreamPlayer.play()
 	
 func flash():
 	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)

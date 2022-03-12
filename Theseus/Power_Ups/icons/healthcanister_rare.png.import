@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/healthcanister_rare.png-d7df40448a7e45eabfd78cb7e32d1ebb.stex"
+path="res://.import/healthcanister_rare.png-13baa7c54b85a36ce264ec4bfff91f69.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Power_Ups/icons/healthcanister_rare.png"
-dest_files=[ "res://.import/healthcanister_rare.png-d7df40448a7e45eabfd78cb7e32d1ebb.stex" ]
+source_file="res://Power_Ups/Icons/healthcanister_rare.png"
+dest_files=[ "res://.import/healthcanister_rare.png-13baa7c54b85a36ce264ec4bfff91f69.stex" ]
 
 [params]
 

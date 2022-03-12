@@ -1,6 +1,7 @@
 extends Node2D
 
-
+func _ready():
+	$AudioStreamPlayer.play()
 
 func _on_Menu_button_pressed():
 	get_tree().change_scene("res://Menu/Title_Screen.tscn")

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/mixkit-player-losing-or-failing-2042.mp3-baf6920204cd1042a70ecc2c6dd19e4f.mp3str"
+
+[deps]
+
+source_file="res://Sound Effects/mixkit-player-losing-or-failing-2042.mp3"
+dest_files=[ "res://.import/mixkit-player-losing-or-failing-2042.mp3-baf6920204cd1042a70ecc2c6dd19e4f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
