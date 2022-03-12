@@ -62,9 +62,9 @@ func _physics_process(delta):
 			master_data.selected_weapon = 2
 			
 		if master_data.selected_weapon == 1:
-			$Hotbar/Select_border.rect_position.x = 205
+			$Hotbar/Select_border.rect_position.x = 5
 		if master_data.selected_weapon == 2:
-			$Hotbar/Select_border.rect_position.x = 205 + 25
+			$Hotbar/Select_border.rect_position.x = 5 + 25
 		
 		
 		# movement logic
