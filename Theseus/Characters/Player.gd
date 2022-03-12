@@ -34,7 +34,7 @@ func _input(event):
 
 func _physics_process(delta):
 	
-	if master_data.health < 0:
+	if master_data.health <= 0:
 		dead()
 	
 	if is_dead == false:
