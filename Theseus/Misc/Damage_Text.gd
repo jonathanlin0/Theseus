@@ -39,16 +39,5 @@ func _ready():
 func _process(delta):
 	position -= velocity * delta
 
-"""
-func activate(txt):
-	$Label.text = "-" + str(txt)
-	visible = true
-	$Timer.start(master_data.damage_text_time)
-
-func _on_Timer_timeout():
-	visible = false
-"""
-
-
 func _on_Tween_tween_all_completed():
 	self.queue_free()

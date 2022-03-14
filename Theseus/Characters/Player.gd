@@ -22,6 +22,9 @@ var knockback = false
 var knockback_dir = "left"
 var kb_power
 
+# creates a delay between the chest/sign alert text growing and shrinking
+var text_can_grow = true
+
 # used to track changes in player health
 var previous_health = master_data.health
 
@@ -66,6 +69,45 @@ func _physics_process(delta):
 		if master_data.selected_weapon == 2:
 			$Hotbar/Select_border.rect_position.x = 205 + 25
 		
+		
+		# chest/sign detection text logic
+		var sign_close = false
+		var chest_close = false
+		for obj in $Object_Hints/Chest_Detection.get_overlapping_bodies():
+			if obj.name.find("sign") != -1:
+				sign_close = true
+			if obj.name.find("chest") != -1:
+				chest_close = true
+		
+		if sign_close == true and $Object_Hints/CanvasLayer/Actual_Text.visible == false:
+			$Object_Hints/CanvasLayer/Actual_Text.text = "Press SPACE to read the sign"
+			$Object_Hints/CanvasLayer/Actual_Text.visible = true
+		elif chest_close == true and $Object_Hints/CanvasLayer/Actual_Text.visible == false:
+			$Object_Hints/CanvasLayer/Actual_Text.text = "Press SPACE to open the chest"
+			$Object_Hints/CanvasLayer/Actual_Text.visible = true
+		if sign_close == false and chest_close == false:
+			$Object_Hints/CanvasLayer/Actual_Text.visible = false
+		
+		# logic for the chest/sign detection text growing and shrinking in size
+		"""
+		if $Object_Hints/CanvasLayer/Actual_Text.visible == true and text_can_grow == true:
+			
+			text_can_grow = false
+			$Object_Hints/Text_Delay.start()
+			
+			
+			var max_scale = 1.25
+			var min_scale = 0.75
+			print("hi")
+			
+			var tween = $Object_Hints/CanvasLayer/Tween
+			
+			$Object_Hints/CanvasLayer/Tween.interpolate_property($Object_Hints/CanvasLayer, "scale", Vector2(1.0,1.0), Vector2(max_scale,max_scale), 0.2, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+			$Object_Hints/CanvasLayer/Tween.interpolate_property($Object_Hints/CanvasLayer, "scale", Vector2(max_scale,max_scale), Vector2(min_scale, min_scale), 0.2, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR, 0.3)
+			$Object_Hints/CanvasLayer/Tween.interpolate_property($Object_Hints/CanvasLayer, "scale", Vector2(min_scale,min_scale), Vector2(1.0, 1.0), 0.2, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR, 0.6)
+			
+			$Object_Hints/CanvasLayer/Tween.start()
+		"""
 		
 		# movement logic
 		
@@ -261,3 +303,6 @@ func _on_flash_timer_timeout():
 func _on_CharacterAnimatedSprite_animation_finished():
 	if is_dead == true:
 		get_tree().change_scene("res://Misc/Game_Over.tscn")
+
+func _on_Text_Delay_timeout():
+	text_can_grow = true
