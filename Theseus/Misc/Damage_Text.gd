@@ -25,7 +25,7 @@ func _ready():
 	
 	scale = Vector2(beginning_scale, beginning_scale)
 	
-	label.set_text(str(amount))
+	label.set_text(str(round(amount)))
 	
 	randomize()
 	var side_movement = randi() % (angle_of_popup * 2 + 1) - angle_of_popup

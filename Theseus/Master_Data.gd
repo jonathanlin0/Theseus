@@ -4,7 +4,7 @@ extends Node
 # used to hold information and other global, useful functions
 # similar attributes grouped together for easier balance changes
 
-var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit", "Red_Spirit", "Gold_Spirit"]
+var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit", "Red_Spirit", "Gold_Spirit", "Snake_Dmg", "SnakePsn"]
 
 var username = "testinglol"
 
@@ -48,6 +48,7 @@ var slime_distance = 225
 var chest_distance = 35
 var sign_distance = 25
 var spirit_distance = 150
+var snake_distance = 175
 
 # collection of the attack range of the enemies
 var small_lizard_attack_range = 150

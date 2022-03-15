@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Tile_Sets/tileset_green.tres" type="TileSet" id=1]
 [ext_resource path="res://Enemies/Snake/Snake_Dmg.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Misc/Pause.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Enemies/Chimera/Chimera.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Levels/Level2.gd" type="Script" id=6]
+[ext_resource path="res://Enemies/Snake/Snake_Psn.tscn" type="PackedScene" id=7]
 
 [node name="Level2" type="Node2D"]
 script = ExtResource( 6 )
@@ -21,7 +22,11 @@ tile_data = PoolIntArray( -6, 1, 0, -5, 1, 0, -4, 1, 0, -3, 1, 0, -2, 1, 0, -1, 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 83, 142 )
 
-[node name="Snake_Dmg" parent="." instance=ExtResource( 2 )]
-
 [node name="Chimera" parent="." instance=ExtResource( 5 )]
 position = Vector2( 235, 138 )
+
+[node name="SnakePsn" parent="." instance=ExtResource( 7 )]
+position = Vector2( 156, 24 )
+
+[node name="Snake_Dmg" parent="." instance=ExtResource( 2 )]
+position = Vector2( -15, 49 )

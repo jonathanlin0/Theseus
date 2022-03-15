@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+
 var attacking = false
 var previous_animation = "slither"
 
@@ -12,6 +13,8 @@ var health = master_data.snake_health
 var velocity = Vector2(10, 0)
 
 var dir = "left"
+
+var ticks = 0
 
 var player_in_hitbox = false
 
@@ -78,16 +81,17 @@ func _physics_process(delta):
 				$AnimatedSprite.play("charge_up")
 		
 		if $AnimatedSprite.animation == "attack" and can_player_take_damage == true and player_in_hitbox:
-			master_data.health -= master_data.snake_dmg_damage
+			master_data.health -= (master_data.snake_dmg_damage / 2)
 			get_parent().get_node("Player")._knockback(dir, 4)
+			ticks = 0
 			can_player_take_damage = false
+			poison()
 	elif is_dead:
 		position.y -= 4
 
 func dead():
 	$AnimatedSprite.play("death")
 	$CollisionShape2D.disabled = true
-	$CollisionShape2DHead.disabled = true
 	is_dead = true
 
 func damage(dmg):
@@ -95,6 +99,12 @@ func damage(dmg):
 		$knockback.start()
 		knockback = true
 		health -= dmg
+
+func poison():
+	if ticks <= 4:
+		master_data.health -= 5
+		$poison.start()
+
 
 func _on_AnimatedSprite_animation_finished():
 	if previous_animation == "charge_up":
@@ -121,3 +131,11 @@ func _on_damage_area_body_entered(body):
 func _on_damage_area_body_exited(body):
 	if body.name == "Player":
 		player_in_hitbox = false
+
+
+func _on_poison_timeout():
+	ticks += 1
+	if ticks < 4:
+		poison()
+	if ticks > 4:
+		ticks = 0
