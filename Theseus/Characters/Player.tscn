@@ -31,6 +31,7 @@
 [ext_resource path="res://Misc/StageTitles/stage_title2.png" type="Texture" id=29]
 [ext_resource path="res://Misc/StageTitles/stage_title2_fade.png" type="Texture" id=30]
 [ext_resource path="res://Characters/Sprites/theseus_death.png" type="Texture" id=31]
+[ext_resource path="res://Sound Effects/Fire 1.mp3" type="AudioStream" id=25]
 
 [sub_resource type="ShaderMaterial" id=104]
 resource_local_to_scene = true
@@ -110,26 +111,6 @@ region = Rect2( 500, 1350, 500, 450 )
 atlas = ExtResource( 31 )
 region = Rect2( 1000, 1350, 500, 450 )
 
-[sub_resource type="AtlasTexture" id=76]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 16, 32 )
-
-[sub_resource type="AtlasTexture" id=68]
-atlas = ExtResource( 8 )
-region = Rect2( 0, 0, 16, 32 )
-
-[sub_resource type="AtlasTexture" id=69]
-atlas = ExtResource( 8 )
-region = Rect2( 16, 0, 16, 32 )
-
-[sub_resource type="AtlasTexture" id=70]
-atlas = ExtResource( 8 )
-region = Rect2( 32, 0, 16, 32 )
-
-[sub_resource type="AtlasTexture" id=71]
-atlas = ExtResource( 8 )
-region = Rect2( 48, 0, 16, 32 )
-
 [sub_resource type="AtlasTexture" id=72]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 32 )
@@ -148,14 +129,6 @@ region = Rect2( 48, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=58]
 atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 16, 32 )
-
-[sub_resource type="AtlasTexture" id=77]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 16, 32 )
-
-[sub_resource type="AtlasTexture" id=67]
-atlas = ExtResource( 13 )
 region = Rect2( 0, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=63]
@@ -190,21 +163,59 @@ region = Rect2( 32, 0, 16, 32 )
 atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 16, 32 )
 
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=76]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=77]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 8 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 8 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 8 )
+region = Rect2( 48, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 16, 32 )
+
 [sub_resource type="SpriteFrames" id=17]
 animations = [ {
 "frames": [ SubResource( 202 ), SubResource( 203 ), SubResource( 204 ), SubResource( 205 ), SubResource( 206 ), SubResource( 207 ), SubResource( 208 ), SubResource( 209 ), SubResource( 210 ), SubResource( 211 ), SubResource( 212 ), SubResource( 213 ), SubResource( 214 ), SubResource( 215 ), SubResource( 216 ), SubResource( 217 ), SubResource( 218 ), SubResource( 219 ) ],
 "loop": true,
 "name": "death",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 76 ) ],
-"loop": true,
-"name": "idle_right",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ) ],
-"loop": true,
-"name": "run_left",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ) ],
@@ -217,6 +228,32 @@ animations = [ {
 "name": "idle_left",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ) ],
+"loop": true,
+"name": "run_up",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ) ],
+"loop": true,
+"name": "run_right",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 58 ) ],
+"frames": [ SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ) ],
+"loop": true,
+"name": "run_down",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 67 ) ],
+"loop": true,
+"name": "idle_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 76 ) ],
+"loop": true,
+"name": "idle_right",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 77 ) ],
 "loop": true,
 "name": "idle_up",
@@ -224,12 +261,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 67 ) ],
 "loop": true,
-"name": "idle_down",
+"name": "idle_up",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ) ],
+"frames": [ SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ) ],
 "loop": true,
-"name": "run_up",
+"name": "run_left",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ) ],
@@ -515,9 +552,9 @@ animations = [ {
 "name": "down",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 87 ), SubResource( 88 ) ],
+"frames": [ SubResource( 90 ), SubResource( 91 ) ],
 "loop": true,
-"name": "left",
+"name": "right",
 "speed": 8.0
 }, {
 "frames": [ SubResource( 90 ), SubResource( 91 ) ],
@@ -546,6 +583,12 @@ extents = Vector2( 20, 10.5 )
 [sub_resource type="DynamicFont" id=57]
 size = 10
 font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=111]
+font_data = ExtResource( 14 )
+
+[sub_resource type="CircleShape2D" id=110]
+radius = 20.0
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 3
@@ -731,6 +774,41 @@ wait_time = 0.5
 [node name="flash_timer" type="Timer" parent="."]
 wait_time = 0.15
 
+[node name="Sound_Effects" type="Position2D" parent="."]
+
+[node name="Fireball" type="AudioStreamPlayer" parent="Sound_Effects"]
+stream = ExtResource( 25 )
+
+[node name="Lightning" type="AudioStreamPlayer" parent="Sound_Effects"]
+stream = ExtResource( 25 )
+
+[node name="Object_Hints" type="Position2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Object_Hints"]
+
+[node name="Actual_Text" type="Label" parent="Object_Hints/CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -97.5
+margin_top = -57.0
+margin_right = 97.5
+margin_bottom = -37.0
+custom_fonts/font = SubResource( 111 )
+text = "Press SPACE to open the chest"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chest_Detection" type="Area2D" parent="Object_Hints"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Object_Hints/Chest_Detection"]
+shape = SubResource( 110 )
+
+[node name="Text_Delay" type="Timer" parent="Object_Hints"]
+
 [connection signal="animation_finished" from="CharacterAnimatedSprite" to="." method="_on_CharacterAnimatedSprite_animation_finished"]
 [connection signal="animation_finished" from="Player_Camera/stagetitles" to="Player_Camera" method="_on_stagetitles_animation_finished"]
 [connection signal="timeout" from="Player_Camera/Timer" to="Player_Camera" method="_on_Timer_timeout"]
@@ -738,3 +816,4 @@ wait_time = 0.15
 [connection signal="timeout" from="ManaRecharge" to="." method="_on_ManaRecharge_timeout"]
 [connection signal="timeout" from="knockback" to="." method="_on_knockback_timeout"]
 [connection signal="timeout" from="flash_timer" to="." method="_on_flash_timer_timeout"]
+[connection signal="timeout" from="Object_Hints/Text_Delay" to="." method="_on_Text_Delay_timeout"]

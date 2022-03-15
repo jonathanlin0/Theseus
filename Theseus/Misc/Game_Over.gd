@@ -2,6 +2,7 @@ extends Node2D
 
 func _ready():
 	$AnimationPlayer.play("fade")
+	$AudioStreamPlayer.play()
 
 func _on_Menu_button_pressed():
 	get_tree().change_scene("res://Menu/Title_Screen.tscn")

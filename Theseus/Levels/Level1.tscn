@@ -8,11 +8,11 @@
 [ext_resource path="res://Enemies/Lizard/Small_Lizard.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Misc/Signs/sign_two.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Misc/Signs/sign_three.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Power_Ups/chests/rare_chest.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Power_Ups/Chests/rare_chest.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Levels/Level1.gd" type="Script" id=10]
 [ext_resource path="res://Bosses/Lizard_Boss/Lizard_Boss.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Misc/Signs/sign_four.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Power_Ups/chests/basic_chest.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Power_Ups/Chests/basic_chest.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Enemies/Slime/Small_Slime.tscn" type="PackedScene" id=20]
 
 [sub_resource type="Animation" id=1]
@@ -198,7 +198,7 @@ position = Vector2( 1695, -389 )
 [node name="Small_Lizard17" parent="Small_Lizards" instance=ExtResource( 6 )]
 position = Vector2( 1517, -359 )
 
-[node name="StaticBody2D" parent="." instance=ExtResource( 5 )]
+[node name="sign_one" parent="." instance=ExtResource( 5 )]
 position = Vector2( 170, 30 )
 
 [node name="Basic_Chests" type="Position2D" parent="."]

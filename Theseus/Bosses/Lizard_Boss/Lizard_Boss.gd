@@ -30,6 +30,8 @@ const BOSS_GATE = preload("res://Bosses/boss_gate.tscn")
 const STAIRS = preload("res://Bosses/stairs.tscn")
 const SIGN_FIVE = preload("res://Misc/Signs/sign_five.tscn")
 
+const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
+
 const CHEST = preload("res://Power_Ups/chests/rare_chest.tscn")
 
 func _randomize():
@@ -117,6 +119,9 @@ func damage(dmg):
 		_randomize()
 		health -= dmg
 		flash()
+		var text = DAMAGE_TEXT.instance()
+		text.amount = dmg
+		add_child(text)
 	if health <= 0:
 		moving = false
 		triggered = false

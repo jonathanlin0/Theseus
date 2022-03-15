@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Misc/Health_Bar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/Slime/Small_Slime.gd" type="Script" id=2]
 [ext_resource path="res://Enemies/Sprites/Slime/slime_death_10.png" type="Texture" id=3]
 [ext_resource path="res://Enemies/Sprites/Slime/small_slime.png" type="Texture" id=4]
 [ext_resource path="res://Shaders/flash.tres" type="Shader" id=5]
+[ext_resource path="res://Sound Effects/Hit 1.mp3" type="AudioStream" id=6]
 
 [sub_resource type="ShaderMaterial" id=17]
 resource_local_to_scene = true
@@ -110,6 +111,9 @@ wait_time = 0.5
 
 [node name="flash_timer" type="Timer" parent="."]
 wait_time = 0.15
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="knockback" to="." method="_on_knockback_timeout"]

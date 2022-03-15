@@ -6,6 +6,7 @@
 [ext_resource path="res://Misc/Game_Over.gd" type="Script" id=4]
 [ext_resource path="res://Misc/Sprites/button_restart.png" type="Texture" id=5]
 [ext_resource path="res://Misc/Sprites/button_restart_hover.png" type="Texture" id=6]
+[ext_resource path="res://Sound Effects/mixkit-player-losing-or-failing-2042.mp3" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -74,9 +75,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
 anims/fade = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
 
 [connection signal="pressed" from="Menu_button" to="." method="_on_Menu_button_pressed"]
 [connection signal="pressed" from="Restart_button" to="." method="_on_Restart_button_pressed"]

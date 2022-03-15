@@ -6,6 +6,8 @@ var unit_vector = Vector2(0,0)
 var mouse_position = position
 
 var hitSomething = false;
+
+var hit_enemies = []
 #var previous_animation = "";
 
 
@@ -36,10 +38,11 @@ func _on_Fireball_body_entered(body):
 	
 	if body.name != "Player":
 		for enemy in master_data.enemy_names:
-			if body.name.find(enemy) != -1:
+			if body.name.find(enemy) != -1 and hit_enemies.find(body.name) == -1:
 				body.damage(master_data.fireball_damage * master_data.ranged_multiplier)
 				$AnimatedSprite.play("fireStop")
 				hitSomething = true
+				hit_enemies.append(body.name)
 	if body.name == "TileMap":
 		hitSomething = true;
 		#previous_animation = "fireStop"

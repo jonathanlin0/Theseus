@@ -14,6 +14,8 @@ var dropped_two = false
 const WINGS = preload("res://Power_Ups/wings_rare.tscn")
 const MANA_CANISTER = preload("res://Power_Ups/manacanister_rare.tscn")
 
+const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Health_Bar.setMax(master_data.spirit_health)
@@ -67,6 +69,9 @@ func damage(dmg):
 	health -= dmg
 	knockback = true
 	$knockback.start()
+	var text = DAMAGE_TEXT.instance()
+	text.amount = dmg
+	add_child(text)
 
 func dead():
 	if drop_one && !dropped_one:
