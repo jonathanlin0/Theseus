@@ -1,12 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Misc/Sprites/gameover.png" type="Texture" id=1]
 [ext_resource path="res://Misc/Sprites/menu_button.png" type="Texture" id=2]
 [ext_resource path="res://Misc/Sprites/menu_button_hover.png" type="Texture" id=3]
 [ext_resource path="res://Misc/Game_Over.gd" type="Script" id=4]
-[ext_resource path="res://Misc/Sprites/button_restart.png" type="Texture" id=5]
+[ext_resource path="res://Sound Effects/mixkit-player-losing-or-failing-2042.mp3" type="AudioStream" id=5]
 [ext_resource path="res://Misc/Sprites/button_restart_hover.png" type="Texture" id=6]
-[ext_resource path="res://Sound Effects/mixkit-player-losing-or-failing-2042.mp3" type="AudioStream" id=7]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -61,14 +60,12 @@ margin_left = 137.0
 margin_top = 191.0
 margin_right = 318.0
 margin_bottom = 223.0
-texture_normal = ExtResource( 5 )
 texture_hover = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 margin_right = 484.0
 margin_bottom = 277.0
 color = Color( 0, 0, 0, 1 )
@@ -81,7 +78,7 @@ anims/RESET = SubResource( 1 )
 anims/fade = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
+stream = ExtResource( 5 )
 
 [connection signal="pressed" from="Menu_button" to="." method="_on_Menu_button_pressed"]
 [connection signal="pressed" from="Restart_button" to="." method="_on_Restart_button_pressed"]
