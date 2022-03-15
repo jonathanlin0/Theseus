@@ -5,14 +5,6 @@
 [ext_resource path="res://Bosses/lizard_boss/spritesheets/spit_to_slime.png" type="Texture" id=3]
 [ext_resource path="res://Bosses/Lizard_Boss/spritesheets/spit_to_slime.png" type="Texture" id=4]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 12, 12 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 12, 0, 12, 12 )
-
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 12, 12 )
@@ -37,17 +29,25 @@ region = Rect2( 48, 0, 12, 12 )
 atlas = ExtResource( 4 )
 region = Rect2( 60, 0, 12, 12 )
 
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 12, 12 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 12, 0, 12, 12 )
+
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "pop",
+"speed": 18.0
+}, {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 15.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
-"loop": true,
-"name": "pop",
-"speed": 8.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]

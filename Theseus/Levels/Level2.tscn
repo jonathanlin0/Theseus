@@ -1,15 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Tile_Sets/tileset_blue.tres" type="TileSet" id=1]
-[ext_resource path="res://Enemies/Lizard/Small_Lizard.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Tile_Sets/tileset_green.tres" type="TileSet" id=1]
+[ext_resource path="res://Enemies/Snake/Snake_Dmg.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Misc/Pause.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemies/Chimera/Chimera.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Levels/Level2.gd" type="Script" id=6]
 
 [node name="Level2" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="PauseMenu" parent="." instance=ExtResource( 4 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 131090, 0, 0, 131091, 0, 0, 131092, 0, 0, 131093, 0, 0, 131094, 0, 0, 131095, 0, 0, 131096, 0, 0, 196632, 0, 0, 262168, 0, 0, 327704, 0, 0, 393240, 0, 0, 458776, 0, 0, 524312, 0, 0, 589848, 0, 0, 655384, 0, 0, 720920, 0, 0, 786456, 0, 0, 851992, 0, 0, 917522, 0, 0, 917523, 0, 0, 917524, 0, 0, 917525, 0, 0, 917526, 0, 0, 917527, 0, 0, 917528, 0, 0 )
+tile_data = PoolIntArray( -6, 1, 0, -5, 1, 0, -4, 1, 0, -3, 1, 0, -2, 1, 0, -1, 1, 0, -65536, 1, 0, -65535, 1, 0, -65534, 1, 0, -65533, 1, 0, -65532, 1, 0, -65531, 1, 0, -65530, 1, 0, -65529, 1, 0, -65528, 1, 0, -65527, 1, 0, -65526, 1, 0, -65525, 1, 0, -65524, 1, 0, -65523, 1, 0, -65522, 1, 0, -65521, 1, 0, -65520, 1, 0, -65519, 1, 0, -65518, 1, 0, -65517, 1, 0, -65516, 1, 0, -65515, 1, 0, -65514, 1, 0, -65513, 1, 0, 65530, 1, 0, 6, 1, 0, 23, 1, 0, 131066, 1, 0, 65559, 1, 0, 196602, 1, 0, 131095, 1, 0, 262138, 1, 0, 196631, 1, 0, 327674, 1, 0, 262167, 1, 0, 393210, 1, 0, 327703, 1, 0, 458746, 1, 0, 393239, 1, 0, 524282, 1, 0, 458775, 1, 0, 589818, 1, 0, 524311, 1, 0, 655354, 1, 0, 589847, 1, 0, 720890, 1, 0, 655383, 1, 0, 786426, 1, 0, 720919, 1, 0, 851962, 1, 0, 786455, 1, 0, 917498, 1, 0, 851991, 1, 0, 983034, 1, 0, 917527, 1, 0, 1048570, 1, 0, 983063, 1, 0, 1114106, 1, 0, 1048599, 1, 0, 1179642, 1, 0, 1114135, 1, 0, 1245178, 1, 0, 1245179, 1, 0, 1245180, 1, 0, 1245181, 1, 0, 1245182, 1, 0, 1245183, 1, 0, 1179648, 1, 0, 1179649, 1, 0, 1179650, 1, 0, 1179651, 1, 0, 1179652, 1, 0, 1179653, 1, 0, 1179654, 1, 0, 1179655, 1, 0, 1179656, 1, 0, 1179657, 1, 0, 1179658, 1, 0, 1179659, 1, 0, 1179660, 1, 0, 1179661, 1, 0, 1179662, 1, 0, 1179663, 1, 0, 1179664, 1, 0, 1179665, 1, 0, 1179666, 1, 0, 1179667, 1, 0, 1179668, 1, 0, 1179669, 1, 0, 1179670, 1, 0, 1179671, 1, 0 )
 
-[node name="Small_Lizard" parent="." instance=ExtResource( 2 )]
-position = Vector2( 351, 79 )
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 83, 142 )
+
+[node name="Snake_Dmg" parent="." instance=ExtResource( 2 )]
+
+[node name="Chimera" parent="." instance=ExtResource( 5 )]
+position = Vector2( 235, 138 )
