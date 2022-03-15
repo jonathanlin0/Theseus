@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rangedeye_rare.png-2b6b6af3baf0490989f95bc0ecf3fe4a.stex"
+path="res://.import/rangedeye_rare.png-f21202066c4a32360ec39dbb747b4a06.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Power_Ups/Icons/rangedeye_rare.png"
-dest_files=[ "res://.import/rangedeye_rare.png-2b6b6af3baf0490989f95bc0ecf3fe4a.stex" ]
+source_file="res://Power_Ups/icons/rangedeye_rare.png"
+dest_files=[ "res://.import/rangedeye_rare.png-f21202066c4a32360ec39dbb747b4a06.stex" ]
 
 [params]
 

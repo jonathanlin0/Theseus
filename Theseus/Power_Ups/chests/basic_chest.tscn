@@ -5,9 +5,8 @@
 [ext_resource path="res://Power_Ups/Chests/chest_all_opened.png" type="Texture" id=3]
 [ext_resource path="res://Power_Ups/Chests/basic_chest.gd" type="Script" id=4]
 
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 48, 40 )
 
 [sub_resource type="AtlasTexture" id=2]
@@ -26,15 +25,15 @@ region = Rect2( 96, 0, 48, 40 )
 atlas = ExtResource( 2 )
 region = Rect2( 144, 0, 48, 40 )
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 48, 40 )
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
+"frames": [ SubResource( 6 ) ],
 "loop": true,
-"name": "opened",
+"name": "closed",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
@@ -42,9 +41,9 @@ animations = [ {
 "name": "opening",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 6 ) ],
+"frames": [ SubResource( 1 ) ],
 "loop": true,
-"name": "closed",
+"name": "opened",
 "speed": 5.0
 } ]
 

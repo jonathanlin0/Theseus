@@ -77,7 +77,8 @@ func _physics_process(delta):
 			if obj.name.find("sign") != -1:
 				sign_close = true
 			if obj.name.find("chest") != -1:
-				chest_close = true
+				if obj.opened == false:
+					chest_close = true
 		
 		if sign_close == true and $Object_Hints/CanvasLayer/Actual_Text.visible == false:
 			$Object_Hints/CanvasLayer/Actual_Text.text = "Press SPACE to read the sign"

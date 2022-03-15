@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chest_basic_opening.png-200df5de1fa08235b3fc624f36ef1933.stex"
+path="res://.import/chest_basic_opening.png-ca90745a956fc9b2fd13bbceddb21ab1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Power_Ups/Chests/chest_basic_opening.png"
-dest_files=[ "res://.import/chest_basic_opening.png-200df5de1fa08235b3fc624f36ef1933.stex" ]
+source_file="res://Power_Ups/chests/chest_basic_opening.png"
+dest_files=[ "res://.import/chest_basic_opening.png-ca90745a956fc9b2fd13bbceddb21ab1.stex" ]
 
 [params]
 
