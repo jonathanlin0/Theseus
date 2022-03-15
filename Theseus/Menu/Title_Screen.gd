@@ -4,6 +4,7 @@ extends Node2D
 
 func _ready():
 	master_data.previous_scene = "title"
+	master_data.level = 1
 
 
 #func _process(delta):
