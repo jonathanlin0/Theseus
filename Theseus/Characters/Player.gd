@@ -37,7 +37,7 @@ func _input(event):
 
 func _physics_process(delta):
 	
-	if master_data.health < 0:
+	if master_data.health <= 0:
 		dead()
 	
 	if is_dead == false:
@@ -65,9 +65,9 @@ func _physics_process(delta):
 			master_data.selected_weapon = 2
 			
 		if master_data.selected_weapon == 1:
-			$Hotbar/Select_border.rect_position.x = 205
+			$Hotbar/Select_border.rect_position.x = 5
 		if master_data.selected_weapon == 2:
-			$Hotbar/Select_border.rect_position.x = 205 + 25
+			$Hotbar/Select_border.rect_position.x = 5 + 25
 		
 		
 		# chest/sign detection text logic

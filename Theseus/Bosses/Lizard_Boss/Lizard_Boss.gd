@@ -153,6 +153,7 @@ func _on_AnimatedSprite_animation_finished():
 		get_parent().add_child(sign_five)
 		var next = STAIRS.instance()
 		next._set_destination("stage_two")
+		master_data.level = 2
 		next.position.x = 2759
 		next.position.y = 341
 		get_parent().add_child(next)

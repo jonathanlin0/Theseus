@@ -2,6 +2,9 @@ extends Node2D
 
 const STAIRS = preload("res://Bosses/stairs.tscn")
 
+func _ready():
+	master_data.level = 2
+
 func _process(delta):
 	
 	# temporary, only for testing
