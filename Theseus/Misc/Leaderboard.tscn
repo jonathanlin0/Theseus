@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Misc/Leaderboard.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=2]
@@ -11,12 +11,16 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 2 )
 
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 2 )
+
 [node name="Leaderboard" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 480.0
 margin_bottom = 270.0
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -29,7 +33,7 @@ __meta__ = {
 margin_top = 20.0
 margin_right = 480.0
 margin_bottom = 55.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "LEADERBOARD"
 align = 1
@@ -56,7 +60,7 @@ margin_right = 388.0
 margin_bottom = 181.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 5 )
 text = "1st: BlueSky - 200 seconds
 2nd: GreenLeaf - 300 seconds
@@ -67,6 +71,17 @@ text = "1st: BlueSky - 200 seconds
 7th: BlackDog - 800 points
 8th: WhitePaint - 900 points"
 align = 1
+
+[node name="Exit" type="Label" parent="."]
+margin_top = 239.0
+margin_right = 480.0
+margin_bottom = 253.0
+custom_fonts/font = SubResource( 6 )
+text = "Press SPACE to return to the main menu"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="request_completed" from="HTTPRequest_test" to="." method="_on_HTTPRequest_test_request_completed"]
 [connection signal="request_completed" from="HTTPRequest_leaderboard" to="." method="_on_HTTPRequest_leaderboard_request_completed"]

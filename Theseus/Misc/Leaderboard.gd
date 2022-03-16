@@ -15,6 +15,9 @@ func _ready():
 	
 	$HTTPRequest_test.request("https://theseusleaderboardserver.jonathanlin04.repl.co/test")
 
+func _process(delta):
+	if Input.is_action_pressed("ui_space"):
+		get_tree().change_scene("res://Menu/Title_Screen.tscn")
 
 # overall function to fill leaderboard with data from internet
 func fill_leaderboard():

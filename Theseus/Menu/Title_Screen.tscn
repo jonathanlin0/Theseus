@@ -225,6 +225,7 @@ script = ExtResource( 12 )
 position = Vector2( 238, 134 )
 scale = Vector2( 1.0125, 1.02963 )
 frames = SubResource( 1 )
+frame = 28
 playing = true
 
 [node name="Play" type="TextureButton" parent="."]
@@ -249,7 +250,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="Leaderboard" type="TextureButton" parent="."]
 margin_left = 2.0
 margin_top = 259.0
 margin_right = 98.0
@@ -282,7 +283,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="multiplayer" type="TextureButton" parent="."]
+[node name="Multiplayer" type="TextureButton" parent="."]
 margin_left = 145.0
 margin_top = 206.0
 margin_right = 323.0
@@ -295,6 +296,7 @@ __meta__ = {
 
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Controls" to="." method="_on_Controls_pressed"]
-[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Leaderboard" to="." method="_on_Leaderboard_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="Multiplayer" to="." method="_on_Multiplayer_pressed"]
