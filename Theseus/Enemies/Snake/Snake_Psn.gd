@@ -134,8 +134,8 @@ func _on_damage_area_body_exited(body):
 
 
 func _on_poison_timeout():
-	ticks += 1
 	if ticks < 4:
+		ticks += 1
 		poison()
 	if ticks > 4:
 		ticks = 0
