@@ -3,7 +3,8 @@ extends Node2D
 
 
 func _ready():
-	pass
+	master_data.previous_scene = "title"
+	master_data.level = 1
 
 
 #func _process(delta):
@@ -11,11 +12,11 @@ func _ready():
 
 
 func _on_Play_pressed():
-	get_tree().change_scene("res://Levels/Level1.tscn")
+	get_tree().change_scene("res://Misc/intro.tscn")
 
 
 func _on_Controls_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene("res://Misc/single_controls.tscn")
 
 
 func _on_TextureButton_pressed():

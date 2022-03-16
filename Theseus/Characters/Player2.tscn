@@ -1,0 +1,256 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://Characters/Sprites/theseus_idle_back_shadow.png" type="Texture" id=1]
+[ext_resource path="res://Characters/Player2.gd" type="Script" id=2]
+[ext_resource path="res://Characters/Sprites/theseus_walk_down_shadow.png" type="Texture" id=3]
+[ext_resource path="res://Characters/Sprites/theseus_walk_up_shadow.png" type="Texture" id=4]
+[ext_resource path="res://Characters/Sprites/theseus_idle_right_shadow.png" type="Texture" id=5]
+[ext_resource path="res://Characters/Sprites/theseus_walk_right_shadow.png" type="Texture" id=6]
+[ext_resource path="res://Characters/Sprites/theseus_walk_left_shadow.png" type="Texture" id=7]
+[ext_resource path="res://Characters/Sprites/theseus_idle_left_shadow.png" type="Texture" id=8]
+[ext_resource path="res://Characters/Sprites/theseus_idle_front_shadow.png" type="Texture" id=9]
+[ext_resource path="res://Misc/Sprites/overlay_bar.png" type="Texture" id=10]
+[ext_resource path="res://Misc/Sprites/blue_bar.png" type="Texture" id=11]
+[ext_resource path="res://Misc/Sprites/black_bar.png" type="Texture" id=12]
+[ext_resource path="res://Misc/Sprites/red_bar.png" type="Texture" id=13]
+[ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://Shaders/flash.tres" type="Shader" id=15]
+[ext_resource path="res://Sound Effects/Fire 1.mp3" type="AudioStream" id=16]
+
+[sub_resource type="ShaderMaterial" id=25]
+shader = ExtResource( 15 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 6 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 6 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 6 )
+region = Rect2( 48, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 48, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 7 )
+region = Rect2( 16, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 7 )
+region = Rect2( 32, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 7 )
+region = Rect2( 48, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="SpriteFrames" id=21]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "run_right",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "run_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "idle_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "run_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": true,
+"name": "run_left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 20 ) ],
+"loop": true,
+"name": "idle_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ) ],
+"loop": true,
+"name": "idle_right",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ) ],
+"loop": true,
+"name": "idle_left",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=22]
+radius = 8.0
+height = 6.0
+
+[sub_resource type="DynamicFont" id=23]
+size = 10
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=24]
+size = 10
+font_data = ExtResource( 14 )
+
+[node name="Player2" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="CharacterAnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 25 )
+frames = SubResource( 21 )
+animation = "run_right"
+
+[node name="MainCollisionBox" type="CollisionShape2D" parent="."]
+shape = SubResource( 22 )
+
+[node name="StatusBars" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="StatusBars"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 475.0
+margin_bottom = 265.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StatusBars/MarginContainer"]
+margin_right = 470.0
+margin_bottom = 260.0
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatusBars/MarginContainer/HBoxContainer"]
+margin_left = 370.0
+margin_right = 470.0
+margin_bottom = 260.0
+
+[node name="HealthBar" type="TextureProgress" parent="StatusBars/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 100.0
+margin_bottom = 10.0
+value = 20.0
+texture_under = ExtResource( 12 )
+texture_over = ExtResource( 10 )
+texture_progress = ExtResource( 13 )
+
+[node name="HealthLabel" type="Label" parent="StatusBars/MarginContainer/HBoxContainer/VBoxContainer/HealthBar"]
+margin_left = -20.0
+margin_top = -2.0
+margin_right = -3.0
+margin_bottom = 11.0
+grow_horizontal = 0
+custom_fonts/font = SubResource( 23 )
+text = "20/100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaBar" type="TextureProgress" parent="StatusBars/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 14.0
+margin_right = 100.0
+margin_bottom = 24.0
+value = 20.0
+texture_under = ExtResource( 12 )
+texture_over = ExtResource( 10 )
+texture_progress = ExtResource( 11 )
+
+[node name="ManaLabel" type="Label" parent="StatusBars/MarginContainer/HBoxContainer/VBoxContainer/ManaBar"]
+margin_left = -20.0
+margin_top = -2.0
+margin_right = -3.0
+margin_bottom = 11.0
+grow_horizontal = 0
+custom_fonts/font = SubResource( 24 )
+text = "20/100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon_Holder" type="Position2D" parent="."]
+position = Vector2( 0, 4 )
+
+[node name="Mana_Recharge" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="knockback" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="flash_timer" type="Timer" parent="."]
+wait_time = 0.15
+
+[node name="Sound_Effects" type="Position2D" parent="."]
+
+[node name="Fireball" type="AudioStreamPlayer" parent="Sound_Effects"]
+stream = ExtResource( 16 )
+
+[node name="Lightning" type="AudioStreamPlayer" parent="Sound_Effects"]
+
+[connection signal="animation_finished" from="CharacterAnimatedSprite" to="." method="_on_CharacterAnimatedSprite_animation_finished"]
+[connection signal="timeout" from="Mana_Recharge" to="." method="_on_Mana_Recharge_timeout"]
+[connection signal="timeout" from="knockback" to="." method="_on_knockback_timeout"]
+[connection signal="timeout" from="flash_timer" to="." method="_on_flash_timer_timeout"]

@@ -76,6 +76,7 @@ animations = [ {
 extents = Vector2( 4.5, 3 )
 
 [node name="Fireball" type="Area2D"]
+collision_layer = 3
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ]

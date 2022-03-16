@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Misc/Input_Username.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 28
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 1 )
+
+[node name="Input_Username" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 480.0
+margin_bottom = 270.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Congratulations" type="Label" parent="."]
+margin_top = 35.0
+margin_right = 480.0
+margin_bottom = 65.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Congratulations on beating Theseus!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time_Elapsed" type="Label" parent="."]
+margin_top = 75.0
+margin_right = 480.0
+margin_bottom = 95.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Time Elapsed: 45345 seconds"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player_Name_Input" type="Label" parent="."]
+margin_top = 139.0
+margin_right = 480.0
+margin_bottom = 174.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "<Player Name Here>"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Warnings" type="Label" parent="."]
+visible = false
+margin_top = 185.0
+margin_right = 480.0
+margin_bottom = 199.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Warning: 20 character limit"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Prompt" type="Label" parent="."]
+margin_top = 210.0
+margin_right = 480.0
+margin_bottom = 230.0
+custom_colors/font_color = Color( 1, 0.658824, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "Please type what you would like to be called by"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Warning_Timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[connection signal="timeout" from="Warning_Timer" to="." method="_on_Timer_timeout"]

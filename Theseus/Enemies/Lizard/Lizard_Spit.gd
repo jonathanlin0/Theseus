@@ -15,7 +15,6 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-
 	
 	velocity.x = unit_vector.x * master_data.lizard_spit_speed * delta
 	velocity.y = unit_vector.y * master_data.lizard_spit_speed * delta

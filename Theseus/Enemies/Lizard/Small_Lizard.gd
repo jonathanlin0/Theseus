@@ -11,9 +11,10 @@ var moving = false
 var rand = RandomNumberGenerator.new()
 var rand_x_vel = 0
 var rand_y_vel = 0
-var x_vel = 0
 
 const SPIT = preload("res://Enemies/Lizard/Lizard_Spit.tscn")
+
+const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
 
 var health = master_data.small_lizard_health
 
@@ -126,7 +127,14 @@ func damage(dmg):
 	triggered = true
 	_randomize()
 	health -= dmg
+	flash()
+	var text = DAMAGE_TEXT.instance()
+	text.amount = dmg
+	add_child(text)
 
+func flash():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
+	$flash_timer.start(master_data.flash_time)
 
 func _on_AnimatedSprite_animation_finished():
 	if moving:
@@ -142,3 +150,7 @@ func _on_AnimatedSprite_animation_finished():
 
 func _on_knockback_timeout():
 	knockback = false
+
+
+func _on_flash_timer_timeout():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)

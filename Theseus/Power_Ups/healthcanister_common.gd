@@ -27,7 +27,7 @@ func _on_Area2D_body_entered(body):
 	if body.name.find("Player") != -1:
 		
 		if (master_data.health < master_data.max_health):
-			master_data.health = master_data.health + 30
+			master_data.health = master_data.health + 75
 			if (master_data.health > master_data.max_health):
 				master_data.health = master_data.max_health
 			bouncing = false

@@ -11,6 +11,8 @@ var is_dead = false
 # the object used to spawn the 2 children slime
 const SMALL_SLIME = preload("res://Enemies/Slime/Small_Slime.tscn")
 
+const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
+
 var previous_animation = "idle"
 
 # makes sure that the player can't damage the slime while it's dying
@@ -26,7 +28,7 @@ func _physics_process(delta):
 	
 	if currently_popping == false:
 	
-		if health <= 0:
+		if health <= 0 && !knockback:
 			dead()
 		
 		if is_dead == false:
@@ -63,9 +65,18 @@ func _physics_process(delta):
 					velocity = move_and_slide(velocity)
 
 func damage(dmg):
-	health -= dmg
-	$knockback.start()
-	knockback = true
+	if health > 0:
+		health -= dmg
+		$knockback.start()
+		knockback = true
+		flash()
+		var text = DAMAGE_TEXT.instance()
+		text.amount = dmg
+		add_child(text)
+
+func flash():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
+	$flash_timer.start(master_data.flash_time)
 
 func dead():
 	currently_popping = true
@@ -90,3 +101,7 @@ func _on_AnimatedSprite_animation_finished():
 
 func _on_knockback_timeout():
 	knockback = false
+
+
+func _on_flash_timer_timeout():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)
