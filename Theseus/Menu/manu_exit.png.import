@@ -2,15 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
+<<<<<<< HEAD:Theseus/Menu/manu_exit.png.import
 path="res://.import/manu_exit.png-5dfac85ccc77a5a46a3cc6c9675cced6.stex"
+=======
+path="res://.import/space.png-be7af1243050c8f00ad22a24e8e031cd.stex"
+>>>>>>> jonathan-stuff:Theseus/Misc/Sprites/space.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<< HEAD:Theseus/Menu/manu_exit.png.import
 source_file="res://Menu/manu_exit.png"
 dest_files=[ "res://.import/manu_exit.png-5dfac85ccc77a5a46a3cc6c9675cced6.stex" ]
+=======
+source_file="res://Misc/Sprites/space.png"
+dest_files=[ "res://.import/space.png-be7af1243050c8f00ad22a24e8e031cd.stex" ]
+>>>>>>> jonathan-stuff:Theseus/Misc/Sprites/space.png.import
 
 [params]
 

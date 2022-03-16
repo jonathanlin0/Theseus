@@ -2,15 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
+<<<<<<< HEAD:Theseus/Menu/menu_play.png.import
 path="res://.import/menu_play.png-6bbc40ad4ca0648c2d0e64aef2b26f46.stex"
+=======
+path="res://.import/stairs.png-3c1a2f82ba4fb32669d2308f97593d37.stex"
+>>>>>>> jonathan-stuff:Theseus/Misc/Sprites/stairs.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<< HEAD:Theseus/Menu/menu_play.png.import
 source_file="res://Menu/menu_play.png"
 dest_files=[ "res://.import/menu_play.png-6bbc40ad4ca0648c2d0e64aef2b26f46.stex" ]
+=======
+source_file="res://Misc/Sprites/stairs.png"
+dest_files=[ "res://.import/stairs.png-3c1a2f82ba4fb32669d2308f97593d37.stex" ]
+>>>>>>> jonathan-stuff:Theseus/Misc/Sprites/stairs.png.import
 
 [params]
 

@@ -96,6 +96,22 @@ margin_bottom = 270.0
 custom_fonts/font = SubResource( 1 )
 text = "Press ESC to exit"
 
+[node name="Controls" type="TextureRect" parent="Pause"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pause/Controls"]
+margin_top = 250.0
+margin_right = 106.0
+margin_bottom = 270.0
+custom_fonts/font = SubResource( 1 )
+text = "Press ESC to exit"
+
 [connection signal="pressed" from="Pause/MarginContainer/VBoxContainer/Resume" to="Pause" method="_on_Resume_pressed"]
 [connection signal="pressed" from="Pause/MarginContainer/VBoxContainer/Restart" to="Pause" method="_on_Restart_pressed"]
 [connection signal="pressed" from="Pause/MarginContainer/VBoxContainer/Controls" to="Pause" method="_on_Controls_pressed"]

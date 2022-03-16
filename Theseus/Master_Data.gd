@@ -18,6 +18,8 @@ var damage_text_time = 0.4
 var start_time
 var end_time
 
+var is_multiplayer = false
+
 # player info
 var max_health = 100
 var health = 100
@@ -26,13 +28,30 @@ var mana = 100
 var level = 1
 var selected_weapon = 1
 
+# data for player 2
+var max_health_p2 = 100
+var health_p2 = 100
+var max_mana_p2 = 100
+var mana_p2 = 100
+
 # powerup multipliers
 var ranged_multiplier = 1.0
 var melee_multiplier = 1.0
 
+# powerup multipliers for player 2
+var ranged_multiplier_p2 = 1.0
+
 # player location
 var player_x = 0
 var player_y = 0
+var player_x_global = 0
+var player_y_global = 0
+
+# player 2 location
+var player_x_p2 = 0
+var player_y_p2 = 0
+var player_x_global_p2 = 0
+var player_y_global_p2 = 0
 
 # collection of all the enemies' health
 var slime_health = 50
@@ -91,6 +110,9 @@ var chimeras_def = 0  # each contributes to 100% of a gold spirit
 # scene ordering
 var previous_scene = "title"
 
+# for the multiplayer game over scene
+var multiplayer_winner = 1
+
 func _reset_all():
 	max_health = 100
 	health = 100
@@ -106,6 +128,12 @@ func _reset_all():
 	snakes_def = 0
 	chimeras_def = 0
 	
+func _reset_all_p2():
+	max_health_p2 = 100
+	health_p2 = 100
+	max_mana_p2 = 100
+	mana_p2 = 100
+	ranged_multiplier_p2 = 1.0
 
 func x_direction(x_body, x_other_object):
 	var out = 0

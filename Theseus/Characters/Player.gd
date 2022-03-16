@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 # velocity is the player's movement
 var velocity = Vector2()
 
@@ -22,6 +21,8 @@ var knockback = false
 var knockback_dir = "left"
 var kb_power
 
+var is_multiplayer = false
+
 # creates a delay between the chest/sign alert text growing and shrinking
 var text_can_grow = true
 
@@ -37,6 +38,27 @@ func _input(event):
 
 func _physics_process(delta):
 	
+	if get_tree().get_current_scene().name.find("Multiplayer") != -1:
+		master_data.is_multiplayer = true
+		is_multiplayer = true
+	
+	if is_multiplayer == true:
+		# disable visibility of the hotbar
+		$Hotbar/Slot1.visible = false
+		$Hotbar/Slot2.visible = false
+		$Hotbar/Fire_animation.visible = false
+		$Hotbar/lightning_animation.visible = false
+		$Hotbar/Select_border.visible = false
+		
+		# setting the limits of the camera so it doesn't move around during multiplayer
+		$Player_Camera.limit_top = 0
+		$Player_Camera.limit_bottom = 270
+		$Player_Camera.limit_left = 0
+		$Player_Camera.limit_right = 480
+		
+		# disable visbility of the chest_detection text
+		$Object_Hints/CanvasLayer/Actual_Text.visible = false
+	
 	if master_data.health <= 0:
 		dead()
 	
@@ -47,6 +69,8 @@ func _physics_process(delta):
 		# update the master_data values
 		master_data.player_x = position.x
 		master_data.player_y = position.y
+		master_data.player_x_global = global_position.x
+		master_data.player_y_global = global_position.y
 		
 		# update the health & mana bars
 		
@@ -69,25 +93,25 @@ func _physics_process(delta):
 		if master_data.selected_weapon == 2:
 			$Hotbar/Select_border.rect_position.x = 5 + 25
 		
-		
-		# chest/sign detection text logic
-		var sign_close = false
-		var chest_close = false
-		for obj in $Object_Hints/Chest_Detection.get_overlapping_bodies():
-			if obj.name.find("sign") != -1:
-				sign_close = true
-			if obj.name.find("chest") != -1:
-				if obj.opened == false:
-					chest_close = true
-		
-		if sign_close == true and $Object_Hints/CanvasLayer/Actual_Text.visible == false:
-			$Object_Hints/CanvasLayer/Actual_Text.text = "Press SPACE to read the sign"
-			$Object_Hints/CanvasLayer/Actual_Text.visible = true
-		elif chest_close == true and $Object_Hints/CanvasLayer/Actual_Text.visible == false:
-			$Object_Hints/CanvasLayer/Actual_Text.text = "Press SPACE to open the chest"
-			$Object_Hints/CanvasLayer/Actual_Text.visible = true
-		if sign_close == false and chest_close == false:
-			$Object_Hints/CanvasLayer/Actual_Text.visible = false
+		if is_multiplayer == false:
+			# chest/sign detection text logic
+			var sign_close = false
+			var chest_close = false
+			for obj in $Object_Hints/Chest_Detection.get_overlapping_bodies():
+				if obj.name.find("sign") != -1:
+					sign_close = true
+				if obj.name.find("chest") != -1:
+					if obj.opened == false:
+						chest_close = true
+			
+			if sign_close == true and $Object_Hints/CanvasLayer/Actual_Text.visible == false:
+				$Object_Hints/CanvasLayer/Actual_Text.text = "Press SPACE to read the sign"
+				$Object_Hints/CanvasLayer/Actual_Text.visible = true
+			elif chest_close == true and $Object_Hints/CanvasLayer/Actual_Text.visible == false:
+				$Object_Hints/CanvasLayer/Actual_Text.text = "Press SPACE to open the chest"
+				$Object_Hints/CanvasLayer/Actual_Text.visible = true
+			if sign_close == false and chest_close == false:
+				$Object_Hints/CanvasLayer/Actual_Text.visible = false
 		
 		# logic for the chest/sign detection text growing and shrinking in size
 		"""
@@ -173,86 +197,114 @@ func _physics_process(delta):
 					$CharacterAnimatedSprite.play("idle_up")
 				if direction == "down":
 					$CharacterAnimatedSprite.play("idle_down")
-			
+		
+		
+		
 		# animation part of melee logic
-		
-		if Input.is_mouse_button_pressed(BUTTON_RIGHT) and !sword_swinging:
-			sword_swinging = true
-			$SwordAnimation.visible = true
-			if direction == "down":
-				$SwordAnimation.play("down")
-			if direction == "up":
-				$SwordAnimation.play("up")
-			if direction == "left":
-				$SwordAnimation.play("left")
-			if direction == "right":
-				$SwordAnimation.play("right")
-		
-		# damage part of melee logic
-		
-		if $SwordAnimation.is_playing() and can_damage == true:
-			can_damage = false
+		if is_multiplayer == false:
+			if Input.is_mouse_button_pressed(BUTTON_RIGHT) and !sword_swinging:
+				sword_swinging = true
+				$SwordAnimation.visible = true
+				if direction == "down":
+					$SwordAnimation.play("down")
+				if direction == "up":
+					$SwordAnimation.play("up")
+				if direction == "left":
+					$SwordAnimation.play("left")
+				if direction == "right":
+					$SwordAnimation.play("right")
 			
-			var area = $SwordSwingAreas/LeftSwordArea
+			# damage part of melee logic
 			
-			if $SwordAnimation.animation == "left":
-				area = $SwordSwingAreas/LeftSwordArea
-			if $SwordAnimation.animation == "right":
-				area = $SwordSwingAreas/RightSwordArea
-			if $SwordAnimation.animation == "down":
-				area = $SwordSwingAreas/DownSwordArea
-			if $SwordAnimation.animation == "up":
-				area = $SwordSwingAreas/UpSwordArea
-			
-			for obj in area.get_overlapping_bodies():
-				for enemy_name in master_data.enemy_names:
-					if enemy_name in obj.name:
-						obj.damage(master_data.sword_damage * master_data.melee_multiplier)
+			if $SwordAnimation.is_playing() and can_damage == true:
+				can_damage = false
+				
+				var area = $SwordSwingAreas/LeftSwordArea
+				
+				if $SwordAnimation.animation == "left":
+					area = $SwordSwingAreas/LeftSwordArea
+				if $SwordAnimation.animation == "right":
+					area = $SwordSwingAreas/RightSwordArea
+				if $SwordAnimation.animation == "down":
+					area = $SwordSwingAreas/DownSwordArea
+				if $SwordAnimation.animation == "up":
+					area = $SwordSwingAreas/UpSwordArea
+				
+				for obj in area.get_overlapping_bodies():
+					for enemy_name in master_data.enemy_names:
+						if enemy_name in obj.name:
+							obj.damage(master_data.sword_damage * master_data.melee_multiplier)
 
 		
-		if Input.is_action_just_pressed("mouse_left_click"):
-			if master_data.selected_weapon == 1 and master_data.mana > master_data.fireball_cost:
-				
-				$Sound_Effects/Fireball.play()
-				
-				master_data.mana -= master_data.fireball_cost
-				
-				var fireball = FIREBALL.instance()
-				get_parent().add_child(fireball)
-				fireball.position = $Weapon_Holder.global_position
-				
-				# rotate the fireball to face the direction of the mouse
-				var mouseX = get_local_mouse_position().x
-				var mouseY = get_local_mouse_position().y
-				
-				# fireball is backwards when x is neg
-				var rad = atan(mouseY/mouseX)
-				if mouseX<0:
-					rad += PI
-				
-				fireball.rotate(rad)
-				
-			if master_data.selected_weapon == 2 and master_data.mana > master_data.lightning_cost:
-				
-				$Sound_Effects/Lightning.play()
-				
-				master_data.mana -= master_data.lightning_cost
-				
-				var lightning = LIGHTNING.instance()
-				get_parent().add_child(lightning)
-				lightning.position = $Weapon_Holder.global_position
-				
-				# rotate the lightning to face the direction of the mouse
-				var mouseX = get_local_mouse_position().x
-				var mouseY = get_local_mouse_position().y
-				
-				# lightning is backwards when x is neg
-				var rad = atan(mouseY/mouseX)
-				if mouseX<0:
-					rad += PI
-				
-				lightning.rotate(rad)
+			if Input.is_action_just_pressed("mouse_left_click"):
+				if master_data.selected_weapon == 1 and master_data.mana > master_data.fireball_cost:
+					
+					$Sound_Effects/Fireball.play()
+					
+					master_data.mana -= master_data.fireball_cost
+					
+					var fireball = FIREBALL.instance()
+					get_parent().add_child(fireball)
+					fireball.position = $Weapon_Holder.global_position
+					
+					# rotate the fireball to face the direction of the mouse
+					var mouseX = get_local_mouse_position().x
+					var mouseY = get_local_mouse_position().y
+					
+					# fireball is backwards when x is neg
+					var rad = atan(mouseY/mouseX)
+					if mouseX<0:
+						rad += PI
+					
+					fireball.rotate(rad)
+					
+				if master_data.selected_weapon == 2 and master_data.mana > master_data.lightning_cost:
+					
+					$Sound_Effects/Lightning.play()
+					
+					master_data.mana -= master_data.lightning_cost
+					
+					var lightning = LIGHTNING.instance()
+					get_parent().add_child(lightning)
+					lightning.position = $Weapon_Holder.global_position
+					
+					# rotate the lightning to face the direction of the mouse
+					var mouseX = get_local_mouse_position().x
+					var mouseY = get_local_mouse_position().y
+					
+					# lightning is backwards when x is neg
+					var rad = atan(mouseY/mouseX)
+					if mouseX<0:
+						rad += PI
+					
+					lightning.rotate(rad)
 		
+		if is_multiplayer == true:
+			if Input.is_action_just_pressed("ui_c"):
+				if master_data.selected_weapon == 1 and master_data.mana > master_data.fireball_cost:
+					
+					$Sound_Effects/Fireball.play()
+					
+					master_data.mana -= master_data.fireball_cost
+					
+					var fireball = FIREBALL.instance()
+					fireball.player_to_hit = 2
+					fireball.insert_player(self)
+					get_parent().add_child(fireball)
+					fireball.position = $Weapon_Holder.global_position
+					
+					# rotate the fireball to face the direction of player 2
+					var dif_x = get_parent().get_node("Player2").global_position.x - global_position.x
+					var dif_y = get_parent().get_node("Player2").global_position.y - global_position.y
+					var mouseX = get_local_mouse_position().x
+					var mouseY = get_local_mouse_position().y
+					
+					# fireball is backwards when x is neg
+					var rad = atan(dif_y/dif_x)
+					if dif_x<0:
+						rad += PI
+					
+					fireball.rotate(rad)
 		
 			
 		if master_data.health != previous_health:
@@ -263,7 +315,11 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity)
 
 func dead():
-	$CharacterAnimatedSprite.play("death")
+	if master_data.is_multiplayer == false:
+		$CharacterAnimatedSprite.play("death")
+	if master_data.is_multiplayer == true:
+		master_data.multiplayer_winner = 2
+		get_tree().change_scene("res://Misc/Game_Over_Multiplayer.tscn")
 	is_dead = true
 
 func flash():
