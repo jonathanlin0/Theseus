@@ -24,9 +24,14 @@ func _on_Resume_pressed():
 
 func _on_Restart_pressed():
 	pause()
-	get_tree().change_scene("res://Levels/" + get_tree().get_current_scene().name + ".tscn")
-	master_data.health = master_data.max_health
-	master_data.mana = master_data.max_mana
+	if master_data.is_multiplayer == false:
+		get_tree().change_scene("res://Levels/" + get_tree().get_current_scene().name + ".tscn")
+		master_data.health = master_data.max_health
+		master_data.mana = master_data.max_mana
+	if master_data.is_multiplayer == true:
+		get_tree().change_scene("res://Misc/Multiplayer.tscn")
+		master_data._reset_all()
+		master_data._reset_all_p2()
 
 func _on_Exit_pressed():
 	pause()

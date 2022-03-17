@@ -29,3 +29,11 @@ func _on_Exit_pressed():
 
 func _on_Credits_pressed():
 	get_tree().change_scene("res://Menu/Credits.tscn")
+
+
+func _on_Leaderboard_pressed():
+	get_tree().change_scene("res://Misc/Leaderboard.tscn")
+
+
+func _on_Multiplayer_pressed():
+	get_tree().change_scene("res://Misc/Multiplayer.tscn")
