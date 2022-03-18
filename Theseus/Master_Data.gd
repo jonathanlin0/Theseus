@@ -38,8 +38,9 @@ var slime_distance = 225
 var chest_distance = 35
 var sign_distance = 25
 
-# collection of the attack range of the enemies
+# collection of the attack range of emtities
 var small_lizard_attack_range = 150
+var fireball_range = 150
 
 # collection of all the speeds
 var player_speed = 7000

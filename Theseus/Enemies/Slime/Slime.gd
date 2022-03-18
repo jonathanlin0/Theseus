@@ -191,3 +191,4 @@ func _on_VisibilityEnabler2D_screen_entered():
 
 func _on_VisibilityEnabler2D_screen_exited():
 	can_see = false
+	sees_player = false
