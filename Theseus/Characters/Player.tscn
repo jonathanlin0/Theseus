@@ -184,10 +184,10 @@ animations = [ {
 "name": "idle_down",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ) ],
+"frames": [ SubResource( 58 ) ],
 "loop": true,
-"name": "run_left",
-"speed": 10.0
+"name": "idle_left",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ) ],
 "loop": true,
@@ -461,9 +461,9 @@ region = Rect2( 288, 0, 96, 96 )
 
 [sub_resource type="SpriteFrames" id=24]
 animations = [ {
-"frames": [ SubResource( 90 ), SubResource( 91 ) ],
+"frames": [ SubResource( 87 ), SubResource( 88 ) ],
 "loop": true,
-"name": "right",
+"name": "left",
 "speed": 8.0
 }, {
 "frames": [ SubResource( 96 ), SubResource( 93 ), SubResource( 94 ) ],
@@ -478,16 +478,16 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=78]
-extents = Vector2( 10.5, 20 )
+extents = Vector2( 7.5, 20 )
 
 [sub_resource type="RectangleShape2D" id=79]
-extents = Vector2( 10.5, 20 )
+extents = Vector2( 7.5, 20 )
 
 [sub_resource type="RectangleShape2D" id=80]
-extents = Vector2( 20, 10 )
+extents = Vector2( 20, 7 )
 
 [sub_resource type="RectangleShape2D" id=81]
-extents = Vector2( 20, 10.5 )
+extents = Vector2( 20, 7.5 )
 
 [sub_resource type="DynamicFont" id=57]
 size = 10
@@ -533,7 +533,7 @@ position = Vector2( -0.500003, 1.19209e-06 )
 scale = Vector2( 0.697917, 0.708333 )
 frames = SubResource( 24 )
 animation = "down"
-frame = 2
+frame = 1
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]
@@ -543,7 +543,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwingAreas/LeftSwordArea"]
-position = Vector2( -21.5, -1 )
+position = Vector2( -15.5, -1 )
 shape = SubResource( 78 )
 
 [node name="RightSwordArea" type="Area2D" parent="SwordSwingAreas"]
@@ -551,7 +551,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwingAreas/RightSwordArea"]
-position = Vector2( 21.5, -1 )
+position = Vector2( 15.5, -1 )
 shape = SubResource( 79 )
 
 [node name="DownSwordArea" type="Area2D" parent="SwordSwingAreas"]
@@ -559,7 +559,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwingAreas/DownSwordArea"]
-position = Vector2( 0, 22 )
+position = Vector2( 0, 19 )
 shape = SubResource( 80 )
 
 [node name="UpSwordArea" type="Area2D" parent="SwordSwingAreas"]
@@ -567,7 +567,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwingAreas/UpSwordArea"]
-position = Vector2( 0, -21.5 )
+position = Vector2( 0, -16.5 )
 shape = SubResource( 81 )
 
 [node name="StatusBars" type="CanvasLayer" parent="."]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tileset_green.png-9f41c4e15778184183f8b20f0259a8f1.stex"
+path="res://.import/snake_goddess_statue.png-21cd064076985234e0ce9e2d08969373.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tile_Sets/Sprites/tileset_green.png"
-dest_files=[ "res://.import/tileset_green.png-9f41c4e15778184183f8b20f0259a8f1.stex" ]
+source_file="res://Bosses/Snake Goddess/snake_goddess_statue.png"
+dest_files=[ "res://.import/snake_goddess_statue.png-21cd064076985234e0ce9e2d08969373.stex" ]
 
 [params]
 

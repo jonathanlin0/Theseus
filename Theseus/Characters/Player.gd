@@ -58,6 +58,40 @@ func _physics_process(delta):
 		
 		# disable visbility of the chest_detection text
 		$Object_Hints/CanvasLayer/Actual_Text.visible = false
+	var speed = master_data.player_speed
+	
+	# update the master_data values
+	master_data.player_x = position.x
+	master_data.player_y = position.y
+	if is_inside_tree():
+		#print(master_data.player_global_y)
+		#print(get_global_position().y)
+		master_data.player_global_x = get_global_position().x
+		master_data.player_global_y = get_global_position().y
+		
+	
+	
+	# update the health & mana bars
+	
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar.max_value = master_data.max_health
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar.value = master_data.health
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + str(master_data.max_health)
+	
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar.max_value = master_data.max_mana
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar.value = master_data.mana
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + str(master_data.max_mana)
+	
+	# movement logic
+	
+	if knockback && knockback_dir == "left":
+		velocity.x = -speed * kb_power * delta * $knockback.time_left
+	if knockback && knockback_dir == "right":
+		velocity.x = speed * kb_power * delta * $knockback.time_left
+	
+	if Input.is_key_pressed(KEY_SHIFT):
+		sprint = true
+	else:
+		sprint = false
 	
 	if master_data.health <= 0:
 		dead()

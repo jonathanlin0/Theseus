@@ -52,6 +52,10 @@ var player_x_p2 = 0
 var player_y_p2 = 0
 var player_x_global_p2 = 0
 var player_y_global_p2 = 0
+#global pos
+var player_global_x = 0
+var player_global_y = 0
+
 
 # collection of all the enemies' health
 var slime_health = 50
@@ -61,6 +65,7 @@ var small_lizard_health = 35
 var lizard_boss_health = 300
 var chimera_health = 250
 var spirit_health = 50
+var snake_goddess_health = 2000
 
 # collection of the distance threshhold for player tracking from enemies
 var slime_distance = 225
@@ -69,8 +74,9 @@ var sign_distance = 25
 var spirit_distance = 150
 var snake_distance = 175
 
-# collection of the attack range of the enemies
+# collection of the attack range of emtities
 var small_lizard_attack_range = 150
+var fireball_range = 150
 
 # collection of all the speeds
 var player_speed = 7000

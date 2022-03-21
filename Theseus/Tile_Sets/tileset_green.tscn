@@ -18,6 +18,8 @@ __meta__ = {
 
 [node name="StaticBody2D" type="StaticBody2D" parent="black00"]
 visible = false
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="black00/StaticBody2D"]
 visible = false
@@ -34,6 +36,8 @@ __meta__ = {
 
 [node name="StaticBody2D" type="StaticBody2D" parent="black01"]
 visible = false
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="black01/StaticBody2D"]
 visible = false
