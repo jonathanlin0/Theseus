@@ -105,3 +105,7 @@ func _on_AnimatedSprite_animation_finished():
 		jabbing = false
 		previous_animation = "idle"
 		$AnimatedSprite.play("idle")
+
+
+func _on_flash_timer_timeout():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)

@@ -3,6 +3,8 @@ extends KinematicBody2D
 # the velocity vector that changes to try to chase the player around
 var velocity = Vector2()
 
+const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
+
 var triggered = false
 var dir = "left"
 
@@ -195,7 +197,15 @@ func damage(dmg):
 	triggered = true
 	_randomize()
 	health -= dmg
-
+	flash()
+	var text = DAMAGE_TEXT.instance()
+	text.amount = dmg
+	add_child(text)
+	$AudioStreamPlayer.play()
+	
+func flash():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
+	$flash_timer.start(master_data.flash_time)
 
 func _on_AnimatedSprite_animation_finished():
 	if moving:
@@ -219,3 +229,7 @@ func _on_VisibilityEnabler2D_screen_entered():
 func _on_VisibilityEnabler2D_screen_exited():
 	can_see = false
 	sees_player = false
+
+
+func _on_flash_timer_timeout():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)

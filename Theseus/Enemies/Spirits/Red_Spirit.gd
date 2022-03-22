@@ -9,9 +9,10 @@ var velocity = Vector2(10, 0)
 var knockback = false
 var dropped = false
 
+const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
+
 const EYE = preload("res://Power_Ups/rangedeye_rare.tscn")
 
-const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -63,9 +64,15 @@ func damage(dmg):
 	health -= dmg
 	knockback = true
 	$knockback.start()
+	flash()
 	var text = DAMAGE_TEXT.instance()
 	text.amount = dmg
 	add_child(text)
+	$AudioStreamPlayer.play()
+	
+func flash():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
+	$flash_timer.start(master_data.flash_time)
 
 func dead():
 	if drop && !dropped:
@@ -83,3 +90,7 @@ func _on_knockback_timeout():
 func _on_AnimatedSprite_animation_finished():
 	if is_dead:
 		queue_free()
+
+
+func _on_flash_timer_timeout():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)
