@@ -222,10 +222,10 @@ animations = [ {
 script = ExtResource( 12 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 238, 134 )
+position = Vector2( 239, 134 )
 scale = Vector2( 1.0125, 1.02963 )
 frames = SubResource( 1 )
-frame = 28
+frame = 29
 playing = true
 
 [node name="Play" type="TextureButton" parent="."]
