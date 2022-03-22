@@ -4,7 +4,7 @@ extends Node
 # used to hold information and other global, useful functions
 # similar attributes grouped together for easier balance changes for interactions between character, enemies, and bosses
 
-var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit", "Red_Spirit", "Gold_Spirit", "Snake_Dmg", "SnakePsn"]
+var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit", "Red_Spirit", "Gold_Spirit", "Snake_Dmg", "SnakePsn", "Snake_Goddess"]
 
 var username = "testinglol"
 
@@ -173,3 +173,7 @@ func get_unit_vector(x_difference, y_difference):
 	out.x = x_difference / hypo
 	out.y = y_difference / hypo
 	return out
+
+#returns the hypotnuse length given 2 positions
+func hypotnuse(start, curr):
+	return sqrt(pow(start.x-curr.x, 2)+pow(start.y-curr.y, 2))
