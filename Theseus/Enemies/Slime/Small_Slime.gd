@@ -104,7 +104,6 @@ func _physics_process(delta):
 						#print("see")
 						break
 					else:
-						print("REE")
 						sees_player = false
 				else:
 					sees_player = false

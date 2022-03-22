@@ -55,7 +55,7 @@ func _physics_process(delta):
 		start = false
 	
 	var curr_pos = global_position
-	print(curr_pos)
+	#print(curr_pos)
 	#print(hypotnuse(start_pos, curr_pos))
 	if hypotnuse(start_pos, curr_pos)>=master_data.fireball_range:
 		hitSomething = true

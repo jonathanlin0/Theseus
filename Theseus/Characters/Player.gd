@@ -221,6 +221,7 @@ func _physics_process(delta):
 		elif !Input.is_action_pressed("ui_w") and !Input.is_action_pressed("ui_s"):
 			velocity.y = 0
 		
+		# logic for player idleing
 		if !Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a"):
 			if !Input.is_action_pressed("ui_w") and !Input.is_action_pressed("ui_s"):
 				if direction == "right":

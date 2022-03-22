@@ -5,6 +5,7 @@ extends Node2D
 func _ready():
 	master_data.previous_scene = "title"
 	master_data.level = 1
+	master_data.is_multiplayer = false
 
 
 #func _process(delta):
