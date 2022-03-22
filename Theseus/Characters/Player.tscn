@@ -535,6 +535,7 @@ script = ExtResource( 5 )
 material = SubResource( 104 )
 frames = SubResource( 17 )
 animation = "run_down"
+frame = 3
 playing = true
 
 [node name="MainCollisionBox" type="CollisionShape2D" parent="."]
