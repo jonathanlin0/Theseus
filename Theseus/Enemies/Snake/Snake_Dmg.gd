@@ -81,7 +81,7 @@ func _physics_process(delta):
 		
 		if $AnimatedSprite.animation == "attack" and can_player_take_damage == true and player_in_hitbox:
 			master_data.health -= master_data.snake_dmg_damage
-			get_parent().get_node("Player")._knockback(dir, 4)
+			get_parent().get_parent().get_node("Player")._knockback(dir, 4)
 			can_player_take_damage = false
 	elif is_dead:
 		position.y -= 4

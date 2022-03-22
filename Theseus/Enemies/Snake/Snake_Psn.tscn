@@ -74,21 +74,6 @@ flags = 8
 atlas = ExtResource( 4 )
 region = Rect2( 480, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=31]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=32]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 96, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=33]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 192, 0, 96, 96 )
-
 [sub_resource type="AtlasTexture" id=1]
 flags = 8
 atlas = ExtResource( 1 )
@@ -109,6 +94,21 @@ flags = 8
 atlas = ExtResource( 1 )
 region = Rect2( 288, 0, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=31]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 96, 96 )
+
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
@@ -121,15 +121,15 @@ animations = [ {
 "name": "attack",
 "speed": 7.0
 }, {
-"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
-"loop": true,
-"name": "charge_up",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "slither",
 "speed": 7.0
+}, {
+"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
+"loop": true,
+"name": "charge_up",
+"speed": 10.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=34]
@@ -145,16 +145,18 @@ script = ExtResource( 3 )
 material = SubResource( 36 )
 frames = SubResource( 5 )
 animation = "slither"
-frame = 1
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 18, 33.5 )
 shape = SubResource( 34 )
 
 [node name="damage_area" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="damage_area"]
+visible = false
 position = Vector2( -23, 24.25 )
 shape = SubResource( 35 )
 

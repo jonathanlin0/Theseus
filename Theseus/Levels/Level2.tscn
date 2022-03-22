@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/Lizard/Small_Lizard.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Tile_Sets/tileset_green.tres" type="TileSet" id=3]
 [ext_resource path="res://Enemies/Snake/Snake_Dmg.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Bosses/Snake Goddess/Snake_Goddess.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Power_Ups/chests/basic_chest.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Enemies/Snake/Snake_Psn.tscn" type="PackedScene" id=7]
 
 [node name="Level2" type="Node2D"]
@@ -21,13 +22,88 @@ tile_data = PoolIntArray( -6881164, 2, 0, -6881163, 2, 0, -6881162, 2, 0, -68811
 position = Vector2( 672, 93 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2284, 212 )
-
-[node name="Snake_Dmg" parent="." instance=ExtResource( 4 )]
-position = Vector2( 426, 132 )
-
-[node name="SnakePsn" parent="." instance=ExtResource( 7 )]
-position = Vector2( 328, 145 )
+position = Vector2( 319, 114 )
 
 [node name="Snake_Goddess" parent="." instance=ExtResource( 5 )]
 position = Vector2( 2438, 196 )
+
+[node name="Poison_Snakes" type="Position2D" parent="."]
+
+[node name="SnakePsn" parent="Poison_Snakes" instance=ExtResource( 7 )]
+position = Vector2( 328, 145 )
+
+[node name="SnakePsn2" parent="Poison_Snakes" instance=ExtResource( 7 )]
+position = Vector2( 205, 192 )
+
+[node name="SnakePsn3" parent="Poison_Snakes" instance=ExtResource( 7 )]
+position = Vector2( 471, 373 )
+
+[node name="SnakePsn4" parent="Poison_Snakes" instance=ExtResource( 7 )]
+position = Vector2( 785, 237 )
+
+[node name="SnakePsn5" parent="Poison_Snakes" instance=ExtResource( 7 )]
+position = Vector2( 1199, -173 )
+
+[node name="SnakePsn6" parent="Poison_Snakes" instance=ExtResource( 7 )]
+position = Vector2( 1595, 313 )
+
+[node name="SnakePsn7" parent="Poison_Snakes" instance=ExtResource( 7 )]
+position = Vector2( 1943, 115 )
+
+[node name="Damage_Snakes" type="Position2D" parent="."]
+
+[node name="Snake_Dmg" parent="Damage_Snakes" instance=ExtResource( 4 )]
+position = Vector2( 426, 132 )
+
+[node name="Snake_Dmg2" parent="Damage_Snakes" instance=ExtResource( 4 )]
+position = Vector2( 560, 210 )
+
+[node name="Snake_Dmg3" parent="Damage_Snakes" instance=ExtResource( 4 )]
+position = Vector2( 592, 398 )
+
+[node name="Snake_Dmg4" parent="Damage_Snakes" instance=ExtResource( 4 )]
+position = Vector2( 4, -80 )
+
+[node name="Snake_Dmg5" parent="Damage_Snakes" instance=ExtResource( 4 )]
+position = Vector2( 542, -200 )
+
+[node name="Snake_Dmg6" parent="Damage_Snakes" instance=ExtResource( 4 )]
+position = Vector2( 862, -82 )
+
+[node name="Snake_Dmg7" parent="Damage_Snakes" instance=ExtResource( 4 )]
+position = Vector2( 1652, -142 )
+
+[node name="Snake_Dmg8" parent="Damage_Snakes" instance=ExtResource( 4 )]
+position = Vector2( 488, 540 )
+
+[node name="Position2D" type="Position2D" parent="."]
+
+[node name="basic_chest" parent="Position2D" instance=ExtResource( 6 )]
+position = Vector2( 254, 559 )
+
+[node name="basic_chest2" parent="Position2D" instance=ExtResource( 6 )]
+position = Vector2( 768, 527 )
+
+[node name="basic_chest3" parent="Position2D" instance=ExtResource( 6 )]
+position = Vector2( 625, 632 )
+
+[node name="basic_chest4" parent="Position2D" instance=ExtResource( 6 )]
+position = Vector2( 983, 312 )
+
+[node name="basic_chest5" parent="Position2D" instance=ExtResource( 6 )]
+position = Vector2( 138, 53 )
+
+[node name="basic_chest6" parent="Position2D" instance=ExtResource( 6 )]
+position = Vector2( 665, -186 )
+
+[node name="basic_chest7" parent="Position2D" instance=ExtResource( 6 )]
+position = Vector2( 1336, -98 )
+
+[node name="basic_chest8" parent="Position2D" instance=ExtResource( 6 )]
+position = Vector2( 1645, 157 )
+
+[node name="basic_chest9" parent="Position2D" instance=ExtResource( 6 )]
+position = Vector2( 1695, 516 )
+
+[node name="basic_chest10" parent="Position2D" instance=ExtResource( 6 )]
+position = Vector2( 1539, 527 )
