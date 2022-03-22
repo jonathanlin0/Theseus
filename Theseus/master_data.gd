@@ -15,8 +15,8 @@ var flash_time = 0.1
 var damage_text_time = 0.4
 
 # used for score calculations
-var start_time
-var end_time
+var start_time = 0
+var end_time = 100
 
 var is_multiplayer = false
 

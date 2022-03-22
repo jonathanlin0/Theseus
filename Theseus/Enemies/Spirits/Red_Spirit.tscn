@@ -70,7 +70,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 11 )
 frames = SubResource( 5 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -92,7 +92,7 @@ wait_time = 0.5
 
 [node name="flash_timer" type="Timer" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="flash_timer"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
