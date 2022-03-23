@@ -532,6 +532,7 @@ position = Vector2( -0.500003, 1.19209e-06 )
 scale = Vector2( 0.697917, 0.708333 )
 frames = SubResource( 24 )
 frame = 1
+animation = "left"
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]

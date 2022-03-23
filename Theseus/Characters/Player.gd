@@ -98,7 +98,6 @@ func _physics_process(delta):
 	
 	if is_dead == false:
 	
-		#var speed = master_data.player_speed
 		
 		# update the master_data values
 		master_data.player_x = position.x

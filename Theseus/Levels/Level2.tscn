@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/Lizard/Small_Lizard.tscn" type="PackedScene" id=2]
@@ -7,8 +7,11 @@
 [ext_resource path="res://Bosses/Snake Goddess/Snake_Goddess.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Power_Ups/chests/basic_chest.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Enemies/Snake/Snake_Psn.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Misc/Pause.tscn" type="PackedScene" id=8]
 
 [node name="Level2" type="Node2D"]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 8 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
