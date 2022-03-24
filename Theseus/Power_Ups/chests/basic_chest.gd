@@ -59,6 +59,7 @@ func _process(delta):
 	
 	if (net_distance <= master_data.chest_distance && !opened or Input.is_action_just_pressed("ui_up")):
 		if (Input.is_action_just_pressed("ui_accept")):
+			$opening.play()
 			$AnimatedSprite.play("opening")
 			last_anim = "opening"
 			

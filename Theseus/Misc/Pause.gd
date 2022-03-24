@@ -29,6 +29,7 @@ func _on_Restart_pressed():
 		master_data.health = master_data.max_health
 		master_data.mana = master_data.max_mana
 	if master_data.is_multiplayer == true:
+		master_data.level = 0
 		get_tree().change_scene("res://Misc/Multiplayer.tscn")
 		master_data._reset_all()
 		master_data._reset_all_p2()

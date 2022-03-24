@@ -23,6 +23,8 @@ var kb_power
 
 var is_multiplayer = false
 
+var prev_music = master_data.music
+
 # creates a delay between the chest/sign alert text growing and shrinking
 var text_can_grow = true
 
@@ -31,12 +33,21 @@ var previous_health = master_data.health
 
 var is_dead = false
 
+func _ready():
+	if master_data.level == 0:
+		$Music/boss_music.play()
+	else:
+		$Music/stage_music.play()
+
 func _input(event):
 	
 	if event is InputEventMouseButton:
 		pass
 
 func _physics_process(delta):
+	if prev_music != master_data.music:
+		prev_music = master_data.music
+		change_music()
 	
 	if get_tree().get_current_scene().name.find("Multiplayer") != -1:
 		master_data.is_multiplayer = true
@@ -58,13 +69,46 @@ func _physics_process(delta):
 		
 		# disable visbility of the chest_detection text
 		$Object_Hints/CanvasLayer/Actual_Text.visible = false
+	var speed = master_data.player_speed
+	
+	# update the master_data values
+	master_data.player_x = position.x
+	master_data.player_y = position.y
+	if is_inside_tree():
+		#print(master_data.player_global_y)
+		#print(get_global_position().y)
+		master_data.player_global_x = get_global_position().x
+		master_data.player_global_y = get_global_position().y
+		
+	
+	
+	# update the health & mana bars
+	
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar.max_value = master_data.max_health
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar.value = master_data.health
+	$StatusBars/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + str(master_data.max_health)
+	
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar.max_value = master_data.max_mana
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar.value = master_data.mana
+	$StatusBars/MarginContainer/VBoxContainer/ManaBar/ManaLabel.text = str(master_data.mana) + "/" + str(master_data.max_mana)
+	
+	# movement logic
+	
+	if knockback && knockback_dir == "left":
+		velocity.x = -speed * kb_power * delta * $knockback.time_left
+	if knockback && knockback_dir == "right":
+		velocity.x = speed * kb_power * delta * $knockback.time_left
+	
+	if Input.is_key_pressed(KEY_SHIFT):
+		sprint = true
+	else:
+		sprint = false
 	
 	if master_data.health <= 0:
 		dead()
 	
 	if is_dead == false:
 	
-		var speed = master_data.player_speed
 		
 		# update the master_data values
 		master_data.player_x = position.x
@@ -187,6 +231,7 @@ func _physics_process(delta):
 		elif !Input.is_action_pressed("ui_w") and !Input.is_action_pressed("ui_s"):
 			velocity.y = 0
 		
+		# logic for player idleing
 		if !Input.is_action_pressed("ui_d") and !Input.is_action_pressed("ui_a"):
 			if !Input.is_action_pressed("ui_w") and !Input.is_action_pressed("ui_s"):
 				if direction == "right":
@@ -206,12 +251,16 @@ func _physics_process(delta):
 				sword_swinging = true
 				$SwordAnimation.visible = true
 				if direction == "down":
+					$Sound_Effects/Sword.play()
 					$SwordAnimation.play("down")
 				if direction == "up":
+					$Sound_Effects/Sword.play()
 					$SwordAnimation.play("up")
 				if direction == "left":
+					$Sound_Effects/Sword.play()
 					$SwordAnimation.play("left")
 				if direction == "right":
+					$Sound_Effects/Sword.play()
 					$SwordAnimation.play("right")
 			
 			# damage part of melee logic
@@ -307,7 +356,7 @@ func _physics_process(delta):
 					fireball.rotate(rad)
 		
 			
-		if master_data.health != previous_health:
+		if master_data.health < previous_health:
 			flash()
 		previous_health = master_data.health
 			
@@ -316,6 +365,7 @@ func _physics_process(delta):
 
 func dead():
 	if master_data.is_multiplayer == false:
+		$Sound_Effects/Dead.play()
 		$CharacterAnimatedSprite.play("death")
 	if master_data.is_multiplayer == true:
 		master_data.multiplayer_winner = 2
@@ -325,6 +375,7 @@ func dead():
 func flash():
 	# good flash shader tutorial
 	# https://www.youtube.com/watch?v=ctevHwoRl24
+	$Sound_Effects/Hit.play()
 	$CharacterAnimatedSprite.material.set_shader_param("flash_modifier", 1)
 	$SwordAnimation.material.set_shader_param("flash_modifier", 1)
 	$flash_timer.start()
@@ -363,3 +414,12 @@ func _on_CharacterAnimatedSprite_animation_finished():
 
 func _on_Text_Delay_timeout():
 	text_can_grow = true
+	
+
+func change_music():
+	$Music/boss_music.stop()
+	$Music/stage_music.stop()
+	if prev_music == "stage":
+		$Music/stage_music.play()
+	if prev_music == "boss":
+		$Music/boss_music.play()

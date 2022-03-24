@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Misc/Leaderboard.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scroll_bar.theme" type="Theme" id=3]
+[ext_resource path="res://Misc/Sprites/rockback.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 28
@@ -24,6 +25,11 @@ color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 239, 390 )
+scale = Vector2( 1.9, 1.9 )
+texture = ExtResource( 4 )
 
 [node name="HTTPRequest_test" type="HTTPRequest" parent="."]
 

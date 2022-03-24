@@ -18,15 +18,28 @@ func _ready():
 func _process(delta):
 	if Input.is_action_pressed("ui_space"):
 		get_tree().change_scene("res://Menu/Title_Screen.tscn")
+		
+	
+	# for the moving background
+	if $Background.position.y >= 390:
+		$Background.position.y = -395
+	$Background.position.y += 0.12
+	
+
 
 # overall function to fill leaderboard with data from internet
 func fill_leaderboard():
+	
+	$ScrollContainer/Label.text = ""
+	
 	var sorted_names = []
 	var sorted_scores = []
+	
 	
 
 	# this sorts the dictionary by score into sorted_names and sorted_scores
 	for player_name in dict["Leaderboard"]:
+
 		var inserted = false
 
 		for i in range(0, len(sorted_scores)):
@@ -34,9 +47,11 @@ func fill_leaderboard():
 				sorted_scores.insert(i, dict["Leaderboard"].get(player_name).get("time_elapsed"))
 				sorted_names.insert(i, player_name)
 				inserted = true
+				break
 		if inserted == false:
 			sorted_scores.push_back(dict["Leaderboard"].get(player_name).get("time_elapsed"))
 			sorted_names.push_back(player_name)
+	
 
 
 	# place the players onto the leaderboard

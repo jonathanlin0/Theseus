@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/snowyback.mp3-85ae4802fd43953316ea8358a35d23f4.mp3str"
+
+[deps]
+
+source_file="res://music/snowyback.mp3"
+dest_files=[ "res://.import/snowyback.mp3-85ae4802fd43953316ea8358a35d23f4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

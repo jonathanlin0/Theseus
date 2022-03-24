@@ -106,6 +106,7 @@ func _physics_process(delta):
 
 func trigger():
 	if !triggered:
+		master_data.music = "boss"
 		triggered = true
 		var block = BOSS_GATE.instance()
 		block.position.x = 2320

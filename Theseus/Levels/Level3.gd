@@ -17,6 +17,7 @@ var y_upper = 250
 var rand = RandomNumberGenerator.new()
 
 func _ready():
+	master_data.music = "boss"
 	rand.randomize()
 	for n in num_green:
 		var x_cood = rand.randf_range(x_lower, x_upper)

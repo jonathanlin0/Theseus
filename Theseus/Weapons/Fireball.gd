@@ -14,11 +14,18 @@ var player_to_hit = 1
 
 var player_that_is_shooting = null
 #var previous_animation = "";
+#start position of the fireball
+var start_pos = Vector2(0,0)
+var start = true
 
 func insert_player(player_obj):
 	player_that_is_shooting = player_obj
 
 func _ready():
+	start_pos.x = global_position.x
+	start_pos.y = global_position.y
+	
+	#print(global_position)
 	
 	if master_data.is_multiplayer == false:
 		mouse_position = get_global_mouse_position()
@@ -37,8 +44,22 @@ func _ready():
 			unit_vector = master_data.get_unit_vector(master_data.player_x_global_p2 - player_that_is_shooting.global_position.x, master_data.player_y_global_p2 - player_that_is_shooting.global_position.y)
 		
 
+func hypotnuse(start, curr):
+	return sqrt(pow(start.x-curr.x, 2)+pow(start.y-curr.y, 2))
+
 
 func _physics_process(delta):
+	
+	if start:
+		start_pos = global_position
+		start = false
+	
+	var curr_pos = global_position
+	#print(curr_pos)
+	#print(hypotnuse(start_pos, curr_pos))
+	if hypotnuse(start_pos, curr_pos)>=master_data.fireball_range:
+		hitSomething = true
+		$AnimatedSprite.play("fireStop")
 	
 	if !hitSomething:
 		velocity.x = unit_vector.x * master_data.fireball_speed * delta
@@ -76,3 +97,7 @@ func _on_AnimatedSprite_animation_finished():
 	#print("REEEE");
 	if hitSomething:
 		queue_free()
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	queue_free()

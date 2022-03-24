@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
 
 var attacking = false
 var previous_animation = "slither"
@@ -82,7 +83,12 @@ func _physics_process(delta):
 		
 		if $AnimatedSprite.animation == "attack" and can_player_take_damage == true and player_in_hitbox:
 			master_data.health -= (master_data.snake_dmg_damage / 2)
-			get_parent().get_node("Player")._knockback(dir, 4)
+			#print(get_parent().get_parent())
+			if get_parent().get_parent().get_node("Player") != null:
+				get_parent().get_parent().get_node("Player")._knockback(dir, 4)
+			else:
+				get_parent().get_node("Player")._knockback(dir,4)
+			
 			ticks = 0
 			can_player_take_damage = false
 			poison()
@@ -99,6 +105,15 @@ func damage(dmg):
 		$knockback.start()
 		knockback = true
 		health -= dmg
+		flash()
+		var text = DAMAGE_TEXT.instance()
+		text.amount = dmg
+		add_child(text)
+		$AudioStreamPlayer.play()
+	
+func flash():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
+	$flash_timer.start(master_data.flash_time)
 
 func poison():
 	if ticks <= 4:
@@ -139,3 +154,7 @@ func _on_poison_timeout():
 		poison()
 	if ticks > 4:
 		ticks = 0
+
+
+func _on_flash_timer_timeout():
+	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)

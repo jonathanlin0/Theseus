@@ -4,7 +4,8 @@ extends Node
 # used to hold information and other global, useful functions
 # similar attributes grouped together for easier balance changes for interactions between character, enemies, and bosses
 
-var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit", "Red_Spirit", "Gold_Spirit", "Snake_Dmg", "SnakePsn"]
+var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit", "Red_Spirit", "Gold_Spirit", "Snake_Dmg", "SnakePsn", "Snake_Goddess"]
+var powerups = ["cutler_common", "cutler_rare", "healthcanister_common", "healthcanister_rare", "manacanister_common", "manacanister_rare", "rangedeye_common", "rangedeye_rare", "wings_common", "wings_rare"]
 
 var username = "testinglol"
 
@@ -15,8 +16,8 @@ var flash_time = 0.1
 var damage_text_time = 0.4
 
 # used for score calculations
-var start_time
-var end_time
+var start_time = 0
+var end_time = 100
 
 var is_multiplayer = false
 
@@ -52,6 +53,10 @@ var player_x_p2 = 0
 var player_y_p2 = 0
 var player_x_global_p2 = 0
 var player_y_global_p2 = 0
+#global pos
+var player_global_x = 0
+var player_global_y = 0
+
 
 # collection of all the enemies' health
 var slime_health = 50
@@ -61,6 +66,7 @@ var small_lizard_health = 35
 var lizard_boss_health = 300
 var chimera_health = 250
 var spirit_health = 50
+var snake_goddess_health = 500
 
 # collection of the distance threshhold for player tracking from enemies
 var slime_distance = 225
@@ -69,8 +75,9 @@ var sign_distance = 25
 var spirit_distance = 150
 var snake_distance = 175
 
-# collection of the attack range of the enemies
+# collection of the attack range of emtities
 var small_lizard_attack_range = 150
+var fireball_range = 150
 
 # collection of all the speeds
 var player_speed = 7000
@@ -109,6 +116,7 @@ var chimeras_def = 0  # each contributes to 100% of a gold spirit
 
 # scene ordering
 var previous_scene = "title"
+var music = "stage"
 
 # for the multiplayer game over scene
 var multiplayer_winner = 1
@@ -118,7 +126,7 @@ func _reset_all():
 	health = 100
 	max_mana = 100
 	mana = 100
-	level = 1
+	level = 0
 	selected_weapon = 1
 	ranged_multiplier = 1.0
 	melee_multiplier = 1.0
@@ -167,3 +175,7 @@ func get_unit_vector(x_difference, y_difference):
 	out.x = x_difference / hypo
 	out.y = y_difference / hypo
 	return out
+
+#returns the hypotnuse length given 2 positions
+func hypotnuse(start, curr):
+	return sqrt(pow(start.x-curr.x, 2)+pow(start.y-curr.y, 2))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Misc/Input_Username.gd" type="Script" id=2]
@@ -18,6 +18,9 @@ font_data = ExtResource( 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 1 )
 
 [node name="Input_Username" type="Node2D"]
@@ -94,4 +97,28 @@ __meta__ = {
 [node name="Warning_Timer" type="Timer" parent="."]
 wait_time = 4.0
 
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="White_Cover" type="ColorRect" parent="."]
+visible = false
+margin_right = 480.0
+margin_bottom = 270.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Loading_Text" type="Label" parent="."]
+visible = false
+margin_left = 215.0
+margin_top = 123.0
+margin_right = 269.0
+margin_bottom = 143.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "Loading..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="timeout" from="Warning_Timer" to="." method="_on_Timer_timeout"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

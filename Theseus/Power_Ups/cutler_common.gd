@@ -7,6 +7,7 @@ extends Area2D
 
 var bouncing = true
 var direction = 1
+var collected = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,11 +25,17 @@ func _process(delta):
 
 
 func _on_cutler_common_body_entered(body):
-	if body.name.find("Player") != -1:
+	if body.name.find("Player") != -1 && !collected:
+		$collect.play()
 		master_data.melee_multiplier = master_data.melee_multiplier + .07
 		bouncing = false
-		queue_free()
+		collected = true
+		visible = false
 
 
 func _on_Timer_timeout():
 	bouncing = false
+
+
+func _on_collect_finished():
+	queue_free()

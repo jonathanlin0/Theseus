@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://Enemies/Sprites/Minotaur/minotaur_axe.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/Sprites/Minotaur/minotaur_chargeup.png" type="Texture" id=2]
@@ -7,6 +7,14 @@
 [ext_resource path="res://Enemies/Sprites/Minotaur/minotaur_death.png" type="Texture" id=5]
 [ext_resource path="res://Enemies/Sprites/Minotaur/minotaur_walk.png" type="Texture" id=6]
 [ext_resource path="res://Enemies/Minotaur/Minotaur.gd" type="Script" id=7]
+[ext_resource path="res://Shaders/flash.tres" type="Shader" id=8]
+[ext_resource path="res://Sound Effects/Hit 1.mp3" type="AudioStream" id=9]
+
+[sub_resource type="ShaderMaterial" id=55]
+resource_local_to_scene = true
+shader = ExtResource( 8 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )
@@ -112,6 +120,22 @@ region = Rect2( 4000, 0, 200, 200 )
 atlas = ExtResource( 5 )
 region = Rect2( 4200, 0, 200, 200 )
 
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 6 )
+region = Rect2( 200, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 200, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 6 )
+region = Rect2( 200, 200, 200, 200 )
+
 [sub_resource type="AtlasTexture" id=36]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 200, 200 )
@@ -188,22 +212,6 @@ region = Rect2( 0, 0, 200, 200 )
 atlas = ExtResource( 3 )
 region = Rect2( 200, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=47]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 200, 200 )
-
-[sub_resource type="AtlasTexture" id=48]
-atlas = ExtResource( 6 )
-region = Rect2( 200, 0, 200, 200 )
-
-[sub_resource type="AtlasTexture" id=49]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 200, 200, 200 )
-
-[sub_resource type="AtlasTexture" id=50]
-atlas = ExtResource( 6 )
-region = Rect2( 200, 200, 200, 200 )
-
 [sub_resource type="SpriteFrames" id=51]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
@@ -215,6 +223,11 @@ animations = [ {
 "loop": true,
 "name": "death",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ) ],
+"loop": true,
+"name": "walk",
+"speed": 7.0
 }, {
 "frames": [ SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ) ],
 "loop": false,
@@ -230,11 +243,6 @@ animations = [ {
 "loop": true,
 "name": "jab",
 "speed": 8.0
-}, {
-"frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ) ],
-"loop": true,
-"name": "walk",
-"speed": 7.0
 } ]
 
 [sub_resource type="ConvexPolygonShape2D" id=52]
@@ -250,9 +258,9 @@ extents = Vector2( 43, 13 )
 script = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 55 )
 frames = SubResource( 51 )
 animation = "idle"
-frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -278,4 +286,10 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_Areas/jab_area"]
 shape = SubResource( 54 )
 
+[node name="flash_timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="flash_timer" to="." method="_on_flash_timer_timeout"]

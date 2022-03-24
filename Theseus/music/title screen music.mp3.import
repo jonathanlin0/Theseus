@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/title screen music.mp3-17671fe6540040a7d9a2f3ef11fec043.mp3str"
+
+[deps]
+
+source_file="res://music/title screen music.mp3"
+dest_files=[ "res://.import/title screen music.mp3-17671fe6540040a7d9a2f3ef11fec043.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
