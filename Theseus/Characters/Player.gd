@@ -23,6 +23,8 @@ var kb_power
 
 var is_multiplayer = false
 
+var prev_music = master_data.music
+
 # creates a delay between the chest/sign alert text growing and shrinking
 var text_can_grow = true
 
@@ -31,12 +33,19 @@ var previous_health = master_data.health
 
 var is_dead = false
 
+func _ready():
+	$Music/stage_music.play()
+
 func _input(event):
 	
 	if event is InputEventMouseButton:
 		pass
 
 func _physics_process(delta):
+	
+	if prev_music != master_data.music:
+		prev_music = master_data.music
+		change_music()
 	
 	if get_tree().get_current_scene().name.find("Multiplayer") != -1:
 		master_data.is_multiplayer = true
@@ -240,12 +249,16 @@ func _physics_process(delta):
 				sword_swinging = true
 				$SwordAnimation.visible = true
 				if direction == "down":
+					$Sound_Effects/Sword.play()
 					$SwordAnimation.play("down")
 				if direction == "up":
+					$Sound_Effects/Sword.play()
 					$SwordAnimation.play("up")
 				if direction == "left":
+					$Sound_Effects/Sword.play()
 					$SwordAnimation.play("left")
 				if direction == "right":
+					$Sound_Effects/Sword.play()
 					$SwordAnimation.play("right")
 			
 			# damage part of melee logic
@@ -341,7 +354,7 @@ func _physics_process(delta):
 					fireball.rotate(rad)
 		
 			
-		if master_data.health != previous_health:
+		if master_data.health < previous_health:
 			flash()
 		previous_health = master_data.health
 			
@@ -350,6 +363,7 @@ func _physics_process(delta):
 
 func dead():
 	if master_data.is_multiplayer == false:
+		$Sound_Effects/Dead.play()
 		$CharacterAnimatedSprite.play("death")
 	if master_data.is_multiplayer == true:
 		master_data.multiplayer_winner = 2
@@ -359,6 +373,7 @@ func dead():
 func flash():
 	# good flash shader tutorial
 	# https://www.youtube.com/watch?v=ctevHwoRl24
+	$Sound_Effects/Hit.play()
 	$CharacterAnimatedSprite.material.set_shader_param("flash_modifier", 1)
 	$SwordAnimation.material.set_shader_param("flash_modifier", 1)
 	$flash_timer.start()
@@ -397,3 +412,12 @@ func _on_CharacterAnimatedSprite_animation_finished():
 
 func _on_Text_Delay_timeout():
 	text_can_grow = true
+	
+
+func change_music():
+	$Music/boss_music.stop()
+	$Music/stage_music.stop()
+	if prev_music == "stage":
+		$Music/stage_music.play()
+	if prev_music == "boss":
+		$Music/boss_music.play()

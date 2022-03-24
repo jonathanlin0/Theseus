@@ -9,11 +9,14 @@ var finish = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	visible = false
 	if master_data.level == 1:
+		visible = true
 		finish = false
 		$stagetitles.play("stage1")
 		$Timer.start()
 	elif master_data.level == 2:
+		visible = true
 		finish = false
 		$stagetitles.play("stage2")
 		$Timer.start()

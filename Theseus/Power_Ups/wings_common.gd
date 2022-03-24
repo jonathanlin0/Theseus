@@ -6,6 +6,7 @@ extends Area2D
 # var b = "text"
 var bouncing = true
 var direction = 1
+var collected = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,11 +24,18 @@ func _process(delta):
 		position += transform.x * 50 * delta * direction
 
 func _on_wings_common_body_entered(body):
-	if body.name.find("Player") != -1 && master_data.player_speed < 12500:
+	if body.name.find("Player") != -1 && master_data.player_speed < 12500 and !collected:
+		$collect.play()
 		master_data.player_speed = master_data.player_speed + 200
 		bouncing = false
-		queue_free()
+		collected = true
+		$collect.play()
+		visible = false
 
 
 func _on_Timer_timeout():
 	bouncing = false
+
+
+func _on_collect_finished():
+	queue_free()

@@ -5,6 +5,7 @@ extends Node
 # similar attributes grouped together for easier balance changes for interactions between character, enemies, and bosses
 
 var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit", "Red_Spirit", "Gold_Spirit", "Snake_Dmg", "SnakePsn", "Snake_Goddess"]
+var powerups = ["cutler_common", "cutler_rare", "healthcanister_common", "healthcanister_rare", "manacanister_common", "manacanister_rare", "rangedeye_common", "rangedeye_rare", "wings_common", "wings_rare"]
 
 var username = "testinglol"
 
@@ -65,7 +66,7 @@ var small_lizard_health = 35
 var lizard_boss_health = 300
 var chimera_health = 250
 var spirit_health = 50
-var snake_goddess_health = 2000
+var snake_goddess_health = 500
 
 # collection of the distance threshhold for player tracking from enemies
 var slime_distance = 225
@@ -115,6 +116,7 @@ var chimeras_def = 0  # each contributes to 100% of a gold spirit
 
 # scene ordering
 var previous_scene = "title"
+var music = "stage"
 
 # for the multiplayer game over scene
 var multiplayer_winner = 1

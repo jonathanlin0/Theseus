@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Tile_Sets/tileset_blue.tres" type="TileSet" id=1]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Levels/Level1.gd" type="Script" id=10]
 [ext_resource path="res://Bosses/Lizard_Boss/Lizard_Boss.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Misc/Signs/sign_four.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Sound Effects/sfx_spawn.wav" type="AudioStream" id=13]
 [ext_resource path="res://Power_Ups/chests/basic_chest.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Enemies/Slime/Small_Slime.tscn" type="PackedScene" id=20]
 
@@ -245,10 +246,10 @@ position = Vector2( 2645, 226 )
 z_index = 101
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -190.0
-margin_top = -109.0
-margin_right = 423.0
-margin_bottom = 239.0
+margin_left = -163.0
+margin_top = -102.0
+margin_right = 450.0
+margin_bottom = 246.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -257,3 +258,6 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
 anims/fade = SubResource( 2 )
+
+[node name="spawn" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )

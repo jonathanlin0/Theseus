@@ -6,6 +6,7 @@ extends Area2D
 # var b = "text"
 var bouncing = true
 var direction = 1
+var collected = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,11 +25,18 @@ func _process(delta):
 
 
 func _on_ranged_eye_body_entered(body):
-	if body.name.find("Player") != -1:
+	if body.name.find("Player") != -1 and !collected:
+		$collect.play()
 		master_data.ranged_multiplier = master_data.ranged_multiplier + .07
 		bouncing = false
-		queue_free()
+		collected = true
+		$collect.play()
+		visible = false
 
 
 func _on_Timer_timeout():
 	bouncing = false
+
+
+func _on_collect_finished():
+	queue_free()
