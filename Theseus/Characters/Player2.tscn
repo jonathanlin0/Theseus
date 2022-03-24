@@ -54,8 +54,12 @@ region = Rect2( 32, 0, 16, 32 )
 atlas = ExtResource( 7 )
 region = Rect2( 48, 0, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 9 )
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=12]
@@ -74,12 +78,8 @@ region = Rect2( 32, 0, 16, 32 )
 atlas = ExtResource( 4 )
 region = Rect2( 48, 0, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 16, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 5 )
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
@@ -114,14 +114,9 @@ animations = [ {
 "name": "run_left",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 7 ) ],
+"frames": [ SubResource( 5 ) ],
 "loop": true,
-"name": "idle_down",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
-"loop": true,
-"name": "run_up",
+"name": "idle_right",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 20 ) ],
@@ -129,9 +124,14 @@ animations = [ {
 "name": "idle_up",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 5 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
-"name": "idle_right",
+"name": "run_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "idle_down",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 6 ) ],

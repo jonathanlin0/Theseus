@@ -34,7 +34,10 @@ var previous_health = master_data.health
 var is_dead = false
 
 func _ready():
-	$Music/stage_music.play()
+	if master_data.level == 0:
+		$Music/boss_music.play()
+	else:
+		$Music/stage_music.play()
 
 func _input(event):
 	
@@ -42,7 +45,6 @@ func _input(event):
 		pass
 
 func _physics_process(delta):
-	
 	if prev_music != master_data.music:
 		prev_music = master_data.music
 		change_music()

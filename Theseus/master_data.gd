@@ -126,7 +126,7 @@ func _reset_all():
 	health = 100
 	max_mana = 100
 	mana = 100
-	level = 1
+	level = 0
 	selected_weapon = 1
 	ranged_multiplier = 1.0
 	melee_multiplier = 1.0
