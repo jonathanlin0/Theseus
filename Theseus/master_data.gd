@@ -11,6 +11,10 @@ var username = "user"
 
 # used to track when mobs die
 var endless_mob_deaths = []
+# enemy health multiplier for endless mode
+var endless_health_multiplier = 1.0
+# number of enemies spawned per level for endless mode
+var endless_num_enemies = 1
 
 # length of flash when a character gets damaged
 var flash_time = 0.1
@@ -61,8 +65,17 @@ var player_y_global_p2 = 0
 var player_global_x = 0
 var player_global_y = 0
 
+# collection of all the enemies' base health
+var base_slime_health = 50
+var base_small_slime_health = 30
+var base_snake_health = 40
+var base_small_lizard_health = 35
+var base_lizard_boss_health = 300
+var base_chimera_health = 250
+var base_spirit_health = 50
+var base_snake_goddess_health = 500
 
-# collection of all the enemies' health
+# collection of all the enemies' health that can change depending on situation that the player is currently in (like enemies increasing in strength in endless mode)
 var slime_health = 50
 var small_slime_health = 30
 var snake_health = 40
@@ -146,6 +159,17 @@ func _reset_all_p2():
 	max_mana_p2 = 100
 	mana_p2 = 100
 	ranged_multiplier_p2 = 1.0
+	
+func _process(delta):
+	if is_endless:
+		slime_health = base_slime_health * endless_health_multiplier
+		small_slime_health = base_small_slime_health * endless_health_multiplier
+		snake_health = base_snake_health * endless_health_multiplier
+		small_lizard_health = base_small_lizard_health * endless_health_multiplier
+		lizard_boss_health = base_lizard_boss_health * endless_health_multiplier
+		chimera_health = base_chimera_health * endless_health_multiplier
+		spirit_health = base_spirit_health * endless_health_multiplier
+		snake_goddess_health = base_snake_goddess_health * endless_health_multiplier
 
 func x_direction(x_body, x_other_object):
 	var out = 0
