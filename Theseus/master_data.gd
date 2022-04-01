@@ -7,7 +7,10 @@ extends Node
 var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit", "Red_Spirit", "Gold_Spirit", "Snake_Dmg", "SnakePsn", "Snake_Goddess"]
 var powerups = ["cutler_common", "cutler_rare", "healthcanister_common", "healthcanister_rare", "manacanister_common", "manacanister_rare", "rangedeye_common", "rangedeye_rare", "wings_common", "wings_rare"]
 
-var username = "testinglol"
+var username = "user"
+
+# used to track when mobs die
+var endless_mob_deaths = []
 
 # length of flash when a character gets damaged
 var flash_time = 0.1
@@ -20,6 +23,7 @@ var start_time = 0
 var end_time = 100
 
 var is_multiplayer = false
+var is_endless = false
 
 # player info
 var max_health = 100

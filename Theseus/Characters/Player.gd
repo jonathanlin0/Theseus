@@ -53,6 +53,12 @@ func _physics_process(delta):
 		master_data.is_multiplayer = true
 		is_multiplayer = true
 	
+	if master_data.is_endless == true:
+		$Player_Camera.limit_top = 0
+		$Player_Camera.limit_bottom = 270
+		$Player_Camera.limit_left = 0
+		$Player_Camera.limit_right = 480
+	
 	if is_multiplayer == true:
 		# disable visibility of the hotbar
 		$Hotbar/Slot1.visible = false

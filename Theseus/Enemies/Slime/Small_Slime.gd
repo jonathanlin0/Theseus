@@ -169,9 +169,12 @@ func dead():
 	$AnimatedSprite.play("death")
 	$CollisionShape2D.disabled = true
 	is_dead = true
+	
+	
 
 func _on_AnimatedSprite_animation_finished():
 	if is_dead == true:
+		master_data.endless_mob_deaths.append(get_instance_id())
 		queue_free()
 
 

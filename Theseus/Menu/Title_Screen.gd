@@ -7,6 +7,7 @@ func _ready():
 	master_data.previous_scene = "title"
 	master_data.level = 0
 	master_data.is_multiplayer = false
+	master_data.is_endless = false
 
 
 #func _process(delta):

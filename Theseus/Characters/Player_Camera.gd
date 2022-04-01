@@ -1,20 +1,15 @@
 extends Camera2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 var finish = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	visible = false
-	print(master_data.level)
-	if master_data.is_multiplayer:
+	if master_data.is_multiplayer or get_parent().get_parent().name.find("Endless_Mode") != -1:
 		$stagetitles.stop()
 		visible = false
-	if master_data.level == 1:
+	elif master_data.level == 1:
 		visible = true
 		finish = false
 		$stagetitles.play("stage1")

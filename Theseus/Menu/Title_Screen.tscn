@@ -228,7 +228,7 @@ script = ExtResource( 12 )
 position = Vector2( 238, 135 )
 scale = Vector2( 1.05, 1.05 )
 frames = SubResource( 1 )
-frame = 35
+frame = 22
 playing = true
 
 [node name="Play" type="TextureButton" parent="."]
