@@ -9,6 +9,7 @@ var powerups = ["cutler_common", "cutler_rare", "healthcanister_common", "health
 
 var username = "user"
 
+var endless_current_spawned_mobs = []
 # used to track when mobs die
 var endless_mob_deaths = []
 # enemy health multiplier for endless mode

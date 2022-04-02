@@ -178,6 +178,7 @@ func dead():
 	previous_animation = "pop"
 	$CollisionShape2D.disabled = true
 	$AnimatedSprite.play("pop")
+	
 
 func _on_AnimatedSprite_animation_finished():
 	if previous_animation == "pop":
@@ -190,6 +191,11 @@ func _on_AnimatedSprite_animation_finished():
 		var small_slime_right = SMALL_SLIME.instance()
 		get_parent().add_child(small_slime_right)
 		small_slime_right.global_position = $SlimeSpawnRight.global_position
+		
+		if master_data.is_endless:
+			master_data.endless_mob_deaths.append(get_instance_id())
+			master_data.endless_current_spawned_mobs.append(small_slime_left.get_instance_id())
+			master_data.endless_current_spawned_mobs.append(small_slime_right.get_instance_id())
 		
 		queue_free()
 

@@ -55,10 +55,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Level_Delay_Bar_Update" type="Timer" parent="CanvasLayer"]
-wait_time = 0.015
-autostart = true
-
 [node name="Level_Warning_Text" type="Label" parent="CanvasLayer"]
 margin_left = 148.5
 margin_top = 248.0
@@ -215,5 +211,4 @@ position = Vector2( 300, 138 )
 
 [node name="Level_Delay" type="Timer" parent="."]
 
-[connection signal="timeout" from="CanvasLayer/Level_Delay_Bar_Update" to="." method="_on_Level_Delay_Bar_Update_timeout"]
 [connection signal="timeout" from="Level_Delay" to="." method="_on_Level_Delay_timeout"]

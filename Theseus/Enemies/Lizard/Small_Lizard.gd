@@ -216,6 +216,7 @@ func _on_AnimatedSprite_animation_finished():
 		prev_anim = "idle"
 	
 	if is_dead == true:
+		master_data.endless_mob_deaths.append(get_instance_id())
 		queue_free()
 
 

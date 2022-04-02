@@ -20,6 +20,7 @@ var power_ups_rare = [CUTLER_RARE, HEALTH_RARE, MANA_RARE, EYE_RARE, WINGS_RARE]
 
 # preload all the enemy objects required for spawning enemies
 const SMALL_LIZARD = preload("res://Enemies/Lizard/Small_Lizard.tscn")
+const BIG_SLIME = preload("res://Enemies/Slime/Slime.tscn")
 const SMALL_SLIME = preload("res://Enemies/Slime/Small_Slime.tscn")
 
 # what level in endless mode the player is currently on
@@ -28,9 +29,6 @@ var level = 1
 var num_enemies = 1
 var enemy_health_multiplier = 1.0
 var percentage_left = 100
-
-# all mobs spawned in the current level
-var current_spawned_mobs = []
 
 # to see if level is currently being delayed
 var currently_level_delay = false
@@ -49,6 +47,7 @@ func _ready():
 	
 func _physics_process(delta):
 	time_elapsed = round(OS.get_unix_time() - start_time)
+
 	
 	if master_data.player_speed >= 12500:
 		if power_ups_common.find(WINGS_COMMON) != -1:
@@ -56,7 +55,7 @@ func _physics_process(delta):
 		if power_ups_rare.find(WINGS_RARE) != -1:
 			power_ups_rare.erase(WINGS_RARE)
 	
-	$CanvasLayer/Level.text = "Level: " + str(level)
+	
 
 	#$CanvasLayer/Level_Delay_Bar.max_value = master_data.endless_level_delay
 	$CanvasLayer/Level_Delay_Bar.value = percentage_left
@@ -67,6 +66,9 @@ func _physics_process(delta):
 		$CanvasLayer/Level_Warning_Text.text = "Time until next level: " + str(round($Level_Delay.get_time_left())) + " seconds"
 		
 		$CanvasLayer/Level_Delay_Bar.visible = true
+		
+		# logic for the delay bar moving and displaying how much time left
+		percentage_left -= (delta/master_data.endless_level_delay)*100
 		$CanvasLayer/Level_Delay_Bar.value = percentage_left
 		
 	
@@ -75,30 +77,28 @@ func _physics_process(delta):
 		$CanvasLayer/Level_Delay_Bar.visible = false
 		
 		if spawned == false:
-			spawn_mobs("small_slime", master_data.endless_num_enemies)
+			spawn_mobs()
+			$CanvasLayer/Level.text = "Level: " + str(level)
 			spawned = true
 		
 		# proceed to the next level after all mobs are killed
-		# if level is odd, then power up the enemies
-		# if level is even, then add more enemies
-		# increase powerups dropped each level by 1 every 3 levels
-		if current_spawned_mobs.size() > 0 and spawned == true:
+		# increase enemy health every other level
+		# increase powerups dropped each level by 1 every 5 levels
+		if master_data.endless_current_spawned_mobs.size() > 0 and spawned == true:
 			master_data.endless_mob_deaths.sort()
-			current_spawned_mobs.sort()
-			if master_data.endless_mob_deaths == current_spawned_mobs:
+			master_data.endless_current_spawned_mobs.sort()
+			if master_data.endless_mob_deaths == master_data.endless_current_spawned_mobs:
 				
 				# reset killed and current mobs
 				master_data.endless_mob_deaths = []
-				current_spawned_mobs = []
+				master_data.endless_current_spawned_mobs = []
 				
 				spawned = false
 				level += 1
 				
-				if level % 2 != 0:
-					master_data.endless_health_multiplier += 0.05
-				elif level % 2 == 0:
-					master_data.endless_num_enemies += 1
-				if level % 3 == 0:
+				if level % 2 == 0:
+					master_data.endless_health_multiplier += 0.1
+				if level % 5 == 0:
 					master_data.endless_num_power_ups += 1
 					
 				var remaining_power_up_spawn_location = $Power_up_spawn_locations.get_children()
@@ -125,22 +125,79 @@ func _physics_process(delta):
 				
 				currently_level_delay = true
 				delay_start = OS.get_unix_time()
-				$CanvasLayer/Level_Delay_Bar_Update.start()
 				percentage_left = 100
 				$Level_Delay.start(master_data.endless_level_delay)
 
-func spawn_mobs(mob, number):
-	var spawn_locations = $Spawn_locations.get_children()
+func spawn_mobs():
 
+	var spawn_locations = $Spawn_locations.get_children()
+	
+	# matches each mob name with the actual mob object
+	var mob_name_dict = {
+		"small_slime" : SMALL_SLIME,
+		"big_slime" : BIG_SLIME,
+		"small_lizard" : SMALL_LIZARD
+	}
+	
+	# for every mob
+	for key in mob_name_dict.keys():
+		if spawn_locations.size() <= 1:
+			spawn_locations = $Spawn_locations.get_children()
 		
-	for i in range(0, number):
+		
+		
+		for i in range(0, round(number_of_mobs(key))):
+			var rand_location = spawn_locations[randi() % spawn_locations.size()]
+			spawn_locations.erase(rand_location)
+			
+			var current_mob = mob_name_dict[key].instance()
+			get_parent().add_child(current_mob)
+			current_mob.global_position = rand_location.global_position
+			master_data.endless_current_spawned_mobs.append(current_mob.get_instance_id())
+	
+	"""
+	for i in range(0, spawn_number):
+		if spawn_locations.size() <= 1:
+			spawn_locations = $Spawn_locations.get_children()
 		var rand_location = spawn_locations[randi() % spawn_locations.size()]
 		spawn_locations.erase(rand_location)
 		
-		var small_slime = SMALL_SLIME.instance()
-		get_parent().add_child(small_slime)
-		small_slime.global_position = rand_location.global_position
-		current_spawned_mobs.append(small_slime.get_instance_id())
+		var current_mob = SMALL_SLIME.instance()
+		
+		# asign which type of mob needs to be spawned
+		if mob == "small_slime":
+			current_mob = SMALL_SLIME.instance()
+		if mob == "big_slime":
+			current_mob = BIG_SLIME.instance()
+		if mob == "small_lizard":
+			current_mob = SMALL_LIZARD.instance()
+		
+		get_parent().add_child(current_mob)
+		current_mob.global_position = rand_location.global_position
+		current_spawned_mobs.append(current_mob.get_instance_id())
+	"""
+		
+		
+
+func number_of_mobs(mob):
+	var x = level
+	var out = 0.0
+	
+	# equations for each type of mob
+	if mob == "small_slime":
+		if 0 < x and x < 25:
+			out = -0.4 * (9500 / (x + 100)) + 40
+	if mob == "big_slime":
+		if 2 < x and x < 30:
+			out = (5000/(-0.3*(x+330))) + 52
+	if mob == "small_lizard":
+		if 10 < x and x < 50:
+			out = (3000/(-0.1*(x+310))) + 95
+		
+	out = round(out)
+	if out > 0:
+		return out
+	return 0
 
 # returns a random number within 25% of the given number
 func number_random(num):
@@ -149,16 +206,6 @@ func number_random(num):
 	return rand_range(bottom_limit, top_limit)
 
 
-
 func _on_Level_Delay_timeout():
 	currently_level_delay = false
 
-
-func _on_Level_Delay_Bar_Update_timeout():
-	
-	# what percent every 0.015 seconds is of the given amount of delay
-	# have to use this math instead of unix time cuz unix time doesn't give the time in decimal
-	percentage_left -= (0.015/master_data.endless_level_delay)*100
-	
-	
-	$CanvasLayer/Level_Delay_Bar_Update.start()
