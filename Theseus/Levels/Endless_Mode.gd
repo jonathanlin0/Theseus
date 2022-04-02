@@ -45,6 +45,9 @@ func _ready():
 	master_data.level = 0
 	master_data._reset_all()
 	
+	master_data.endless_mob_deaths = []
+	master_data.endless_current_spawned_mobs = []
+	
 func _physics_process(delta):
 	time_elapsed = round(OS.get_unix_time() - start_time)
 

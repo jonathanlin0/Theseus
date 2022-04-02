@@ -33,6 +33,10 @@ func _on_Restart_pressed():
 		get_tree().change_scene("res://Misc/Multiplayer.tscn")
 		master_data._reset_all()
 		master_data._reset_all_p2()
+	elif master_data.is_endless == true:
+		master_data.level = 0
+		get_tree().change_scene("res://Levels/Endless_Mode.tscn")
+		master_data._reset_all()
 
 func _on_Exit_pressed():
 	pause()
