@@ -572,7 +572,6 @@ shape = SubResource( 18 )
 material = SubResource( 104 )
 frames = SubResource( 17 )
 animation = "run_down"
-frame = 2
 playing = true
 
 [node name="Player_Camera" type="Camera2D" parent="."]
@@ -594,6 +593,7 @@ position = Vector2( -0.500003, 1.19209e-06 )
 scale = Vector2( 0.697917, 0.708333 )
 frames = SubResource( 24 )
 animation = "left"
+frame = 1
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]
@@ -766,6 +766,7 @@ visible = false
 [node name="CanvasLayer" type="CanvasLayer" parent="Object_Hints"]
 
 [node name="Actual_Text" type="Label" parent="Object_Hints/CanvasLayer"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5

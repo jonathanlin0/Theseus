@@ -1,11 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Tile_Sets/tileset_blue.tres" type="TileSet" id=2]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Levels/Endless_Mode.gd" type="Script" id=4]
+[ext_resource path="res://Misc/Sprites/black_bar.png" type="Texture" id=5]
+[ext_resource path="res://Misc/Sprites/dark_red_bar.png" type="Texture" id=6]
+[ext_resource path="res://Misc/Sprites/overlay_bar.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 14
 font_data = ExtResource( 1 )
 
 [node name="Endless_Mode" type="Node2D"]
@@ -30,6 +37,36 @@ margin_bottom = 23.0
 grow_horizontal = 0
 custom_fonts/font = SubResource( 1 )
 text = "Level: 96"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level_Delay_Bar" type="TextureProgress" parent="CanvasLayer"]
+margin_left = 165.0
+margin_top = 239.0
+margin_right = 265.0
+margin_bottom = 249.0
+rect_scale = Vector2( 1.5, 1.1 )
+value = 30.0
+texture_under = ExtResource( 5 )
+texture_over = ExtResource( 7 )
+texture_progress = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level_Delay_Bar_Update" type="Timer" parent="CanvasLayer"]
+wait_time = 0.015
+autostart = true
+
+[node name="Level_Warning_Text" type="Label" parent="CanvasLayer"]
+margin_left = 148.5
+margin_top = 248.0
+margin_right = 331.5
+margin_bottom = 268.0
+custom_fonts/font = SubResource( 2 )
+text = "Time until next level: 2 seconds"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -175,3 +212,8 @@ position = Vector2( 240, 197 )
 
 [node name="Position2D10" type="Position2D" parent="Power_up_spawn_locations"]
 position = Vector2( 300, 138 )
+
+[node name="Level_Delay" type="Timer" parent="."]
+
+[connection signal="timeout" from="CanvasLayer/Level_Delay_Bar_Update" to="." method="_on_Level_Delay_Bar_Update_timeout"]
+[connection signal="timeout" from="Level_Delay" to="." method="_on_Level_Delay_timeout"]

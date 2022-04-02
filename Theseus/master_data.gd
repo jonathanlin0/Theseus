@@ -17,6 +17,8 @@ var endless_health_multiplier = 1.0
 var endless_num_enemies = 1
 # number of powerups spawned after each level for endless mode
 var endless_num_power_ups = 1
+# amount of seconds between each level, typically used to collect the powerups
+var endless_level_delay = 5.0
 
 # length of flash when a character gets damaged
 var flash_time = 0.1
