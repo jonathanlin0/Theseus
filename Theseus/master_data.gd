@@ -15,6 +15,8 @@ var endless_mob_deaths = []
 var endless_health_multiplier = 1.0
 # number of enemies spawned per level for endless mode
 var endless_num_enemies = 1
+# number of powerups spawned after each level for endless mode
+var endless_num_power_ups = 1
 
 # length of flash when a character gets damaged
 var flash_time = 0.1
