@@ -85,7 +85,6 @@ func update_player():
 func _physics_process(delta):
 	
 	
-	
 	var difference_x = master_data.player_x - global_position.x
 	var difference_y = master_data.player_y - global_position.y
 	
@@ -122,7 +121,7 @@ func _physics_process(delta):
 		if is_dead == false:
 			
 			# used for player tracking
-			
+
 			
 			var net_distance = 0
 			net_distance = sqrt((difference_x * difference_x) + (difference_y * difference_y))
@@ -148,22 +147,17 @@ func _physics_process(delta):
 					velocity = Vector2(sign_x * 50,sign_y * 50)
 					velocity = move_and_slide(velocity)
 				elif knockback:
-					velocity = -Vector2(sign_x * 50,sign_y * 50) * (master_data.knockback_power * 1.5) * pow($knockback.time_left, 2)
+					velocity = -Vector2(sign_x * 50,sign_y * 50) * (master_data.knockback_power * 1.5) * pow($Enemy_Abstract_Class/knockback_timer.time_left, 2)
 					velocity = move_and_slide(velocity)
+					
 
 func damage(dmg):
-	$knockback.start()
-	knockback = true
 	health -= dmg
-	flash()
-	var text = DAMAGE_TEXT.instance()
-	text.amount = dmg
-	add_child(text)
-	$AudioStreamPlayer.play()
+	$Enemy_Abstract_Class.knockback()
+	$Enemy_Abstract_Class.flash()
+	$Enemy_Abstract_Class.damage_text(dmg)
+	$Enemy_Abstract_Class.damage_audio()
 	
-func flash():
-	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
-	$flash_timer.start(master_data.flash_time)
 
 func dead():
 	$AnimatedSprite.play("death")
@@ -178,16 +172,9 @@ func _on_AnimatedSprite_animation_finished():
 		queue_free()
 
 
-func _on_knockback_timeout():
-	knockback = false
-
 func _on_VisibilityEnabler2D_screen_entered():
 	can_see = true
 
 func _on_VisibilityEnabler2D_screen_exited():
 	can_see = false
 	sees_player = false
-
-
-func _on_flash_timer_timeout():
-	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)
