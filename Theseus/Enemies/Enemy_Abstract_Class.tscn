@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Enemy_Code_Block.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/Enemy_Abstract_Class.gd" type="Script" id=1]
 [ext_resource path="res://Sound Effects/Hit 1.mp3" type="AudioStream" id=2]
 
 [node name="Enemy_Abstract_Class" type="Position2D"]
