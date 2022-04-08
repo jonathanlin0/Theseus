@@ -164,7 +164,6 @@ func dead():
 	$CollisionShape2D.disabled = true
 	is_dead = true
 	
-	
 
 func _on_AnimatedSprite_animation_finished():
 	if is_dead == true:
