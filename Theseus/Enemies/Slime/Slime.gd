@@ -166,9 +166,6 @@ func damage(dmg):
 	$Enemy_Abstract_Class.damage_text(dmg)
 	$Enemy_Abstract_Class.damage_audio()
 	
-func flash():
-	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
-	$flash_timer.start(master_data.flash_time)
 
 func dead():
 	currently_popping = true
@@ -197,16 +194,9 @@ func _on_AnimatedSprite_animation_finished():
 		queue_free()
 
 
-func _on_knockback_timeout():
-	knockback = false
-
 func _on_VisibilityEnabler2D_screen_entered():
 	can_see = true
 
 func _on_VisibilityEnabler2D_screen_exited():
 	can_see = false
 	sees_player = false
-
-
-func _on_flash_timer_timeout():
-	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)

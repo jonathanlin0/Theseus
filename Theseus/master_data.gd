@@ -6,6 +6,12 @@ extends Node
 
 var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit", "Red_Spirit", "Gold_Spirit", "Snake_Dmg", "SnakePsn", "Snake_Goddess"]
 var powerups = ["cutler_common", "cutler_rare", "healthcanister_common", "healthcanister_rare", "manacanister_common", "manacanister_rare", "rangedeye_common", "rangedeye_rare", "wings_common", "wings_rare"]
+var colors = {
+	"red":Vector3(1.0, 0, 0),
+	"green":Vector3(0.0, 1.0, 0),
+	"blue":Vector3(0.0, 0.0, 1),
+	"light_blue":Vector3(0.52,0.82,1)
+}
 
 var username = "user"
 
