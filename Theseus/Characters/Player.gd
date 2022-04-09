@@ -16,6 +16,7 @@ var sprint = false
 
 const FIREBALL = preload("res://Weapons/Fireball.tscn")
 const LIGHTNING = preload("res://Weapons/Lightning.tscn")
+const ICICLE = preload("res://Weapons/Icicle.tscn")
 
 var knockback = false
 var knockback_dir = "left"
@@ -137,11 +138,15 @@ func _physics_process(delta):
 			master_data.selected_weapon = 1
 		if Input.is_action_pressed("ui_2"):
 			master_data.selected_weapon = 2
+		if Input.is_action_pressed("ui_3"):
+			master_data.selected_weapon = 3
 			
 		if master_data.selected_weapon == 1:
 			$Hotbar/Select_border.rect_position.x = 5
 		if master_data.selected_weapon == 2:
 			$Hotbar/Select_border.rect_position.x = 5 + 25
+		if master_data.selected_weapon == 3:
+			$Hotbar/Select_border.rect_position.x = 5 + 25 + 25
 		
 		if is_multiplayer == false:
 			# chest/sign detection text logic
@@ -333,6 +338,25 @@ func _physics_process(delta):
 						rad += PI
 					
 					lightning.rotate(rad)
+				
+				if master_data.selected_weapon == 3:
+					
+					$Sound_Effects/Lightning.play()
+					
+					var icicle = ICICLE.instance()
+					get_parent().add_child(icicle)
+					icicle.position = $Weapon_Holder.global_position
+					
+					# rotate the icicle to face the direction of the mouse
+					var mouseX = get_local_mouse_position().x
+					var mouseY = get_local_mouse_position().y
+					
+					# icicle is backwards when x is neg
+					var rad = atan(mouseY/mouseX)
+					if mouseX<0:
+						rad += PI
+					
+					icicle.rotate(rad)
 		
 		if is_multiplayer == true:
 			if Input.is_action_just_pressed("ui_c"):

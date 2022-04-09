@@ -9,6 +9,7 @@ var health = master_data.small_slime_health
 var is_dead = false
 
 var knockback = false
+var is_frozen = false
 
 var previous_animation = "idle"
 
@@ -118,7 +119,7 @@ func _physics_process(delta):
 		if health <= 0:
 			dead()
 		
-		if is_dead == false:
+		if is_dead == false and is_frozen == false:
 			
 			# used for player tracking
 
@@ -154,9 +155,9 @@ func _physics_process(delta):
 func damage(dmg):
 	health -= dmg
 	$Enemy_Abstract_Class.knockback()
-	$Enemy_Abstract_Class.flash()
 	$Enemy_Abstract_Class.damage_text(dmg)
 	$Enemy_Abstract_Class.damage_audio()
+	$Enemy_Abstract_Class.flash()
 	
 
 func dead():

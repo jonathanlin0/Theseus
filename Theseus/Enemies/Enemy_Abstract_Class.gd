@@ -9,9 +9,10 @@ var can_see_player = false
 """
 
 Required variables for each enemy:
-	
+
 var health = <info from master data>
 var knockback = false
+var is_frozen = false
 
 
 Required misc stuff for each enemy:
@@ -33,7 +34,6 @@ func _ready():
 
 func _physics_process(delta):
 	
-	
 
 	if can_see_player == true:
 		pass
@@ -45,9 +45,11 @@ func knockback():
 	$knockback_timer.start()
 	get_parent().knockback = true
 
+
 # play the damage audio
 func damage_audio():
 	$AudioStreamPlayer.play()
+
 
 # show the damage text (a red text flying out in a random direction indicating how much damage the player just did to the enemy)
 func damage_text(dmg):
@@ -55,11 +57,17 @@ func damage_text(dmg):
 	text.amount = dmg
 	get_parent().add_child(text)
 
+
 # the enemy flashes for a split second to indicate that the player did damage
 func flash():
-	animated_sprite.material.set_shader_param("flash_modifier", 1)
-	animated_sprite.material.set_shader_param("flash_color", master_data.colors["light_blue"])
-	$flash_timer.start(master_data.flash_time)
+	if get_parent().is_frozen == true:
+		animated_sprite.material.set_shader_param("flash_modifier", 0.75)
+		animated_sprite.material.set_shader_param("flash_color", master_data.colors["light_blue"])
+		$frozen_timer.start(master_data.freeze_time)
+	else:
+		animated_sprite.material.set_shader_param("flash_modifier", 1)
+		animated_sprite.material.set_shader_param("flash_color", master_data.colors["white"])
+		$flash_timer.start(master_data.flash_time)
 
 
 func _on_flash_timer_timeout():
@@ -76,3 +84,8 @@ func _on_VisibilityNotifier2D_screen_entered():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	can_see_player = false
+
+
+func _on_frozen_timer_timeout():
+	animated_sprite.material.set_shader_param("flash_modifier", 0)
+	get_parent().is_frozen = false

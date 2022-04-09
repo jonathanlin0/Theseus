@@ -10,7 +10,8 @@ var colors = {
 	"red":Vector3(1.0, 0, 0),
 	"green":Vector3(0.0, 1.0, 0),
 	"blue":Vector3(0.0, 0.0, 1),
-	"light_blue":Vector3(0.52,0.82,1)
+	"light_blue":Vector3(0.52,0.82,1),
+	"white":Vector3(1.0,1.0,1.0)
 }
 
 var username = "user"
@@ -29,6 +30,9 @@ var endless_level_delay = 5.0
 
 # length of flash when a character gets damaged
 var flash_time = 0.1
+
+# length of time for enemy to remain frozen after icicle hits them
+var freeze_time = 2.0
 
 # length of text that appears above an enemy when they get damaged
 var damage_text_time = 0.4
@@ -106,21 +110,25 @@ var snake_distance = 175
 # collection of the attack range of emtities
 var small_lizard_attack_range = 150
 var fireball_range = 150
+var icicle_range = 150
 
 # collection of all the speeds
 var player_speed = 7000
-var fireball_speed = 200
+var fireball_speed = 250
+var icicle_speed = 200
 var lightning_speed = 300
 var lizard_spit_speed = 180
 
 # how much energy each attack costs
 var fireball_cost = 10
 var lightning_cost = 25
+var icicle_cost = 30
 
 # how much damage each attack does
 var sword_damage = 20
 var fireball_damage = 10
 var lightning_damage = 30
+var icicle_damage = 20
 var lizard_spit_damage = 10
 var lizard_boss_slap_damage = 20
 var minotaur_axe_damage = 50

@@ -16,7 +16,11 @@ wait_time = 0.5
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
+[node name="frozen_timer" type="Timer" parent="."]
+wait_time = 5.0
+
 [connection signal="timeout" from="flash_timer" to="." method="_on_flash_timer_timeout"]
 [connection signal="timeout" from="knockback_timer" to="." method="_on_knockback_timer_timeout"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="frozen_timer" to="." method="_on_frozen_timer_timeout"]
