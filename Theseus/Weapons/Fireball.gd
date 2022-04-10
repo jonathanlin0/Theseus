@@ -18,6 +18,8 @@ var player_that_is_shooting = null
 var start_pos = Vector2(0,0)
 var start = true
 
+const EXPLOSION = preload("res://Particle_Effects/Explosion.tscn")
+
 func insert_player(player_obj):
 	player_that_is_shooting = player_obj
 
@@ -78,6 +80,10 @@ func _on_Fireball_body_entered(body):
 					$AnimatedSprite.play("fireStop")
 					hitSomething = true
 					hit_enemies.append(body.name)
+					
+					var explosion = EXPLOSION.instance()
+					get_parent().add_child(explosion)
+					explosion.global_position = global_position
 	if master_data.is_multiplayer == true:
 		if player_that_is_shooting.name == "Player":
 			if body.name == "Player2":

@@ -21,8 +21,6 @@ var diff_y = 0
 
 var player_angle = 0
 
-
-
 var vision_angle_total = deg2rad(360)
 var ray_diff = deg2rad(2)
 var vision = master_data.slime_distance
