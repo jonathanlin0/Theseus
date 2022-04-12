@@ -81,9 +81,9 @@ func _on_Fireball_body_entered(body):
 					hitSomething = true
 					hit_enemies.append(body.name)
 					
-					var explosion = EXPLOSION.instance()
-					get_parent().add_child(explosion)
-					explosion.global_position = global_position
+					#var explosion = EXPLOSION.instance()
+					#get_parent().add_child(explosion)
+					#explosion.global_position = global_position
 	if master_data.is_multiplayer == true:
 		if player_that_is_shooting.name == "Player":
 			if body.name == "Player2":

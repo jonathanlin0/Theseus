@@ -392,6 +392,24 @@ func _physics_process(delta):
 			
 			
 		velocity = move_and_slide(velocity)
+	
+	var enemies_in_area = []
+	var enemies_in_area_instance_ids = []
+	for obj in $Enemy_Vision_Area.get_overlapping_bodies():
+		if obj.name.find("Player") == -1 and enemies_in_area_instance_ids.find(obj.get_instance_id()) == -1:
+			var added = false
+			for known_enemy in master_data.enemy_names:
+				if obj.name.find(known_enemy) != -1 and added == false:
+					enemies_in_area.append(obj)
+					enemies_in_area_instance_ids.append(obj.get_instance_id())
+					added = true
+	
+	if enemies_in_area.size() > 0:
+		var enemy_pos = Vector2(enemies_in_area[0].global_position.x - global_position.x,enemies_in_area[0].global_position.y - global_position.y)
+		enemy_pos.y = enemy_pos.y * 1
+		
+		$Enemy_Vision.cast_to = enemy_pos
+	# end of physics process function
 
 func dead():
 	if master_data.is_multiplayer == false:
