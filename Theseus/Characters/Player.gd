@@ -406,9 +406,13 @@ func _physics_process(delta):
 	
 	if enemies_in_area.size() > 0:
 		var enemy_pos = Vector2(enemies_in_area[0].global_position.x - global_position.x,enemies_in_area[0].global_position.y - global_position.y)
-		enemy_pos.y = enemy_pos.y * 1
 		
 		$Enemy_Vision.cast_to = enemy_pos
+		if $Enemy_Vision.get_collider() != enemies_in_area[0]:
+			print("blind")
+		else:
+			print("can see")
+		#print($Enemy_Vision.intersect_ray())
 	# end of physics process function
 
 func dead():

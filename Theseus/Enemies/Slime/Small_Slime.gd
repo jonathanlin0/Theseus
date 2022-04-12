@@ -66,7 +66,7 @@ func _ready():
 			player_angle = PI/2
 	else:
 		player_angle = atan(diff_y/diff_x)
-	make_ray()
+	#make_ray()
 
 func update_player():
 	diff_x = master_data.player_global_x - global_position.x
