@@ -26,6 +26,8 @@ var is_multiplayer = false
 
 var prev_music = master_data.music
 
+var temp = 0
+
 # creates a delay between the chest/sign alert text growing and shrinking
 var text_can_grow = true
 
@@ -34,11 +36,24 @@ var previous_health = master_data.health
 
 var is_dead = false
 
+var to_be_deleted_areas = []
+
 func _ready():
 	if master_data.level == 0:
 		$Music/boss_music.play()
 	else:
 		$Music/stage_music.play()
+		
+	var new_area = Area2D.new()
+	var new_collision_shape = CollisionShape2D.new()
+	var ray_shape = RayShape2D.new()
+	ray_shape.length = 100
+	new_collision_shape.shape = ray_shape
+	new_area.add_child(new_collision_shape)
+	add_child(new_area)
+	new_area.queue_free()
+	#print($Enemy_Vision_RayShape/CollisionShape2D.shape)
+	
 
 func _input(event):
 	
@@ -46,6 +61,8 @@ func _input(event):
 		pass
 
 func _physics_process(delta):
+	
+	
 	if prev_music != master_data.music:
 		prev_music = master_data.music
 		change_music()
@@ -403,16 +420,82 @@ func _physics_process(delta):
 					enemies_in_area.append(obj)
 					enemies_in_area_instance_ids.append(obj.get_instance_id())
 					added = true
-	
+					
+	if to_be_deleted_areas.size() > 0:
+		for obj in to_be_deleted_areas:
+			to_be_deleted_areas.erase(obj)
+			obj.queue_free()
+	# how to do enemy vision with rayshape2D
+	temp += 1
 	if enemies_in_area.size() > 0:
-		var enemy_pos = Vector2(enemies_in_area[0].global_position.x - global_position.x,enemies_in_area[0].global_position.y - global_position.y)
+		print(temp)
+		for enemy in enemies_in_area:
+			
+			var new_area = Area2D.new()
+			var new_collision_shape = CollisionShape2D.new()
+			new_collision_shape.disabled = false
+			var ray_shape = RayShape2D.new()
+			ray_shape.length = 150
+			new_collision_shape.shape = ray_shape
+			new_area.add_child(new_collision_shape)
+			add_child(new_area)
 		
-		$Enemy_Vision.cast_to = enemy_pos
-		if $Enemy_Vision.get_collider() != enemies_in_area[0]:
-			print("blind")
-		else:
-			print("can see")
+			var angle = atan((enemy.global_position.y - global_position.y) / (enemy.global_position.x - global_position.x))
+			
+			if enemy.global_position.x - global_position.x < 0:
+				angle += PI
+			
+			var degs = rad2deg(angle)
+			
+			# .rotate() rotates the rayshape2D by adding the angle onto the existing angle
+			#$Enemy_Vision_2.rotate($Enemy_Vision_2.rotation * -1)
+			#$Enemy_Vision_2.rotate(deg2rad(-90))
+			
+			# .rotation_degrees immediately sets the rotation
+			#$Enemy_Vision_2.rotation_degrees = -90
+			
+			new_collision_shape.rotation = angle - (PI/2)
+			
+			var enemy_vision_overlapping_bodies = new_area.get_overlapping_bodies()
+			
+			# removes the player object from the list of overlapping bodies
+			for obj in enemy_vision_overlapping_bodies:
+				if obj.name.find("Player") != -1:
+					enemy_vision_overlapping_bodies.erase(obj)
+			
+			print(enemy_vision_overlapping_bodies)
+			var wall_in_way = false
+			for obj in enemy_vision_overlapping_bodies:
+				var exists = false
+				for known_enemy in master_data.enemy_names:
+					if obj.name.find(known_enemy) != -1:
+						exists = true
+				if exists == false:
+					wall_in_way = true
+			
+			if wall_in_way:
+				print("blind")
+			else:
+				print("can see")
+				
+			to_be_deleted_areas.append(new_area)
+			
+	# how to do it with the Enemy_Vision raycast
+	"""
+	if enemies_in_area.size() > 0:
+		print(str(temp))
+		for enemy in enemies_in_area:
+			print(enemy)
+			temp += 1
+			var enemy_pos = Vector2(enemy.global_position.x - global_position.x,enemy.global_position.y - global_position.y)
+			
+			$Enemy_Vision.cast_to = enemy_pos
+			if $Enemy_Vision.get_collider() != enemy:
+				print("blind")
+			else:
+				print("can see")
 		#print($Enemy_Vision.intersect_ray())
+	"""
 	# end of physics process function
 
 func dead():

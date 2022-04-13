@@ -1,4 +1,4 @@
-[gd_scene load_steps=148 format=2]
+[gd_scene load_steps=149 format=2]
 
 [ext_resource path="res://Sound Effects/sfx_sword.wav" type="AudioStream" id=1]
 [ext_resource path="res://Characters/Sprites/theseus_walk_up_shadow.png" type="Texture" id=2]
@@ -562,6 +562,9 @@ radius = 20.0
 [sub_resource type="CircleShape2D" id=240]
 radius = 150.0
 
+[sub_resource type="RayShape2D" id=241]
+length = 150.0
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 3
 collision_mask = 3
@@ -575,7 +578,7 @@ shape = SubResource( 18 )
 material = SubResource( 104 )
 frames = SubResource( 17 )
 animation = "run_down"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Player_Camera" type="Camera2D" parent="."]
@@ -598,7 +601,6 @@ position = Vector2( -0.500003, 1.19209e-06 )
 scale = Vector2( 0.697917, 0.708333 )
 frames = SubResource( 24 )
 animation = "left"
-frame = 1
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]
@@ -803,12 +805,22 @@ stream = ExtResource( 32 )
 stream = ExtResource( 33 )
 
 [node name="Enemy_Vision" type="RayCast2D" parent="."]
+visible = false
 enabled = true
 
 [node name="Enemy_Vision_Area" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_Vision_Area"]
 shape = SubResource( 240 )
+
+[node name="Enemy_Vision_RayShape" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_Vision_RayShape"]
+shape = SubResource( 241 )
+
+[node name="Ray_Disappear" type="Timer" parent="."]
+wait_time = 0.1
 
 [connection signal="animation_finished" from="CharacterAnimatedSprite" to="." method="_on_CharacterAnimatedSprite_animation_finished"]
 [connection signal="animation_finished" from="Player_Camera/stagetitles" to="Player_Camera" method="_on_stagetitles_animation_finished"]
