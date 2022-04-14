@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Tile_Sets/tileset_blue.tres" type="TileSet" id=1]
-[ext_resource path="res://Enemies/Slime/Small_Slime.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemies/Chimera/Chimera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Misc/Testing_Scene.gd" type="Script" id=4]
 [ext_resource path="res://Misc/Pause.tscn" type="PackedScene" id=7]
@@ -19,8 +19,5 @@ tile_data = PoolIntArray( -851982, 8, 0, -851981, 8, 0, -786447, 8, 0, -786446, 
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
-[node name="Small_Slime" parent="." instance=ExtResource( 2 )]
-position = Vector2( 88, -19 )
-
-[node name="Small_Slime2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 88, 37 )
+[node name="Chimera" parent="." instance=ExtResource( 2 )]
+position = Vector2( -110, -14 )

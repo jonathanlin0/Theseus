@@ -21,6 +21,7 @@ Required misc stuff for each enemy:
 	- having the main animated sprite called "AnimatedSprite"
 	- having the flash shader on the AnimatedSprite
 	- have an animation called "idle" in the AnimatedSprite object
+	- have an animation called "idle" in the AnimatedSprite object
 
 """
 
@@ -34,9 +35,9 @@ func _ready():
 	
 
 func _physics_process(delta):
-	
-
-	pass
+	if get_parent().is_frozen == true:
+		animated_sprite.material.set_shader_param("flash_modifier", 0.75)
+	#print(animated_sprite.material.get_shader_param("flash_modifier"))
 
 # function for knockback
 func knockback():
@@ -61,17 +62,24 @@ func damage_text(dmg):
 # the enemy flashes for a split second to indicate that the player did damage
 func flash():
 	if get_parent().is_frozen == true:
-		animated_sprite.material.set_shader_param("flash_modifier", 0.75)
 		animated_sprite.material.set_shader_param("flash_color", master_data.colors["light_blue"])
+		animated_sprite.material.set_shader_param("flash_modifier", 0.75)
+		
 		$frozen_timer.start(master_data.freeze_time)
+		print("freeze")
 	else:
 		animated_sprite.material.set_shader_param("flash_modifier", 1)
 		animated_sprite.material.set_shader_param("flash_color", master_data.colors["white"])
 		$flash_timer.start(master_data.flash_time)
+		print("dmg")
 
 
 func _on_flash_timer_timeout():
-	animated_sprite.material.set_shader_param("flash_modifier", 0)
+	# there's a bug where if the player damages the enemy with fireball or lightning and then tries to freeze the enemy, the enemy will flash blue but will not stay blue while frozen like intended
+	# this condition somehow fixes the bug, but I don't know why. but it seems like this conditional statement works and doesn't break anything, so we're going to roll with it
+	# - jonathan :D
+	if get_parent().is_frozen == false:
+		animated_sprite.material.set_shader_param("flash_modifier", 0)
 
 
 func _on_knockback_timer_timeout():
@@ -87,5 +95,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_frozen_timer_timeout():
+	
 	animated_sprite.material.set_shader_param("flash_modifier", 0)
 	get_parent().is_frozen = false

@@ -59,20 +59,20 @@ flags = 8
 atlas = ExtResource( 4 )
 region = Rect2( 768, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=34]
 flags = 8
 atlas = ExtResource( 3 )
-region = Rect2( 288, 0, 96, 96 )
+region = Rect2( 0, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=35]
 flags = 8
 atlas = ExtResource( 3 )
-region = Rect2( 384, 0, 96, 96 )
+region = Rect2( 96, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=36]
 flags = 8
 atlas = ExtResource( 3 )
-region = Rect2( 480, 0, 96, 96 )
+region = Rect2( 192, 0, 96, 96 )
 
 [sub_resource type="AtlasTexture" id=17]
 flags = 8
@@ -94,20 +94,20 @@ flags = 8
 atlas = ExtResource( 1 )
 region = Rect2( 288, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=34]
+[sub_resource type="AtlasTexture" id=10]
 flags = 8
 atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 96, 96 )
+region = Rect2( 288, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=35]
+[sub_resource type="AtlasTexture" id=11]
 flags = 8
 atlas = ExtResource( 3 )
-region = Rect2( 96, 0, 96, 96 )
+region = Rect2( 384, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=36]
+[sub_resource type="AtlasTexture" id=12]
 flags = 8
 atlas = ExtResource( 3 )
-region = Rect2( 192, 0, 96, 96 )
+region = Rect2( 480, 0, 96, 96 )
 
 [sub_resource type="SpriteFrames" id=30]
 animations = [ {
@@ -116,9 +116,9 @@ animations = [ {
 "name": "death",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
 "loop": true,
-"name": "attack",
+"name": "charge_up",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
@@ -126,9 +126,9 @@ animations = [ {
 "name": "slither",
 "speed": 7.0
 }, {
-"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
-"name": "charge_up",
+"name": "attack",
 "speed": 10.0
 } ]
 
@@ -148,7 +148,7 @@ script = ExtResource( 2 )
 material = SubResource( 37 )
 frames = SubResource( 30 )
 animation = "slither"
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

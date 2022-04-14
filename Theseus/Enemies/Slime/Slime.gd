@@ -1,13 +1,15 @@
 extends KinematicBody2D
 
+var health = master_data.slime_health
+var knockback = false
+var is_frozen = false
+var sees_player = false
+
 # the velocity vector that changes to try to chase the player around
 var velocity = Vector2(100,0)
 
 const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
 
-var knockback = false
-
-var health = master_data.slime_health
 var is_dead = false
 
 # the object used to spawn the 2 children slime
@@ -28,7 +30,6 @@ var diff_x = 0
 var diff_y = 0
 
 
-var sees_player = false
 var can_see = false
 
 func make_ray():

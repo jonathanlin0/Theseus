@@ -1,5 +1,10 @@
 extends KinematicBody2D
 
+var health = master_data.chimera_health
+var knockback = false
+var is_frozen = false
+var sees_player = false
+
 var velocity = Vector2()
 
 var triggered = false
@@ -11,15 +16,12 @@ var rand = RandomNumberGenerator.new()
 var rand_x_vel = 0
 var rand_y_vel = 0
 
-var health = master_data.chimera_health
-
 var is_dead = false
 
 var can_attack = true
 
 var prev_anim = ""
 
-var knockback = false
 var collision
 
 var lion_attack = false
@@ -56,33 +58,35 @@ func _ready():
 var attack_time_started = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$Health_Bar.setValue(health)
-	if health <= 0:
-		dead()
-		
-	if is_dead == false:
-		if velocity.x != 0:
-			moving = true
-		if velocity.x == 0:
-			moving = false
-		# used for player tracking
-		
-		if prev_anim == "lion_attack":
-			if !attack_time_started:
-				$lion_attack.start()
-				attack_time_started = true
-			position += transform.x * 1500 * delta * (($lion_attack.wait_time / 2) - ($lion_attack.time_left))
-		
-		if prev_anim == "goat_attack":
-			if !attack_time_started:
-				$goat_attack.start()
-				attack_time_started = true
-			position += transform.x * -2000 * delta * (($goat_attack.wait_time / 2) - ($goat_attack.time_left))
-		
-		collision = move_and_collide(velocity * delta)
-		if collision && moving:
-			velocity = velocity.bounce(collision.normal)
-			_randomize()
+	if $Enemy_Abstract_Class.on_screen:
+		$Health_Bar.setValue(health)
+		if health <= 0:
+			dead()
+			
+		if is_dead == false and is_frozen == false:
+			
+			if velocity.x != 0:
+				moving = true
+			if velocity.x == 0:
+				moving = false
+			# used for player tracking
+			
+			if prev_anim == "lion_attack":
+				if !attack_time_started:
+					$lion_attack.start()
+					attack_time_started = true
+				position += transform.x * 1500 * delta * (($lion_attack.wait_time / 2) - ($lion_attack.time_left))
+			
+			if prev_anim == "goat_attack":
+				if !attack_time_started:
+					$goat_attack.start()
+					attack_time_started = true
+				position += transform.x * -2000 * delta * (($goat_attack.wait_time / 2) - ($goat_attack.time_left))
+			
+			collision = move_and_collide(velocity * delta)
+			if collision && moving:
+				velocity = velocity.bounce(collision.normal)
+				_randomize()
 
 func dead():
 	$AnimatedSprite.play("death")
@@ -91,28 +95,36 @@ func dead():
 
 func damage(dmg):
 	triggered = true
-	_randomize()
+	#_randomize()
 	health -= dmg
+	$Enemy_Abstract_Class.knockback()
+	$Enemy_Abstract_Class.flash()
+	$Enemy_Abstract_Class.damage_text(dmg)
+	$Enemy_Abstract_Class.damage_audio()
 
 func _on_AnimatedSprite_animation_finished():
-	if moving:
-		$AnimatedSprite.play("walk")
-		prev_anim = "walk"
-	if !moving && !attacking:
-		$AnimatedSprite.play("idle")
-		prev_anim = "idle"
-	if lion_attack:
-		$AnimatedSprite.play("lion_chargeup")
-		prev_anim = "lion_chargeup"
-		attacking = true
-		$lion_charge.start()
-	if goat_attack:
-		$AnimatedSprite.play("goat_chargeup")
-		prev_anim = "goat_chargeup"
-		attacking = true
-		$goat_charge.start()
 	if is_dead:
 		queue_free()
+	if is_frozen == false:
+		if moving:
+			$AnimatedSprite.play("walk")
+			prev_anim = "walk"
+		if !moving && !attacking:
+			$AnimatedSprite.play("idle")
+			prev_anim = "idle"
+		if lion_attack:
+			$AnimatedSprite.play("lion_chargeup")
+			prev_anim = "lion_chargeup"
+			attacking = true
+			$lion_charge.start()
+		if goat_attack:
+			$AnimatedSprite.play("goat_chargeup")
+			prev_anim = "goat_chargeup"
+			attacking = true
+			$goat_charge.start()
+	if is_frozen == true:
+		$AnimatedSprite.play("frozen")
+	
 
 
 func _on_lion_box_body_entered(body):
