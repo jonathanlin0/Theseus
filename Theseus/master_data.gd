@@ -37,6 +37,8 @@ var freeze_time = 2.0
 # length of text that appears above an enemy when they get damaged
 var damage_text_time = 0.4
 
+var visible_enemies = []
+
 # used for score calculations
 var start_time = 0
 var end_time = 100

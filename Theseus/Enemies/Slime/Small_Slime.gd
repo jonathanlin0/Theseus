@@ -26,7 +26,7 @@ var ray_diff = deg2rad(2)
 var vision = master_data.slime_distance
 
 var sees_player = false
-var can_see = false
+var on_screen = false
 
 func make_ray():
 	var i = 0
@@ -71,7 +71,6 @@ func _ready():
 func update_player():
 	diff_x = master_data.player_global_x - global_position.x
 	diff_y = master_data.player_global_y - global_position.y
-	#print(diff_y)
 	if diff_x == 0:
 		if diff_y <0:
 			player_angle = -PI/2
@@ -86,7 +85,7 @@ func _physics_process(delta):
 	
 	var difference_x = master_data.player_x - global_position.x
 	var difference_y = master_data.player_y - global_position.y
-	
+	"""
 	var i = -1
 	for ray in get_children():
 		if ray.is_class("RayCast2D"):
@@ -108,7 +107,8 @@ func _physics_process(delta):
 				else:
 					sees_player = false
 					#print("no see")
-	
+	"""
+
 	
 	$Health_Bar.setValue(health)
 	
@@ -171,8 +171,8 @@ func _on_AnimatedSprite_animation_finished():
 
 
 func _on_VisibilityEnabler2D_screen_entered():
-	can_see = true
+	on_screen = true
 
 func _on_VisibilityEnabler2D_screen_exited():
-	can_see = false
+	on_screen = false
 	sees_player = false

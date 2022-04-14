@@ -4,7 +4,7 @@ extends Position2D
 
 onready var animated_sprite = get_parent().get_node("AnimatedSprite")
 
-var can_see_player = false
+var on_screen = false
 
 """
 
@@ -13,6 +13,7 @@ Required variables for each enemy:
 var health = <info from master data>
 var knockback = false
 var is_frozen = false
+var sees_player = false
 
 
 Required misc stuff for each enemy:
@@ -35,8 +36,7 @@ func _ready():
 func _physics_process(delta):
 	
 
-	if can_see_player == true:
-		pass
+	pass
 
 # function for knockback
 func knockback():
@@ -79,11 +79,11 @@ func _on_knockback_timer_timeout():
 
 
 func _on_VisibilityNotifier2D_screen_entered():
-	can_see_player = true
+	on_screen = true
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	can_see_player = false
+	on_screen = false
 
 
 func _on_frozen_timer_timeout():

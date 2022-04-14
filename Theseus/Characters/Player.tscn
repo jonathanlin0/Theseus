@@ -578,7 +578,6 @@ shape = SubResource( 18 )
 material = SubResource( 104 )
 frames = SubResource( 17 )
 animation = "run_down"
-frame = 2
 playing = true
 
 [node name="Player_Camera" type="Camera2D" parent="."]
@@ -601,7 +600,6 @@ position = Vector2( -0.500003, 1.19209e-06 )
 scale = Vector2( 0.697917, 0.708333 )
 frames = SubResource( 24 )
 animation = "left"
-frame = 1
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]
@@ -830,3 +828,5 @@ wait_time = 0.1
 [connection signal="timeout" from="knockback" to="." method="_on_knockback_timeout"]
 [connection signal="timeout" from="flash_timer" to="." method="_on_flash_timer_timeout"]
 [connection signal="timeout" from="Object_Hints/Text_Delay" to="." method="_on_Text_Delay_timeout"]
+[connection signal="body_entered" from="Enemy_Vision_Area" to="." method="_on_Enemy_Vision_Area_body_entered"]
+[connection signal="body_exited" from="Enemy_Vision_Area" to="." method="_on_Enemy_Vision_Area_body_exited"]
