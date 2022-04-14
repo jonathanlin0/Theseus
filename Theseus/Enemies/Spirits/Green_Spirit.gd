@@ -1,13 +1,16 @@
 extends KinematicBody2D
 
+var health = master_data.spirit_health
+var knockback = false
+var is_frozen = false
+var sees_player = false
+
 var rand = RandomNumberGenerator.new()
 var drop_one = false
 var drop_two = false
 var triggered = false
 var is_dead = false
-var health = master_data.spirit_health
 var velocity = Vector2(10, 0)
-var knockback = false
 var dropped_one = false
 var dropped_two = false
 
@@ -33,7 +36,7 @@ func _process(delta):
 	if health <= 0:
 		dead()
 	
-	if is_dead == false:
+	if is_dead == false and is_frozen == false:
 		
 		# used for player tracking
 		var difference_x = master_data.player_x - global_position.x
@@ -61,23 +64,16 @@ func _process(delta):
 				velocity = Vector2(sign_x * 50,sign_y * 50)
 				velocity = move_and_slide(velocity)
 			elif knockback:
-				velocity = -Vector2(sign_x * 50,sign_y * 50) * (master_data.knockback_power * 1.5) * pow($knockback.time_left, 2)
+				velocity = -Vector2(sign_x * 50,sign_y * 50) * (master_data.knockback_power * 1.5) * pow($Enemy_Abstract_Class/knockback_timer.time_left, 2)
 				velocity = move_and_slide(velocity)
 
 func damage(dmg):
-	triggered = true
 	health -= dmg
-	knockback = true
-	$knockback.start()
-	flash()
-	var text = DAMAGE_TEXT.instance()
-	text.amount = dmg
-	add_child(text)
-	$AudioStreamPlayer.play()
-	
-func flash():
-	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
-	$flash_timer.start(master_data.flash_time)
+	$Enemy_Abstract_Class.knockback()
+	$Enemy_Abstract_Class.flash()
+	$Enemy_Abstract_Class.damage_text(dmg)
+	$Enemy_Abstract_Class.damage_audio()
+
 
 func dead():
 	if drop_one && !dropped_one:
@@ -97,10 +93,3 @@ func dead():
 func _on_AnimatedSprite_animation_finished():
 	if is_dead:
 		queue_free()
-
-func _on_knockback_timeout():
-	knockback = false
-
-
-func _on_flash_timer_timeout():
-	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)

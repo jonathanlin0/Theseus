@@ -51,26 +51,7 @@ func make_ray():
 	add_child(ray2)
 	add_child(ray_main)
 	
-	#var i = 0
-	#while i <= vision_angle_total/ray_diff:
-		#var ray = RayCast2D.new()
-		#var angle = ray_diff*i
-		#ray.cast_to = Vector2.UP.rotated(angle)*vision
-		#ray.add_exception(SMALL_SLIME)
-		#ray.enabled = true
-		#ray.collision_mask = 2
-		#add_child(ray)
-		#i=i+1
-	
 
-#func _draw():
-	#for ray in get_children():
-		#if ray.is_class("RayCast2D"):
-			#draw_line(Vector2(0,0), ray.get_cast_to(), Color(1,0,0,1), 1)
-			
-			#print(ray.get_collider().to_string())
-			#print(global_position)
-		#print(ray)
 	
 
 func update_player():
@@ -124,10 +105,8 @@ func _physics_process(delta):
 		if health <= 0:
 			dead()
 		
-		if is_dead == false:
-			#print(master_data.player_global_x)
-			#print(global_position.x)
-			# used for player tracking
+		if is_dead == false and is_frozen == false:
+
 			var difference_x = master_data.player_global_x - global_position.x
 			var difference_y = master_data.player_global_y - global_position.y
 			
@@ -194,10 +173,3 @@ func _on_AnimatedSprite_animation_finished():
 		
 		queue_free()
 
-
-func _on_VisibilityEnabler2D_screen_entered():
-	can_see = true
-
-func _on_VisibilityEnabler2D_screen_exited():
-	can_see = false
-	sees_player = false

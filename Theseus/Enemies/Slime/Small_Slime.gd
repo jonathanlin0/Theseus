@@ -1,15 +1,16 @@
 extends KinematicBody2D
 
+var health = master_data.small_slime_health
+var knockback = false
+var is_frozen = false
+var sees_player = false
+
 # the velocity vector that changes to try to chase the player around
 var velocity = Vector2(10,0)
 
 const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
 
-var health = master_data.small_slime_health
 var is_dead = false
-
-var knockback = false
-var is_frozen = false
 
 var previous_animation = "idle"
 
@@ -25,37 +26,6 @@ var vision_angle_total = deg2rad(360)
 var ray_diff = deg2rad(2)
 var vision = master_data.slime_distance
 
-var sees_player = false
-var on_screen = false
-
-func make_ray():
-	var i = 0
-	
-	var ray_main = RayCast2D.new()
-	var ray1 = RayCast2D.new()
-	var ray2 = RayCast2D.new()
-	ray_main.cast_to = Vector2.UP.rotated(player_angle)*vision
-	ray1.cast_to = Vector2.UP.rotated(player_angle+ray_diff)*vision
-	ray2.cast_to = Vector2.UP.rotated(player_angle-ray_diff)*vision
-	ray_main.enabled = true
-	ray1.enabled = true
-	ray2.enabled = true
-	ray_main.collision_mask = 2
-	ray1.collision_mask = 2
-	ray2.collision_mask = 2
-	add_child(ray1)
-	add_child(ray2)
-	add_child(ray_main)
-	
-	#while i <= vision_angle_total/ray_diff:
-		#var ray = RayCast2D.new()
-		#var angle = ray_diff*i
-		#ray.cast_to = Vector2.UP.rotated(angle)*vision
-		#ray.add_exception(SMALL_SLIME)
-		#ray.enabled = true
-		#ray.collision_mask = 2
-		#add_child(ray)
-		#i=i+1
 
 func _ready():
 	$Health_Bar.setMax(master_data.small_slime_health)
@@ -66,7 +36,6 @@ func _ready():
 			player_angle = PI/2
 	else:
 		player_angle = atan(diff_y/diff_x)
-	#make_ray()
 
 func update_player():
 	diff_x = master_data.player_global_x - global_position.x
@@ -85,29 +54,6 @@ func _physics_process(delta):
 	
 	var difference_x = master_data.player_x - global_position.x
 	var difference_y = master_data.player_y - global_position.y
-	"""
-	var i = -1
-	for ray in get_children():
-		if ray.is_class("RayCast2D"):
-			ray.cast_to = Vector2.UP.rotated(player_angle+ray_diff*i)*vision
-			i=i+1
-	
-	if can_see:
-		update_player()
-		for ray in get_children():
-			if ray.is_class("RayCast2D"):
-				if ray.get_collider() != null:
-					#print(ray.get_collider().to_string())
-					if ray.get_collider().to_string().substr(0,6) == "Player":
-						sees_player = true
-						#print("see")
-						break
-					else:
-						sees_player = false
-				else:
-					sees_player = false
-					#print("no see")
-	"""
 
 	
 	$Health_Bar.setValue(health)
@@ -118,8 +64,6 @@ func _physics_process(delta):
 			dead()
 		
 		if is_dead == false and is_frozen == false:
-			
-			# used for player tracking
 
 			
 			var net_distance = 0
@@ -170,9 +114,3 @@ func _on_AnimatedSprite_animation_finished():
 		queue_free()
 
 
-func _on_VisibilityEnabler2D_screen_entered():
-	on_screen = true
-
-func _on_VisibilityEnabler2D_screen_exited():
-	on_screen = false
-	sees_player = false

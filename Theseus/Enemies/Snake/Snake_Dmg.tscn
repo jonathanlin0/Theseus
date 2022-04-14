@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Enemies/Sprites/Snake/snake_dps_slither_4.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/Snake/Snake_Dmg.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Misc/Health_Bar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Shaders/flash.tres" type="Shader" id=6]
 [ext_resource path="res://Sound Effects/Hit 1.mp3" type="AudioStream" id=7]
+[ext_resource path="res://Enemies/Enemy_Abstract_Class.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ShaderMaterial" id=37]
 resource_local_to_scene = true
@@ -148,7 +149,7 @@ script = ExtResource( 2 )
 material = SubResource( 37 )
 frames = SubResource( 30 )
 animation = "slither"
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -175,16 +176,11 @@ margin_right = 67.0
 margin_bottom = 42.0
 rect_scale = Vector2( 0.5, 0.5 )
 
-[node name="knockback" type="Timer" parent="."]
-wait_time = 0.5
-
-[node name="flash_timer" type="Timer" parent="."]
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+
+[node name="Enemy_Abstract_Class" parent="." instance=ExtResource( 8 )]
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="body_entered" from="damage_area" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="damage_area" to="." method="_on_damage_area_body_exited"]
-[connection signal="timeout" from="knockback" to="." method="_on_knockback_timeout"]
-[connection signal="timeout" from="flash_timer" to="." method="_on_flash_timer_timeout"]

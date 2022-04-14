@@ -1,5 +1,10 @@
 extends KinematicBody2D
 
+var health = master_data.snake_health
+var knockback = false
+var is_frozen = false
+var sees_player = false
+
 const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
 
 var attacking = false
@@ -9,8 +14,6 @@ var can_player_take_damage = true
 
 var is_dead = false
 var moving = false
-var knockback = false
-var health = master_data.snake_health
 var velocity = Vector2(10, 0)
 
 var dir = "left"
@@ -29,7 +32,7 @@ func _physics_process(delta):
 		if health <= 0 && !knockback:
 			dead()
 		
-		if is_dead == false:
+		if is_dead == false and is_frozen == false:
 			
 			if previous_animation != "slither":
 				velocity.x = 0
@@ -72,7 +75,7 @@ func _physics_process(delta):
 						velocity = Vector2(sign_x * 50,sign_y * 50)
 						velocity = move_and_slide(velocity)
 					elif knockback:
-						velocity = -Vector2(sign_x * 50,sign_y * 50) * (master_data.knockback_power * 1.5) * pow($knockback.time_left, 2)
+						velocity = -Vector2(sign_x * 50,sign_y * 50) * (master_data.knockback_power * 1.5) * pow($Enemy_Abstract_Class/knockback_timer.time_left, 2)
 						velocity = move_and_slide(velocity)
 		
 		for obj in $damage_area.get_overlapping_bodies():
@@ -102,18 +105,12 @@ func dead():
 
 func damage(dmg):
 	if health > 0:
-		$knockback.start()
-		knockback = true
 		health -= dmg
-		flash()
-		var text = DAMAGE_TEXT.instance()
-		text.amount = dmg
-		add_child(text)
-		$AudioStreamPlayer.play()
+		$Enemy_Abstract_Class.knockback()
+		$Enemy_Abstract_Class.flash()
+		$Enemy_Abstract_Class.damage_text(dmg)
+		$Enemy_Abstract_Class.damage_audio()
 	
-func flash():
-	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
-	$flash_timer.start(master_data.flash_time)
 
 func poison():
 	if ticks <= 4:
@@ -134,9 +131,6 @@ func _on_AnimatedSprite_animation_finished():
 		queue_free()
 
 
-func _on_knockback_timeout():
-	knockback = false
-
 
 func _on_damage_area_body_entered(body):
 	if body.name == "Player":
@@ -155,6 +149,3 @@ func _on_poison_timeout():
 	if ticks > 4:
 		ticks = 0
 
-
-func _on_flash_timer_timeout():
-	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)

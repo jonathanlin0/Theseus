@@ -23,6 +23,13 @@ Required misc stuff for each enemy:
 	- have an animation called "idle" in the AnimatedSprite object
 	- have an animation called "idle" in the AnimatedSprite object
 
+Typical functions used in a damage() function of an enemy
+	health -= dmg
+	$Enemy_Abstract_Class.knockback()
+	$Enemy_Abstract_Class.flash()
+	$Enemy_Abstract_Class.damage_text(dmg)
+	$Enemy_Abstract_Class.damage_audio()
+
 """
 
 const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
@@ -66,12 +73,10 @@ func flash():
 		animated_sprite.material.set_shader_param("flash_modifier", 0.75)
 		
 		$frozen_timer.start(master_data.freeze_time)
-		print("freeze")
 	else:
 		animated_sprite.material.set_shader_param("flash_modifier", 1)
 		animated_sprite.material.set_shader_param("flash_color", master_data.colors["white"])
 		$flash_timer.start(master_data.flash_time)
-		print("dmg")
 
 
 func _on_flash_timer_timeout():

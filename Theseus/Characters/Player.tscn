@@ -560,10 +560,10 @@ font_data = ExtResource( 14 )
 radius = 20.0
 
 [sub_resource type="CircleShape2D" id=240]
-radius = 150.0
+radius = 175.0
 
 [sub_resource type="RayShape2D" id=241]
-length = 150.0
+length = 175.0
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 3
@@ -600,7 +600,6 @@ position = Vector2( -0.500003, 1.19209e-06 )
 scale = Vector2( 0.697917, 0.708333 )
 frames = SubResource( 24 )
 animation = "left"
-frame = 1
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]
