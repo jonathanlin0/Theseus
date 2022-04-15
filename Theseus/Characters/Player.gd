@@ -402,6 +402,7 @@ func _physics_process(delta):
 			
 		velocity = move_and_slide(velocity)
 	
+	# add all the enemies in the area to enemies_in_area
 	var enemies_in_area = []
 	var enemies_in_area_instance_ids = []
 	for obj in $Enemy_Vision_Area.get_overlapping_bodies():
@@ -413,11 +414,14 @@ func _physics_process(delta):
 					enemies_in_area_instance_ids.append(obj.get_instance_id())
 					added = true
 					
-
+	
+	# adds all current enemies in the area to the enemies_to_be_checked
 	for enemy in enemies_in_area:
 		if enemies_to_be_checked.find(enemy) == -1:
 			enemies_to_be_checked.append(enemy)
-
+	
+	# checks the earliest added enemy in enemies_to_be_checked to see if the enemy/player can see each other
+	# have to check the enemies like this one by one instead of all together in a single forloop because a RayShape2D can only check 1 object and its collisions per frame, so in each frame the following section of code checks the enemy vision
 	if enemies_to_be_checked.size() > 0:
 		var angle = atan((enemies_to_be_checked[0].global_position.y - global_position.y) / (enemies_to_be_checked[0].global_position.x - global_position.x))
 			
@@ -445,15 +449,12 @@ func _physics_process(delta):
 				wall_in_way = true
 			
 		if wall_in_way:
-			
 			enemies_to_be_checked[0].sees_player = false
 		else:
-			
 			enemies_to_be_checked[0].sees_player = true
 			
 		enemies_to_be_checked.remove(0)
-	# how to do enemy vision with rayshape2D
-	temp += 1
+	
 
 	# end of physics process function
 

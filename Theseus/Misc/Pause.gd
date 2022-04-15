@@ -37,6 +37,8 @@ func _on_Restart_pressed():
 		master_data.level = 0
 		get_tree().change_scene("res://Levels/Endless_Mode.tscn")
 		master_data._reset_all()
+	if get_tree().get_current_scene().name == "Testing_Scene":
+		get_tree().change_scene("res://Misc/Testing_Scene.tscn")
 
 func _on_Exit_pressed():
 	pause()

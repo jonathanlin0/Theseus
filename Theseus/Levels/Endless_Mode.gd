@@ -23,6 +23,9 @@ const SMALL_LIZARD = preload("res://Enemies/Lizard/Small_Lizard.tscn")
 const BIG_SLIME = preload("res://Enemies/Slime/Slime.tscn")
 const SMALL_SLIME = preload("res://Enemies/Slime/Small_Slime.tscn")
 
+const IMPLOSION = preload("res://Particle_Effects/Implosion.tscn")
+var implosions_to_be_deleted = []
+
 # what level in endless mode the player is currently on
 var level = 1
 
@@ -39,6 +42,10 @@ var spawned = false
 var delay_start = OS.get_unix_time()
 var delay_time_left = 0
 
+# these two variables are temporary storage for the enemies and the locations of each enemy that need to be spawned
+var areas_to_spawn = []
+var enemies_to_spawn = []
+
 func _ready():
 	master_data.is_endless = true
 	start_time = OS.get_unix_time()
@@ -47,6 +54,17 @@ func _ready():
 	
 	master_data.endless_mob_deaths = []
 	master_data.endless_current_spawned_mobs = []
+	
+	"""
+	var implosion = IMPLOSION.instance()
+	implosion.scale.x = 0.1
+	implosion.scale.y = 0.1
+	add_child(implosion)
+	implosion.global_position = Vector2(240,135)
+	"""
+	#var explosion = EXPLOSION.instance()
+					#get_parent().add_child(explosion)
+					#explosion.global_position = global_position
 	
 func _physics_process(delta):
 	time_elapsed = round(OS.get_unix_time() - start_time)
@@ -59,11 +77,14 @@ func _physics_process(delta):
 			power_ups_rare.erase(WINGS_RARE)
 	
 	
-
-	#$CanvasLayer/Level_Delay_Bar.max_value = master_data.endless_level_delay
+	print($Level_Delay.time_left)
 	$CanvasLayer/Level_Delay_Bar.value = percentage_left
 	
-	if currently_level_delay == true:
+	if $Level_Delay.time_left == 0:
+		$CanvasLayer/Level_Warning_Text.visible = false
+		$CanvasLayer/Level_Delay_Bar.visible = false
+	
+	if $Level_Delay.time_left > 0:
 		# turn on the text and bar that shows how much time left until the next level starts
 		$CanvasLayer/Level_Warning_Text.visible = true
 		$CanvasLayer/Level_Warning_Text.text = "Time until next level: " + str(round($Level_Delay.get_time_left())) + " seconds"
@@ -75,9 +96,7 @@ func _physics_process(delta):
 		$CanvasLayer/Level_Delay_Bar.value = percentage_left
 		
 	
-	if currently_level_delay == false:
-		$CanvasLayer/Level_Warning_Text.visible = false
-		$CanvasLayer/Level_Delay_Bar.visible = false
+	if $Level_Delay.time_left <= master_data.implosion_time:
 		
 		if spawned == false:
 			spawn_mobs()
@@ -153,34 +172,26 @@ func spawn_mobs():
 			var rand_location = spawn_locations[randi() % spawn_locations.size()]
 			spawn_locations.erase(rand_location)
 			
+			areas_to_spawn.append(rand_location)
+			enemies_to_spawn.append(mob_name_dict[key])
+			
+			
+			# code moved to when the implosion animation timer ends
+			"""
 			var current_mob = mob_name_dict[key].instance()
 			get_parent().add_child(current_mob)
 			current_mob.global_position = rand_location.global_position
 			master_data.endless_current_spawned_mobs.append(current_mob.get_instance_id())
-	
-	"""
-	for i in range(0, spawn_number):
-		if spawn_locations.size() <= 1:
-			spawn_locations = $Spawn_locations.get_children()
-		var rand_location = spawn_locations[randi() % spawn_locations.size()]
-		spawn_locations.erase(rand_location)
-		
-		var current_mob = SMALL_SLIME.instance()
-		
-		# asign which type of mob needs to be spawned
-		if mob == "small_slime":
-			current_mob = SMALL_SLIME.instance()
-		if mob == "big_slime":
-			current_mob = BIG_SLIME.instance()
-		if mob == "small_lizard":
-			current_mob = SMALL_LIZARD.instance()
-		
-		get_parent().add_child(current_mob)
-		current_mob.global_position = rand_location.global_position
-		current_spawned_mobs.append(current_mob.get_instance_id())
-	"""
-		
-		
+			"""
+	# spawn the implosions
+	for current_area in areas_to_spawn:
+		var implosion = IMPLOSION.instance()
+		implosion.scale.x = 0.07
+		implosion.scale.y = 0.07
+		add_child(implosion)
+		implosion.global_position = current_area.global_position
+		implosions_to_be_deleted.append(implosion)
+	$Implosion_Timer.start()
 
 func number_of_mobs(mob):
 	var x = level
@@ -212,3 +223,20 @@ func number_random(num):
 func _on_Level_Delay_timeout():
 	currently_level_delay = false
 
+
+func _on_Implosion_Timer_timeout():
+	# remove all the implosion effects
+	for implosion in implosions_to_be_deleted:
+		implosion.queue_free()
+		
+	# spawn all the enemies
+	for i in range(0, areas_to_spawn.size()):
+		var current_mob = enemies_to_spawn[i].instance()
+		$Enemies_Holder.add_child(current_mob)
+		current_mob.global_position = areas_to_spawn[i].global_position
+		master_data.endless_current_spawned_mobs.append(current_mob.get_instance_id())
+	
+	# reset everything
+	implosions_to_be_deleted = []
+	enemies_to_spawn = []
+	areas_to_spawn = []

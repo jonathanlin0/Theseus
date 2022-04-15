@@ -1,14 +1,26 @@
 extends Node2D
 
+const IMPLOSION = preload("res://Particle_Effects/Implosion.tscn")
+const SMALL_SLIME = preload("res://Enemies/Slime/Small_Slime.tscn")
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var temp = []
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	master_data.level = 0
+	var implosion = IMPLOSION.instance()
+	implosion.scale.x = 0.07
+	implosion.scale.y = 0.07
+	add_child(implosion)
+	implosion.global_position = Vector2(240,135)
+	temp.append(implosion)
+	$Timer.start(1)
 
 func _process(delta):
 	pass
+
+
+func _on_Timer_timeout():
+	
+	temp[0].queue_free()
+	var current_mob = SMALL_SLIME.instance()
+	get_parent().add_child(current_mob)
+	current_mob.global_position = Vector2(240,135)

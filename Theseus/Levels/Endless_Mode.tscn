@@ -213,5 +213,12 @@ position = Vector2( 240, 197 )
 position = Vector2( 300, 138 )
 
 [node name="Level_Delay" type="Timer" parent="."]
+one_shot = true
+
+[node name="Implosion_Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Enemies_Holder" type="Position2D" parent="."]
 
 [connection signal="timeout" from="Level_Delay" to="." method="_on_Level_Delay_timeout"]
+[connection signal="timeout" from="Implosion_Timer" to="." method="_on_Implosion_Timer_timeout"]

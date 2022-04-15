@@ -28,6 +28,9 @@ var endless_num_power_ups = 1
 # amount of seconds between each level, typically used to collect the powerups
 var endless_level_delay = 5.0
 
+# time for the implosion effect
+var implosion_time = 1.0
+
 # length of flash when a character gets damaged
 var flash_time = 0.1
 
