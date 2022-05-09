@@ -9,7 +9,7 @@ var mouse_position = position
 var hitSomething = false;
 
 var hit_enemies = []
-#var previous_animation = "";
+var previous_animation = "";
 
 var player_to_hit = 1
 
@@ -60,7 +60,6 @@ func _physics_process(delta):
 	#print(hypotnuse(start_pos, curr_pos))
 	if hypotnuse(start_pos, curr_pos)>=master_data.icicle_range:
 		hitSomething = true
-		#$AnimatedSprite.play("fireStop")
 	
 	if !hitSomething:
 		velocity.x = unit_vector.x * master_data.icicle_speed * delta
@@ -78,19 +77,24 @@ func _on_Icicle_body_entered(body):
 					body.is_frozen = true
 					
 					body.damage(master_data.icicle_damage * master_data.ranged_multiplier)
-					#$AnimatedSprite.play("fireStop")
+					$AnimatedSprite.play("break")
+					previous_animation = "fireStop"
 					hitSomething = true
 					hit_enemies.append(body.name)
 					
 					
 	if body.name == "TileMap":
 		hitSomething = true;
-		#previous_animation = "fireStop"
-		#$AnimatedSprite.play("fireStop")
+		previous_animation = "fireStop"
+		$AnimatedSprite.play("break")
 		$CollisionShape2D.disabled = true
 		velocity = Vector2(0,0);
-		queue_free()
 
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
+
+
+func _on_AnimatedSprite_animation_finished():
+	if previous_animation == "fireStop":
+		queue_free()
