@@ -155,7 +155,7 @@ func _physics_process(delta):
 		if master_data.selected_weapon == 2:
 			$Hotbar/Select_border.rect_position.x = 5 + 25
 		if master_data.selected_weapon == 3:
-			$Hotbar/Select_border.rect_position.x = 5 + 25 + 25
+			$Hotbar/Select_border.rect_position.x = 5 + 25 + 24
 		
 		if is_multiplayer == false:
 			# chest/sign detection text logic
