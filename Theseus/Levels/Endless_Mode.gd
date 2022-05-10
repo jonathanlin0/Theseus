@@ -79,7 +79,7 @@ func _physics_process(delta):
 			power_ups_rare.erase(WINGS_RARE)
 	
 	
-	print($Level_Delay.time_left)
+
 	$CanvasLayer/Level_Delay_Bar.value = percentage_left
 	
 	if $Level_Delay.time_left == 0:

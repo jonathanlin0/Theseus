@@ -8,7 +8,7 @@ func _ready():
 	master_data.level = 0
 	master_data.is_multiplayer = false
 	master_data.is_endless = false
-
+	master_data.endless_health_multiplier = 1.0
 
 #func _process(delta):
 #	pass

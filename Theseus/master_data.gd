@@ -185,15 +185,18 @@ func _reset_all_p2():
 	ranged_multiplier_p2 = 1.0
 	
 func _process(delta):
-	if is_endless:
-		slime_health = base_slime_health * endless_health_multiplier
-		small_slime_health = base_small_slime_health * endless_health_multiplier
-		snake_health = base_snake_health * endless_health_multiplier
-		small_lizard_health = base_small_lizard_health * endless_health_multiplier
-		lizard_boss_health = base_lizard_boss_health * endless_health_multiplier
-		chimera_health = base_chimera_health * endless_health_multiplier
-		spirit_health = base_spirit_health * endless_health_multiplier
-		snake_goddess_health = base_snake_goddess_health * endless_health_multiplier
+	if !is_endless:
+		endless_health_multiplier = 1.0
+	
+	slime_health = base_slime_health * endless_health_multiplier
+	small_slime_health = base_small_slime_health * endless_health_multiplier
+	snake_health = base_snake_health * endless_health_multiplier
+	small_lizard_health = base_small_lizard_health * endless_health_multiplier
+	lizard_boss_health = base_lizard_boss_health * endless_health_multiplier
+	chimera_health = base_chimera_health * endless_health_multiplier
+	spirit_health = base_spirit_health * endless_health_multiplier
+	snake_goddess_health = base_snake_goddess_health * endless_health_multiplier
+	print(slime_health)
 
 func x_direction(x_body, x_other_object):
 	var out = 0

@@ -146,7 +146,6 @@ script = ExtResource( 3 )
 material = SubResource( 36 )
 frames = SubResource( 5 )
 animation = "slither"
-frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
