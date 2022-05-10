@@ -132,6 +132,10 @@ func _physics_process(delta):
 		master_data.player_x_global = global_position.x
 		master_data.player_y_global = global_position.y
 		
+		# make sure health is not negative
+		if master_data.health < 0:
+			master_data.health = 0
+		
 		# update the health & mana bars
 		
 		$StatusBars/MarginContainer/VBoxContainer/HealthBar.max_value = master_data.max_health
@@ -348,9 +352,11 @@ func _physics_process(delta):
 					
 					lightning.rotate(rad)
 				
-				if master_data.selected_weapon == 3:
+				if master_data.selected_weapon == 3 and master_data.mana > master_data.icicle_cost:
 					
 					$Sound_Effects/Lightning.play()
+					
+					master_data.mana -= master_data.icicle_cost
 					
 					var icicle = ICICLE.instance()
 					get_parent().add_child(icicle)

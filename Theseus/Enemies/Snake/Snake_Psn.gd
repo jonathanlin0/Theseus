@@ -128,6 +128,7 @@ func _on_AnimatedSprite_animation_finished():
 		can_player_take_damage = true
 	
 	if is_dead:
+		master_data.endless_mob_deaths.append(get_instance_id())
 		queue_free()
 
 

@@ -22,6 +22,8 @@ var power_ups_rare = [CUTLER_RARE, HEALTH_RARE, MANA_RARE, EYE_RARE, WINGS_RARE]
 const SMALL_LIZARD = preload("res://Enemies/Lizard/Small_Lizard.tscn")
 const BIG_SLIME = preload("res://Enemies/Slime/Slime.tscn")
 const SMALL_SLIME = preload("res://Enemies/Slime/Small_Slime.tscn")
+const SNAKE_DMG = preload("res://Enemies/Snake/Snake_Dmg.tscn")
+const SNAKE_PSN = preload("res://Enemies/Snake/Snake_PSN.tscn")
 
 const IMPLOSION = preload("res://Particle_Effects/Implosion.tscn")
 var implosions_to_be_deleted = []
@@ -158,7 +160,9 @@ func spawn_mobs():
 	var mob_name_dict = {
 		"small_slime" : SMALL_SLIME,
 		"big_slime" : BIG_SLIME,
-		"small_lizard" : SMALL_LIZARD
+		"small_lizard" : SMALL_LIZARD,
+		"snake_dmg" : SNAKE_DMG,
+		"snake_psn" : SNAKE_PSN
 	}
 	
 	# for every mob
@@ -199,14 +203,21 @@ func number_of_mobs(mob):
 	
 	# equations for each type of mob
 	if mob == "small_slime":
-		if 0 < x and x < 25:
+		if 0 < x and x < 15:
 			out = -0.4 * (9500 / (x + 100)) + 40
 	if mob == "big_slime":
-		if 2 < x and x < 30:
-			out = (5000/(-0.3*(x+330))) + 52
+		if 2 < x and x < 20:
+			out = -0.2 * (x-16)*(x-16) + 4
 	if mob == "small_lizard":
-		if 10 < x and x < 50:
-			out = (3000/(-0.1*(x+310))) + 95
+		if 5 < x and x < 27:
+			out = (3000/(-0.1*(x+310))) + 96
+	if mob == "snake_dmg":
+		if 10 < x and x < 40:
+			out = -0.03*(x-30)*(x-30) + 15
+	if mob == "snake_psn":
+		if 12 < x and x < 42:
+			out = -0.03*(x-32)*(x-30) + 15
+		
 		
 	out = round(out)
 	if out > 0:
