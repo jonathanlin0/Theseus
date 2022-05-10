@@ -22,8 +22,8 @@ var end_time = 100
 var is_multiplayer = false
 
 # player info
-var max_health = 100
-var health = 100
+var max_health = 100000
+var health = 100000
 var max_mana = 100
 var mana = 100
 var level = 1

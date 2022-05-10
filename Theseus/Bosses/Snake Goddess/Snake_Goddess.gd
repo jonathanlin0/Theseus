@@ -10,6 +10,7 @@ var previous_animation = "statue"
 var spawning = false
 var can_be_damaged = false
 var dead = false
+var mad = false
 
 var velocity = Vector2()
 var speed = 0
@@ -24,19 +25,36 @@ func _physics_process(delta):
 	#if master_data.hypotnuse(get_parent().get_child(3).get_global_position(), get_global_position())<150 and sleeping:
 	if master_data.hypotnuse(Vector2(master_data.player_global_x, master_data.player_global_y), get_global_position()) < 150 and sleeping:
 		activate()
+		
+	#if player is 105 away go toward, if closer than 95 go away.
 	if !sleeping and !spawning and !dead:
 		if master_data.hypotnuse(get_parent().get_child(3).get_global_position(), get_global_position()) > 105:
 			velocity = master_data.get_unit_vector(get_parent().get_child(3).get_global_position().x-get_global_position().x, get_parent().get_child(3).get_global_position().y-get_global_position().y)*speed
 		elif master_data.hypotnuse(get_parent().get_child(3).get_global_position(), get_global_position()) < 95:
 			velocity = master_data.get_unit_vector(get_parent().get_child(3).get_global_position().x-get_global_position().x, get_parent().get_child(3).get_global_position().y-get_global_position().y)*-speed
-			
 		else:
 			velocity = Vector2(0,0)
 		#print (velocity)
 		velocity = move_and_slide(velocity)
 		$AnimatedSprite.play("idle")
 		
+		#print($ProximityDetection.get_overlapping_bodies()[0].to_string())
+		if !mad:
+			for thing in $ProximityDetection.get_overlapping_bodies():
+				if thing.to_string().find("Player", 0) != -1:
+					mad = true
+					#print("MAD")
+					
+		#stop and whack the player of too close.
+		if mad:
+			velocity = Vector2(0,0)
+			whack()
+			
 	
+
+func whack():
+	$AnimatedSprite.play("whack")
+	previous_animation = "whack"
 
 func damage(dmg):
 	if can_be_damaged:
@@ -108,6 +126,9 @@ func _on_AnimatedSprite_animation_finished():
 		
 	if previous_animation == "death":
 		queue_free()
+		
+	if previous_animation == "whack":
+		mad = false
 
 
 func _on_Spawn_Timer_timeout():
