@@ -27,6 +27,10 @@ var endless_num_enemies = 1
 var endless_num_power_ups = 1
 # amount of seconds between each level, typically used to collect the powerups
 var endless_level_delay = 5.0
+# every x levels that the enemy increases by 0.1% health
+var endless_enemy_health_break = 2
+# every x levels that num of powerups increases by 1
+var endless_powerup_break = 5
 
 # time for the implosion effect
 var implosion_time = 1.0
@@ -196,7 +200,6 @@ func _process(delta):
 	chimera_health = base_chimera_health * endless_health_multiplier
 	spirit_health = base_spirit_health * endless_health_multiplier
 	snake_goddess_health = base_snake_goddess_health * endless_health_multiplier
-	print(slime_health)
 
 func x_direction(x_body, x_other_object):
 	var out = 0

@@ -24,6 +24,7 @@ const BIG_SLIME = preload("res://Enemies/Slime/Slime.tscn")
 const SMALL_SLIME = preload("res://Enemies/Slime/Small_Slime.tscn")
 const SNAKE_DMG = preload("res://Enemies/Snake/Snake_Dmg.tscn")
 const SNAKE_PSN = preload("res://Enemies/Snake/Snake_PSN.tscn")
+const CHIMERA = preload("res://Enemies/Chimera/Chimera.tscn")
 
 const IMPLOSION = preload("res://Particle_Effects/Implosion.tscn")
 var implosions_to_be_deleted = []
@@ -48,6 +49,9 @@ var delay_time_left = 0
 var areas_to_spawn = []
 var enemies_to_spawn = []
 
+# used for testing. ensure test_level = 0
+var test_level = 17
+
 func _ready():
 	master_data.is_endless = true
 	start_time = OS.get_unix_time()
@@ -57,16 +61,43 @@ func _ready():
 	master_data.endless_mob_deaths = []
 	master_data.endless_current_spawned_mobs = []
 	
-	"""
-	var implosion = IMPLOSION.instance()
-	implosion.scale.x = 0.1
-	implosion.scale.y = 0.1
-	add_child(implosion)
-	implosion.global_position = Vector2(240,135)
-	"""
-	#var explosion = EXPLOSION.instance()
-					#get_parent().add_child(explosion)
-					#explosion.global_position = global_position
+	
+	if test_level != 0:
+		level = test_level
+		
+		
+		for i in range(1, test_level):
+			
+			# adjust enemy health based on test level
+			if i % master_data.endless_enemy_health_break:
+				master_data.endless_health_multiplier += 0.1
+		
+			# give powerups based on test level
+			if i % master_data.endless_powerup_break:
+				master_data.endless_num_power_ups += 1
+		
+		# give powerups base (copy pasted from code below)
+		var remaining_power_up_spawn_location = $Power_up_spawn_locations.get_children()
+				
+		for i in range(0, master_data.endless_num_power_ups):
+			
+			# resets the avaliable spots to add powerups if there are no spots left
+			if remaining_power_up_spawn_location.size() < 1:
+				remaining_power_up_spawn_location = $Power_up_spawn_locations.get_children()
+					
+			# pick a random spawn location and then remove it from the avaliable list
+			var rand_power_up_location = remaining_power_up_spawn_location[randi() % remaining_power_up_spawn_location.size()]
+			remaining_power_up_spawn_location.erase(rand_power_up_location)
+					
+			# 20% chance to drop a rare
+			if int(rand_range(0,100)) > 20:
+				var power_up = power_ups_common[randi() % power_ups_common.size()].instance()
+				get_parent().add_child(power_up)
+				power_up.global_position = rand_power_up_location.global_position
+			else:
+				var power_up = power_ups_rare[randi() % power_ups_rare.size()].instance()
+				get_parent().add_child(power_up)
+				power_up.global_position = rand_power_up_location.global_position
 	
 func _physics_process(delta):
 	time_elapsed = round(OS.get_unix_time() - start_time)
@@ -120,9 +151,9 @@ func _physics_process(delta):
 				spawned = false
 				level += 1
 				
-				if level % 2 == 0:
+				if level % master_data.endless_enemy_health_break == 0:
 					master_data.endless_health_multiplier += 0.1
-				if level % 5 == 0:
+				if level % master_data.endless_powerup_break == 0:
 					master_data.endless_num_power_ups += 1
 					
 				var remaining_power_up_spawn_location = $Power_up_spawn_locations.get_children()
@@ -162,7 +193,8 @@ func spawn_mobs():
 		"big_slime" : BIG_SLIME,
 		"small_lizard" : SMALL_LIZARD,
 		"snake_dmg" : SNAKE_DMG,
-		"snake_psn" : SNAKE_PSN
+		"snake_psn" : SNAKE_PSN,
+		"chimera": CHIMERA
 	}
 	
 	# for every mob
@@ -217,6 +249,9 @@ func number_of_mobs(mob):
 	if mob == "snake_psn":
 		if 12 < x and x < 42:
 			out = -0.03*(x-32)*(x-30) + 15
+	if mob == "chimera":
+		if 17 < x and x < 50:
+			out = -0.03*(x-37)*(x-37) + 13
 		
 		
 	out = round(out)

@@ -40,6 +40,9 @@ var to_be_deleted_areas = []
 
 var enemies_to_be_checked = []
 
+# used to delay the start time
+var start_time = OS.get_unix_time()
+
 func _ready():
 	if master_data.level == 0:
 		$Music/boss_music.play()
@@ -428,8 +431,17 @@ func _physics_process(delta):
 	
 	# checks the earliest added enemy in enemies_to_be_checked to see if the enemy/player can see each other
 	# have to check the enemies like this one by one instead of all together in a single forloop because a RayShape2D can only check 1 object and its collisions per frame, so in each frame the following section of code checks the enemy vision
+
+	
 	if enemies_to_be_checked.size() > 0:
-		var angle = atan((enemies_to_be_checked[0].global_position.y - global_position.y) / (enemies_to_be_checked[0].global_position.x - global_position.x))
+		
+		var angle = 0
+		
+		# to compensate for enemies on the same x values (since can't divide by 0)
+		if (enemies_to_be_checked[0].global_position.x - global_position.x) == 0:
+			angle = atan((enemies_to_be_checked[0].global_position.y - global_position.y) / (0.000001))
+		else:
+			angle = atan((enemies_to_be_checked[0].global_position.y - global_position.y) / (enemies_to_be_checked[0].global_position.x - global_position.x))
 			
 		if enemies_to_be_checked[0].global_position.x - global_position.x < 0:
 			angle += PI
