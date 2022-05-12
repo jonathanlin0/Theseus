@@ -8,7 +8,7 @@ var sees_player = false
 const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
 
 var attacking = false
-var previous_animation = "slither"
+var previous_animation = "idle"
 
 var can_player_take_damage = true
 
@@ -34,7 +34,7 @@ func _physics_process(delta):
 		
 		if is_dead == false and is_frozen == false:
 			
-			if previous_animation != "slither":
+			if previous_animation != "idle":
 				velocity.x = 0
 				velocity.y = 0
 			else:
@@ -123,8 +123,8 @@ func _on_AnimatedSprite_animation_finished():
 		previous_animation = "attack"
 		$AnimatedSprite.play("attack")
 	elif previous_animation == "attack":
-		previous_animation = "slither"
-		$AnimatedSprite.play("slither")
+		previous_animation = "idle"
+		$AnimatedSprite.play("idle")
 		can_player_take_damage = true
 	
 	if is_dead:

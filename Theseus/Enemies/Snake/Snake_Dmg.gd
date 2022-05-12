@@ -8,7 +8,7 @@ var sees_player = false
 const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
 
 var attacking = false
-var previous_animation = "slither"
+var previous_animation = "idle"
 
 var can_player_take_damage = true
 

@@ -580,6 +580,7 @@ shape = SubResource( 18 )
 material = SubResource( 104 )
 frames = SubResource( 17 )
 animation = "run_down"
+frame = 3
 playing = true
 
 [node name="Player_Camera" type="Camera2D" parent="."]

@@ -24,7 +24,7 @@ func _process(delta):
 		position += transform.x * 50 * delta * direction
 
 func _on_wings_common_body_entered(body):
-	if body.name.find("Player") != -1 && master_data.player_speed < 12500 and !collected:
+	if body.name.find("Player") != -1 && master_data.player_speed < master_data.max_speed and !collected:
 		$collect.play()
 		master_data.player_speed = master_data.player_speed + 200
 		bouncing = false

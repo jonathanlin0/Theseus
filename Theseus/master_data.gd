@@ -60,6 +60,7 @@ var max_mana = 100
 var mana = 100
 var level = 1
 var selected_weapon = 1
+var max_speed = 12500
 
 # data for player 2
 var max_health_p2 = 100
