@@ -23,6 +23,8 @@ var dir = "left"
 
 var moving = false
 
+var sees_player = false
+
 var regen = true
 
 const SPIT = preload("res://Bosses/Lizard_Boss/Big_Spit.tscn")
