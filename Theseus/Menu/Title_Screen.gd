@@ -71,3 +71,16 @@ func _on_credits_finished():
 
 func _on_multiTimer_timeout():
 	get_tree().change_scene("res://Misc/Multiplayer.tscn")
+
+
+func _on_Endless_pressed():
+	$Endless/endless.play()
+	$Endless/endlessTimer.start()
+
+
+func _on_endless_finished():
+	pass # Replace with function body.
+
+
+func _on_endlessTimer_timeout():
+	get_tree().change_scene("res://Levels/Endless_Mode.tscn")

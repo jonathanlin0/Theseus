@@ -50,7 +50,7 @@ var areas_to_spawn = []
 var enemies_to_spawn = []
 
 # used for testing. ensure test_level = 0
-var test_level = 25
+var test_level = 20
 
 func _ready():
 	master_data.is_endless = true
