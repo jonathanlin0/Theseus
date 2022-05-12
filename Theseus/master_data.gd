@@ -100,6 +100,7 @@ var minotaur_jab_damage = 20
 var snake_dmg_damage = 20
 var chimera_lion_damage = 25
 var chimera_goat_damage = 20
+var snake_goddess_whack_damage = 15
 
 # the rare powerup spawn chances
 var rare_chance_in_basic_chest = 0.2

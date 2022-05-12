@@ -27,7 +27,8 @@ func _physics_process(delta):
 		activate()
 		
 	#if player is 105 away go toward, if closer than 95 go away.
-	if !sleeping and !spawning and !dead:
+	if !sleeping and !spawning and !dead and !mad:
+		
 		if master_data.hypotnuse(get_parent().get_child(3).get_global_position(), get_global_position()) > 105:
 			velocity = master_data.get_unit_vector(get_parent().get_child(3).get_global_position().x-get_global_position().x, get_parent().get_child(3).get_global_position().y-get_global_position().y)*speed
 		elif master_data.hypotnuse(get_parent().get_child(3).get_global_position(), get_global_position()) < 95:
@@ -39,22 +40,23 @@ func _physics_process(delta):
 		$AnimatedSprite.play("idle")
 		
 		#print($ProximityDetection.get_overlapping_bodies()[0].to_string())
-		if !mad:
-			for thing in $ProximityDetection.get_overlapping_bodies():
-				if thing.to_string().find("Player", 0) != -1:
-					mad = true
-					#print("MAD")
-					
+		
+	if !mad and !spawning and !dead:
+		for thing in $ProximityDetection.get_overlapping_bodies():
+			if thing.to_string().find("Player", 0) != -1:
+				mad = true
+				print("MAD")
+				
 		#stop and whack the player of too close.
 		if mad:
 			velocity = Vector2(0,0)
 			whack()
-			
-	
 
 func whack():
+	print("WHACKED")
 	$AnimatedSprite.play("whack")
 	previous_animation = "whack"
+	master_data.health -= master_data.snake_goddess_whack_damage
 
 func damage(dmg):
 	if can_be_damaged:
@@ -85,34 +87,35 @@ func activate():
 	previous_animation = "activate"
 	
 func spawn_snake():
-	var boxes = $Wall_Spacer.get_children()
-	var pos = $Positions.get_children()
-	
-	var random = RandomNumberGenerator.new()
-	
-	random.randomize()
-	var box = random.randi_range(0, 5)
-	#print(box)
-	random.randomize()
-	var type = random.randi_range(0,1)
-	print(box)
-	print(type)
-	if !has_collision(boxes[box]):
-		if type == 0:
-			var damage = DAMAGE.instance()
-			get_parent().get_node("Damage_Snakes").add_child(damage)
-			damage.global_position = $Positions.get_children()[box].global_position
-		else:
-			print(get_parent().get_node("Poison_Snakes"))
-			var poison = POISON.instance()
-			get_parent().add_child(poison)
-			poison.global_position = $Positions.get_children()[box].global_position
-	#print(boxes)
-	
-	spawning = true
-	speed = 0
-	$AnimatedSprite.play("summon")
-	previous_animation = "summon"
+	if !mad:
+		var boxes = $Wall_Spacer.get_children()
+		var pos = $Positions.get_children()
+		
+		var random = RandomNumberGenerator.new()
+		
+		random.randomize()
+		var box = random.randi_range(0, 5)
+		#print(box)
+		random.randomize()
+		var type = random.randi_range(0,1)
+		print(box)
+		print(type)
+		if !has_collision(boxes[box]):
+			if type == 0:
+				var damage = DAMAGE.instance()
+				get_parent().get_node("Damage_Snakes").add_child(damage)
+				damage.global_position = $Positions.get_children()[box].global_position
+			else:
+				print(get_parent().get_node("Poison_Snakes"))
+				var poison = POISON.instance()
+				get_parent().add_child(poison)
+				poison.global_position = $Positions.get_children()[box].global_position
+		#print(boxes)
+		
+		spawning = true
+		speed = 0
+		$AnimatedSprite.play("summon")
+		previous_animation = "summon"
 
 
 func _on_AnimatedSprite_animation_finished():
@@ -129,6 +132,7 @@ func _on_AnimatedSprite_animation_finished():
 		
 	if previous_animation == "whack":
 		mad = false
+		print("no more mad")
 
 
 func _on_Spawn_Timer_timeout():
