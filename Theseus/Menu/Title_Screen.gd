@@ -1,9 +1,10 @@
 extends Node2D
 
-
+var cursor = load("res://Misc/Sprites/cursor.png")
 
 func _ready():
 	$Music.play()
+	Input.set_custom_mouse_cursor(cursor)
 	master_data.previous_scene = "title"
 	master_data.level = 0
 	master_data.is_multiplayer = false

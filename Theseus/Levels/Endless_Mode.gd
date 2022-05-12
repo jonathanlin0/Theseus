@@ -3,6 +3,8 @@ extends Node2D
 var start_time = OS.get_unix_time()
 var time_elapsed = 0
 
+var cursor = load("res://Misc/Sprites/cursor_cross.png")
+
 # preload all the powerups
 const CUTLER_COMMON = preload("res://Power_Ups/cutler_common.tscn")
 const CUTLER_RARE = preload("res://Power_Ups/cutler_rare.tscn")
@@ -50,9 +52,10 @@ var areas_to_spawn = []
 var enemies_to_spawn = []
 
 # used for testing. ensure test_level = 0
-var test_level = 20
+var test_level = 0
 
 func _ready():
+	Input.set_custom_mouse_cursor(cursor)
 	master_data.is_endless = true
 	start_time = OS.get_unix_time()
 	master_data.level = 0

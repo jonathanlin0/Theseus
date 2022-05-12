@@ -246,10 +246,10 @@ position = Vector2( 2645, 226 )
 z_index = 101
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -163.0
-margin_top = -102.0
-margin_right = 450.0
-margin_bottom = 246.0
+margin_left = -166.0
+margin_top = -111.0
+margin_right = 447.0
+margin_bottom = 237.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
