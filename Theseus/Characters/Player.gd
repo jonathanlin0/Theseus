@@ -40,8 +40,6 @@ var to_be_deleted_areas = []
 
 var enemies_to_be_checked = []
 
-# used to delay the start time
-var start_time = OS.get_unix_time()
 
 func _ready():
 	if master_data.level == 0:
@@ -437,41 +435,44 @@ func _physics_process(delta):
 		
 		var angle = 0
 		
-		# to compensate for enemies on the same x values (since can't divide by 0)
-		if (enemies_to_be_checked[0].global_position.x - global_position.x) == 0:
-			angle = atan((enemies_to_be_checked[0].global_position.y - global_position.y) / (0.000001))
-		else:
-			angle = atan((enemies_to_be_checked[0].global_position.y - global_position.y) / (enemies_to_be_checked[0].global_position.x - global_position.x))
-			
-		if enemies_to_be_checked[0].global_position.x - global_position.x < 0:
-			angle += PI
-			
-		var degs = rad2deg(angle)
-		$Enemy_Vision_RayShape/CollisionShape2D.rotation = angle - (PI/2)
-			
-		var enemy_vision_overlapping_bodies = $Enemy_Vision_RayShape.get_overlapping_bodies()
-			
-		# removes the player object from the list of overlapping bodies
-		for obj in enemy_vision_overlapping_bodies:
-			if obj.name.find("Player") != -1:
-				enemy_vision_overlapping_bodies.erase(obj)
-			
+		var wr = weakref(enemies_to_be_checked[0])
+		if (wr.get_ref()):
+			# to compensate for enemies on the same x values (since can't divide by 0)
+			if (enemies_to_be_checked[0].global_position.x - global_position.x) == 0:
+				angle = atan((enemies_to_be_checked[0].global_position.y - global_position.y) / (0.000001))
+			else:
+				angle = atan((enemies_to_be_checked[0].global_position.y - global_position.y) / (enemies_to_be_checked[0].global_position.x - global_position.x))
+				
+			if enemies_to_be_checked[0].global_position.x - global_position.x < 0:
+				angle += PI
+				
+			var degs = rad2deg(angle)
+			$Enemy_Vision_RayShape/CollisionShape2D.rotation = angle - (PI/2)
+				
+			var enemy_vision_overlapping_bodies = $Enemy_Vision_RayShape.get_overlapping_bodies()
+				
+			# removes the player object from the list of overlapping bodies
+			for obj in enemy_vision_overlapping_bodies:
+				if obj.name.find("Player") != -1:
+					enemy_vision_overlapping_bodies.erase(obj)
+				
 
-		var wall_in_way = false
-		for obj in enemy_vision_overlapping_bodies:
-			var exists = false
-			for known_enemy in master_data.enemy_names:
-				if obj.name.find(known_enemy) != -1:
-					exists = true
-			if exists == false:
-				wall_in_way = true
-			
-		if wall_in_way:
-			enemies_to_be_checked[0].sees_player = false
-		else:
-			enemies_to_be_checked[0].sees_player = true
-			
+			var wall_in_way = false
+			for obj in enemy_vision_overlapping_bodies:
+				var exists = false
+				for known_enemy in master_data.enemy_names:
+					if obj.name.find(known_enemy) != -1:
+						exists = true
+				if exists == false:
+					wall_in_way = true
+				
+			if wall_in_way:
+				enemies_to_be_checked[0].sees_player = false
+			else:
+				enemies_to_be_checked[0].sees_player = true
+				
 		enemies_to_be_checked.remove(0)
+		
 	
 
 	# end of physics process function

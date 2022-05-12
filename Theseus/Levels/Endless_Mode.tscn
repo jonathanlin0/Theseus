@@ -180,6 +180,36 @@ position = Vector2( 206, 41 )
 [node name="spawn350" type="Position2D" parent="Spawn_locations"]
 position = Vector2( 223, 37 )
 
+[node name="spawn_00" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 40, 45 )
+
+[node name="spawn_01" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 40, 90 )
+
+[node name="spawn_02" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 40, 135 )
+
+[node name="spawn_03" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 40, 180 )
+
+[node name="spawn_04" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 40, 225 )
+
+[node name="spawn_05" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 85, 45 )
+
+[node name="spawn_06" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 85, 90 )
+
+[node name="spawn_07" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 85, 135 )
+
+[node name="spawn_08" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 85, 180 )
+
+[node name="spawn_09" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 85, 225 )
+
 [node name="Power_up_spawn_locations" type="Position2D" parent="."]
 
 [node name="Position2D" type="Position2D" parent="Power_up_spawn_locations"]

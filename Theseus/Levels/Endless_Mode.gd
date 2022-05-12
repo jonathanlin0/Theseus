@@ -50,7 +50,7 @@ var areas_to_spawn = []
 var enemies_to_spawn = []
 
 # used for testing. ensure test_level = 0
-var test_level = 17
+var test_level = 25
 
 func _ready():
 	master_data.is_endless = true
@@ -75,35 +75,64 @@ func _ready():
 			# give powerups based on test level
 			if i % master_data.endless_powerup_break:
 				master_data.endless_num_power_ups += 1
-		
-		# give powerups base (copy pasted from code below)
-		var remaining_power_up_spawn_location = $Power_up_spawn_locations.get_children()
-				
-		for i in range(0, master_data.endless_num_power_ups):
 			
-			# resets the avaliable spots to add powerups if there are no spots left
-			if remaining_power_up_spawn_location.size() < 1:
-				remaining_power_up_spawn_location = $Power_up_spawn_locations.get_children()
+			# automatically powerup the player w/o using powerups by inherently changing the player's values
+			var power_ups = ["cutler","health","mana","eye","wings"]
+			# randomize randomizes the random seed
+			randomize()
+			for x in range(0, master_data.endless_num_power_ups):
+			
+				# 80% chance drop common
+				if int(rand_range(0, 100)) > 20:
 					
-			# pick a random spawn location and then remove it from the avaliable list
-			var rand_power_up_location = remaining_power_up_spawn_location[randi() % remaining_power_up_spawn_location.size()]
-			remaining_power_up_spawn_location.erase(rand_power_up_location)
+					var power_up = power_ups[randi() % power_ups.size()]
 					
-			# 20% chance to drop a rare
-			if int(rand_range(0,100)) > 20:
-				var power_up = power_ups_common[randi() % power_ups_common.size()].instance()
-				get_parent().add_child(power_up)
-				power_up.global_position = rand_power_up_location.global_position
-			else:
-				var power_up = power_ups_rare[randi() % power_ups_rare.size()].instance()
-				get_parent().add_child(power_up)
-				power_up.global_position = rand_power_up_location.global_position
+					if power_up == "cutler":
+						master_data.melee_multiplier += 0.07
+					if power_up == "health":
+						if (master_data.health < master_data.max_health):
+							master_data.health = master_data.health + 75
+							if (master_data.health > master_data.max_health):
+								master_data.health = master_data.max_health
+						else:
+							master_data.max_health = master_data.max_health + 10
+							master_data.health = master_data.max_health
+					if power_up == "mana":
+						master_data.max_mana = master_data.max_mana + 50
+						master_data.mana = master_data.max_mana
+					if power_up == "eye":
+						master_data.ranged_multiplier += 0.07
+					if power_up == "wings":
+						master_data.player_speed += 200
+				else:
+					var power_up = power_ups[randi() % power_ups.size()]
+					
+					if power_up == "cutler":
+						master_data.melee_multiplier += .2
+					if power_up == "health":
+						if (master_data.health < master_data.max_health):
+							master_data.health = master_data.health + 150
+							if (master_data.health > master_data.max_health):
+								master_data.health = master_data.max_health
+						else:
+							master_data.max_health = master_data.max_health + 20
+							master_data.health = master_data.max_health
+					if power_up == "mana":
+						master_data.max_mana = master_data.max_mana + 100
+						master_data.mana = master_data.max_mana
+					if power_up == "eye":
+						master_data.ranged_multiplier += .2
+					if power_up == "wings":
+						master_data.player_speed += 400
+				
+				# 20% chance to drop a rare
+			
 	
 func _physics_process(delta):
 	time_elapsed = round(OS.get_unix_time() - start_time)
 
 	
-	if master_data.player_speed >= 12500:
+	if master_data.player_speed >= master_data.max_speed:
 		if power_ups_common.find(WINGS_COMMON) != -1:
 			power_ups_common.erase(WINGS_COMMON)
 		if power_ups_rare.find(WINGS_RARE) != -1:
@@ -202,9 +231,13 @@ func spawn_mobs():
 		if spawn_locations.size() <= 1:
 			spawn_locations = $Spawn_locations.get_children()
 		
-		
+
 		
 		for i in range(0, round(number_of_mobs(key))):
+			
+			if spawn_locations.size() <= 1:
+				spawn_locations = $Spawn_locations.get_children()
+			
 			var rand_location = spawn_locations[randi() % spawn_locations.size()]
 			spawn_locations.erase(rand_location)
 			
@@ -212,13 +245,6 @@ func spawn_mobs():
 			enemies_to_spawn.append(mob_name_dict[key])
 			
 			
-			# code moved to when the implosion animation timer ends
-			"""
-			var current_mob = mob_name_dict[key].instance()
-			get_parent().add_child(current_mob)
-			current_mob.global_position = rand_location.global_position
-			master_data.endless_current_spawned_mobs.append(current_mob.get_instance_id())
-			"""
 	# spawn the implosions
 	for current_area in areas_to_spawn:
 		var implosion = IMPLOSION.instance()
