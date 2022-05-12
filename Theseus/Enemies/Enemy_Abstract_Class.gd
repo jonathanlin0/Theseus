@@ -46,12 +46,6 @@ func _physics_process(delta):
 		animated_sprite.material.set_shader_param("flash_modifier", 0.75)
 	#print(animated_sprite.material.get_shader_param("flash_modifier"))
 
-# function for knockback
-func knockback():
-	# code for knockback has to be set up in the enemy's code
-	
-	$knockback_timer.start()
-	get_parent().knockback = true
 
 
 # play the damage audio

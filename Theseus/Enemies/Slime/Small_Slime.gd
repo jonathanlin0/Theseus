@@ -96,7 +96,7 @@ func _physics_process(delta):
 
 func damage(dmg):
 	health -= dmg
-	$Enemy_Abstract_Class.knockback()
+	#$Enemy_Abstract_Class.knockback()
 	$Enemy_Abstract_Class.damage_text(dmg)
 	$Enemy_Abstract_Class.damage_audio()
 	$Enemy_Abstract_Class.flash()
