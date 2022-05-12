@@ -210,37 +210,262 @@ position = Vector2( 85, 180 )
 [node name="spawn_09" type="Position2D" parent="Spawn_locations"]
 position = Vector2( 85, 225 )
 
+[node name="spawn_10" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 395, 45 )
+
+[node name="spawn_11" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 395, 90 )
+
+[node name="spawn_12" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 395, 135 )
+
+[node name="spawn_13" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 395, 180 )
+
+[node name="spawn_14" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 395, 225 )
+
+[node name="spawn_15" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 440, 45 )
+
+[node name="spawn_16" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 440, 90 )
+
+[node name="spawn_17" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 440, 135 )
+
+[node name="spawn_18" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 440, 180 )
+
+[node name="spawn_19" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 440, 225 )
+
+[node name="spawn__01" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 240, 135 )
+
+[node name="spawn__05" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 285, 135 )
+
+[node name="spawn__04" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 195, 135 )
+
+[node name="spawn__02" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 240, 180 )
+
+[node name="spawn__03" type="Position2D" parent="Spawn_locations"]
+position = Vector2( 240, 90 )
+
 [node name="Power_up_spawn_locations" type="Position2D" parent="."]
 
 [node name="Position2D" type="Position2D" parent="Power_up_spawn_locations"]
-position = Vector2( 64, 61 )
+position = Vector2( 32, 45 )
 
 [node name="Position2D2" type="Position2D" parent="Power_up_spawn_locations"]
-position = Vector2( 64, 208 )
+position = Vector2( 32, 90 )
 
 [node name="Position2D3" type="Position2D" parent="Power_up_spawn_locations"]
-position = Vector2( 413, 216 )
+position = Vector2( 32, 135 )
 
 [node name="Position2D4" type="Position2D" parent="Power_up_spawn_locations"]
-position = Vector2( 415, 79 )
+position = Vector2( 32, 180 )
 
 [node name="Position2D5" type="Position2D" parent="Power_up_spawn_locations"]
-position = Vector2( 413, 149 )
+position = Vector2( 32, 225 )
 
 [node name="Position2D6" type="Position2D" parent="Power_up_spawn_locations"]
-position = Vector2( 65, 133 )
+position = Vector2( 64, 45 )
 
 [node name="Position2D7" type="Position2D" parent="Power_up_spawn_locations"]
-position = Vector2( 239, 77 )
+position = Vector2( 64, 90 )
 
 [node name="Position2D8" type="Position2D" parent="Power_up_spawn_locations"]
-position = Vector2( 175, 132 )
+position = Vector2( 64, 135 )
 
 [node name="Position2D9" type="Position2D" parent="Power_up_spawn_locations"]
-position = Vector2( 240, 197 )
+position = Vector2( 64, 180 )
 
 [node name="Position2D10" type="Position2D" parent="Power_up_spawn_locations"]
-position = Vector2( 300, 138 )
+position = Vector2( 64, 225 )
+
+[node name="Position2D11" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 96, 45 )
+
+[node name="Position2D12" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 96, 90 )
+
+[node name="Position2D13" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 96, 135 )
+
+[node name="Position2D14" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 96, 180 )
+
+[node name="Position2D15" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 96, 225 )
+
+[node name="Position2D16" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 128, 45 )
+
+[node name="Position2D17" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 128, 90 )
+
+[node name="Position2D18" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 128, 135 )
+
+[node name="Position2D19" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 128, 180 )
+
+[node name="Position2D20" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 128, 225 )
+
+[node name="Position2D21" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 160, 45 )
+
+[node name="Position2D22" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 160, 90 )
+
+[node name="Position2D23" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 160, 135 )
+
+[node name="Position2D24" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 160, 180 )
+
+[node name="Position2D25" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 160, 225 )
+
+[node name="Position2D26" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 192, 45 )
+
+[node name="Position2D27" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 192, 90 )
+
+[node name="Position2D28" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 192, 135 )
+
+[node name="Position2D29" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 192, 180 )
+
+[node name="Position2D30" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 192, 225 )
+
+[node name="Position2D31" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 224, 45 )
+
+[node name="Position2D32" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 224, 90 )
+
+[node name="Position2D33" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 224, 135 )
+
+[node name="Position2D34" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 224, 180 )
+
+[node name="Position2D35" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 224, 225 )
+
+[node name="Position2D36" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 256, 45 )
+
+[node name="Position2D37" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 256, 90 )
+
+[node name="Position2D38" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 256, 135 )
+
+[node name="Position2D39" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 256, 180 )
+
+[node name="Position2D40" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 256, 225 )
+
+[node name="Position2D41" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 288, 45 )
+
+[node name="Position2D42" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 288, 90 )
+
+[node name="Position2D43" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 288, 135 )
+
+[node name="Position2D44" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 288, 180 )
+
+[node name="Position2D45" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 288, 225 )
+
+[node name="Position2D46" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 320, 45 )
+
+[node name="Position2D47" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 320, 90 )
+
+[node name="Position2D48" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 320, 135 )
+
+[node name="Position2D49" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 320, 180 )
+
+[node name="Position2D50" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 320, 225 )
+
+[node name="Position2D51" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 352, 45 )
+
+[node name="Position2D52" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 352, 90 )
+
+[node name="Position2D53" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 352, 135 )
+
+[node name="Position2D54" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 352, 180 )
+
+[node name="Position2D55" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 352, 225 )
+
+[node name="Position2D56" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 384, 45 )
+
+[node name="Position2D57" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 384, 90 )
+
+[node name="Position2D58" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 384, 135 )
+
+[node name="Position2D59" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 384, 180 )
+
+[node name="Position2D60" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 384, 225 )
+
+[node name="Position2D61" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 416, 45 )
+
+[node name="Position2D62" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 416, 90 )
+
+[node name="Position2D63" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 416, 135 )
+
+[node name="Position2D64" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 416, 180 )
+
+[node name="Position2D65" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 416, 225 )
+
+[node name="Position2D66" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 448, 45 )
+
+[node name="Position2D67" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 448, 90 )
+
+[node name="Position2D68" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 448, 135 )
+
+[node name="Position2D69" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 448, 180 )
+
+[node name="Position2D70" type="Position2D" parent="Power_up_spawn_locations"]
+position = Vector2( 448, 225 )
 
 [node name="Level_Delay" type="Timer" parent="."]
 one_shot = true

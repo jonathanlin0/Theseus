@@ -76,10 +76,16 @@ func flash():
 func _on_flash_timer_timeout():
 	# there's a bug where if the player damages the enemy with fireball or lightning and then tries to freeze the enemy, the enemy will flash blue but will not stay blue while frozen like intended
 	# this condition somehow fixes the bug, but I don't know why. but it seems like this conditional statement works and doesn't break anything, so we're going to roll with it
-	# - jonathan :D
+	# - jonathan
 	if get_parent().is_frozen == false:
 		animated_sprite.material.set_shader_param("flash_modifier", 0)
 
+# function for knockback
+func knockback():
+	# code for knockback has to be set up in the enemy's code
+	
+	$knockback_timer.start()
+	get_parent().knockback = true
 
 func _on_knockback_timer_timeout():
 	get_parent().knockback = false

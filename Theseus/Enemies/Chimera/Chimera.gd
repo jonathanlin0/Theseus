@@ -95,7 +95,6 @@ func dead():
 
 func damage(dmg):
 	triggered = true
-	#_randomize()
 	health -= dmg
 	$Enemy_Abstract_Class.knockback()
 	$Enemy_Abstract_Class.flash()

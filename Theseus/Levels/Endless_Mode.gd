@@ -52,7 +52,7 @@ var areas_to_spawn = []
 var enemies_to_spawn = []
 
 # used for testing. ensure test_level = 0
-var test_level = 0
+var test_level = 25
 
 func _ready():
 	Input.set_custom_mouse_cursor(cursor)
@@ -106,7 +106,10 @@ func _ready():
 					if power_up == "eye":
 						master_data.ranged_multiplier += 0.07
 					if power_up == "wings":
-						master_data.player_speed += 200
+						if master_data.player_speed < master_data.max_speed:
+							master_data.player_speed += 200
+						else:
+							x += 1
 				else:
 					var power_up = power_ups[randi() % power_ups.size()]
 					
@@ -126,7 +129,10 @@ func _ready():
 					if power_up == "eye":
 						master_data.ranged_multiplier += .2
 					if power_up == "wings":
-						master_data.player_speed += 400
+						if master_data.player_speed < master_data.max_speed:
+							master_data.player_speed += 400
+						else:
+							x += 1
 				
 				# 20% chance to drop a rare
 			
