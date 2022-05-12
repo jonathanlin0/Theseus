@@ -73,8 +73,10 @@ func _physics_process(delta):
 		# disable visibility of the hotbar
 		$Hotbar/Slot1.visible = false
 		$Hotbar/Slot2.visible = false
+		$Hotbar/Slot3.visible = false
 		$Hotbar/Fire_animation.visible = false
 		$Hotbar/lightning_animation.visible = false
+		$Hotbar/ice_animation.visible = false
 		$Hotbar/Select_border.visible = false
 		
 		# setting the limits of the camera so it doesn't move around during multiplayer
