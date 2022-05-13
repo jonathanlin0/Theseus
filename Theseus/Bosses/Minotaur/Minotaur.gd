@@ -32,7 +32,7 @@ func _physics_process(delta):
 		var difference_x = master_data.player_x - global_position.x
 		var difference_y = master_data.player_y - global_position.y
 		
-		print(difference_x)
+		
 		
 		if abs(difference_x) > 32:
 			
@@ -49,10 +49,18 @@ func _physics_process(delta):
 			
 				if difference_x > 0:
 					direction = "right"
-					scale.x = -1
+					#scale.x = -1
+					$AnimatedSprite.flip_h = true
+					$Attack_Areas/axe_area.position.x = 100
+					$Attack_Areas/jab_area.position.x = 17
+					$CollisionShape2D.position.x = -33
 				if difference_x < 0:
 					direction = "left"
-					scale.x = 1
+					#scale.x = 1
+					$AnimatedSprite.flip_h = false
+					$Attack_Areas/axe_area.position.x = -100
+					$Attack_Areas/jab_area.position.x = -17
+					$CollisionShape2D.position.x = -25
 				
 				
 		

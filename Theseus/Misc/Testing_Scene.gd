@@ -19,8 +19,4 @@ func _process(delta):
 
 
 func _on_Timer_timeout():
-	
-	temp[0].queue_free()
-	var current_mob = SMALL_SLIME.instance()
-	get_parent().add_child(current_mob)
-	current_mob.global_position = Vector2(240,135)
+	pass
