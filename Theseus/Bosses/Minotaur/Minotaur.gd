@@ -49,14 +49,12 @@ func _physics_process(delta):
 			
 				if difference_x > 0:
 					direction = "right"
-					#scale.x = -1
 					$AnimatedSprite.flip_h = true
 					$Attack_Areas/axe_area.position.x = 100
 					$Attack_Areas/jab_area.position.x = 17
 					$CollisionShape2D.position.x = -33
 				if difference_x < 0:
 					direction = "left"
-					#scale.x = 1
 					$AnimatedSprite.flip_h = false
 					$Attack_Areas/axe_area.position.x = -100
 					$Attack_Areas/jab_area.position.x = -17

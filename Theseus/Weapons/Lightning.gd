@@ -8,10 +8,16 @@ var mouse_position = position
 var hit_objects = []
 
 var hit_something = false
+var autoaim = false
+var autoaim_enemy = null
 
 func _ready():
 	
-	mouse_position = get_global_mouse_position()
+	if autoaim == false:
+		mouse_position = get_global_mouse_position()
+	if autoaim == true:
+		mouse_position = autoaim_enemy.global_position
+		hit_objects.append(autoaim_enemy)
 	
 	# need to offset from player's position
 	mouse_position.x -= master_data.player_x
@@ -71,12 +77,8 @@ func _on_Lightning_body_entered(body):
 			
 			# closest_obj will be null if no enemies in radius
 			if closest_obj != null:
-				#print("--")
-				#print(closest_obj.name)
-				#print(closest_obj.global_position)
-				#print(global_position)
 				
-				# change unit vectorf
+				# change unit vector
 				unit_vector = master_data.get_unit_vector(closest_obj.global_position.x - global_position.x, closest_obj.global_position.y - global_position.y)
 				
 				# add the current obj to list of hit objects so that lightning won

@@ -263,7 +263,7 @@ script = ExtResource( 7 )
 material = SubResource( 55 )
 frames = SubResource( 51 )
 animation = "idle"
-frame = 2
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

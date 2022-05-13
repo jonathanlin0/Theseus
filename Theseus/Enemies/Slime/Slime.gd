@@ -31,25 +31,6 @@ var diff_y = 0
 
 
 var can_see = false
-
-func make_ray():
-	var i = 0
-	
-	var ray_main = RayCast2D.new()
-	var ray1 = RayCast2D.new()
-	var ray2 = RayCast2D.new()
-	ray_main.cast_to = Vector2.UP.rotated(player_angle)*vision
-	ray1.cast_to = Vector2.UP.rotated(player_angle+ray_diff)*vision
-	ray2.cast_to = Vector2.UP.rotated(player_angle-ray_diff)*vision
-	ray_main.enabled = true
-	ray1.enabled = true
-	ray2.enabled = true
-	ray_main.collision_mask = 2
-	ray1.collision_mask = 2
-	ray2.collision_mask = 2
-	add_child(ray1)
-	add_child(ray2)
-	add_child(ray_main)
 	
 
 	
@@ -69,32 +50,12 @@ func update_player():
 
 func _ready():
 	$Health_Bar.setMax(master_data.slime_health)
-	make_ray()
+
 	#draw the rays for debugging
 	#print(position)
 
 func _physics_process(delta):
-	
-	var i = -1
-	for ray in get_children():
-		if ray.is_class("RayCast2D"):
-			ray.cast_to = Vector2.UP.rotated(player_angle+ray_diff*i)*vision
-			i=i+1
-	
-	
-	if can_see:
-		update_player()
-		for ray in get_children():
-			if ray.is_class("RayCast2D"):
-				if ray.get_collider() != null:
-					#print(ray.get_collider().to_string())
-					if ray.get_collider().to_string().substr(0, 6) == "Player":
-						sees_player = true
-						break
-					else:
-						sees_player = false
-				else:
-					sees_player = false
+
 	
 	
 	$Health_Bar.setValue(health)

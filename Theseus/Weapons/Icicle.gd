@@ -19,6 +19,9 @@ var player_that_is_shooting = null
 var start_pos = Vector2(0,0)
 var start = true
 
+var autoaim = false
+var autoaim_enemy = null
+
 func insert_player(player_obj):
 	player_that_is_shooting = player_obj
 
@@ -29,7 +32,11 @@ func _ready():
 	#print(global_position)
 	
 	if master_data.is_multiplayer == false:
-		mouse_position = get_global_mouse_position()
+		print(autoaim)
+		if autoaim == false:
+			mouse_position = get_global_mouse_position()
+		if autoaim == true:
+			mouse_position = autoaim_enemy.global_position
 		
 		# need to offset from player's position
 		mouse_position.x -= master_data.player_x

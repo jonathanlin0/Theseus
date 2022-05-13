@@ -20,6 +20,9 @@ var start = true
 
 const EXPLOSION = preload("res://Particle_Effects/Explosion.tscn")
 
+var autoaim = false
+var enemy_to_hit = null
+
 func insert_player(player_obj):
 	player_that_is_shooting = player_obj
 
@@ -30,20 +33,24 @@ func _ready():
 	#print(global_position)
 	
 	if master_data.is_multiplayer == false:
-		mouse_position = get_global_mouse_position()
-		
-		# need to offset from player's position
-		mouse_position.x -= master_data.player_x
-		mouse_position.y -= master_data.player_y
-		
-		# need to convert the triangle (x and y components) into a unit triangle to maintain a uniform net vector
-		unit_vector = master_data.get_unit_vector(mouse_position.x - position.x, mouse_position.y - position.y)
+		if autoaim == false:
+			mouse_position = get_global_mouse_position()
+			
+			# need to offset from player's position
+			mouse_position.x -= master_data.player_x
+			mouse_position.y -= master_data.player_y
+			
+			# need to convert the triangle (x and y components) into a unit triangle to maintain a uniform net vector
+			unit_vector = master_data.get_unit_vector(mouse_position.x - position.x, mouse_position.y - position.y)
+		if autoaim == true:
+			unit_vector = master_data.get_unit_vector(enemy_to_hit.global_position.x - master_data.player_x_global, enemy_to_hit.global_position.y - master_data.player_y_global)
 	if master_data.is_multiplayer == true:
 		
 		if player_to_hit == 1:
 			unit_vector = master_data.get_unit_vector(master_data.player_x_global - player_that_is_shooting.global_position.x, master_data.player_y_global - player_that_is_shooting.global_position.y)
 		if player_to_hit == 2:
 			unit_vector = master_data.get_unit_vector(master_data.player_x_global_p2 - player_that_is_shooting.global_position.x, master_data.player_y_global_p2 - player_that_is_shooting.global_position.y)
+
 		
 
 func hypotnuse(start, curr):

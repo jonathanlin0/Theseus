@@ -580,7 +580,7 @@ shape = SubResource( 18 )
 material = SubResource( 104 )
 frames = SubResource( 17 )
 animation = "run_down"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Player_Camera" type="Camera2D" parent="."]
@@ -603,7 +603,6 @@ position = Vector2( -0.500003, 1.19209e-06 )
 scale = Vector2( 0.697917, 0.708333 )
 frames = SubResource( 24 )
 animation = "left"
-frame = 1
 playing = true
 
 [node name="SwordSwingAreas" type="Position2D" parent="."]

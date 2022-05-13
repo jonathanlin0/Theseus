@@ -376,8 +376,9 @@ func _physics_process(delta):
 					
 					icicle.rotate(rad)
 		
-		if is_multiplayer == true:
-			if Input.is_action_just_pressed("ui_c"):
+		# autoaim shooting
+		if Input.is_action_just_pressed("ui_c"):
+			if is_multiplayer == true:
 				if master_data.selected_weapon == 1 and master_data.mana > master_data.fireball_cost:
 					
 					$Sound_Effects/Fireball.play()
@@ -402,6 +403,96 @@ func _physics_process(delta):
 						rad += PI
 					
 					fireball.rotate(rad)
+			else:
+				var close_enemies = []
+				for temp in $Enemy_Vision_Area.get_overlapping_bodies():
+					for enemy_name in master_data.enemy_names:
+						if temp.name.find(enemy_name) != -1 and temp.sees_player == true:
+							close_enemies.append(temp)
+				
+				var shortest_distance = 99999999
+				var closest_mob = null
+				
+				for mob in close_enemies:
+					var dif_x = global_position.x - mob.global_position.x
+					var dif_y = global_position.y - mob.global_position.y
+					var net_distance = abs(sqrt( (dif_x*dif_x) + (dif_y * dif_y)))
+				
+					if net_distance < shortest_distance:
+						shortest_distance = net_distance
+						closest_mob = mob
+				
+				if closest_mob != null:
+					if master_data.selected_weapon == 1 and master_data.mana > master_data.fireball_cost:
+					
+						$Sound_Effects/Fireball.play()
+						
+						master_data.mana -= master_data.fireball_cost
+						
+						var fireball = FIREBALL.instance()
+						fireball.autoaim = true
+						fireball.enemy_to_hit = closest_mob
+						get_parent().add_child(fireball)
+						fireball.position = $Weapon_Holder.global_position
+						
+						
+						# rotate the fireball to face the direction of the mouse
+						var mouseX = closest_mob.global_position.x
+						var mouseY = closest_mob.global_position.y
+						
+						# fireball is backwards when x is neg
+						var rad = atan((mouseY - global_position.y)/(mouseX - global_position.y))
+						if mouseX<0:
+							rad += PI
+						
+						fireball.rotate(rad)
+						
+					if master_data.selected_weapon == 2 and master_data.mana > master_data.lightning_cost:
+						
+						$Sound_Effects/Lightning.play()
+						
+						master_data.mana -= master_data.lightning_cost
+						
+						var lightning = LIGHTNING.instance()
+						lightning.autoaim = true
+						lightning.autoaim_enemy = closest_mob
+						get_parent().add_child(lightning)
+						lightning.position = $Weapon_Holder.global_position
+						
+						
+						# rotate the lightning to face the direction of the mouse
+						var mouseX = closest_mob.global_position.x
+						var mouseY = closest_mob.global_position.y
+						
+						# fireball is backwards when x is neg
+						var rad = atan((mouseY - global_position.y)/(mouseX - global_position.y))
+						if mouseX<0:
+							rad += PI
+						
+						lightning.rotate(rad)
+					
+					if master_data.selected_weapon == 3 and master_data.mana > master_data.icicle_cost:
+						
+						$Sound_Effects/Lightning.play()
+						
+						master_data.mana -= master_data.icicle_cost
+						
+						var icicle = ICICLE.instance()
+						icicle.autoaim = true
+						icicle.autoaim_enemy = closest_mob
+						get_parent().add_child(icicle)
+						icicle.position = $Weapon_Holder.global_position
+						
+						# rotate the icicle to face the direction of the mouse
+						var mouseX = closest_mob.global_position.x
+						var mouseY = closest_mob.global_position.y
+						
+						# fireball is backwards when x is neg
+						var rad = atan((mouseY - global_position.y)/(mouseX - global_position.y))
+						if mouseX<0:
+							rad += PI
+						
+						icicle.rotate(rad)
 		
 			
 		if master_data.health < previous_health:
