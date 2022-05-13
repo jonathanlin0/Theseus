@@ -104,21 +104,6 @@ flags = 8
 atlas = ExtResource( 3 )
 region = Rect2( 1710, 0, 114, 89 )
 
-[sub_resource type="AtlasTexture" id=32]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 114, 89 )
-
-[sub_resource type="AtlasTexture" id=33]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 114, 0, 114, 89 )
-
-[sub_resource type="AtlasTexture" id=34]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 228, 0, 114, 89 )
-
 [sub_resource type="AtlasTexture" id=1]
 flags = 8
 atlas = ExtResource( 1 )
@@ -163,6 +148,21 @@ region = Rect2( 798, 0, 114, 89 )
 flags = 8
 atlas = ExtResource( 1 )
 region = Rect2( 912, 0, 114, 89 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 114, 89 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 114, 0, 114, 89 )
+
+[sub_resource type="AtlasTexture" id=34]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 228, 0, 114, 89 )
 
 [sub_resource type="AtlasTexture" id=31]
 flags = 8
@@ -231,14 +231,14 @@ animations = [ {
 "name": "death",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
-"loop": true,
-"name": "whack",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "activate",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
+"loop": true,
+"name": "whack",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 31 ) ],
@@ -275,6 +275,7 @@ radius = 35.0571
 script = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 1 )
 frames = SubResource( 10 )
 animation = "statue"
 playing = true
@@ -290,6 +291,8 @@ position = Vector2( -34, 11 )
 scale = Vector2( 2, 1 )
 
 [node name="C1" type="CollisionShape2D" parent="Wall_Spacer/Check1"]
+position = Vector2( -3.5, 0 )
+scale = Vector2( 1.408, 1.485 )
 shape = SubResource( 45 )
 
 [node name="Check2" type="Area2D" parent="Wall_Spacer"]
@@ -297,6 +300,8 @@ position = Vector2( 21, -16 )
 scale = Vector2( 2, 1 )
 
 [node name="C2" type="CollisionShape2D" parent="Wall_Spacer/Check2"]
+position = Vector2( 3.5, -8 )
+scale = Vector2( 1.408, 1.485 )
 shape = SubResource( 46 )
 
 [node name="Check3" type="Area2D" parent="Wall_Spacer"]
@@ -304,6 +309,8 @@ position = Vector2( 36, 15 )
 scale = Vector2( 2, 1 )
 
 [node name="C3" type="CollisionShape2D" parent="Wall_Spacer/Check3"]
+position = Vector2( 3.5, 1 )
+scale = Vector2( 1.408, 1.485 )
 shape = SubResource( 47 )
 
 [node name="Check4" type="Area2D" parent="Wall_Spacer"]
@@ -311,6 +318,8 @@ position = Vector2( -16, -16 )
 scale = Vector2( 2, 1 )
 
 [node name="C4" type="CollisionShape2D" parent="Wall_Spacer/Check4"]
+position = Vector2( -3.5, -7 )
+scale = Vector2( 1.408, 1.485 )
 shape = SubResource( 48 )
 
 [node name="Check5" type="Area2D" parent="Wall_Spacer"]
@@ -318,6 +327,8 @@ position = Vector2( -16, 41 )
 scale = Vector2( 2, 1 )
 
 [node name="C5" type="CollisionShape2D" parent="Wall_Spacer/Check5"]
+position = Vector2( -3.5, 7 )
+scale = Vector2( 1.408, 1.485 )
 shape = SubResource( 49 )
 
 [node name="Check6" type="Area2D" parent="Wall_Spacer"]
@@ -325,6 +336,8 @@ position = Vector2( 19, 41 )
 scale = Vector2( 2, 1 )
 
 [node name="C6" type="CollisionShape2D" parent="Wall_Spacer/Check6"]
+position = Vector2( 3.5, 7 )
+scale = Vector2( 1.408, 1.485 )
 shape = SubResource( 50 )
 
 [node name="Health_Bar" parent="." instance=ExtResource( 8 )]
@@ -343,24 +356,25 @@ autostart = true
 [node name="Positions" type="Node2D" parent="."]
 
 [node name="SpawnLocation1" type="Position2D" parent="Positions"]
-position = Vector2( -34, 11 )
+position = Vector2( -41, 11 )
 
 [node name="SpawnLocation2" type="Position2D" parent="Positions"]
-position = Vector2( 21, -16 )
+position = Vector2( 28, -24 )
 
 [node name="SpawnLocation3" type="Position2D" parent="Positions"]
-position = Vector2( 36, 15 )
+position = Vector2( 43, 16 )
 
 [node name="SpawnLocation4" type="Position2D" parent="Positions"]
-position = Vector2( -16, -16 )
+position = Vector2( -23, -23 )
 
 [node name="SpawnLocation5" type="Position2D" parent="Positions"]
-position = Vector2( -16, 41 )
+position = Vector2( -23, 48 )
 
 [node name="SpawnLocation6" type="Position2D" parent="Positions"]
-position = Vector2( 19, 41 )
+position = Vector2( 26, 48 )
 
 [node name="ProximityDetection" type="Area2D" parent="."]
+visible = false
 
 [node name="TooClose" type="CollisionShape2D" parent="ProximityDetection"]
 position = Vector2( 2, 12 )

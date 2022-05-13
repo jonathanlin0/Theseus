@@ -15,6 +15,7 @@ var mad = false
 var velocity = Vector2()
 var speed = 0
 var health = master_data.snake_goddess_health
+var dir = "left"
 
 func _ready():
 	$Health_Bar.setMax(master_data.snake_goddess_health)
@@ -23,6 +24,15 @@ func _ready():
 func _physics_process(delta):
 	#activate when the player gets close
 	#if master_data.hypotnuse(get_parent().get_child(3).get_global_position(), get_global_position())<150 and sleeping:
+	if position.x > master_data.player_x:
+		dir = "left"
+		$AnimatedSprite.flip_h = false
+		
+	if position.x < master_data.player_x:
+		dir = "right"
+		$AnimatedSprite.flip_h = true
+		
+	
 	if master_data.hypotnuse(Vector2(master_data.player_global_x, master_data.player_global_y), get_global_position()) < 150 and sleeping:
 		activate()
 		
@@ -57,6 +67,7 @@ func whack():
 	$AnimatedSprite.play("whack")
 	previous_animation = "whack"
 	master_data.health -= master_data.snake_goddess_whack_damage
+	get_parent().get_node("Player")._knockback(dir,8)
 
 func damage(dmg):
 	if can_be_damaged:
