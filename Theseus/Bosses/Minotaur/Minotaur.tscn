@@ -224,12 +224,12 @@ animations = [ {
 "frames": [ SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ) ],
 "loop": false,
 "name": "charge_up",
-"speed": 7.0
+"speed": 17.0
 }, {
 "frames": [ SubResource( 89 ), SubResource( 90 ), SubResource( 91 ), SubResource( 92 ) ],
 "loop": true,
 "name": "walk",
-"speed": 7.0
+"speed": 10.0
 }, {
 "frames": [ SubResource( 93 ), SubResource( 94 ), SubResource( 95 ), SubResource( 96 ), SubResource( 97 ), SubResource( 98 ) ],
 "loop": true,
@@ -248,7 +248,7 @@ animations = [ {
 } ]
 
 [sub_resource type="ConvexPolygonShape2D" id=52]
-points = PoolVector2Array( 18, 45, 14, -15, 45, -15, 39, 45 )
+points = PoolVector2Array( 18, 45, 14, 5, 45, 5, 39, 45 )
 
 [sub_resource type="RectangleShape2D" id=53]
 extents = Vector2( 26, 45 )
@@ -262,11 +262,12 @@ script = ExtResource( 7 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 55 )
 frames = SubResource( 51 )
-animation = "idle"
+animation = "walk"
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -25, 0 )
+position = Vector2( -25, 3 )
 shape = SubResource( 52 )
 
 [node name="Attack_Areas" type="Position2D" parent="."]
@@ -281,7 +282,7 @@ __meta__ = {
 shape = SubResource( 53 )
 
 [node name="jab_area" type="Area2D" parent="Attack_Areas"]
-position = Vector2( -17, 27 )
+position = Vector2( -30, 29 )
 __meta__ = {
 "_edit_group_": true
 }

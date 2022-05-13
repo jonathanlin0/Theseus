@@ -99,7 +99,7 @@ var base_lizard_boss_health = 300
 var base_chimera_health = 250
 var base_spirit_health = 50
 var base_snake_goddess_health = 500
-var base_minotaur_health = 750
+var base_minotaur_health = 100
 
 # collection of all the enemies' health that can change depending on situation that the player is currently in (like enemies increasing in strength in endless mode)
 var slime_health = 50
@@ -110,7 +110,7 @@ var lizard_boss_health = 300
 var chimera_health = 250
 var spirit_health = 50
 var snake_goddess_health = 500
-var minotaur_health = 750
+var minotaur_health = 100
 
 # collection of the distance threshhold for player tracking from enemies
 var slime_distance = 225

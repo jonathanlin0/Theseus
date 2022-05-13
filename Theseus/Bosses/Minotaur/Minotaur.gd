@@ -1,17 +1,21 @@
 extends KinematicBody2D
 
+const BOSS_GATE = preload("res://Bosses/boss_gate.tscn")
+const STAIRS = preload("res://Bosses/stairs.tscn")
+
 var velocity = Vector2()
 
 var axe_swinging = false
 var jabbing = false
 
-var previous_animation = "idle"
+var previous_animation = "walk"
 
 var can_player_take_damage = true
 
 var direction = "left"
 var previous_direction = "left"
 
+var max_health = master_data.minotaur_health
 var health = master_data.minotaur_health
 
 var is_dead = false
@@ -26,39 +30,64 @@ var dir = "left"
 
 var can_move
 
+var triggered = false
+
+var difference_x
+var difference_y
+
+# three phases based on health:: 100% - 60% is phase 1, 59% - 30% is phase 2, 29% - 0% is phase 3
+var phase = 1
 
 func _randomize():
 	if !is_frozen:
 		rand.randomize()
-		rand_x_vel = rand.randf_range(-100, 100)
-		rand_y_vel = rand.randf_range(-40, 40)
-		velocity.x += rand_x_vel
-		velocity.y += rand_y_vel
+		if phase == 1:
+			rand_x_vel = rand.randf_range(-100, 100)
+			rand_y_vel = rand.randf_range(-100, 100)
+		if phase == 2:
+			rand_x_vel = rand.randf_range(-200, 200)
+			rand_y_vel = rand.randf_range(-200, 200)
+		if phase == 3:
+			rand_x_vel = rand.randf_range(-350, 350)
+			rand_y_vel = rand.randf_range(-350, 350)
 		
-		if velocity.x > 50:
-			velocity.x = 50
+		if velocity.x < 60 * phase and velocity.x > 0:
+			velocity.x = 60 * phase
+			
+		if velocity.x > -60 * phase and velocity.x < 0:
+			velocity.x = -60 * phase
 		
-		if velocity.x < -50:
-			velocity.x = -50
+		if velocity.y < 60 * phase and velocity.y > 0:
+			velocity.y = 60 * phase
 		
-		if velocity.y > 20:
-			velocity.y = 20
+		if velocity.y > -60 * phase and velocity.y < 0:
+			velocity.y = -60 * phase
+
 		
-		if velocity.y < -20:
-			velocity.y = -20
+		print(velocity.x)
+		print(velocity.y)
+		
+		velocity.x = rand_x_vel
+		velocity.y = rand_y_vel
 
 func _physics_process(delta):
+	if phase == 1 and health < max_health * .6:
+		phase = 2
+	if phase == 2 and health < max_health * .3:
+		phase = 3
 	
-	if is_dead == false and is_frozen == false:
+	difference_x = master_data.player_x - global_position.x
+	difference_y = master_data.player_y - global_position.y
 	
+	if !triggered and master_data.player_x > 10:
+		trigger()
+	
+	
+	if is_dead == false and is_frozen == false and triggered:
 		$Health_Bar.setValue(health)
 		
 		if axe_swinging == false and jabbing == false:
-			$AnimatedSprite.play("idle")
-		
-		
-		var difference_x = master_data.player_x - global_position.x
-		var difference_y = master_data.player_y - global_position.y
+			$AnimatedSprite.play("walk")
 		
 		if !is_dead and can_move:
 			var net_distance = 0
@@ -80,7 +109,6 @@ func _physics_process(delta):
 		
 		
 		if abs(difference_x) > 32:
-			
 			# set of conditions to ensure that the minotaur can move/change directions
 			can_move = true
 			if axe_swinging == true or $AnimatedSprite.animation == "charge_up":
@@ -98,18 +126,19 @@ func _physics_process(delta):
 					axe_swinging = true
 					previous_animation = "charge_up"
 					$AnimatedSprite.play("charge_up")
+					$AnimatedSprite.set_speed_scale(rand.randf_range(1, 3))
 		
 		
 		# ensures the player can only take damage once per axe swing
 		if can_player_take_damage == true and $AnimatedSprite.animation == "axe_swing":
 			for obj in $Attack_Areas/axe_area.get_overlapping_bodies():
 				if obj.name.find("Player") != -1:
+					obj._knockback(dir, 7)
 					master_data.health -= master_data.minotaur_axe_damage
 					can_player_take_damage = false
 					
 		# flying animation for the axe swing
 		if $AnimatedSprite.animation == "axe_swing" and $AnimatedSprite.frame == 0:
-			print(dir)
 			if dir == "left":
 				velocity.x = -50000 * delta
 			if dir == "right":
@@ -123,6 +152,7 @@ func _physics_process(delta):
 				if obj.name.find("Player") != -1:
 					previous_animation = "jab"
 					$AnimatedSprite.play("jab")
+					obj._knockback(dir, 8)
 					jabbing = true
 		
 		# code for minotaur jab logic
@@ -133,21 +163,31 @@ func _physics_process(delta):
 					master_data.health -= master_data.minotaur_jab_damage
 
 func damage(dmg):
-	health -= dmg
-	#$Enemy_Abstract_Class.knockback()
-	$Enemy_Abstract_Class.flash()
-	$Enemy_Abstract_Class.damage_text(dmg)
-	$Enemy_Abstract_Class.damage_audio()
+	if triggered:
+		health -= dmg
+		#$Enemy_Abstract_Class.knockback()
+		$Enemy_Abstract_Class.flash()
+		$Enemy_Abstract_Class.damage_text(dmg)
+		$Enemy_Abstract_Class.damage_audio()
+
+func trigger():
+	triggered = true
+	var block = BOSS_GATE.instance()
+	block.position.x = -17
+	block.position.y = 101
+	get_parent().add_child(block)
+	_randomize()
 
 func _on_AnimatedSprite_animation_finished():
 	
 	if previous_animation == "charge_up":
 		previous_animation = "axe_swing"
+		$AnimatedSprite.set_speed_scale(1);
 		$AnimatedSprite.play("axe_swing")
 	elif previous_animation == "axe_swing":
 		can_player_take_damage = true
-		previous_animation = "idle"
-		$AnimatedSprite.play("idle")
+		previous_animation = "walk"
+		$AnimatedSprite.play("walk")
 		_randomize()
 		axe_swinging = false
 		jabbing = false
@@ -155,8 +195,8 @@ func _on_AnimatedSprite_animation_finished():
 		can_player_take_damage = true
 		jabbing = false
 		axe_swinging = false
-		previous_animation = "idle"
-		$AnimatedSprite.play("idle")
+		previous_animation = "walk"
+		$AnimatedSprite.play("walk")
 
 
 func _on_flash_timer_timeout():
