@@ -19,6 +19,34 @@ var is_frozen = false
 
 var sees_player = false
 
+var rand = RandomNumberGenerator.new()
+var rand_x_vel = 20
+var rand_y_vel = 20
+var dir = "left"
+
+var can_move
+
+
+func _randomize():
+	if !is_frozen:
+		rand.randomize()
+		rand_x_vel = rand.randf_range(-100, 100)
+		rand_y_vel = rand.randf_range(-40, 40)
+		velocity.x += rand_x_vel
+		velocity.y += rand_y_vel
+		
+		if velocity.x > 50:
+			velocity.x = 50
+		
+		if velocity.x < -50:
+			velocity.x = -50
+		
+		if velocity.y > 20:
+			velocity.y = 20
+		
+		if velocity.y < -20:
+			velocity.y = -20
+
 func _physics_process(delta):
 	
 	if is_dead == false and is_frozen == false:
@@ -32,37 +60,36 @@ func _physics_process(delta):
 		var difference_x = master_data.player_x - global_position.x
 		var difference_y = master_data.player_y - global_position.y
 		
+		if !is_dead and can_move:
+			var net_distance = 0
+			net_distance = sqrt((difference_x * difference_x) + (difference_y * difference_y))
+			var collision = move_and_collide(velocity * delta)
+			if difference_x < 0:
+				dir = "left"
+			if difference_x > 0:
+				dir = "right"
+			if dir == "left":
+				scale.x = scale.y * 1
+				$Health_Bar.set_rotation(0)
+			if dir == "right":
+				scale.x = scale.y * -1
+				$Health_Bar.set_rotation(3.14159)
+			if collision:
+				velocity = velocity.bounce(collision.normal)
+				_randomize()
 		
 		
 		if abs(difference_x) > 32:
 			
 			# set of conditions to ensure that the minotaur can move/change directions
-			var can_move = true
+			can_move = true
 			if axe_swinging == true or $AnimatedSprite.animation == "charge_up":
 				can_move = false
 			if jabbing == true:
 				can_move = false
 			
-			
-			#if can_move == true:
-			if $AnimatedSprite.animation != "charge_up" and $AnimatedSprite.animation != "axe_swing":
-			
-				if difference_x > 0:
-					direction = "right"
-					$AnimatedSprite.flip_h = true
-					$Attack_Areas/axe_area.position.x = 100
-					$Attack_Areas/jab_area.position.x = 17
-					$CollisionShape2D.position.x = -33
-				if difference_x < 0:
-					direction = "left"
-					$AnimatedSprite.flip_h = false
-					$Attack_Areas/axe_area.position.x = -100
-					$Attack_Areas/jab_area.position.x = -17
-					$CollisionShape2D.position.x = -25
-				
-				
 		
-		previous_direction = direction
+		previous_direction = dir
 		
 		# start the charge up animation if the player is within the minotaur's range
 		if previous_animation != "charge_up" and previous_animation != "axe_swing":
@@ -82,12 +109,13 @@ func _physics_process(delta):
 					
 		# flying animation for the axe swing
 		if $AnimatedSprite.animation == "axe_swing" and $AnimatedSprite.frame == 0:
-			if direction == "left":
+			print(dir)
+			if dir == "left":
 				velocity.x = -50000 * delta
-			if direction == "right":
+			if dir == "right":
 				velocity.x = 50000 * delta
 			velocity.y = 0
-			velocity = move_and_slide(velocity)
+			move_and_slide(velocity)
 					
 		# code for minotaur jab
 		if axe_swinging == false and previous_animation != "jab":
@@ -120,6 +148,7 @@ func _on_AnimatedSprite_animation_finished():
 		can_player_take_damage = true
 		previous_animation = "idle"
 		$AnimatedSprite.play("idle")
+		_randomize()
 		axe_swinging = false
 		jabbing = false
 	elif previous_animation == "jab":

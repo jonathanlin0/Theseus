@@ -16,6 +16,38 @@ shader = ExtResource( 10 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
 
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 220, 130 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 5 )
+region = Rect2( 220, 0, 220, 130 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 5 )
+region = Rect2( 440, 0, 220, 130 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 5 )
+region = Rect2( 660, 0, 220, 130 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 5 )
+region = Rect2( 880, 0, 220, 130 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 5 )
+region = Rect2( 1100, 0, 220, 130 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 5 )
+region = Rect2( 1320, 0, 220, 130 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 5 )
+region = Rect2( 1540, 0, 220, 130 )
+
 [sub_resource type="AtlasTexture" id=62]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 220, 130 )
@@ -63,38 +95,6 @@ region = Rect2( 2200, 0, 220, 130 )
 [sub_resource type="AtlasTexture" id=73]
 atlas = ExtResource( 4 )
 region = Rect2( 2420, 0, 220, 130 )
-
-[sub_resource type="AtlasTexture" id=54]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 220, 130 )
-
-[sub_resource type="AtlasTexture" id=55]
-atlas = ExtResource( 5 )
-region = Rect2( 220, 0, 220, 130 )
-
-[sub_resource type="AtlasTexture" id=56]
-atlas = ExtResource( 5 )
-region = Rect2( 440, 0, 220, 130 )
-
-[sub_resource type="AtlasTexture" id=57]
-atlas = ExtResource( 5 )
-region = Rect2( 660, 0, 220, 130 )
-
-[sub_resource type="AtlasTexture" id=58]
-atlas = ExtResource( 5 )
-region = Rect2( 880, 0, 220, 130 )
-
-[sub_resource type="AtlasTexture" id=59]
-atlas = ExtResource( 5 )
-region = Rect2( 1100, 0, 220, 130 )
-
-[sub_resource type="AtlasTexture" id=60]
-atlas = ExtResource( 5 )
-region = Rect2( 1320, 0, 220, 130 )
-
-[sub_resource type="AtlasTexture" id=61]
-atlas = ExtResource( 5 )
-region = Rect2( 1540, 0, 220, 130 )
 
 [sub_resource type="AtlasTexture" id=47]
 atlas = ExtResource( 3 )
@@ -294,14 +294,14 @@ region = Rect2( 3080, 0, 220, 130 )
 
 [sub_resource type="SpriteFrames" id=74]
 animations = [ {
-"frames": [ SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ) ],
-"loop": true,
-"name": "sleeping",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ) ],
 "loop": true,
 "name": "idle",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ) ],
+"loop": true,
+"name": "sleeping",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ) ],
@@ -349,7 +349,6 @@ material = SubResource( 85 )
 position = Vector2( -14, 10 )
 frames = SubResource( 74 )
 animation = "idle"
-frame = 5
 playing = true
 
 [node name="spitpos" type="Position2D" parent="."]

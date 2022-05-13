@@ -55,8 +55,8 @@ var is_endless = false
 
 # player info
 var max_health = 100
-var health = 100
-var max_mana = 100
+var health = 10000
+var max_mana = 10000
 var mana = 100
 var level = 1
 var selected_weapon = 1
