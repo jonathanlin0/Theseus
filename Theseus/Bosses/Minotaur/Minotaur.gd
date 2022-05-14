@@ -38,6 +38,9 @@ var difference_y
 # three phases based on health:: 100% - 60% is phase 1, 59% - 30% is phase 2, 29% - 0% is phase 3
 var phase = 1
 
+func _ready():
+	$Health_Bar.setMax(master_data.minotaur_health)
+
 func _randomize():
 	if !is_frozen:
 		rand.randomize()
@@ -62,18 +65,16 @@ func _randomize():
 		
 		if velocity.y > -60 * phase and velocity.y < 0:
 			velocity.y = -60 * phase
-
-		
-		print(velocity.x)
-		print(velocity.y)
-		
 		velocity.x = rand_x_vel
 		velocity.y = rand_y_vel
 
 func _physics_process(delta):
+	$Health_Bar.setValue(health)
 	if phase == 1 and health < max_health * .6:
+		$AnimatedSprite.modulate = Color( 1, 0.71, 0.76, 1 )
 		phase = 2
 	if phase == 2 and health < max_health * .3:
+		$AnimatedSprite.modulate = Color( 1, 0, 0, 1 )
 		phase = 3
 	
 	difference_x = master_data.player_x - global_position.x
@@ -84,7 +85,6 @@ func _physics_process(delta):
 	
 	
 	if is_dead == false and is_frozen == false and triggered:
-		$Health_Bar.setValue(health)
 		
 		if axe_swinging == false and jabbing == false:
 			$AnimatedSprite.play("walk")

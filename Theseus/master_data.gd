@@ -55,8 +55,8 @@ var is_endless = false
 
 # player info
 var max_health = 100
-var health = 10000
-var max_mana = 10000
+var health = 100
+var max_mana = 100
 var mana = 100
 var level = 1
 var selected_weapon = 1
@@ -99,7 +99,7 @@ var base_lizard_boss_health = 300
 var base_chimera_health = 250
 var base_spirit_health = 50
 var base_snake_goddess_health = 500
-var base_minotaur_health = 100
+var base_minotaur_health = 2000
 
 # collection of all the enemies' health that can change depending on situation that the player is currently in (like enemies increasing in strength in endless mode)
 var slime_health = 50
@@ -110,7 +110,7 @@ var lizard_boss_health = 300
 var chimera_health = 250
 var spirit_health = 50
 var snake_goddess_health = 500
-var minotaur_health = 100
+var minotaur_health = 2000
 
 # collection of the distance threshhold for player tracking from enemies
 var slime_distance = 225
@@ -157,10 +157,10 @@ var rare_chance_in_rare_chest = 0.4
 var knockback_power = 10
 
 # number of ememies defeated by the player, used to calculate score and spirit spawns
-var slimes_def = 0  # each contributes to 20% of a green spirit
-var lizards_def = 0  # each contributes to 50% of a green spirit
-var snakes_def = 0  # each contributes to 100% of a red spirit
-var chimeras_def = 0  # each contributes to 100% of a gold spirit
+var slimes_def = 32  # each contributes to 20% of a green spirit
+var lizards_def = 13  # each contributes to 50% of a green spirit
+var snakes_def = 14  # each contributes to 100% of a red spirit
+var chimeras_def = 3  # each contributes to 100% of a gold spirit
 
 # scene ordering
 var previous_scene = "title"
