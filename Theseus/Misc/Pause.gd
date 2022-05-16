@@ -3,6 +3,10 @@ extends Control
 
 var showing_controls = false
 
+func _ready():
+	$MusicSlider.value = db2linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")))
+	$SFXSlider.value = db2linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")))
+
 
 func _input(event):
 	if event.is_action_pressed("ui_pause") or event.is_action_pressed("ui_cancel"):

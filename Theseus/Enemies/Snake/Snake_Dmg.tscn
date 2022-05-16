@@ -15,20 +15,25 @@ shader = ExtResource( 6 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=17]
 flags = 8
-atlas = ExtResource( 3 )
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 8
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 8
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 8
+atlas = ExtResource( 1 )
 region = Rect2( 288, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 8
-atlas = ExtResource( 3 )
-region = Rect2( 384, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=12]
-flags = 8
-atlas = ExtResource( 3 )
-region = Rect2( 480, 0, 96, 96 )
 
 [sub_resource type="AtlasTexture" id=21]
 flags = 8
@@ -75,6 +80,21 @@ flags = 8
 atlas = ExtResource( 4 )
 region = Rect2( 768, 0, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=10]
+flags = 8
+atlas = ExtResource( 3 )
+region = Rect2( 288, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 8
+atlas = ExtResource( 3 )
+region = Rect2( 384, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 8
+atlas = ExtResource( 3 )
+region = Rect2( 480, 0, 96, 96 )
+
 [sub_resource type="AtlasTexture" id=34]
 flags = 8
 atlas = ExtResource( 3 )
@@ -90,47 +110,27 @@ flags = 8
 atlas = ExtResource( 3 )
 region = Rect2( 192, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=17]
-flags = 8
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=18]
-flags = 8
-atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=19]
-flags = 8
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=20]
-flags = 8
-atlas = ExtResource( 1 )
-region = Rect2( 288, 0, 96, 96 )
-
 [sub_resource type="SpriteFrames" id=30]
 animations = [ {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
-"name": "attack",
-"speed": 10.0
+"name": "idle",
+"speed": 7.0
 }, {
 "frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
 "loop": true,
 "name": "death",
 "speed": 10.0
 }, {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "attack",
+"speed": 10.0
+}, {
 "frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
 "loop": true,
 "name": "charge_up",
 "speed": 10.0
-}, {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
-"loop": true,
-"name": "idle",
-"speed": 7.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=31]

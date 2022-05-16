@@ -2,7 +2,10 @@ extends Node2D
 
 var cursor = load("res://Misc/Sprites/cursor.png")
 
+var selection = false
+
 func _ready():
+	selection = false
 	$Music.play()
 	Input.set_custom_mouse_cursor(cursor)
 	master_data.previous_scene = "title"
@@ -16,16 +19,17 @@ func _ready():
 
 
 func _on_Play_pressed():
-	$Play/play.play()
-	$Play/Timer.start()
+	if !selection:
+		var value = load("res://Menu/Sprites/menu_play_click.png")
+		$Play/play.play()
+		$Play/Timer.start()
+		$Play.set_normal_texture(value)
+		selection = true
+	
 
 
 func _on_Controls_pressed():
 	get_tree().change_scene("res://Misc/single_controls.tscn")
-
-
-func _on_TextureButton_pressed():
-	pass # Replace with function body.
 
 
 func _on_Exit_pressed():
@@ -41,8 +45,12 @@ func _on_Leaderboard_pressed():
 
 
 func _on_Multiplayer_pressed():
-	$Multiplayer/multiplayer.play()
-	$Multiplayer/multiTimer.start()
+	if !selection:
+		var value = load("res://Menu/Sprites/menu_multiplayer_click.png")
+		$Multiplayer.set_normal_texture(value)
+		$Multiplayer/multiplayer.play()
+		$Multiplayer/multiTimer.start()
+		selection = true
 
 
 func _on_Timer_timeout():
@@ -75,8 +83,12 @@ func _on_multiTimer_timeout():
 
 
 func _on_Endless_pressed():
-	$Endless/endless.play()
-	$Endless/endlessTimer.start()
+	if !selection:
+		var value = load("res://Menu/Sprites/menu_endless_click.png")
+		$Endless/endless.play()
+		$Endless/endlessTimer.start()
+		$Endless.set_normal_texture(value)
+		selection = true
 
 
 func _on_endless_finished():
