@@ -105,7 +105,7 @@ func spawn_snake():
 		var random = RandomNumberGenerator.new()
 		
 		random.randomize()
-		var box = random.randi_range(0, 5)
+		var box = random.randi_range(0, 9)
 		#print(box)
 		random.randomize()
 		var type = random.randi_range(0,1)
@@ -121,6 +121,9 @@ func spawn_snake():
 				var poison = POISON.instance()
 				get_parent().add_child(poison)
 				poison.global_position = $Positions.get_children()[box].global_position
+		#recursively call until spawn annother
+		else:
+			spawn_snake()
 		#print(boxes)
 		
 		spawning = true
