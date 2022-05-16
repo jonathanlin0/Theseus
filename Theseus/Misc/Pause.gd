@@ -48,3 +48,13 @@ func _on_Exit_pressed():
 func _on_Controls_pressed():
 	showing_controls = true
 	$Controls.visible = true
+
+func _on_MasterVolume_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear2db(value))
+
+
+func _on_MusicSlider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear2db(value))
+
+func _on_SFXSlider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear2db(value))

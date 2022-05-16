@@ -261,3 +261,4 @@ anims/fade = SubResource( 2 )
 
 [node name="spawn" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
+bus = "SFX"
