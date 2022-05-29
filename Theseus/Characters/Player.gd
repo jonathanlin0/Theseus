@@ -124,6 +124,10 @@ func _physics_process(delta):
 		sprint = false
 	
 	if master_data.health <= 0:
+		master_data.health = 0
+		$StatusBars/MarginContainer/VBoxContainer/HealthBar.max_value = master_data.max_health
+		$StatusBars/MarginContainer/VBoxContainer/HealthBar.value = master_data.health
+		$StatusBars/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + str(master_data.max_health)
 		dead()
 	
 	if is_dead == false:
@@ -584,8 +588,10 @@ func flash():
 	# https://www.youtube.com/watch?v=ctevHwoRl24
 	$Sound_Effects/Hit.play()
 	$CharacterAnimatedSprite.material.set_shader_param("flash_modifier", 1)
+	$CharacterAnimatedSprite.material.set_shader_param("flash_color", master_data.colors["white"])
 	$SwordAnimation.material.set_shader_param("flash_modifier", 1)
-	$flash_timer.start()
+	$SwordAnimation.material.set_shader_param("flash_color", master_data.colors["white"])
+	$flash_timer.start(master_data.flash_time)
 	
 
 func _knockback(var dir, var powa):

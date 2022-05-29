@@ -157,10 +157,10 @@ var rare_chance_in_rare_chest = 0.4
 var knockback_power = 10
 
 # number of ememies defeated by the player, used to calculate score and spirit spawns
-var slimes_def = 32  # each contributes to 20% of a green spirit
-var lizards_def = 13  # each contributes to 50% of a green spirit
-var snakes_def = 14  # each contributes to 100% of a red spirit
-var chimeras_def = 3  # each contributes to 100% of a gold spirit
+var slimes_def = 0  # each contributes to 20% of a green spirit
+var lizards_def = 0  # each contributes to 50% of a green spirit
+var snakes_def = 0  # each contributes to 100% of a red spirit
+var chimeras_def = 0  # each contributes to 100% of a gold spirit
 
 # scene ordering
 var previous_scene = "title"
