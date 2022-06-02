@@ -18,6 +18,7 @@ config/icon="res://game_icon.png"
 [autoload]
 
 master_data="*res://master_data.gd"
+Server="*res://Misc/Server.gd"
 
 [display]
 
