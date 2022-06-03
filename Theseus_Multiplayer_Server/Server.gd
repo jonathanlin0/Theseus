@@ -21,3 +21,10 @@ func _Peer_Connected(player_id):
 
 func _Peer_Disconnected(player_id):
 	print("User " + str(player_id) + " Disconnected")
+
+remote func fetch_test_data():
+	var player_id = get_tree().get_rpc_sender_id()
+	var return_value = "test successful"
+	
+	rpc_id(player_id, "return_test_data", return_value)
+	print("sending test data")

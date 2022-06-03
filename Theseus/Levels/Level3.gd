@@ -22,24 +22,24 @@ func _ready():
 	for n in num_green:
 		var x_cood = rand.randf_range(x_lower, x_upper)
 		var y_cood = rand.randf_range(y_lower, y_upper)
-		var grn = GREEN.instance()
-		grn.position.x = x_cood
-		grn.position.y = y_cood
-		add_child(grn)
+		var Green_Spirit = GREEN.instance()
+		Green_Spirit.position.x = x_cood
+		Green_Spirit.position.y = y_cood
+		add_child(Green_Spirit)
 	for n in num_red:
 		var x_cood = rand.randf_range(x_lower, x_upper)
 		var y_cood = rand.randf_range(y_lower, y_upper)
-		var re = RED.instance()
-		re.position.x = x_cood
-		re.position.y = y_cood
-		add_child(re)
+		var Red_Spirit = RED.instance()
+		Red_Spirit.position.x = x_cood
+		Red_Spirit.position.y = y_cood
+		add_child(Red_Spirit)
 	for n in num_gold:
 		var x_cood = rand.randf_range(x_lower, x_upper)
 		var y_cood = rand.randf_range(y_lower, y_upper)
-		var go = GOLD.instance()
-		go.position.x = x_cood
-		go.position.y = y_cood
-		add_child(go)
+		var Gold_Spirit = GOLD.instance()
+		Gold_Spirit.position.x = x_cood
+		Gold_Spirit.position.y = y_cood
+		add_child(Gold_Spirit)
 
 func _process(delta):
 

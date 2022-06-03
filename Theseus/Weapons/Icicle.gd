@@ -32,7 +32,7 @@ func _ready():
 	#print(global_position)
 	
 	if master_data.is_multiplayer == false:
-		print(autoaim)
+		
 		if autoaim == false:
 			mouse_position = get_global_mouse_position()
 		if autoaim == true:

@@ -6,11 +6,7 @@ const SMALL_SLIME = preload("res://Enemies/Slime/Small_Slime.tscn")
 var temp = []
 
 func _ready():
-	pass
+	Server.fetch_test_data()
 
 func _process(delta):
-	pass
-
-
-func _on_Timer_timeout():
 	pass

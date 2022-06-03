@@ -1,12 +1,32 @@
 extends Node
 
 var network = NetworkedMultiplayerENet.new()
+# the ip of 127.0.0.1 is local IP, so do not need VPS or another hosting platform to run the multiplayer game.
+# in other words, can develop on a single desktop computer for free
+# change the "ip" variable to the IP of the VPS if you want to run the server on a VPS
 var ip = "127.0.0.1"
 var port = 1909
 
 func _ready():
 	connect_to_server()
 	
+	
+func fetch_test_data():
+	# rpc() calls every peer on the network
+	# rpc_id() allows you to call a specific peer on the network
+	# rpc and rpc_id communicates w server and waits for a response from them, latency for client to wait for response from server. ensures that server received signal and sent back another one
+	# rpc_unreliable and rpc_id_unreliable basically sends a crazy high number of packets and does not care if the server receives it. but sending like 60 packets a second, a considerable amount is bound to be received
+	# rpc would be used for smt like opening an important loot crate
+	# rpc_unreliable would be used for smt like sending player positions
+	# 0 is everybody
+	# 1 is the server
+	# any other number is the specific peer you want to connect to
+	rpc_id(1, "fetch_test_data")
+
+remote func return_skill_damage(test_val):
+	print(test_val)
+
+
 func connect_to_server():
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)

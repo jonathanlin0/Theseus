@@ -44,8 +44,9 @@ func net_distance (current_x, dest_x, current_y, dest_y):
 
 func _on_Lightning_body_entered(body):
 	var is_enemy = false
+	
 	for enemy_name in master_data.enemy_names:
-		if body.name.find(enemy_name) != -1:
+		if body.name.find(enemy_name) != -1 and body.name.find("TileMap") == -1:
 			is_enemy = true
 	
 	if body.name != "Player" and is_enemy == true:
@@ -54,6 +55,7 @@ func _on_Lightning_body_entered(body):
 		# do this so that current obj isn't considered when analyzing which obj is the closest to lightning
 		hit_objects.append(body.name)
 		body.damage(master_data.lightning_damage * master_data.ranged_multiplier)
+		
 
 		if $Range.get_overlapping_bodies().size() > 0:
 			
