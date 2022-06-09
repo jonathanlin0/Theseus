@@ -121,7 +121,8 @@ func spawn_snake():
 				var poison = POISON.instance()
 				get_parent().add_child(poison)
 				poison.global_position = $Positions.get_children()[box].global_position
-		#recursively call until spawn annother
+		#recursively call until spawn annother snake 
+		
 		else:
 			spawn_snake()
 		#print(boxes)
