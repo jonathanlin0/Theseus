@@ -12,6 +12,9 @@ var can_be_damaged = false
 var dead = false
 var mad = false
 
+#in the event all boxes for spawning snakes are filled.
+var times_called = 0
+
 var velocity = Vector2()
 var speed = 0
 var health = master_data.snake_goddess_health
@@ -97,7 +100,7 @@ func activate():
 	$AnimatedSprite.play("activate")
 	previous_animation = "activate"
 	
-func spawn_snake():
+func spawn_snake(iterations):
 	if !mad:
 		var boxes = $Wall_Spacer.get_children()
 		var pos = $Positions.get_children()
@@ -109,9 +112,16 @@ func spawn_snake():
 		#print(box)
 		random.randomize()
 		var type = random.randi_range(0,1)
-		print(box)
-		print(type)
+		#print(box)
+		#print(times_called)
+		
+		spawning = true
+		speed = 0
+		$AnimatedSprite.play("summon")
+		previous_animation = "summon"
+		
 		if !has_collision(boxes[box]):
+			times_called = 0
 			if type == 0:
 				var damage = DAMAGE.instance()
 				get_parent().get_node("Damage_Snakes").add_child(damage)
@@ -121,16 +131,16 @@ func spawn_snake():
 				var poison = POISON.instance()
 				get_parent().add_child(poison)
 				poison.global_position = $Positions.get_children()[box].global_position
+			print("YAY SNAKE")
 		#recursively call until spawn annother snake 
 		
 		else:
-			spawn_snake()
-		#print(boxes)
-		
-		spawning = true
-		speed = 0
-		$AnimatedSprite.play("summon")
-		previous_animation = "summon"
+			if iterations<24:
+				print(iterations)
+				spawn_snake(iterations+1)
+			else:
+				#times_called = 0
+				print("SMOKE GRENADE")
 
 
 func _on_AnimatedSprite_animation_finished():
@@ -153,6 +163,6 @@ func _on_AnimatedSprite_animation_finished():
 func _on_Spawn_Timer_timeout():
 	#print ("do da spawn")
 	if !sleeping and !dead:
-		spawn_snake()
+		spawn_snake(times_called)
 	
 

@@ -146,33 +146,33 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 37 )
+position = Vector2( -65, -76 )
 frames = SubResource( 30 )
 animation = "slither"
-frame = 3
+frame = 2
 playing = true
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 18.75, 32.5625 )
+position = Vector2( 0.75, 5.0625 )
 shape = SubResource( 31 )
 
 [node name="CollisionShape2DHead" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( -2, 18.5 )
+position = Vector2( -20, -9 )
 shape = SubResource( 32 )
 
 [node name="damage_area" type="Area2D" parent="."]
+position = Vector2( 0, -4.5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="damage_area"]
-visible = false
-position = Vector2( -20.5, 24 )
+position = Vector2( -44, 4 )
 shape = SubResource( 33 )
 
 [node name="Health_Bar" parent="." instance=ExtResource( 5 )]
-margin_left = -33.0
-margin_top = 2.0
-margin_right = 67.0
-margin_bottom = 42.0
+margin_left = -50.0
+margin_top = -25.0
+margin_right = 50.0
+margin_bottom = 15.0
 rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="knockback" type="Timer" parent="."]
