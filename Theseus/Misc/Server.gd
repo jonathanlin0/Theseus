@@ -21,9 +21,10 @@ func fetch_test_data():
 	# 0 is everybody
 	# 1 is the server
 	# any other number is the specific peer you want to connect to
+	print("hi")
 	rpc_id(1, "fetch_test_data")
 
-remote func return_skill_damage(test_val):
+remote func return_test_data(test_val):
 	print(test_val)
 
 
@@ -39,3 +40,4 @@ func _OnConnectionFailed():
 
 func _OnConnectionSucceeded():
 	print("Successfully Connected")
+	fetch_test_data()

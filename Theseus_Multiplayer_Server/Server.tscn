@@ -4,3 +4,11 @@
 
 [node name="Server" type="Node"]
 script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 1025.0
+margin_bottom = 14.0
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -42,6 +42,7 @@ var enemies_to_be_checked = []
 
 
 func _ready():
+	
 	if master_data.level == 0:
 		$Music/boss_music.play()
 	else:
@@ -53,7 +54,6 @@ func _input(event):
 		pass
 
 func _physics_process(delta):
-	
 	
 	if prev_music != master_data.music:
 		prev_music = master_data.music
