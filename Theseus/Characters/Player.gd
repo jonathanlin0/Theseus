@@ -55,6 +55,9 @@ func _input(event):
 
 func _physics_process(delta):
 	
+	if get_tree().get_current_scene().name.find("Online_Multiplayer") != -1:
+		Server.send_position(position)
+	
 	if prev_music != master_data.music:
 		prev_music = master_data.music
 		change_music()

@@ -6,7 +6,7 @@ var finish = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	visible = false
-	if master_data.is_multiplayer or get_parent().get_parent().name.find("Endless_Mode") != -1:
+	if master_data.is_multiplayer or get_parent().get_parent().name.find("Endless_Mode") != -1 or get_parent().get_parent().name.find("Multiplayer") != -1:
 		$stagetitles.stop()
 		visible = false
 	elif master_data.level == 1:

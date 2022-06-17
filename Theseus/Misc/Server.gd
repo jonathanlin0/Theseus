@@ -15,7 +15,7 @@ func fetch_test_data():
 	# rpc() calls every peer on the network
 	# rpc_id() allows you to call a specific peer on the network
 	# rpc and rpc_id communicates w server and waits for a response from them, latency for client to wait for response from server. ensures that server received signal and sent back another one
-	# rpc_unreliable and rpc_id_unreliable basically sends a crazy high number of packets and does not care if the server receives it. but sending like 60 packets a second, a considerable amount is bound to be received
+	# rpc_unreliable and rpc_unreliable_id basically sends a crazy high number of packets and does not care if the server receives it. but sending like 60 packets a second, a considerable amount is bound to be received
 	# rpc would be used for smt like opening an important loot crate
 	# rpc_unreliable would be used for smt like sending player positions
 	# 0 is everybody
@@ -23,6 +23,9 @@ func fetch_test_data():
 	# any other number is the specific peer you want to connect to
 	print("hi")
 	rpc_id(1, "fetch_test_data")
+
+func send_position(pos):
+	rpc_unreliable_id(1, "send_position", pos)
 
 remote func return_test_data(test_val):
 	print(test_val)
