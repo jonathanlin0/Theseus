@@ -35,6 +35,7 @@ var endless_powerup_break = 5
 # position of current player
 var online_multiplayer_player_x = 0
 var online_multiplayer_player_y = 0
+var online_multiplayer_fireballs = {}
 
 # time for the implosion effect
 var implosion_time = 1.0

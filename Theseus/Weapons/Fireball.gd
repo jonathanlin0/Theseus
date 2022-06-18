@@ -83,7 +83,7 @@ func _physics_process(delta):
 		velocity.y = unit_vector.y * master_data.fireball_speed * delta
 	
 	if get_tree().get_current_scene().name == "Online_Multiplayer":
-		get_parent().fireball_positions[get_instance_id()] = global_position
+		get_parent().fireballs[get_instance_id()] = global_position
 	
 	translate(velocity)
 	
@@ -122,11 +122,11 @@ func _on_AnimatedSprite_animation_finished():
 	#print("REEEE");
 	if hitSomething:
 		if get_tree().get_current_scene().name == "Online_Multiplayer":
-			get_parent().fireball_positions.erase(get_instance_id())
+			get_parent().fireballs.erase(get_instance_id())
 		queue_free()
 
 
 func _on_VisibilityNotifier2D_screen_exited():
 	if get_tree().get_current_scene().name == "Online_Multiplayer":
-		get_parent().fireball_positions.erase(get_instance_id())
+		get_parent().fireballs.erase(get_instance_id())
 	queue_free()

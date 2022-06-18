@@ -16,7 +16,26 @@ var current_player = null
 var current_player_velocity = Vector2()
 
 # dictionary of all the fireballs from this player
-var fireball_positions = {}
+var fireballs = {}
+"""
+The structure for the fireball dictionary on client side goes as follows:
+	
+{
+	[fireball_1_instance_id]: {
+		"position": (2,3),
+		"vector": (1,4),
+		"angle": (3.14)
+	}
+	[fireball_2_instance_id]: {
+		"position": (2,3),
+		"vector": (1,4),
+		"angle": (3.14)
+	}
+}
+
+On the server side, each one of these client side fireball dictionaries are nested under the user ID that the client is requesting from
+
+"""
 
 func _ready():
 	current_player = ONLINE_PLAYER.instance()
@@ -95,4 +114,4 @@ func _physics_process(delta):
 		
 		fireball.rotate(rad)
 	
-	Server.send_fireballs(fireball_positions)
+	Server.send_fireballs(fireballs)

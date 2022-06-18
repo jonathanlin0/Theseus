@@ -33,6 +33,9 @@ func send_fireballs(fireballs):
 remote func return_test_data(test_val):
 	print(test_val)
 
+remote func return_fireballs(fireballs_input):
+	master_data.online_multiplayer_fireballs = fireballs_input
+
 
 func connect_to_server():
 	network.create_client(ip, port)

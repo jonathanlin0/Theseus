@@ -1,10 +1,32 @@
 extends Node
 
+const PLAYER = preload("res://Character/Player.tscn")
+
 var network = NetworkedMultiplayerENet.new()
 var port = 1909
 var max_players = 100
 var current_players = 0
+
 var player_positions = {}
+"""
+structure:
+
+{
+	player_user_id:(2,4)
+}
+"""
+
+var players_on_screen = {}
+"""
+{
+	player_user_id:[
+		object,
+		position
+	]
+}
+"""
+
+
 var fireballs = {}
 
 func add_text(text):
@@ -15,10 +37,29 @@ func add_text(text):
 func _ready():
 	
 	start_server()
+	
 
 func _process(delta):
 	$Stats/Current_Players.text = "Concurrent Players: " + str(current_players)
-	$Stats/Fireball_Cnt.text = "Concurrent Fireballs: " + str(fireballs.size())
+	
+	var fireball_cnt = 0
+	for given_player_id in fireballs.keys():
+		fireball_cnt += fireballs[given_player_id].size()
+	$Stats/Fireball_Cnt.text = "Concurrent Fireballs: " + str(fireball_cnt)
+	
+	if player_positions.size() > 0:
+		for given_player in player_positions.keys():
+			if players_on_screen.keys().find(given_player) == -1:
+				var new_player = PLAYER.instance()
+				get_parent().add_child(new_player)
+				new_player.position = player_positions[given_player]
+				
+				players_on_screen[given_player] = [new_player, player_positions[given_player]]
+	
+	for given_player in players_on_screen.keys():
+		players_on_screen[given_player][0].global_position = player_positions[given_player]
+	
+	
 
 func start_server():
 	network.create_server(port, max_players)
@@ -45,7 +86,18 @@ remote func send_position(pos):
 	add_text(str(pos))
 
 remote func send_fireballs(fireball_dict):
-	fireballs = fireball_dict
+	var player_id = get_tree().get_rpc_sender_id()
+	fireballs[player_id] = fireball_dict
+
+remote func fetch_fireballs():
+	var player_id = get_tree().get_rpc_sender_id()
+	var fireballs_copy = fireballs
+	fireballs_copy.erase(player_id)
+	
+	var return_value = fireballs_copy
+	
+	rpc_id(player_id, "return_test_data", return_value)
+	add_text("Sent Fireball Data")
 
 remote func fetch_test_data():
 	var player_id = get_tree().get_rpc_sender_id()
