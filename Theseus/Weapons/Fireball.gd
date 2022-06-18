@@ -31,8 +31,16 @@ func _ready():
 	start_pos.y = global_position.y
 	
 	#print(global_position)
+	if get_tree().get_current_scene().name == "Online_Multiplayer":
+		mouse_position = get_global_mouse_position()
+		
+		mouse_position.x -= master_data.online_multiplayer_player_x
+		mouse_position.y -= master_data.online_multiplayer_player_y
+		
+		unit_vector = master_data.get_unit_vector(mouse_position.x - position.x, mouse_position.y - position.y)
+		
 	
-	if master_data.is_multiplayer == false:
+	if master_data.is_multiplayer == false and get_tree().get_current_scene().name != "Online_Multiplayer":
 		if autoaim == false:
 			mouse_position = get_global_mouse_position()
 			
@@ -44,7 +52,7 @@ func _ready():
 			unit_vector = master_data.get_unit_vector(mouse_position.x - position.x, mouse_position.y - position.y)
 		if autoaim == true:
 			unit_vector = master_data.get_unit_vector(enemy_to_hit.global_position.x - master_data.player_x_global, enemy_to_hit.global_position.y - master_data.player_y_global)
-	if master_data.is_multiplayer == true:
+	if master_data.is_multiplayer == true and get_tree().get_current_scene().name != "Online_Multiplayer":
 		
 		if player_to_hit == 1:
 			unit_vector = master_data.get_unit_vector(master_data.player_x_global - player_that_is_shooting.global_position.x, master_data.player_y_global - player_that_is_shooting.global_position.y)
@@ -74,7 +82,11 @@ func _physics_process(delta):
 		velocity.x = unit_vector.x * master_data.fireball_speed * delta
 		velocity.y = unit_vector.y * master_data.fireball_speed * delta
 	
+	if get_tree().get_current_scene().name == "Online_Multiplayer":
+		get_parent().fireball_positions[get_instance_id()] = global_position
+	
 	translate(velocity)
+	
 
 
 func _on_Fireball_body_entered(body):
@@ -109,8 +121,12 @@ func _on_Fireball_body_entered(body):
 func _on_AnimatedSprite_animation_finished():
 	#print("REEEE");
 	if hitSomething:
+		if get_tree().get_current_scene().name == "Online_Multiplayer":
+			get_parent().fireball_positions.erase(get_instance_id())
 		queue_free()
 
 
 func _on_VisibilityNotifier2D_screen_exited():
+	if get_tree().get_current_scene().name == "Online_Multiplayer":
+		get_parent().fireball_positions.erase(get_instance_id())
 	queue_free()

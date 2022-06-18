@@ -5,6 +5,7 @@ var port = 1909
 var max_players = 100
 var current_players = 0
 var player_positions = {}
+var fireballs = {}
 
 func add_text(text):
 	var existing_text = $Console.text
@@ -17,6 +18,7 @@ func _ready():
 
 func _process(delta):
 	$Stats/Current_Players.text = "Concurrent Players: " + str(current_players)
+	$Stats/Fireball_Cnt.text = "Concurrent Fireballs: " + str(fireballs.size())
 
 func start_server():
 	network.create_server(port, max_players)
@@ -41,6 +43,9 @@ remote func send_position(pos):
 	var player_id = get_tree().get_rpc_sender_id()
 	player_positions[player_id] = pos
 	add_text(str(pos))
+
+remote func send_fireballs(fireball_dict):
+	fireballs = fireball_dict
 
 remote func fetch_test_data():
 	var player_id = get_tree().get_rpc_sender_id()

@@ -26,6 +26,9 @@ func fetch_test_data():
 
 func send_position(pos):
 	rpc_unreliable_id(1, "send_position", pos)
+	
+func send_fireballs(fireballs):
+	rpc_unreliable_id(1, "send_fireballs", fireballs)
 
 remote func return_test_data(test_val):
 	print(test_val)

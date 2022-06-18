@@ -145,3 +145,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "idle_right"
+
+[node name="Fireball_Spawn" type="Position2D" parent="."]
+position = Vector2( 0, 4 )
