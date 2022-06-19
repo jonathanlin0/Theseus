@@ -83,7 +83,9 @@ func _physics_process(delta):
 		velocity.y = unit_vector.y * master_data.fireball_speed * delta
 	
 	if get_tree().get_current_scene().name == "Online_Multiplayer":
-		get_parent().fireballs[get_instance_id()] = global_position
+		get_parent().fireballs[get_instance_id()]["position"] = global_position
+		
+		
 	
 	translate(velocity)
 	

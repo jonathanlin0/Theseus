@@ -21,12 +21,12 @@ var fireballs = {}
 The structure for the fireball dictionary on client side goes as follows:
 	
 {
-	[fireball_1_instance_id]: {
+	fireball_1_instance_id: {
 		"position": (2,3),
 		"vector": (1,4),
 		"angle": (3.14)
 	}
-	[fireball_2_instance_id]: {
+	fireball_2_instance_id: {
 		"position": (2,3),
 		"vector": (1,4),
 		"angle": (3.14)
@@ -113,5 +113,10 @@ func _physics_process(delta):
 			rad += PI
 		
 		fireball.rotate(rad)
+		fireballs[fireball.get_instance_id()] = {
+			"position":fireball.global_position,
+			"vector":fireball.unit_vector,
+			"angle":rad
+		}
 	
 	Server.send_fireballs(fireballs)

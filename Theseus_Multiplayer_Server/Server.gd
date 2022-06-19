@@ -28,6 +28,26 @@ var players_on_screen = {}
 
 
 var fireballs = {}
+"""
+structure:
+	
+{
+	player_user_id:{
+		fireball_1_instance_id: {
+			"position":(2,3),
+			"vector":(2,3),
+			"angle":pi
+		}
+	}
+	player_user_id:{
+		fireball_1_instance_id: {
+			"position":(2,3),
+			"vector":(2,3),
+			"angle":pi
+		}
+	}
+}
+"""
 
 func add_text(text):
 	var existing_text = $Console.text
@@ -79,6 +99,11 @@ func _Peer_Disconnected(player_id):
 	print("User " + str(player_id) + " Disconnected")
 	add_text("User " + str(player_id) + " Disconnected")
 	current_players -= 1
+	
+	player_positions.erase(player_id)
+	players_on_screen[player_id][0].queue_free()
+	players_on_screen.erase(player_id)
+	
 
 remote func send_position(pos):
 	var player_id = get_tree().get_rpc_sender_id()
