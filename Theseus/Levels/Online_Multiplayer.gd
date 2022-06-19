@@ -16,6 +16,8 @@ var current_player = null
 var current_player_velocity = Vector2()
 
 # dictionary of all the fireballs from this player
+# every frame, the fireball object updates its position, and every frame the online multiplayer will send the server the fireballs' new location
+# when a fireball dies (queue_free()), then it first removes itself from the fireball dictionary that the client sends to the server
 var fireballs = {}
 """
 The structure for the fireball dictionary on client side goes as follows:
@@ -34,13 +36,17 @@ The structure for the fireball dictionary on client side goes as follows:
 }
 
 On the server side, each one of these client side fireball dictionaries are nested under the user ID that the client is requesting from
-
 """
+
+# makes sure the ping only changes every 3 seconds
+var last_ping_time = 0
 
 func _ready():
 	current_player = ONLINE_PLAYER.instance()
 	add_child(current_player)
 	current_player.position = $Player_Spawn_Location.global_position
+	
+	last_ping_time = OS.get_time().second
 
 func _physics_process(delta):
 	Server.send_position(current_player.global_position)
@@ -120,3 +126,10 @@ func _physics_process(delta):
 		}
 	
 	Server.send_fireballs(fireballs)
+	
+	var start_time = OS.get_ticks_msec()
+	Server.fetch_ping(start_time)
+
+	if (OS.get_time().second - last_ping_time) % 3 == 0 and OS.get_time().second != last_ping_time:
+		$Ping.text = "Ping: " + str(master_data.online_multiplayer_ping) + " ms"
+		last_ping_time = OS.get_time().second
