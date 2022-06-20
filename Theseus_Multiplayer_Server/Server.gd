@@ -110,9 +110,10 @@ func _process(delta):
 	
 	
 	# update players' health bars
-	for player_id in players_on_screen.keys():
-		players_on_screen[player_id][0].get_node("Health_Bar").setMax(100)
-		players_on_screen[player_id][0].get_node("Health_Bar").setValue(player_healths[player_id])
+	if players_on_screen.size() > 0:
+		for player_id in players_on_screen.keys():
+			players_on_screen[player_id][0].get_node("Health_Bar").setMax(100)
+			players_on_screen[player_id][0].get_node("Health_Bar").setValue(player_healths[player_id])
 	
 	
 	# controls showing the player on screen
@@ -177,15 +178,19 @@ func _process(delta):
 
 	# remove all the fireballs that are not being sent by the clients anymore
 	for fireball_instance_id in fireballs_on_screen.keys():
-		if all_fireball_instance_ids.find(fireball_instance_id) == -1:
-			fireballs_on_screen[fireball_instance_id]["object"].queue_free()
-			fireballs_on_screen.erase(fireball_instance_id)
+			if all_fireball_instance_ids.find(fireball_instance_id) == -1:
+				var wr = weakref(fireballs_on_screen[fireball_instance_id]["object"])
+				if wr.get_ref():
+					fireballs_on_screen[fireball_instance_id]["object"].queue_free()
+					fireballs_on_screen.erase(fireball_instance_id)
 	
 	# update fireball positions
 	for fireball_instance_id in fireballs_on_screen.keys():
-		var temp_player_id = fireballs_on_screen[fireball_instance_id]["object"].player_id
-		
-		fireballs_on_screen[fireball_instance_id]["object"].position = fireballs[temp_player_id][fireball_instance_id]["position"]
+		var wr = weakref(fireballs_on_screen[fireball_instance_id]["object"])
+		if wr.get_ref():
+			var temp_player_id = fireballs_on_screen[fireball_instance_id]["object"].player_id
+			
+			fireballs_on_screen[fireball_instance_id]["object"].position = fireballs[temp_player_id][fireball_instance_id]["position"]
 	
 
 func start_server():

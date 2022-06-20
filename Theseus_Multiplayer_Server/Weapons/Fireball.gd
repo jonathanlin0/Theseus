@@ -8,6 +8,7 @@ var unit_vector = Vector2()
 
 var damage = 5
 
+var to_be_killed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,6 +24,9 @@ func _physics_process(delta):
 	
 	translate(velocity)
 
+func die():
+	to_be_killed = true
+	$AnimatedSprite.play("die")
 
 func _on_Fireball_body_entered(body):
 	# when a fireball hits an opponent
@@ -30,3 +34,9 @@ func _on_Fireball_body_entered(body):
 		if body.user_id != player_id:
 			if get_parent().player_healths.keys().find(body.user_id) != -1:
 				get_parent().player_healths[body.user_id] -= damage
+			die()
+
+
+func _on_AnimatedSprite_animation_finished():
+	if to_be_killed == true:
+		queue_free()

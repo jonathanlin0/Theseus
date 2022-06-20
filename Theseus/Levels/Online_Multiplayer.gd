@@ -251,7 +251,7 @@ func _physics_process(delta):
 	# remove all the fireballs that are not being sent by the clients anymore
 	for fireball_instance_id in fireballs_on_screen.keys():
 		if all_fireball_instance_ids.find(fireball_instance_id) == -1:
-			fireballs_on_screen[fireball_instance_id]["object"].queue_free()
+			fireballs_on_screen[fireball_instance_id]["object"].die()
 			fireballs_on_screen.erase(fireball_instance_id)
 	
 	# update fireball positions
