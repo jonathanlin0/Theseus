@@ -36,6 +36,9 @@ func fetch_ping(start_time):
 func fetch_players():
 	rpc_id(1, "fetch_players")
 
+func fetch_fireballs():
+	rpc_id(1, "fetch_fireballs")
+
 remote func return_test_data(test_val):
 	print(test_val)
 

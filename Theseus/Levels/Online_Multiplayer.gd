@@ -5,6 +5,7 @@ extends Node2D
 
 const ONLINE_PLAYER = preload("res://Characters/Online_Player.tscn")
 const FIREBALL = preload("res://Weapons/Fireball.tscn")
+const ONLINE_FIREBALL = preload("res://Weapons/Online_Fireball.tscn")
 
 # the direction the player is facing
 var direction = "up"
@@ -36,6 +37,19 @@ The structure for the fireball dictionary on client side goes as follows:
 }
 
 On the server side, each one of these client side fireball dictionaries are nested under the user ID that the client is requesting from
+"""
+
+var fireballs_on_screen = {}
+"""
+Structure:
+	
+{
+	fireball_instance_id = {
+		"object":object,
+		"position"(2,34),
+		"angle": pi
+	}
+}
 """
 
 var enemies_on_screen = {}
@@ -197,7 +211,42 @@ func _physics_process(delta):
 			elif player_directions[player_instance_id] == "right":
 				enemies_on_screen[player_instance_id]["object"].get_node("AnimatedSprite").play("idle_right")
 
+
+	Server.fetch_fireballs()
+	master_data.online_multiplayer_fireballs
+	var online_fireballs = master_data.online_multiplayer_fireballs
+	
+	# shows the fireballs on screen
+	for given_player in online_fireballs.keys():
+		for fireball_instance_id in online_fireballs[given_player].keys():
+			if fireballs_on_screen.keys().find(fireball_instance_id) == -1:
+				var new_online_fireball = ONLINE_FIREBALL.instance()
+				get_parent().add_child(new_online_fireball)
+				new_online_fireball.position = online_fireballs[given_player][fireball_instance_id]["position"]
+				new_online_fireball.player_id = given_player
+				new_online_fireball.rotate(online_fireballs[given_player][fireball_instance_id]["angle"])
+				
+				
+				fireballs_on_screen[fireball_instance_id] = {
+					"object":new_online_fireball,
+					"position":online_fireballs[given_player][fireball_instance_id]["position"],
+					"angle":online_fireballs[given_player][fireball_instance_id]["angle"]
+				}
+	
+	
+	var all_fireball_instance_ids = []
+	for given_player in online_fireballs.keys():
+		for fireball_id in online_fireballs[given_player].keys():
+			all_fireball_instance_ids.append(fireball_id)
+
+	# remove all the fireballs that are not being sent by the clients anymore
+	for fireball_instance_id in fireballs_on_screen.keys():
+		if all_fireball_instance_ids.find(fireball_instance_id) == -1:
+			fireballs_on_screen[fireball_instance_id]["object"].queue_free()
+			fireballs_on_screen.erase(fireball_instance_id)
+	
+	# update fireball positions
+	for fireball_instance_id in fireballs_on_screen.keys():
+		var temp_player_id = fireballs_on_screen[fireball_instance_id]["object"].player_id
 		
-		
-		
-		
+		fireballs_on_screen[fireball_instance_id]["object"].position = online_fireballs[temp_player_id][fireball_instance_id]["position"]

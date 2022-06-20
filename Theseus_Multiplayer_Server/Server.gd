@@ -70,7 +70,8 @@ Structure:
 {
 	fireball_instance_id = {
 		"object":object,
-		"position"(2,34)
+		"position"(2,34),
+		"angle": pi
 	}
 }
 """
@@ -110,7 +111,7 @@ func _process(delta):
 	for given_player in player_positions.keys():
 		all_player_instance_ids.append(given_player)
 
-	# remove all the fireballs that are not being sent by the clients anymore
+	# remove all the clients that are not being sent by the clients anymore
 	for player_id in players_on_screen.keys():
 		if all_player_instance_ids.find(player_id) == -1:
 			players_on_screen[player_id][0].queue_free()
@@ -144,7 +145,8 @@ func _process(delta):
 				
 				fireballs_on_screen[fireball_instance_id] = {
 					"object":new_fireball,
-					"position":fireballs[given_player][fireball_instance_id]["position"]
+					"position":fireballs[given_player][fireball_instance_id]["position"],
+					"angle":fireballs[given_player][fireball_instance_id]["angle"]
 				}
 	
 	
@@ -165,17 +167,6 @@ func _process(delta):
 		
 		fireballs_on_screen[fireball_instance_id]["object"].position = fireballs[temp_player_id][fireball_instance_id]["position"]
 	
-	"""
-	for given_player in fireballs.keys():
-		for fireball_instance_id in fireballs[given_player].keys():
-			if fireballs[given_player][fireball_instance_id]["object"] == null:
-				var new_fireball = FIREBALL.instance()
-				get_parent().add_child(new_fireball)
-				new_fireball.position = fireballs[given_player][fireball_instance_id]["position"]
-				print("hi")
-			else:
-				fireballs[given_player][fireball_instance_id]["object"].global_position = fireballs[given_player][fireball_instance_id]["position"]
-	"""
 
 func start_server():
 	network.create_server(port, max_players)
@@ -213,13 +204,12 @@ remote func send_fireballs(fireball_dict):
 
 remote func fetch_fireballs():
 	var player_id = get_tree().get_rpc_sender_id()
-	var fireballs_copy = fireballs
-	fireballs_copy.erase(player_id)
+	var fireballs_copy = {}
+	for given_player_id in fireballs.keys():
+		if given_player_id != player_id:
+			fireballs_copy[given_player_id] = fireballs[given_player_id]
 	
-	var return_value = fireballs_copy
-	
-	rpc_id(player_id, "return_test_data", return_value)
-	add_text("Sent Fireball Data")
+	rpc_id(player_id, "return_fireballs", fireballs_copy)
 
 remote func fetch_test_data():
 	var player_id = get_tree().get_rpc_sender_id()
