@@ -23,4 +23,6 @@ func _physics_process(delta):
 
 
 func _on_Fireball_body_entered(body):
-	pass # Replace with function body.
+	if body.name.find("Player") != -1:
+		if body.user_id != player_id:
+			print("hi")

@@ -88,6 +88,7 @@ func _process(delta):
 				var new_player = PLAYER.instance()
 				get_parent().add_child(new_player)
 				new_player.position = player_positions[given_player]
+				new_player.user_id = given_player
 				
 				players_on_screen[given_player] = [new_player, player_positions[given_player]]
 	
