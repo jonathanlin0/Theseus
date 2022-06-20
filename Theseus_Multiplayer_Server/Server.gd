@@ -98,12 +98,22 @@ func _ready():
 	
 
 func _process(delta):
+	
+	# display how many concurrent players
 	$Stats/Current_Players.text = "Concurrent Players: " + str(current_players)
 	
+	# display how many concurrent fireballs
 	var fireball_cnt = 0
 	for given_player_id in fireballs.keys():
 		fireball_cnt += fireballs[given_player_id].size()
 	$Stats/Fireball_Cnt.text = "Concurrent Fireballs: " + str(fireball_cnt)
+	
+	
+	# update players' health bars
+	for player_id in players_on_screen.keys():
+		players_on_screen[player_id][0].get_node("Health_Bar").setMax(100)
+		players_on_screen[player_id][0].get_node("Health_Bar").setValue(player_healths[player_id])
+	
 	
 	# controls showing the player on screen
 	if player_positions.size() > 0:
