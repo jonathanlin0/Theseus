@@ -1,11 +1,26 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Character/Sprites/theseus_idle_front_shadow.png" type="Texture" id=1]
 [ext_resource path="res://Character/Player.gd" type="Script" id=2]
+[ext_resource path="res://Character/Sprites/theseus_idle_left_shadow.png" type="Texture" id=3]
+[ext_resource path="res://Character/Sprites/theseus_idle_back_shadow.png" type="Texture" id=4]
+[ext_resource path="res://Character/Sprites/theseus_idle_right_shadow.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
 height = 6.0
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -13,9 +28,24 @@ region = Rect2( 0, 0, 16, 32 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
+"frames": [ SubResource( 4 ) ],
+"loop": true,
+"name": "idle_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ) ],
+"loop": true,
+"name": "idle_right",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ) ],
+"loop": true,
+"name": "idle_left",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 2 ) ],
 "loop": true,
-"name": "default",
+"name": "idle_down",
 "speed": 5.0
 } ]
 
@@ -28,3 +58,4 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
+animation = "idle_right"

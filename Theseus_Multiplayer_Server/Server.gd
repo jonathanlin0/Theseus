@@ -8,6 +8,18 @@ var port = 1909
 var max_players = 100
 var current_players = 0
 
+# holds all of the players' directions
+var player_directions = {}
+"""
+Structure:
+	
+{
+	player_user_id:"left"
+}
+
+"""
+
+# holds all of the players' positions on the screen
 var player_positions = {}
 """
 structure:
@@ -17,6 +29,7 @@ structure:
 }
 """
 
+# the dictionary holds all the current players on the screen
 var players_on_screen = {}
 """
 {
@@ -89,11 +102,33 @@ func _process(delta):
 				get_parent().add_child(new_player)
 				new_player.position = player_positions[given_player]
 				new_player.user_id = given_player
+				new_player.get_node("AnimatedSprite").play("idle_down")
 				
 				players_on_screen[given_player] = [new_player, player_positions[given_player]]
 	
+	var all_player_instance_ids = []
+	for given_player in player_positions.keys():
+		all_player_instance_ids.append(given_player)
+
+	# remove all the fireballs that are not being sent by the clients anymore
+	for player_id in players_on_screen.keys():
+		if all_player_instance_ids.find(player_id) == -1:
+			players_on_screen[player_id][0].queue_free()
+			players_on_screen.erase(player_id)
+	
 	for given_player in players_on_screen.keys():
 		players_on_screen[given_player][0].global_position = player_positions[given_player]
+		if player_directions[given_player] == "down" or player_directions[given_player] == "up":
+			if player_directions[given_player] == "down":
+				players_on_screen[given_player][0].get_node("AnimatedSprite").play("idle_down")
+			elif player_directions[given_player] == "up":
+				players_on_screen[given_player][0].get_node("AnimatedSprite").play("idle_up")
+		else:
+			if player_directions[given_player] == "left":
+				players_on_screen[given_player][0].get_node("AnimatedSprite").play("idle_left")
+			elif player_directions[given_player] == "right":
+				players_on_screen[given_player][0].get_node("AnimatedSprite").play("idle_right")
+		
 	
 	
 	# shows the fireballs on screen
@@ -162,13 +197,15 @@ func _Peer_Disconnected(player_id):
 	current_players -= 1
 	
 	player_positions.erase(player_id)
-	players_on_screen[player_id][0].queue_free()
-	players_on_screen.erase(player_id)
+	player_directions.erase(player_id)
+	#players_on_screen[player_id][0].queue_free()
+	#players_on_screen.erase(player_id)
 	
 
-remote func send_position(pos):
+remote func send_position(pos, dir):
 	var player_id = get_tree().get_rpc_sender_id()
 	player_positions[player_id] = pos
+	player_directions[player_id] = dir
 
 remote func send_fireballs(fireball_dict):
 	var player_id = get_tree().get_rpc_sender_id()
@@ -194,3 +231,20 @@ remote func fetch_test_data():
 remote func fetch_ping(start_time):
 	var player_id = get_tree().get_rpc_sender_id()
 	rpc_id(player_id, "return_ping", start_time)
+
+remote func fetch_players():
+	var player_id = get_tree().get_rpc_sender_id()
+	
+	# copy the player_positions dictionary
+	var temp_player_positions = {}
+	for given_player_id in player_positions:
+		if given_player_id != player_id:
+			temp_player_positions[given_player_id] = player_positions[given_player_id]
+	
+	# copy the player_directions dictionary
+	var temp_player_directions = {}
+	for given_player_id in player_directions:
+		if given_player_id != player_id:
+			temp_player_directions[given_player_id] = player_directions[given_player_id]
+	
+	rpc_id(player_id, "return_players", temp_player_positions, temp_player_directions)

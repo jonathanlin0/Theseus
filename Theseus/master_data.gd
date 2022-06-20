@@ -32,6 +32,10 @@ var endless_enemy_health_break = 2
 # every x levels that num of powerups increases by 1
 var endless_powerup_break = 5
 
+# holds all the positions of the online multiplayer enemies
+var online_multiplayer_players = {}
+# holds all the directions of the online multiplayer enemies
+var online_multiplayer_players_directions = {}
 var online_multiplayer_ping = 0
 # position of current player
 var online_multiplayer_player_x = 0

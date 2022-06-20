@@ -24,14 +24,17 @@ func fetch_test_data():
 	print("hi")
 	rpc_id(1, "fetch_test_data")
 
-func send_position(pos):
-	rpc_unreliable_id(1, "send_position", pos)
+func send_position(pos, direction):
+	rpc_unreliable_id(1, "send_position", pos, direction)
 	
 func send_fireballs(fireballs):
 	rpc_unreliable_id(1, "send_fireballs", fireballs)
 	
 func fetch_ping(start_time):
 	rpc_id(1, "fetch_ping", start_time)
+
+func fetch_players():
+	rpc_id(1, "fetch_players")
 
 remote func return_test_data(test_val):
 	print(test_val)
@@ -41,6 +44,10 @@ remote func return_fireballs(fireballs_input):
 
 remote func return_ping(start_time):
 	master_data.online_multiplayer_ping = OS.get_ticks_msec() - start_time
+
+remote func return_players(players, dir):
+	master_data.online_multiplayer_players = players
+	master_data.online_multiplayer_players_directions = dir
 
 func connect_to_server():
 	network.create_client(ip, port)

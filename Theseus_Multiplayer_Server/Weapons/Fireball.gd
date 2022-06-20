@@ -23,6 +23,7 @@ func _physics_process(delta):
 
 
 func _on_Fireball_body_entered(body):
+	# when a fireball hits an opponent
 	if body.name.find("Player") != -1:
 		if body.user_id != player_id:
 			print("hi")
