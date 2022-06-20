@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Characters/Sprites/theseus_idle_front_shadow.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Sprites/theseus_walk_right_shadow.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Characters/Sprites/theseus_walk_up_shadow.png" type="Texture" id=6]
 [ext_resource path="res://Characters/Sprites/theseus_idle_right_shadow.png" type="Texture" id=7]
 [ext_resource path="res://Characters/Sprites/theseus_walk_down_shadow.png" type="Texture" id=8]
+[ext_resource path="res://Misc/Health_Bar.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -145,6 +146,13 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "idle_right"
+
+[node name="Health_Bar" parent="." instance=ExtResource( 9 )]
+margin_left = -50.0
+margin_top = -23.696
+margin_right = 50.0
+margin_bottom = -13.696
+rect_scale = Vector2( 0.33, 0.33 )
 
 [node name="Fireball_Spawn" type="Position2D" parent="."]
 position = Vector2( 0, 4 )

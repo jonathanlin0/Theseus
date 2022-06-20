@@ -6,6 +6,8 @@ var fireball_speed = 250
 var velocity = Vector2()
 var unit_vector = Vector2()
 
+var damage = 5
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,4 +28,5 @@ func _on_Fireball_body_entered(body):
 	# when a fireball hits an opponent
 	if body.name.find("Player") != -1:
 		if body.user_id != player_id:
-			print("hi")
+			if get_parent().player_healths.keys().find(body.user_id) != -1:
+				get_parent().player_healths[body.user_id] -= damage

@@ -8,6 +8,16 @@ var port = 1909
 var max_players = 100
 var current_players = 0
 
+var player_healths = {}
+"""
+Structure:
+	
+{
+	player_id: health,
+	player_id: health
+}
+"""
+
 # holds all of the players' directions
 var player_directions = {}
 """
@@ -137,7 +147,7 @@ func _process(delta):
 		for fireball_instance_id in fireballs[given_player].keys():
 			if fireballs_on_screen.keys().find(fireball_instance_id) == -1:
 				var new_fireball = FIREBALL.instance()
-				get_parent().add_child(new_fireball)
+				add_child(new_fireball)
 				new_fireball.position = fireballs[given_player][fireball_instance_id]["position"]
 				new_fireball.player_id = given_player
 				new_fireball.rotate(fireballs[given_player][fireball_instance_id]["angle"])
@@ -181,6 +191,9 @@ func _Peer_Connected(player_id):
 	print("User " + str(player_id) + " Connected")
 	add_text("User " + str(player_id) + " Connected")
 	current_players += 1
+	
+	if player_healths.keys().find(player_id) == -1:
+		player_healths[player_id] = 100
 
 func _Peer_Disconnected(player_id):
 	print("User " + str(player_id) + " Disconnected")
@@ -189,8 +202,7 @@ func _Peer_Disconnected(player_id):
 	
 	player_positions.erase(player_id)
 	player_directions.erase(player_id)
-	#players_on_screen[player_id][0].queue_free()
-	#players_on_screen.erase(player_id)
+	player_healths.erase(player_id)
 	
 
 remote func send_position(pos, dir):
@@ -238,3 +250,20 @@ remote func fetch_players():
 			temp_player_directions[given_player_id] = player_directions[given_player_id]
 	
 	rpc_id(player_id, "return_players", temp_player_positions, temp_player_directions)
+
+remote func fetch_healths():
+	var player_id = get_tree().get_rpc_sender_id()
+	
+	# copy the player_healths dictionary
+	var temp_player_healths = {}
+	for given_player_id in player_healths:
+		if given_player_id != player_id:
+			temp_player_healths[given_player_id] = player_healths[given_player_id]
+	
+
+	rpc_id(player_id, "return_healths", temp_player_healths)
+
+remote func fetch_my_health():
+	var player_id = get_tree().get_rpc_sender_id()
+	
+	rpc_id(player_id, "return_my_health", player_healths[player_id])

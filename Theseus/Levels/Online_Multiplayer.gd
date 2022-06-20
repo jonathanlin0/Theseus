@@ -130,9 +130,13 @@ func _physics_process(delta):
 		current_player_velocity.x = master_data.player_speed * delta
 	if Input.is_action_pressed("ui_a") == true and Input.is_action_pressed("ui_d") == true:
 		current_player_velocity.x = 0
-	
+
 	
 	current_player.move_and_slide(current_player_velocity)
+	
+	# set health of the current_player
+	Server.fetch_my_health()
+	current_player.get_node("Health_Bar").setValue(master_data.online_multiplayer_players_my_health)
 	
 	# logic for shooting
 	if Input.is_action_just_pressed("mouse_left_click"):
@@ -179,10 +183,13 @@ func _physics_process(delta):
 			add_child(new_online_player)
 			new_online_player.position = master_data.online_multiplayer_players[player_id]
 			new_online_player.get_node("AnimatedSprite").play("idle_down")
+			new_online_player.get_node("Health_Bar").setMax(100)
+			new_online_player.get_node("Health_Bar").setValue(100)
 			
 			enemies_on_screen[player_id] = {
 				"object": new_online_player,
-				"position":master_data.online_multiplayer_players[player_id]
+				"position":master_data.online_multiplayer_players[player_id],
+				"health":100
 			}
 			
 	var all_enemy_instance_ids = []
@@ -195,7 +202,7 @@ func _physics_process(delta):
 			enemies_on_screen[player_instance_id]["object"].queue_free()
 			enemies_on_screen.erase(player_instance_id)
 	
-	# update enemy positions and direction
+	# update enemy positions and direction and health
 	for player_instance_id in enemies_on_screen.keys():
 		enemies_on_screen[player_instance_id]["object"].position = master_data.online_multiplayer_players[player_instance_id]
 		
@@ -210,6 +217,8 @@ func _physics_process(delta):
 				enemies_on_screen[player_instance_id]["object"].get_node("AnimatedSprite").play("idle_left")
 			elif player_directions[player_instance_id] == "right":
 				enemies_on_screen[player_instance_id]["object"].get_node("AnimatedSprite").play("idle_right")
+		
+		enemies_on_screen[player_instance_id]["object"].get_node("Health_Bar").setValue(master_data.online_multiplayer_players_healths[player_instance_id])
 
 
 	Server.fetch_fireballs()
@@ -250,3 +259,5 @@ func _physics_process(delta):
 		var temp_player_id = fireballs_on_screen[fireball_instance_id]["object"].player_id
 		
 		fireballs_on_screen[fireball_instance_id]["object"].position = online_fireballs[temp_player_id][fireball_instance_id]["position"]
+	
+	Server.fetch_healths()

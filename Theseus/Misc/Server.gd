@@ -39,6 +39,12 @@ func fetch_players():
 func fetch_fireballs():
 	rpc_id(1, "fetch_fireballs")
 
+func fetch_healths():
+	rpc_id(1, "fetch_healths")
+
+func fetch_my_health():
+	rpc_id(1, "fetch_my_health")
+
 remote func return_test_data(test_val):
 	print(test_val)
 
@@ -51,6 +57,12 @@ remote func return_ping(start_time):
 remote func return_players(players, dir):
 	master_data.online_multiplayer_players = players
 	master_data.online_multiplayer_players_directions = dir
+
+remote func return_healths(healths):
+	master_data.online_multiplayer_players_healths = healths
+	
+remote func return_my_health(health):
+	master_data.online_multiplayer_players_my_health = health
 
 func connect_to_server():
 	network.create_client(ip, port)
