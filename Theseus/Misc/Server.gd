@@ -45,6 +45,9 @@ func fetch_healths():
 func fetch_my_health():
 	rpc_id(1, "fetch_my_health")
 
+func restart_online_multiplayer_game():
+	rpc_id(1, "restart_online_multiplayer_game")
+
 remote func return_test_data(test_val):
 	print(test_val)
 

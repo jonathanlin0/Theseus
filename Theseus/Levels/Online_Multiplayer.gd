@@ -97,9 +97,10 @@ func _physics_process(delta):
 			$Canvas/Online_Multiplayer_Game_Over.set_status("You Lost!")
 	
 	
-	var run = true
 	# when the game is not over yet
 	if master_data.online_multiplayer_status != "lose" and master_data.online_multiplayer_status != "win":
+		
+		$Canvas/Online_Multiplayer_Game_Over.visible = false
 		
 		master_data.online_multiplayer_player_x = current_player.global_position.x
 		master_data.online_multiplayer_player_y = current_player.global_position.y

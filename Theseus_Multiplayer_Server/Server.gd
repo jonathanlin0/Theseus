@@ -86,7 +86,10 @@ Structure:
 }
 """
 
+# used to see if the game is over
 var game_over = false
+# used to make sure the game over msg is only sent once
+var sent_game_over_msg = false
 
 var server_start_time = OS.get_unix_time()
 
@@ -129,7 +132,8 @@ func _process(delta):
 			$CanvasLayer/ColorRect/Game_Over_Text_2.text = "Waiting for players' response..."
 	
 	# this ends the game
-	if game_over == true and player_healths.size() > 0:
+	if game_over == true and sent_game_over_msg == false and player_healths.size() > 0:
+
 		# see who has the least health left
 		var loser_id = player_healths.keys()[0]
 		var loser_health = player_healths[player_healths.keys()[0]]
@@ -143,8 +147,13 @@ func _process(delta):
 				rpc_id(player_id, "game_over", "lose")
 			if player_id != loser_id:
 				rpc_id(player_id, "game_over", "win")
+		
+		sent_game_over_msg = true
 	
 	if game_over == false:
+		
+		$CanvasLayer/ColorRect.visible = false
+		
 		# update players' health bars
 		if players_on_screen.size() > 0 and player_healths.size() > 0:
 			for player_id in players_on_screen.keys():
@@ -319,3 +328,16 @@ remote func fetch_my_health():
 	
 	rpc_id(player_id, "return_my_health", player_healths[player_id])
 	
+remote func restart_online_multiplayer_game():
+	for player_id in player_healths.keys():
+		player_healths[player_id] = 100
+	
+	for player_id in fireballs.keys():
+		for fireball_id in fireballs[player_id].keys():
+			fireballs[player_id].erase(fireball_id)
+	
+	game_over = false
+	sent_game_over_msg = false
+	
+	for player_id in player_positions.keys():
+		rpc_id(player_id, "game_over", "")

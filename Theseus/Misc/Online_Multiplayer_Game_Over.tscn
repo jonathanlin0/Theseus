@@ -32,7 +32,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="Online_Multiplayer_Game_Over"]
+[node name="Play_Again_Button" type="TextureButton" parent="Online_Multiplayer_Game_Over"]
 margin_left = 208.0
 margin_top = 142.0
 margin_right = 272.0
@@ -41,3 +41,5 @@ texture_normal = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="pressed" from="Online_Multiplayer_Game_Over/Play_Again_Button" to="Online_Multiplayer_Game_Over" method="_on_Play_Again_Button_pressed"]
