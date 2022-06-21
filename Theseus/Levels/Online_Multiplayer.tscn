@@ -42,4 +42,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="."]
+margin_left = 208.0
+margin_top = 115.0
+margin_right = 248.0
+margin_bottom = 129.0
+text = "hi"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Canvas" parent="." instance=ExtResource( 6 )]
