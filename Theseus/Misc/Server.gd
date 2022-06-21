@@ -64,6 +64,10 @@ remote func return_healths(healths):
 remote func return_my_health(health):
 	master_data.online_multiplayer_players_my_health = health
 
+remote func game_over(game_status):
+	master_data.online_multiplayer_status = game_status
+	
+
 func connect_to_server():
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)

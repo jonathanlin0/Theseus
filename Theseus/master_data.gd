@@ -40,6 +40,8 @@ var online_multiplayer_players_directions = {}
 var online_multiplayer_players_healths = {}
 # holds the current client player's health
 var online_multiplayer_players_my_health = 100
+# online_multiplayer_status can be "win" or "lose". it will change to one of them after the server signals that the game is over and their placement
+var online_multiplayer_status = ""
 var online_multiplayer_ping = 0
 # position of current player
 var online_multiplayer_player_x = 0
