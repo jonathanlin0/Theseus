@@ -117,6 +117,17 @@ func _process(delta):
 			game_over = true
 	
 
+	if game_over == true:
+		$CanvasLayer/ColorRect.visible = true
+		if OS.get_unix_time() % 4 == 0:
+			$CanvasLayer/ColorRect/Game_Over_Text_2.text = "Waiting for players' response"
+		if OS.get_unix_time() % 4 == 1:
+			$CanvasLayer/ColorRect/Game_Over_Text_2.text = "Waiting for players' response."
+		if OS.get_unix_time() % 4 == 2:
+			$CanvasLayer/ColorRect/Game_Over_Text_2.text = "Waiting for players' response.."
+		if OS.get_unix_time() % 4 == 3:
+			$CanvasLayer/ColorRect/Game_Over_Text_2.text = "Waiting for players' response..."
+	
 	# this ends the game
 	if game_over == true and player_healths.size() > 0:
 		# see who has the least health left
