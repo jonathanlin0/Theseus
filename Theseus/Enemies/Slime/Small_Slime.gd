@@ -90,13 +90,13 @@ func _physics_process(delta):
 					velocity = Vector2(sign_x * 50,sign_y * 50)
 					velocity = move_and_slide(velocity)
 				elif knockback:
-					velocity = -Vector2(sign_x * 50,sign_y * 50) * (master_data.knockback_power * 1.5) * pow($Enemy_Abstract_Class/knockback_timer.time_left, 2)
+					velocity = -Vector2(sign_x * 50,sign_y * 50) * master_data.knockback_power * pow($Enemy_Abstract_Class/knockback_timer.time_left, 2)
 					velocity = move_and_slide(velocity)
 					
 
 func damage(dmg):
 	health -= dmg
-	#$Enemy_Abstract_Class.knockback()
+	$Enemy_Abstract_Class.knockback()
 	$Enemy_Abstract_Class.damage_text(dmg)
 	$Enemy_Abstract_Class.damage_audio()
 	$Enemy_Abstract_Class.flash()

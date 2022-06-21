@@ -75,7 +75,6 @@ func _physics_process(delta):
 			var net_distance = 0
 			net_distance = sqrt((difference_x * difference_x) + (difference_y * difference_y))
 			
-			#if net_distance <= master_data.slime_distance:
 			
 			if sees_player:
 				
