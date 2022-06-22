@@ -154,11 +154,7 @@ func _process(delta):
 		
 		$CanvasLayer/ColorRect.visible = false
 		
-		# update players' health bars
-		if players_on_screen.size() > 0 and player_healths.size() > 0:
-			for player_id in players_on_screen.keys():
-				players_on_screen[player_id][0].get_node("Health_Bar").setMax(100)
-				players_on_screen[player_id][0].get_node("Health_Bar").setValue(player_healths[player_id])
+		
 		
 		
 		# controls showing the player on screen
@@ -236,6 +232,12 @@ func _process(delta):
 				var temp_player_id = fireballs_on_screen[fireball_instance_id]["object"].player_id
 				
 				fireballs_on_screen[fireball_instance_id]["object"].position = fireballs[temp_player_id][fireball_instance_id]["position"]
+		
+		# update players' health bars
+		if players_on_screen.size() > 0 and player_healths.size() > 0:
+			for player_id in players_on_screen.keys():
+				players_on_screen[player_id][0].get_node("Health_Bar").setMax(100)
+				players_on_screen[player_id][0].get_node("Health_Bar").setValue(player_healths[player_id])
 	
 
 func start_server():

@@ -6,6 +6,7 @@ extends Node2D
 const ONLINE_PLAYER = preload("res://Characters/Online_Player.tscn")
 const FIREBALL = preload("res://Weapons/Fireball.tscn")
 const ONLINE_FIREBALL = preload("res://Weapons/Online_Fireball.tscn")
+var cursor = load("res://Misc/Sprites/cursor_cross.png")
 
 # the direction the player is facing
 var direction = "up"
@@ -72,11 +73,15 @@ Structure:
 var last_ping_time = 0
 
 func _ready():
+	
+	Input.set_custom_mouse_cursor(cursor)
 	current_player = ONLINE_PLAYER.instance()
 	add_child(current_player)
 	current_player.position = $Player_Spawn_Location.global_position
 	
 	last_ping_time = OS.get_time().second
+	
+	
 
 func _physics_process(delta):
 	
