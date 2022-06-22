@@ -25,7 +25,7 @@ const SMALL_LIZARD = preload("res://Enemies/Lizard/Small_Lizard.tscn")
 const BIG_SLIME = preload("res://Enemies/Slime/Slime.tscn")
 const SMALL_SLIME = preload("res://Enemies/Slime/Small_Slime.tscn")
 const SNAKE_DMG = preload("res://Enemies/Snake/Snake_Dmg.tscn")
-const SNAKE_PSN = preload("res://Enemies/Snake/Snake_PSN.tscn")
+const SNAKE_PSN = preload("res://Enemies/Snake/Snake_Psn.tscn")
 const CHIMERA = preload("res://Enemies/Chimera/Chimera.tscn")
 
 const IMPLOSION = preload("res://Particle_Effects/Implosion.tscn")
@@ -52,7 +52,7 @@ var areas_to_spawn = []
 var enemies_to_spawn = []
 
 # used for testing. ensure test_level = 0
-var test_level = 25
+var test_level = 11
 
 func _ready():
 	Input.set_custom_mouse_cursor(cursor)
@@ -268,6 +268,8 @@ func number_of_mobs(mob):
 	var x = level
 	var out = 0.0
 	
+	# formulas found here:
+	# https://www.desmos.com/calculator/qkyiqcfsna
 	# equations for each type of mob
 	if mob == "small_slime":
 		if 0 < x and x < 15:

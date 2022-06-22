@@ -21,7 +21,7 @@ tile_data = PoolIntArray( -1966104, 13, 0, -1966103, 13, 0, -1966102, 13, 0, -19
 position = Vector2( -3, 15 )
 
 [node name="Slime2" parent="." instance=ExtResource( 2 )]
-position = Vector2( -195, 25 )
+position = Vector2( -184, 25 )
 
 [node name="Slime" parent="." instance=ExtResource( 2 )]
-position = Vector2( -193, -16 )
+position = Vector2( -182, -16 )
