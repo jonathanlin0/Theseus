@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Server.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=2]
@@ -16,6 +16,10 @@ size = 20
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=7]
 size = 20
 font_data = ExtResource( 2 )
 
@@ -95,6 +99,19 @@ margin_bottom = 60.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 4 )
 text = "Concurrent Fireballs: 3"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Packet_Cnt" type="Label" parent="Stats"]
+margin_left = 1.0
+margin_top = 82.0
+margin_right = 191.0
+margin_bottom = 107.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "Packets: 500 per second"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

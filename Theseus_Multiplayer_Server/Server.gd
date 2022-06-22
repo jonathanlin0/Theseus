@@ -93,6 +93,20 @@ var sent_game_over_msg = false
 
 var server_start_time = OS.get_unix_time()
 
+
+# used to make sure packet count is only changed every 3 seconds to prevent too much processing
+var last_changed_time = 0
+# keeps the packet counter
+var packets = {}
+"""
+Structure:
+	
+{
+	OS.get_unix_time(): 32,
+	OS.get_unix_time(): 4
+}
+"""
+
 func add_text(text):
 	var existing_text = $Console.text
 	existing_text = text + "\n" + existing_text
@@ -114,6 +128,36 @@ func _process(delta):
 	for given_player_id in fireballs.keys():
 		fireball_cnt += fireballs[given_player_id].size()
 	$Stats/Fireball_Cnt.text = "Concurrent Fireballs: " + str(fireball_cnt)
+	
+	# udpate the packet count every 3 seconds
+	if last_changed_time != OS.get_unix_time() and OS.get_unix_time() % 3 == 0:
+		
+		# erase packet counts past 10 seconds ago
+		for given_time in packets.keys():
+			if given_time <= (OS.get_unix_time() - 10):
+				packets.erase(given_time)
+			if given_time > (OS.get_unix_time() - 10):
+				break
+		
+		last_changed_time = OS.get_unix_time()
+		
+		var total_packet_count = 0
+		var total_packet_seconds = 0
+		
+		# average the packet count from the last 3 seconds, if they exist
+		var valid_seconds = packets.keys()
+		if valid_seconds.find(OS.get_unix_time() - 1) != -1:
+			total_packet_seconds += 1
+			total_packet_count += packets[OS.get_unix_time() - 1]
+		if valid_seconds.find(OS.get_unix_time() - 2) != -1:
+			total_packet_seconds += 1
+			total_packet_count += packets[OS.get_unix_time() - 2]
+		if valid_seconds.find(OS.get_unix_time() - 3) != -1:
+			total_packet_seconds += 1
+			total_packet_count += packets[OS.get_unix_time() - 3]
+		
+		if total_packet_seconds != 0:
+			$Stats/Packet_Cnt.text = "Packets: " + str(total_packet_count / total_packet_seconds) + " per second"
 	
 	for player_id in player_healths.keys():
 		if player_healths[player_id] <= 0:
@@ -267,16 +311,30 @@ func _Peer_Disconnected(player_id):
 	player_healths.erase(player_id)
 	
 
+func add_packet():
+	if packets.keys().find(OS.get_unix_time()) != -1:
+		var temp = packets[OS.get_unix_time()]
+		temp += 1
+		packets[OS.get_unix_time()] = temp
+	if packets.keys().find(OS.get_unix_time()) == -1:
+		packets[OS.get_unix_time()] = 1
+
 remote func send_position(pos, dir):
+	add_packet()
+	
 	var player_id = get_tree().get_rpc_sender_id()
 	player_positions[player_id] = pos
 	player_directions[player_id] = dir
 
 remote func send_fireballs(fireball_dict):
+	add_packet()
+	
 	var player_id = get_tree().get_rpc_sender_id()
 	fireballs[player_id] = fireball_dict
 
 remote func fetch_fireballs():
+	add_packet()
+	
 	var player_id = get_tree().get_rpc_sender_id()
 	var fireballs_copy = {}
 	for given_player_id in fireballs.keys():
@@ -286,6 +344,8 @@ remote func fetch_fireballs():
 	rpc_id(player_id, "return_fireballs", fireballs_copy)
 
 remote func fetch_test_data():
+	add_packet()
+	
 	var player_id = get_tree().get_rpc_sender_id()
 	var return_value = "test successful"
 	
@@ -293,10 +353,14 @@ remote func fetch_test_data():
 	add_text("Sent Test Data")
 
 remote func fetch_ping(start_time):
+	add_packet()
+	
 	var player_id = get_tree().get_rpc_sender_id()
 	rpc_id(player_id, "return_ping", start_time)
 
 remote func fetch_players():
+	add_packet()
+	
 	var player_id = get_tree().get_rpc_sender_id()
 	
 	# copy the player_positions dictionary
@@ -314,6 +378,8 @@ remote func fetch_players():
 	rpc_id(player_id, "return_players", temp_player_positions, temp_player_directions)
 
 remote func fetch_healths():
+	add_packet()
+	
 	var player_id = get_tree().get_rpc_sender_id()
 	
 	# copy the player_healths dictionary
@@ -326,6 +392,8 @@ remote func fetch_healths():
 	rpc_id(player_id, "return_healths", temp_player_healths)
 
 remote func fetch_my_health():
+	add_packet()
+	
 	var player_id = get_tree().get_rpc_sender_id()
 	
 	rpc_id(player_id, "return_my_health", player_healths[player_id])
