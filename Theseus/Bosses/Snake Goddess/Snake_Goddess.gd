@@ -3,6 +3,7 @@ extends KinematicBody2D
 
 const DAMAGE = preload("res://Enemies/Snake/Snake_Dmg.tscn")
 const POISON = preload("res://Enemies/Snake/Snake_Psn.tscn")
+const SMOKE = preload("res://Bosses/Snake Goddess/FailSmoke.tscn")
 
 
 var sleeping = true
@@ -139,6 +140,9 @@ func spawn_snake(iterations):
 				print(iterations)
 				spawn_snake(iterations+1)
 			else:
+				var smoke = SMOKE.instance()
+				get_parent().add_child(smoke)
+				smoke.global_position = self.position
 				#times_called = 0
 				print("SMOKE GRENADE")
 

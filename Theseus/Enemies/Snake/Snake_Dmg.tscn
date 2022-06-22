@@ -149,7 +149,6 @@ material = SubResource( 37 )
 position = Vector2( -65, -76 )
 frames = SubResource( 30 )
 animation = "slither"
-frame = 2
 playing = true
 centered = false
 
@@ -183,8 +182,14 @@ wait_time = 0.5
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( -0.5, -2.5 )
+scale = Vector2( 2.55, 1.35 )
+
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="body_entered" from="damage_area" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="damage_area" to="." method="_on_damage_area_body_exited"]
 [connection signal="timeout" from="knockback" to="." method="_on_knockback_timeout"]
 [connection signal="timeout" from="flash_timer" to="." method="_on_flash_timer_timeout"]
+[connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]

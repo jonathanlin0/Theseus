@@ -23,6 +23,8 @@ func _ready():
 	player_in_hitbox = false
 	$Health_Bar.setMax(master_data.snake_health)
 
+
+
 func _physics_process(delta):
 	$Health_Bar.setValue(health)
 	if !is_dead:
