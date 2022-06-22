@@ -107,6 +107,7 @@ func _physics_process(delta):
 		
 		$Canvas/Online_Multiplayer_Game_Over.visible = false
 		
+		# update positions in master_data
 		master_data.online_multiplayer_player_x = current_player.global_position.x
 		master_data.online_multiplayer_player_y = current_player.global_position.y
 		

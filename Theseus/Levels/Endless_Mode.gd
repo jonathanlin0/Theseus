@@ -44,23 +44,29 @@ var currently_level_delay = false
 # checks to see if mobs have spawned
 var spawned = false
 
+# used for the 5 seconds between each level
 var delay_start = OS.get_unix_time()
 var delay_time_left = 0
 
-# these two variables are temporary storage for the enemies and the locations of each enemy that need to be spawned
-var areas_to_spawn = []
-var enemies_to_spawn = []
-
-# used for testing. ensure test_level = 0
+# used for testing. set test level to 0 to start from level 1
 var test_level = 11
 
+# the enemies that need to be spawned
+var enemies_to_spawn = []
+# the locations of said enemies above that need to be spawned
+var areas_to_spawn = []
+
+
+# function runs when the level first loads
 func _ready():
+	# resets core data to the game
 	Input.set_custom_mouse_cursor(cursor)
 	master_data.is_endless = true
 	start_time = OS.get_unix_time()
 	master_data.level = 0
 	master_data._reset_all()
 	
+	# resets the mobs on the screen
 	master_data.endless_mob_deaths = []
 	master_data.endless_current_spawned_mobs = []
 	
@@ -68,7 +74,7 @@ func _ready():
 	if test_level != 0:
 		level = test_level
 		
-		
+		# this loop is used to adjust, with variability, the player's stats to the appropriate level for testing and debugging
 		for i in range(1, test_level):
 			
 			# adjust enemy health based on test level
@@ -86,6 +92,8 @@ func _ready():
 			for x in range(0, master_data.endless_num_power_ups):
 			
 				# 80% chance drop common
+				# 20% chance drop a rare
+				# does the correct buff according to rarity
 				if int(rand_range(0, 100)) > 20:
 					
 					var power_up = power_ups[randi() % power_ups.size()]
@@ -133,22 +141,20 @@ func _ready():
 							master_data.player_speed += 400
 						else:
 							x += 1
-				
-				# 20% chance to drop a rare
-			
-	
+
+
+# this function runs every frame (100+ times a second)
 func _physics_process(delta):
 	time_elapsed = round(OS.get_unix_time() - start_time)
 
-	
+	# ensures that wings (which increase player speed) won't spawn when the player is at speed max
 	if master_data.player_speed >= master_data.max_speed:
 		if power_ups_common.find(WINGS_COMMON) != -1:
 			power_ups_common.erase(WINGS_COMMON)
 		if power_ups_rare.find(WINGS_RARE) != -1:
 			power_ups_rare.erase(WINGS_RARE)
 	
-	
-
+	# updates the progress bar and appropriate text
 	$CanvasLayer/Level_Delay_Bar.value = percentage_left
 	
 	if $Level_Delay.time_left == 0:
@@ -237,11 +243,13 @@ func spawn_mobs():
 	
 	# for every mob
 	for key in mob_name_dict.keys():
+		# if all spawn locations are taken up, then the spawn locations are refilled
+		# this ensures that all spawn locations are used before doubling up on spawn locations
 		if spawn_locations.size() <= 1:
 			spawn_locations = $Spawn_locations.get_children()
 		
 
-		
+		# picks a random spawn location for each mob 
 		for i in range(0, round(number_of_mobs(key))):
 			
 			if spawn_locations.size() <= 1:
@@ -254,7 +262,7 @@ func spawn_mobs():
 			enemies_to_spawn.append(mob_name_dict[key])
 			
 			
-	# spawn the implosions
+	# spawn the implosion animations
 	for current_area in areas_to_spawn:
 		var implosion = IMPLOSION.instance()
 		implosion.scale.x = 0.07

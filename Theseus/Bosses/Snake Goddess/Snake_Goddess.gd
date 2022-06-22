@@ -14,6 +14,7 @@ var dead = false
 var velocity = Vector2()
 var speed = 0
 var health = master_data.snake_goddess_health
+var sees_player = false
 
 func _ready():
 	$Health_Bar.setMax(master_data.snake_goddess_health)
