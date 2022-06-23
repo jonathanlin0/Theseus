@@ -317,3 +317,6 @@ position = Vector2( 2680, 1746 )
 
 [node name="basic_chest10" parent="Chests" instance=ExtResource( 6 )]
 position = Vector2( 4094, 1823 )
+
+[node name="Position2D2" type="Position2D" parent="."]
+position = Vector2( 4429, 1573 )

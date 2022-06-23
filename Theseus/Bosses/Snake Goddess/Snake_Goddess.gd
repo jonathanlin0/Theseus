@@ -4,7 +4,9 @@ extends KinematicBody2D
 const DAMAGE = preload("res://Enemies/Snake/Snake_Dmg.tscn")
 const POISON = preload("res://Enemies/Snake/Snake_Psn.tscn")
 const SMOKE = preload("res://Bosses/Snake Goddess/FailSmoke.tscn")
-
+const STAIRS = preload("res://Bosses/stairs.tscn")
+const SIGN_FIVE = preload("res://Misc/Signs/sign_five.tscn")
+const CHEST = preload("res://Power_Ups/chests/rare_chest.tscn")
 
 var sleeping = true
 var previous_animation = "statue"
@@ -164,6 +166,19 @@ func _on_AnimatedSprite_animation_finished():
 		speed = 50
 		
 	if previous_animation == "death":
+		var chest = CHEST.instance()
+		chest.position = $chestpos.global_position
+		get_parent().add_child(chest)
+		var sign_five = SIGN_FIVE.instance()
+		sign_five.position.x = 4356
+		sign_five.position.y = 1573
+		get_parent().add_child(sign_five)
+		var next = STAIRS.instance()
+		next._set_destination("stage_three")
+		master_data.level = 2
+		next.position.x = 4429
+		next.position.y = 1573
+		get_parent().add_child(next)
 		queue_free()
 		
 	if previous_animation == "whack":
