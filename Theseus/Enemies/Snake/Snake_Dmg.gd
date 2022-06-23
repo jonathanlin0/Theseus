@@ -33,7 +33,6 @@ var diff_x = 0
 var diff_y = 0
 
 var can_see = false
-var sees_player = false
 
 func _ready():
 	player_in_hitbox = false

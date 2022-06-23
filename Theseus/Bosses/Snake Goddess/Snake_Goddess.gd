@@ -21,6 +21,9 @@ var speed = 0
 var health = master_data.snake_goddess_health
 var sees_player = false
 var dir = "left"
+var is_frozen = false
+var knockback = false
+
 
 func _ready():
 	$Health_Bar.setMax(master_data.snake_goddess_health)
@@ -76,9 +79,12 @@ func whack():
 
 func damage(dmg):
 	if can_be_damaged:
-		health-=dmg
 		$Health_Bar.setValue(health)
-		#flash
+		health -= dmg
+		$Enemy_Abstract_Class.knockback()
+		$Enemy_Abstract_Class.flash()
+		$Enemy_Abstract_Class.damage_text(dmg)
+		$Enemy_Abstract_Class.damage_audio()
 	if health <= 0:
 		dead = true
 		$AnimatedSprite.play("death")

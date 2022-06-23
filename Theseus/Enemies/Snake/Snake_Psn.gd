@@ -37,7 +37,6 @@ var diff_x = 0
 var diff_y = 0
 
 var can_see = false
-var sees_player = false
 
 func make_ray():
 	var i = 0

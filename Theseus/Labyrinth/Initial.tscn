@@ -4,7 +4,7 @@
 [ext_resource path="res://Power_Ups/chests/rare_chest.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Power_Ups/chests/basic_chest.tscn" type="PackedScene" id=3]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )

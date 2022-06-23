@@ -29,7 +29,7 @@ position = Vector2( 1649, 56 )
 position = Vector2( 185, 100 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1750, 1229 )
+position = Vector2( 3941, 1404 )
 
 [node name="Snake_Goddess" parent="." instance=ExtResource( 5 )]
 position = Vector2( 4328, 1480 )
