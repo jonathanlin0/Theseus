@@ -325,25 +325,30 @@ animation = "frozen"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -2, 16.5 )
 scale = Vector2( 1.35965, 0.295263 )
 shape = SubResource( 63 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -25, -7 )
 shape = SubResource( 67 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 24, -16 )
 shape = SubResource( 68 )
 
 [node name="lion_box" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lion_box"]
 position = Vector2( -76, 6 )
 shape = SubResource( 61 )
 
 [node name="goat_box" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="goat_box"]
 position = Vector2( 95, 11 )
@@ -371,12 +376,14 @@ wait_time = 1.3
 wait_time = 0.5
 
 [node name="bump_area" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bump_area"]
 position = Vector2( -1.5, 27.5 )
 shape = SubResource( 64 )
 
 [node name="Enemy_Abstract_Class" parent="." instance=ExtResource( 11 )]
+visible = false
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="body_entered" from="lion_box" to="." method="_on_lion_box_body_entered"]

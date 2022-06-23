@@ -175,19 +175,21 @@ material = SubResource( 37 )
 position = Vector2( -65, -76 )
 frames = SubResource( 30 )
 animation = "slither"
-frame = 1
 playing = true
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.75, 5.0625 )
 shape = SubResource( 31 )
 
 [node name="CollisionShape2DHead" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -20, -9 )
 shape = SubResource( 32 )
 
 [node name="damage_area" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, -4.5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="damage_area"]
@@ -205,10 +207,12 @@ rect_scale = Vector2( 0.5, 0.5 )
 stream = ExtResource( 7 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 position = Vector2( -0.5, -2.5 )
 scale = Vector2( 2.55, 1.35 )
 
 [node name="Enemy_Abstract_Class" parent="." instance=ExtResource( 8 )]
+visible = false
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="body_entered" from="damage_area" to="." method="_on_damage_area_body_entered"]
