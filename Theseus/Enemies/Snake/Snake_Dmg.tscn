@@ -172,39 +172,45 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 37 )
+position = Vector2( -65, -76 )
 frames = SubResource( 30 )
 animation = "slither"
 playing = true
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 18.75, 32.5625 )
+position = Vector2( 0.75, 5.0625 )
 shape = SubResource( 31 )
 
 [node name="CollisionShape2DHead" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( -2, 18.5 )
+position = Vector2( -20, -9 )
 shape = SubResource( 32 )
 
 [node name="damage_area" type="Area2D" parent="."]
+position = Vector2( 0, -4.5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="damage_area"]
-visible = false
-position = Vector2( -20.5, 24 )
+position = Vector2( -44, 4 )
 shape = SubResource( 33 )
 
 [node name="Health_Bar" parent="." instance=ExtResource( 5 )]
-margin_left = -33.0
-margin_top = 2.0
-margin_right = 67.0
-margin_bottom = 42.0
+margin_left = -50.0
+margin_top = -25.0
+margin_right = 50.0
+margin_bottom = 15.0
 rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 
-[node name="Enemy_Abstract_Class" parent="." instance=ExtResource( 8 )]
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( -0.5, -2.5 )
+scale = Vector2( 2.55, 1.35 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="body_entered" from="damage_area" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="damage_area" to="." method="_on_damage_area_body_exited"]
+[connection signal="timeout" from="knockback" to="." method="_on_knockback_timeout"]
+[connection signal="timeout" from="flash_timer" to="." method="_on_flash_timer_timeout"]
+[connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
