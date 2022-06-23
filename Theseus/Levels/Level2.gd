@@ -1,9 +1,10 @@
 extends Node2D
 
 const STAIRS = preload("res://Bosses/stairs.tscn")
+var cursor = load("res://Misc/Sprites/cursor_cross.png")
 
 func _ready():
-	$AnimationPlayer.play("fade")
+	Input.set_custom_mouse_cursor(cursor)
 	master_data.level = 2
 	master_data.music = "stage"
 

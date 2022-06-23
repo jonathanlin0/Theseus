@@ -169,6 +169,8 @@ func damage(dmg):
 		$Enemy_Abstract_Class.flash()
 		$Enemy_Abstract_Class.damage_text(dmg)
 		$Enemy_Abstract_Class.damage_audio()
+	if health <= 0:
+		get_tree().change_scene("res://Misc/Input_Username.tscn")
 
 func trigger():
 	triggered = true

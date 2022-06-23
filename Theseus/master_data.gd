@@ -63,8 +63,8 @@ var damage_text_time = 0.4
 var visible_enemies = []
 
 # used for score calculations
-var start_time = 0
-var end_time = 100
+var start_time = OS.get_unix_time()
+var end_time = OS.get_unix_time() + 5021
 
 var is_multiplayer = false
 var is_endless = false
