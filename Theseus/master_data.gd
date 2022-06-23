@@ -175,7 +175,7 @@ func get_unit_vector(x_difference, y_difference):
 	var out = Vector2(0,0)
 	
 	if hypo == 0:
-		out.x = 1
+		out.x = 0
 		out.y = 1
 	else:
 		out.x = x_difference / hypo
