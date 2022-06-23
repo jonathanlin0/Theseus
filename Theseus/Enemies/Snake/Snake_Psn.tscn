@@ -15,26 +15,6 @@ shader = ExtResource( 6 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 8
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=2]
-flags = 8
-atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=3]
-flags = 8
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=4]
-flags = 8
-atlas = ExtResource( 1 )
-region = Rect2( 288, 0, 96, 96 )
-
 [sub_resource type="AtlasTexture" id=22]
 flags = 8
 atlas = ExtResource( 2 )
@@ -130,13 +110,28 @@ flags = 8
 atlas = ExtResource( 4 )
 region = Rect2( 192, 0, 96, 96 )
 
+[sub_resource type="AtlasTexture" id=1]
+flags = 8
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 8
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 8
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 8
+atlas = ExtResource( 1 )
+region = Rect2( 288, 0, 96, 96 )
+
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
-"loop": true,
-"name": "idle",
-"speed": 7.0
-}, {
 "frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
 "loop": true,
 "name": "death",
@@ -156,6 +151,11 @@ animations = [ {
 "loop": true,
 "name": "charge_up",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 7.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=34]
@@ -164,7 +164,7 @@ extents = Vector2( 28, 7 )
 [sub_resource type="RectangleShape2D" id=35]
 extents = Vector2( 16, 18.25 )
 
-[node name="SnakePsn" type="KinematicBody2D"]
+[node name="Snake_Psn" type="KinematicBody2D"]
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -172,7 +172,6 @@ material = SubResource( 36 )
 position = Vector2( -63, -77 )
 frames = SubResource( 5 )
 animation = "slither"
-frame = 1
 playing = true
 centered = false
 

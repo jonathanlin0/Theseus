@@ -27,6 +27,8 @@ var sees_player = false
 
 var regen = true
 
+var is_frozen = false
+
 const SPIT = preload("res://Bosses/Lizard_Boss/Big_Spit.tscn")
 const BOSS_GATE = preload("res://Bosses/boss_gate.tscn")
 const STAIRS = preload("res://Bosses/stairs.tscn")
@@ -73,7 +75,7 @@ func _physics_process(delta):
 	$Health_Bar.setValue(health)
 	if health <= 0:
 		dead = true
-	if !dead:
+	if !dead and !is_frozen:
 		var difference_x = master_data.player_x - position.x
 		var difference_y = master_data.player_y - position.y
 		var net_distance = 0
@@ -118,13 +120,12 @@ func trigger():
 func damage(dmg):
 	if !dead && triggered:
 		$regen.start()
-		regen = false
-		_randomize()
 		health -= dmg
-		flash()
-		var text = DAMAGE_TEXT.instance()
-		text.amount = dmg
-		add_child(text)
+		regen = false
+		$Enemy_Abstract_Class.flash()
+		$Enemy_Abstract_Class.damage_text(dmg)
+		$Enemy_Abstract_Class.damage_audio()
+		_randomize()
 	if health <= 0:
 		moving = false
 		triggered = false

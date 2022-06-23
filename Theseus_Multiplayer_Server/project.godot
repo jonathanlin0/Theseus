@@ -12,7 +12,8 @@ config_version=4
 
 config/name="Theseus Multiplayer Server"
 run/main_scene="res://Server.tscn"
-config/icon="res://icon.png"
+boot_splash/image="res://server_boot_splash.png"
+config/icon="res://server_icon.png"
 
 [display]
 

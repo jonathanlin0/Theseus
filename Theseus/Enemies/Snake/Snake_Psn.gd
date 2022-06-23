@@ -185,6 +185,9 @@ func damage(dmg):
 		$Enemy_Abstract_Class.flash()
 		$Enemy_Abstract_Class.damage_text(dmg)
 		$Enemy_Abstract_Class.damage_audio()
+	if health <= 0:
+		dead()
+	
 	
 
 func poison():

@@ -4,7 +4,7 @@ extends Node
 # used to hold information and other global, useful functions
 # similar attributes grouped together for easier balance changes for interactions between character, enemies, and bosses
 
-var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit", "Red_Spirit", "Gold_Spirit", "Snake_Dmg", "SnakePsn", "Snake_Goddess", "Minotaur"]
+var enemy_names = ["Slime", "Small_Slime", "Small_Lizard", "Lizard_Boss", "Chimera", "Green_Spirit", "Red_Spirit", "Gold_Spirit", "Snake_Dmg", "SnakePsn", "Snake_Psn", "Snake_Goddess", "Minotaur"]
 var powerups = ["cutler_common", "cutler_rare", "healthcanister_common", "healthcanister_rare", "manacanister_common", "manacanister_rare", "rangedeye_common", "rangedeye_rare", "wings_common", "wings_rare"]
 var colors = {
 	"red":Vector3(1.0, 0, 0),

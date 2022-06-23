@@ -170,6 +170,7 @@ func _physics_process(delta):
 		position.y -= 4
 
 func dead():
+	
 	$AnimatedSprite.play("death")
 	$CollisionShape2D.disabled = true
 	$CollisionShape2DHead.disabled = true
@@ -182,9 +183,15 @@ func damage(dmg):
 		$Enemy_Abstract_Class.flash()
 		$Enemy_Abstract_Class.damage_text(dmg)
 		$Enemy_Abstract_Class.damage_audio()
+	if health <= 0:
+		dead()
 	
 
 func _on_AnimatedSprite_animation_finished():
+	
+	if is_dead:
+		master_data.endless_mob_deaths.append(get_instance_id())
+		queue_free()
 	if previous_animation == "charge_up":
 		previous_animation = "attack"
 		$AnimatedSprite.play("attack")
@@ -193,9 +200,6 @@ func _on_AnimatedSprite_animation_finished():
 		$AnimatedSprite.play("slither")
 		can_player_take_damage = true
 	
-	if is_dead:
-		master_data.endless_mob_deaths.append(get_instance_id())
-		queue_free()
 
 
 func _on_knockback_timeout():

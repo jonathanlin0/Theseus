@@ -1,8 +1,8 @@
 [gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Menu/Sprites/titlescreen_47.png" type="Texture" id=1]
-[ext_resource path="res://Menu/Sprites/menu_play_hover.png" type="Texture" id=2]
-[ext_resource path="res://Menu/Sprites/menu_play.png" type="Texture" id=3]
+[ext_resource path="res://Menu/menu_play_yellow_hover.png" type="Texture" id=2]
+[ext_resource path="res://Menu/menu_play_yellow.png" type="Texture" id=3]
 [ext_resource path="res://Menu/Sprites/menu_credits_hover.png" type="Texture" id=4]
 [ext_resource path="res://Menu/Sprites/menu_multiplayer_hover.png" type="Texture" id=5]
 [ext_resource path="res://Menu/Sprites/menu_credits.png" type="Texture" id=6]
@@ -17,8 +17,8 @@
 [ext_resource path="res://Sound Effects/sfx_menu_play.wav" type="AudioStream" id=15]
 [ext_resource path="res://Sound Effects/sfx_menu_reg.wav" type="AudioStream" id=16]
 [ext_resource path="res://music/title screen music.mp3" type="AudioStream" id=17]
-[ext_resource path="res://Menu/Sprites/menu_endless_hover.png" type="Texture" id=18]
-[ext_resource path="res://Menu/Sprites/menu_endless.png" type="Texture" id=19]
+[ext_resource path="res://Menu/menu_endless_yellow_hover.png" type="Texture" id=18]
+[ext_resource path="res://Menu/menu_endless_yellow.png" type="Texture" id=19]
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 8
@@ -230,7 +230,7 @@ script = ExtResource( 12 )
 position = Vector2( 238, 135 )
 scale = Vector2( 1.05, 1.05 )
 frames = SubResource( 1 )
-frame = 33
+frame = 14
 playing = true
 
 [node name="Play" type="TextureButton" parent="."]

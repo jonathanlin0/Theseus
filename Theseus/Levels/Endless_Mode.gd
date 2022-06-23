@@ -49,7 +49,7 @@ var delay_start = OS.get_unix_time()
 var delay_time_left = 0
 
 # used for testing. set test level to 0 to start from level 1
-var test_level = 0
+var test_level = 9
 
 # the enemies that need to be spawned
 var enemies_to_spawn = []
@@ -183,6 +183,16 @@ func _physics_process(delta):
 		# proceed to the next level after all mobs are killed
 		# increase enemy health every other level
 		# increase powerups dropped each level by 1 every 5 levels
+		
+		# TEMP
+		print("")
+		#print(master_data.endless_current_spawned_mobs)
+		#print(master_data.endless_mob_deaths)
+		for temp_obj in master_data.endless_current_spawned_mobs:
+			if master_data.endless_mob_deaths.find(temp_obj) == -1:
+				print(instance_from_id(temp_obj))
+		
+		# TEMP
 		if master_data.endless_current_spawned_mobs.size() > 0 and spawned == true:
 			master_data.endless_mob_deaths.sort()
 			master_data.endless_current_spawned_mobs.sort()
