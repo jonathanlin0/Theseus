@@ -149,6 +149,7 @@ material = SubResource( 37 )
 position = Vector2( -65, -76 )
 frames = SubResource( 30 )
 animation = "slither"
+frame = 3
 playing = true
 centered = false
 

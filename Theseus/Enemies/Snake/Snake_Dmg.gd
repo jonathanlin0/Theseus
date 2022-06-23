@@ -22,7 +22,7 @@ var player_in_hitbox = false
 #vars for rays so to give "vision"
 var vision_angle_total = deg2rad(360)
 var ray_diff = deg2rad(2)
-var vision = master_data.slime_distance
+var vision = master_data.snake_distance
 var player_angle = 0
 
 var diff_x = 0
@@ -56,7 +56,7 @@ func make_ray():
 	add_child(ray2)
 	add_child(ray_main)
 
-
+#update the angle of player relative to SELF
 func update_player():
 	diff_x = master_data.player_global_x - global_position.x
 	diff_y = master_data.player_global_y - global_position.y
@@ -73,7 +73,7 @@ func update_player():
 			player_angle = atan2(diff_y, diff_x)+PI/2 + 2*stupid
 		else:
 			player_angle = atan2(diff_y, diff_x)+PI/2
-		
+
 
 func orient_rays():
 	#orient rays toeward player

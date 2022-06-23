@@ -73,7 +73,7 @@ var slime_distance = 225
 var chest_distance = 35
 var sign_distance = 25
 var spirit_distance = 150
-var snake_distance = 175
+var snake_distance = 200
 
 # collection of the attack range of emtities
 var small_lizard_attack_range = 150
@@ -173,8 +173,14 @@ func get_unit_vector(x_difference, y_difference):
 	var hypo = sqrt((x_difference * x_difference) + (y_difference * y_difference))
 	
 	var out = Vector2(0,0)
-	out.x = x_difference / hypo
-	out.y = y_difference / hypo
+	
+	if hypo == 0:
+		out.x = 1
+		out.y = 1
+	else:
+		out.x = x_difference / hypo
+		out.y = y_difference / hypo
+	
 	return out
 
 #returns the hypotnuse length given 2 positions
