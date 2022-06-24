@@ -86,7 +86,7 @@ func _on_credits_finished():
 
 
 func _on_multiTimer_timeout():
-	get_tree().change_scene("res://Misc/Multiplayer.tscn")
+	get_tree().change_scene("res://Menu/Multiplayer_Selection.tscn")
 
 
 func _on_Endless_pressed():
