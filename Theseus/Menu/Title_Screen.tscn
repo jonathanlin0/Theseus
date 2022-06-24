@@ -4,9 +4,9 @@
 [ext_resource path="res://Menu/menu_play_yellow_hover.png" type="Texture" id=2]
 [ext_resource path="res://Menu/menu_play_yellow.png" type="Texture" id=3]
 [ext_resource path="res://Menu/Sprites/menu_credits_hover.png" type="Texture" id=4]
-[ext_resource path="res://Menu/Sprites/menu_multiplayer_hover.png" type="Texture" id=5]
+[ext_resource path="res://Menu/menu_multiplayer_yellow_hover.png" type="Texture" id=5]
 [ext_resource path="res://Menu/Sprites/menu_credits.png" type="Texture" id=6]
-[ext_resource path="res://Menu/Sprites/menu_multiplayer.png" type="Texture" id=7]
+[ext_resource path="res://Menu/menu_multiplayer_yellow.png" type="Texture" id=7]
 [ext_resource path="res://Menu/Sprites/menu_exit.png" type="Texture" id=8]
 [ext_resource path="res://Menu/Sprites/menu_controls.png" type="Texture" id=9]
 [ext_resource path="res://Menu/Sprites/menu_exit_hover.png" type="Texture" id=10]
@@ -230,7 +230,7 @@ script = ExtResource( 12 )
 position = Vector2( 238, 135 )
 scale = Vector2( 1.05, 1.05 )
 frames = SubResource( 1 )
-frame = 33
+frame = 9
 playing = true
 
 [node name="Play" type="TextureButton" parent="."]
@@ -311,8 +311,8 @@ margin_left = 145.0
 margin_top = 201.0
 margin_right = 323.0
 margin_bottom = 221.0
-texture_normal = ExtResource( 5 )
-texture_hover = ExtResource( 7 )
+texture_normal = ExtResource( 7 )
+texture_hover = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

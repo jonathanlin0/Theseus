@@ -198,8 +198,10 @@ func dead():
 func flash():
 	# good flash shader tutorial
 	# https://www.youtube.com/watch?v=ctevHwoRl24
+	$Sound_Effects/Hit.play()
 	$CharacterAnimatedSprite.material.set_shader_param("flash_modifier", 1)
-	$flash_timer.start()
+	$CharacterAnimatedSprite.material.set_shader_param("flash_color", master_data.colors["white"])
+	$flash_timer.start(master_data.flash_time)
 	
 
 func _knockback(var dir, var powa):

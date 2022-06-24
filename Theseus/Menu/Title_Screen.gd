@@ -3,6 +3,7 @@ extends Node2D
 var cursor = load("res://Misc/Sprites/cursor.png")
 
 var selection = false
+var last_pressed_button = ""
 
 func _ready():
 	selection = false
@@ -19,7 +20,10 @@ func _ready():
 
 
 func _on_Play_pressed():
+	if selection and last_pressed_button == "play":
+		_on_Timer_timeout()
 	if !selection:
+		last_pressed_button = "play"
 		var value = load("res://Menu/Sprites/menu_play_click.png")
 		$Play/play.play()
 		$Play/Timer.start()
@@ -45,7 +49,10 @@ func _on_Leaderboard_pressed():
 
 
 func _on_Multiplayer_pressed():
+	if selection and last_pressed_button == "multiplayer":
+		_on_multiTimer_timeout()
 	if !selection:
+		last_pressed_button = "multiplayer"
 		var value = load("res://Menu/Sprites/menu_multiplayer_click.png")
 		$Multiplayer.set_normal_texture(value)
 		$Multiplayer/multiplayer.play()
@@ -83,7 +90,10 @@ func _on_multiTimer_timeout():
 
 
 func _on_Endless_pressed():
+	if selection and last_pressed_button == "endless":
+		_on_endlessTimer_timeout()
 	if !selection:
+		last_pressed_button = "endless"
 		var value = load("res://Menu/Sprites/menu_endless_click.png")
 		$Endless/endless.play()
 		$Endless/endlessTimer.start()
