@@ -53,16 +53,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Console" type="Label" parent="."]
+[node name="Black_Console_Background" type="ColorRect" parent="."]
 margin_left = 257.0
 margin_top = 295.0
 margin_right = 452.0
 margin_bottom = 513.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Console" type="Label" parent="."]
+margin_left = 262.0
+margin_top = 300.0
+margin_right = 447.0
+margin_bottom = 508.0
+custom_colors/font_color = Color( 0.184314, 1, 0, 1 )
 custom_constants/line_spacing = -2
 custom_fonts/font = SubResource( 3 )
-text = "output from games go here
-just a text placeholder for testing and stuff"
+text = "Dashboard Started"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

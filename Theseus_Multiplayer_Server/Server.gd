@@ -287,7 +287,7 @@ func _process(delta):
 func start_server():
 	network.create_server(port, max_players)
 	get_tree().set_network_peer(network)
-	print("Server started")
+	add_text("Server started")
 	
 	network.connect("peer_connected", self, "_Peer_Connected")
 	network.connect("peer_disconnected", self, "_Peer_Disconnected")
@@ -350,7 +350,7 @@ remote func fetch_test_data():
 	var return_value = "test successful"
 	
 	rpc_id(player_id, "return_test_data", return_value)
-	add_text("Sent Test Data")
+	add_text("Sent Test Data to Client")
 
 remote func fetch_ping(start_time):
 	add_packet()
