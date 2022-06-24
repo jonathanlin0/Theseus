@@ -107,6 +107,12 @@ Structure:
 }
 """
 
+# the last recorded process time rate
+var last_process_time = 0
+# the time between each frame
+var delta_var = 0.1
+
+
 func add_text(text):
 	var existing_text = $Console.text
 	existing_text = text + "\n" + existing_text
@@ -119,6 +125,8 @@ func _ready():
 	
 
 func _process(delta):
+	
+	delta_var = delta
 	
 	# display how many concurrent players
 	$Stats/Current_Players.text = "Concurrent Players: " + str(current_players)
@@ -411,3 +419,14 @@ remote func restart_online_multiplayer_game():
 	
 	for player_id in player_positions.keys():
 		rpc_id(player_id, "game_over", "")
+
+
+func _on_Process_Update_timeout():
+	
+	
+	var current_process_time = 1/delta_var
+	
+	if (current_process_time - last_process_time) > 30 or (last_process_time - current_process_time) > 30:
+		$Stats/Process_Cnt.text = "Processes: " + str(round(current_process_time)) + " per second"
+	
+	last_process_time = current_process_time

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Server.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/orange kid.ttf" type="DynamicFontData" id=2]
@@ -11,6 +11,10 @@ font_data = ExtResource( 2 )
 size = 10
 font_data = ExtResource( 2 )
 
+[sub_resource type="DynamicFont" id=9]
+size = 25
+font_data = ExtResource( 2 )
+
 [sub_resource type="DynamicFont" id=2]
 size = 20
 font_data = ExtResource( 2 )
@@ -20,7 +24,11 @@ size = 20
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=7]
-size = 20
+size = 18
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 18
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -42,9 +50,9 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="."]
-margin_top = 270.0
+margin_top = 275.0
 margin_right = 480.0
-margin_bottom = 290.0
+margin_bottom = 295.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Multiplayer Server Dashboard"
@@ -55,9 +63,9 @@ __meta__ = {
 
 [node name="Black_Console_Background" type="ColorRect" parent="."]
 margin_left = 257.0
-margin_top = 295.0
+margin_top = 299.0
 margin_right = 452.0
-margin_bottom = 513.0
+margin_bottom = 517.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,9 +73,9 @@ __meta__ = {
 
 [node name="Console" type="Label" parent="."]
 margin_left = 262.0
-margin_top = 300.0
+margin_top = 304.0
 margin_right = 447.0
-margin_bottom = 508.0
+margin_bottom = 512.0
 custom_colors/font_color = Color( 0.184314, 1, 0, 1 )
 custom_constants/line_spacing = -2
 custom_fonts/font = SubResource( 3 )
@@ -79,19 +87,27 @@ __meta__ = {
 
 [node name="Stats" type="ColorRect" parent="."]
 margin_left = 25.0
-margin_top = 295.0
+margin_top = 299.0
 margin_right = 215.0
-margin_bottom = 515.0
+margin_bottom = 519.0
 color = Color( 0.811765, 0.811765, 0.811765, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Online_Label" type="Label" parent="Stats"]
+margin_right = 190.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0.694118, 0.12549, 1 )
+custom_fonts/font = SubResource( 9 )
+text = "Status: Online"
+align = 1
+
 [node name="Current_Players" type="Label" parent="Stats"]
 margin_left = 10.0
-margin_top = 10.0
+margin_top = 59.0
 margin_right = 180.0
-margin_bottom = 35.0
+margin_bottom = 84.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Concurrent Players: 1"
@@ -102,9 +118,9 @@ __meta__ = {
 
 [node name="Fireball_Cnt" type="Label" parent="Stats"]
 margin_left = 10.0
-margin_top = 35.0
+margin_top = 84.0
 margin_right = 180.0
-margin_bottom = 60.0
+margin_bottom = 109.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 4 )
 text = "Concurrent Fireballs: 3"
@@ -114,13 +130,24 @@ __meta__ = {
 }
 
 [node name="Packet_Cnt" type="Label" parent="Stats"]
-margin_left = 1.0
-margin_top = 82.0
-margin_right = 191.0
-margin_bottom = 107.0
+margin_top = 138.0
+margin_right = 190.0
+margin_bottom = 163.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 7 )
 text = "Packets: 500 per second"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Process_Cnt" type="Label" parent="Stats"]
+margin_top = 162.0
+margin_right = 190.0
+margin_bottom = 187.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Processes: 4533 per second"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -168,3 +195,8 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Process_Update" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Process_Update" to="." method="_on_Process_Update_timeout"]
