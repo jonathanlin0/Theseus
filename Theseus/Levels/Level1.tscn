@@ -238,7 +238,7 @@ position = Vector2( 2250, 222 )
 position = Vector2( 2057, 71 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 117, 64 )
+position = Vector2( 1351, 19 )
 z_index = 100
 
 [node name="Lizard_Boss" parent="." instance=ExtResource( 11 )]
@@ -246,10 +246,10 @@ position = Vector2( 2645, 226 )
 z_index = 101
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -178.0
-margin_top = -99.0
-margin_right = 435.0
-margin_bottom = 249.0
+margin_left = -1248.0
+margin_top = 323.0
+margin_right = -635.0
+margin_bottom = 671.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
