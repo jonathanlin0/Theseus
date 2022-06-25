@@ -32,6 +32,8 @@ var endless_enemy_health_break = 2
 # every x levels that num of powerups increases by 1
 var endless_powerup_break = 5
 
+# variable to see if the client is connected to a server
+var online_multiplayer_is_connected = false
 # holds all the positions of the online multiplayer enemies
 var online_multiplayer_players = {}
 # holds all the directions of the online multiplayer enemies
@@ -70,8 +72,8 @@ var is_multiplayer = false
 var is_endless = false
 
 # player info
-var max_health = 100000
-var health = 100000
+var max_health = 100
+var health = 100
 var max_mana = 100
 var mana = 100
 var level = 1

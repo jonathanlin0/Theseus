@@ -8,9 +8,13 @@ var ip = "127.0.0.1"
 var port = 1909
 
 func _ready():
-	connect_to_server()
+	initial_connect_to_server()
 	
-	
+
+#func _process(delta):
+#	pass
+
+# this function is used to test the sending of data between the client and server
 func fetch_test_data():
 	# rpc() calls every peer on the network
 	# rpc_id() allows you to call a specific peer on the network
@@ -21,8 +25,10 @@ func fetch_test_data():
 	# 0 is everybody
 	# 1 is the server
 	# any other number is the specific peer you want to connect to
-	print("hi")
 	rpc_id(1, "fetch_test_data")
+
+func fetch_connection():
+	rpc_id(1, "fetch_connection")
 
 func send_position(pos, direction):
 	rpc_unreliable_id(1, "send_position", pos, direction)
@@ -48,8 +54,15 @@ func fetch_my_health():
 func restart_online_multiplayer_game():
 	rpc_id(1, "restart_online_multiplayer_game")
 
+func temp():
+	return network.get_channel_count()
+
 remote func return_test_data(test_val):
-	print(test_val)
+	# could do something with the returned test data here
+	pass
+
+remote func return_connection():
+	master_data.online_multiplayer_is_connected = true
 
 remote func return_fireballs(fireballs_input):
 	master_data.online_multiplayer_fireballs = fireballs_input
@@ -71,16 +84,26 @@ remote func game_over(game_status):
 	master_data.online_multiplayer_status = game_status
 	
 
-func connect_to_server():
+func initial_connect_to_server():
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)
 	
 	network.connect("connection_failed", self, "_OnConnectionFailed")
 	network.connect("connection_succeeded", self, "_OnConnectionSucceeded")
 
+func connect_to_server():
+	if network.get_peer_port(1) != 0:
+		master_data.online_multiplayer_is_connected = true
+	if network.get_peer_port(1) == 0:
+		master_data.online_multiplayer_is_connected = false
+		network.create_client(ip, port)
+		get_tree().set_network_peer(network)
+		
+		network.connect("connection_failed", self, "_OnConnectionFailed")
+		network.connect("connection_succeeded", self, "_OnConnectionSucceeded")
+
 func _OnConnectionFailed():
 	print("Failed to connect")
 
 func _OnConnectionSucceeded():
 	print("Successfully Connected")
-	fetch_test_data()

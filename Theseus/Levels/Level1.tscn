@@ -125,7 +125,7 @@ position = Vector2( 486, -52 )
 position = Vector2( 273, 432 )
 
 [node name="Slime9" parent="Big_Slimes" instance=ExtResource( 3 )]
-position = Vector2( 937, -74 )
+position = Vector2( 1188, -251 )
 
 [node name="Slime10" parent="Big_Slimes" instance=ExtResource( 3 )]
 position = Vector2( 805, 246 )
@@ -238,7 +238,7 @@ position = Vector2( 2250, 222 )
 position = Vector2( 2057, 71 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1351, 19 )
+position = Vector2( 122, 53 )
 z_index = 100
 
 [node name="Lizard_Boss" parent="." instance=ExtResource( 11 )]
@@ -246,10 +246,10 @@ position = Vector2( 2645, 226 )
 z_index = 101
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -1248.0
-margin_top = 323.0
-margin_right = -635.0
-margin_bottom = 671.0
+margin_left = -191.0
+margin_top = -112.0
+margin_right = 422.0
+margin_bottom = 236.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false

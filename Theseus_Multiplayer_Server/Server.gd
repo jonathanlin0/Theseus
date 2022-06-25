@@ -405,6 +405,13 @@ remote func fetch_my_health():
 	var player_id = get_tree().get_rpc_sender_id()
 	
 	rpc_id(player_id, "return_my_health", player_healths[player_id])
+
+remote func fetch_connection():
+	add_packet()
+	
+	var player_id = get_tree().get_rpc_sender_id()
+	
+	rpc_id(player_id, "return_connection")
 	
 remote func restart_online_multiplayer_game():
 	for player_id in player_healths.keys():

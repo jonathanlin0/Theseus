@@ -1,5 +1,7 @@
 extends Control
 
+# pause menu is currently at z index (layer) 100
+# most other items that cover the screen, like no connection for multiplayer or game ending on multiplayer, are at layer 50
 
 var showing_controls = false
 
