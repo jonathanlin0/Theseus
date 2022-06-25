@@ -320,12 +320,13 @@ func _Peer_Disconnected(player_id):
 	
 
 func add_packet():
-	if packets.keys().find(OS.get_unix_time()) != -1:
-		var temp = packets[OS.get_unix_time()]
+	var cur_time = OS.get_unix_time()
+	if packets.keys().find(cur_time) != -1:
+		var temp = packets[cur_time]
 		temp += 1
-		packets[OS.get_unix_time()] = temp
-	if packets.keys().find(OS.get_unix_time()) == -1:
-		packets[OS.get_unix_time()] = 1
+		packets[cur_time] = temp
+	if packets.keys().find(cur_time) == -1:
+		packets[cur_time] = 1
 
 remote func send_position(pos, dir):
 	add_packet()
@@ -433,7 +434,7 @@ func _on_Process_Update_timeout():
 	
 	var current_process_time = 1/delta_var
 	
-	if (current_process_time - last_process_time) > 30 or (last_process_time - current_process_time) > 30:
+	if (current_process_time - last_process_time) > 1 or (last_process_time - current_process_time) > 1:
 		$Stats/Process_Cnt.text = "Processes: " + str(round(current_process_time)) + " per second"
 	
 	last_process_time = current_process_time

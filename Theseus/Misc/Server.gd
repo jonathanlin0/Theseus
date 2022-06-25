@@ -54,8 +54,6 @@ func fetch_my_health():
 func restart_online_multiplayer_game():
 	rpc_id(1, "restart_online_multiplayer_game")
 
-func temp():
-	return network.get_channel_count()
 
 remote func return_test_data(test_val):
 	# could do something with the returned test data here

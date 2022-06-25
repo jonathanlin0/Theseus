@@ -85,8 +85,7 @@ func _ready():
 	
 
 func _physics_process(delta):
-	
-	$Ping.text = str(Server.temp())
+	$Ping.text = ("Ping: 10 ms")
 	
 	if master_data.online_multiplayer_is_connected == false:
 		if OS.get_unix_time() % 3 == 0:

@@ -33,6 +33,8 @@ func _on_Fireball_body_entered(body):
 	if body.name.find("Player") != -1:
 		if body.user_id != player_id:
 			if get_parent().player_healths.keys().find(body.user_id) != -1:
+				if get_tree().get_current_scene().name == "Server":
+					get_parent().add_text("Fireball " + str(get_instance_id()) + " hit user " + str(body.user_id))
 				get_parent().player_healths[body.user_id] -= damage
 			die()
 
