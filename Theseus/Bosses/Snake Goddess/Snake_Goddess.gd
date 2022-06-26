@@ -6,7 +6,7 @@ const POISON = preload("res://Enemies/Snake/Snake_Psn.tscn")
 const SMOKE = preload("res://Bosses/Snake Goddess/FailSmoke.tscn")
 const STAIRS = preload("res://Bosses/stairs.tscn")
 const SIGN_FIVE = preload("res://Misc/Signs/sign_five.tscn")
-const CHEST = preload("res://Power_Ups/chests/rare_chest.tscn")
+const CHEST = preload("res://Power_Ups/Chests/rare_chest.tscn")
 
 var sleeping = true
 var previous_animation = "statue"

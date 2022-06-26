@@ -36,7 +36,7 @@ const SIGN_FIVE = preload("res://Misc/Signs/sign_five.tscn")
 
 const DAMAGE_TEXT = preload("res://Misc/Damage_Text.tscn")
 
-const CHEST = preload("res://Power_Ups/chests/rare_chest.tscn")
+const CHEST = preload("res://Power_Ups/Chests/rare_chest.tscn")
 
 func _randomize():
 	if triggered:
