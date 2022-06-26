@@ -180,12 +180,10 @@ playing = true
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 4, 3 )
 shape = SubResource( 34 )
 
 [node name="CollisionShape2DHead" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -18, -11 )
 shape = SubResource( 41 )
 

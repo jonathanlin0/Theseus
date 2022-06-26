@@ -172,9 +172,9 @@ func _physics_process(delta):
 		position.y -= 4
 
 func dead():
+	$CollisionShape2D.set_deferred("disabled", true)
+	$CollisionShape2DHead.set_deferred("disabled", true)
 	$AnimatedSprite.play("death")
-	$CollisionShape2D.disabled = true
-	$CollisionShape2DHead.disabled = true
 	is_dead = true
 
 func damage(dmg):
