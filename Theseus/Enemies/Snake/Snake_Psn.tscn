@@ -15,6 +15,41 @@ shader = ExtResource( 6 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
 
+[sub_resource type="AtlasTexture" id=1]
+flags = 8
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 8
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 8
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 8
+atlas = ExtResource( 1 )
+region = Rect2( 288, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 288, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 384, 0, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 8
+atlas = ExtResource( 4 )
+region = Rect2( 480, 0, 96, 96 )
+
 [sub_resource type="AtlasTexture" id=22]
 flags = 8
 atlas = ExtResource( 2 )
@@ -60,21 +95,6 @@ flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 768, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=13]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 288, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=14]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 384, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=15]
-flags = 8
-atlas = ExtResource( 4 )
-region = Rect2( 480, 0, 96, 96 )
-
 [sub_resource type="AtlasTexture" id=37]
 flags = 8
 atlas = ExtResource( 1 )
@@ -110,36 +130,21 @@ flags = 8
 atlas = ExtResource( 4 )
 region = Rect2( 192, 0, 96, 96 )
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 8
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=2]
-flags = 8
-atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=3]
-flags = 8
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 96, 96 )
-
-[sub_resource type="AtlasTexture" id=4]
-flags = 8
-atlas = ExtResource( 1 )
-region = Rect2( 288, 0, 96, 96 )
-
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
-"name": "death",
+"name": "idle",
 "speed": 7.0
 }, {
 "frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "attack",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": true,
+"name": "death",
 "speed": 7.0
 }, {
 "frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ) ],
@@ -151,11 +156,6 @@ animations = [ {
 "loop": true,
 "name": "charge_up",
 "speed": 10.0
-}, {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
-"loop": true,
-"name": "idle",
-"speed": 7.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=34]
@@ -175,6 +175,7 @@ material = SubResource( 36 )
 position = Vector2( -63, -77 )
 frames = SubResource( 5 )
 animation = "slither"
+frame = 1
 playing = true
 centered = false
 

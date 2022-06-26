@@ -71,7 +71,6 @@ func update_player():
 			player_angle = PI/2
 	else:
 		if scale.x == scale.y * -1:
-			#the scale does a stupid trhing wher the angle is inverted so I have to uninvert it now with stupie mathj >:(
 			var stupid = PI/2 - atan2(diff_y, diff_x)
 			player_angle = atan2(diff_y, diff_x)+PI/2 + 2*stupid
 		else:
@@ -111,7 +110,7 @@ func _physics_process(delta):
 		
 		if !is_dead and can_see and sees_player and !is_frozen:
 			
-			if previous_animation != "slither":
+			if previous_animation != "idle":
 				velocity.x = 0
 				velocity.y = 0
 			else:
@@ -196,8 +195,8 @@ func _on_AnimatedSprite_animation_finished():
 		previous_animation = "attack"
 		$AnimatedSprite.play("attack")
 	elif previous_animation == "attack":
-		previous_animation = "slither"
-		$AnimatedSprite.play("slither")
+		previous_animation = "idle"
+		$AnimatedSprite.play("idle")
 		can_player_take_damage = true
 	
 

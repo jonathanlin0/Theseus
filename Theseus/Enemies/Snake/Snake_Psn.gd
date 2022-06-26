@@ -69,7 +69,6 @@ func update_player():
 			player_angle = PI/2
 	else:
 		if scale.x == scale.y * -1:
-			#the scale does a stupid trhing wher the angle is inverted so I have to uninvert it now with stupie mathj >:(
 			var stupid = PI/2 - atan2(diff_y, diff_x)
 			player_angle = atan2(diff_y, diff_x)+PI/2 + 2*stupid
 		else:
