@@ -49,7 +49,7 @@ var delay_start = OS.get_unix_time()
 var delay_time_left = 0
 
 # used for testing. set test level to 0 to start from level 1
-var test_level = 13
+var test_level = 0
 
 # the enemies that need to be spawned
 var enemies_to_spawn = []

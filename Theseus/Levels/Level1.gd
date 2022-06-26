@@ -13,6 +13,7 @@ func _ready():
 	master_data.level = 1
 	master_data.start_time = OS.get_unix_time()
 	master_data.music = "stage"
+	master_data.previous_scene = "Level1"
 	
 func _process(delta):
 	# temporary, only for testing

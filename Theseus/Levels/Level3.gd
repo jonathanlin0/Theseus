@@ -20,6 +20,7 @@ var rand = RandomNumberGenerator.new()
 func _ready():
 	Input.set_custom_mouse_cursor(cursor)
 	master_data.music = "boss"
+	master_data.previous_scene = "Level3"
 	rand.randomize()
 	for n in num_green:
 		var x_cood = rand.randf_range(x_lower, x_upper)

@@ -7,6 +7,7 @@ func _ready():
 	Input.set_custom_mouse_cursor(cursor)
 	master_data.level = 2
 	master_data.music = "stage"
+	master_data.previous_scene = "Level2"
 
 func _process(delta):
 	
