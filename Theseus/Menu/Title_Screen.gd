@@ -14,6 +14,9 @@ func _ready():
 	master_data.is_multiplayer = false
 	master_data.is_endless = false
 	master_data.endless_health_multiplier = 1.0
+	
+	Server.connect_to_server()
+	Server.fetch_connection()
 
 #func _process(delta):
 #	pass

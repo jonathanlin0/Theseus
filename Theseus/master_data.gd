@@ -34,6 +34,10 @@ var endless_powerup_break = 5
 
 # variable to see if the client is connected to a server
 var online_multiplayer_is_connected = false
+# see if current player has spawned yet for online multipler
+var online_multiplayer_has_spawned = false
+# which spot the player will spawn in
+var online_multiplayer_spawn_quadrant = 0
 # holds all the positions of the online multiplayer enemies
 var online_multiplayer_players = {}
 # holds all the directions of the online multiplayer enemies
