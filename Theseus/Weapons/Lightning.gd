@@ -8,10 +8,16 @@ var mouse_position = position
 var hit_objects = []
 
 var hit_something = false
+var autoaim = false
+var autoaim_enemy = null
 
 func _ready():
 	
-	mouse_position = get_global_mouse_position()
+	if autoaim == false:
+		mouse_position = get_global_mouse_position()
+	if autoaim == true:
+		mouse_position = autoaim_enemy.global_position
+		hit_objects.append(autoaim_enemy)
 	
 	# need to offset from player's position
 	mouse_position.x -= master_data.player_x
@@ -38,8 +44,9 @@ func net_distance (current_x, dest_x, current_y, dest_y):
 
 func _on_Lightning_body_entered(body):
 	var is_enemy = false
+	
 	for enemy_name in master_data.enemy_names:
-		if body.name.find(enemy_name) != -1:
+		if body.name.find(enemy_name) != -1 and body.name.find("TileMap") == -1:
 			is_enemy = true
 	
 	if body.name != "Player" and is_enemy == true:
@@ -48,6 +55,7 @@ func _on_Lightning_body_entered(body):
 		# do this so that current obj isn't considered when analyzing which obj is the closest to lightning
 		hit_objects.append(body.name)
 		body.damage(master_data.lightning_damage * master_data.ranged_multiplier)
+		
 
 		if $Range.get_overlapping_bodies().size() > 0:
 			
@@ -71,12 +79,8 @@ func _on_Lightning_body_entered(body):
 			
 			# closest_obj will be null if no enemies in radius
 			if closest_obj != null:
-				#print("--")
-				#print(closest_obj.name)
-				#print(closest_obj.global_position)
-				#print(global_position)
 				
-				# change unit vectorf
+				# change unit vector
 				unit_vector = master_data.get_unit_vector(closest_obj.global_position.x - global_position.x, closest_obj.global_position.y - global_position.y)
 				
 				# add the current obj to list of hit objects so that lightning won

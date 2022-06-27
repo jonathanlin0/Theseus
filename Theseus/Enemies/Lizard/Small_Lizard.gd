@@ -1,5 +1,10 @@
 extends KinematicBody2D
 
+var health = master_data.small_lizard_health
+var knockback = false
+var is_frozen = false
+var sees_player = false
+
 # the velocity vector that changes to try to chase the player around
 var velocity = Vector2()
 
@@ -16,15 +21,11 @@ var rand_y_vel = 0
 
 const SPIT = preload("res://Enemies/Lizard/Lizard_Spit.tscn")
 
-var health = master_data.small_lizard_health
-
 var is_dead = false
 
 var can_shoot = true
 
 var prev_anim
-
-var knockback = false
 
 var collision
 
@@ -38,27 +39,7 @@ var player_angle = 0
 var diff_x = 0
 var diff_y = 0
 
-var sees_player = false
-var can_see = false
 
-func make_ray():
-	var i = 0
-	
-	var ray_main = RayCast2D.new()
-	var ray1 = RayCast2D.new()
-	var ray2 = RayCast2D.new()
-	ray_main.cast_to = Vector2.UP.rotated(player_angle)*vision
-	ray1.cast_to = Vector2.UP.rotated(player_angle+ray_diff)*vision
-	ray2.cast_to = Vector2.UP.rotated(player_angle-ray_diff)*vision
-	ray_main.enabled = true
-	ray1.enabled = true
-	ray2.enabled = true
-	ray_main.collision_mask = 2
-	ray1.collision_mask = 2
-	ray2.collision_mask = 2
-	add_child(ray1)
-	add_child(ray2)
-	add_child(ray_main)
 	
 func update_player():
 	diff_x = master_data.player_global_x - global_position.x
@@ -103,30 +84,13 @@ func _randomize():
 
 func _ready():
 	$Health_Bar.setMax(master_data.small_lizard_health)
-	make_ray()
 
 func _physics_process(delta):
 	
-	#orient rays toeward player
-	var i = -1
-	for ray in get_children():
-		if ray.is_class("RayCast2D"):
-			ray.cast_to = Vector2.UP.rotated(player_angle+ray_diff*i)*vision
-			i=i+1
+
 	
-	if can_see:
+	if $Enemy_Abstract_Class.on_screen:
 		update_player()
-		for ray in get_children():
-			if ray.is_class("RayCast2D"):
-				if ray.get_collider() != null:
-					#print(ray.get_collider().to_string())
-					if ray.get_collider().to_string().substr(0, 6) == "Player":
-						sees_player = true
-						break
-					else:
-						sees_player = false
-				else:
-					sees_player = false
 	
 	
 	$Health_Bar.setValue(health)
@@ -134,7 +98,7 @@ func _physics_process(delta):
 	if health <= 0:
 		dead()
 	
-	if is_dead == false:
+	if is_dead == false and is_frozen == false:
 		
 		# used for player tracking
 		var difference_x = master_data.player_x - global_position.x
@@ -194,18 +158,12 @@ func _on_ShootingCooldown_timeout():
 	can_shoot = true
 
 func damage(dmg):
-	triggered = true
-	_randomize()
 	health -= dmg
-	flash()
-	var text = DAMAGE_TEXT.instance()
-	text.amount = dmg
-	add_child(text)
-	$AudioStreamPlayer.play()
+	$Enemy_Abstract_Class.knockback()
+	$Enemy_Abstract_Class.flash()
+	$Enemy_Abstract_Class.damage_text(dmg)
+	$Enemy_Abstract_Class.damage_audio()
 	
-func flash():
-	$AnimatedSprite.material.set_shader_param("flash_modifier", 1)
-	$flash_timer.start(master_data.flash_time)
 
 func _on_AnimatedSprite_animation_finished():
 	if moving:
@@ -216,20 +174,7 @@ func _on_AnimatedSprite_animation_finished():
 		prev_anim = "idle"
 	
 	if is_dead == true:
+		master_data.endless_mob_deaths.append(get_instance_id())
 		queue_free()
 
 
-func _on_knockback_timeout():
-	knockback = false
-
-
-func _on_VisibilityEnabler2D_screen_entered():
-	can_see = true
-
-func _on_VisibilityEnabler2D_screen_exited():
-	can_see = false
-	sees_player = false
-
-
-func _on_flash_timer_timeout():
-	$AnimatedSprite.material.set_shader_param("flash_modifier", 0)

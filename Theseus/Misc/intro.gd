@@ -25,3 +25,7 @@ func _on_VideoPlayer_finished():
 
 func _on_Timer_timeout():
 	$Sprite.visible = false
+
+
+func _on_Auto_Next_Timer_timeout():
+	get_tree().change_scene("res://Misc/single_controls.tscn")

@@ -24,5 +24,10 @@ texture = ExtResource( 2 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.004
 
+[node name="Auto_Next_Timer" type="Timer" parent="."]
+wait_time = 50.0
+autostart = true
+
 [connection signal="finished" from="VideoPlayer" to="." method="_on_VideoPlayer_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Auto_Next_Timer" to="." method="_on_Auto_Next_Timer_timeout"]

@@ -1,5 +1,11 @@
 ** Will add more info later
 
+### Folder Structure and Important Files
+
+- The folder `Leaderboard Server` contains the code for the leaderboard server that is hosted on Replit.com
+- The folder `Theseus` contains all the code for the client side of the video game.
+- The folder `Theseus_Multiplayer_Server` contains all the code for the server that runs multiplayer.
+
 ### Background Information
 
 Our game follows the story of Theseus. In the Greek myth, fourteen-year-old Theseus was chosen by King Minos to be an annual sacrifice to the Minotaur, an abomination of a human with a bull’s head that was imprisoned in a labyrinth under Crete. The intricate labyrinth was constructed by Deadalus, a master engineer who was also responsible for the creation of the Minotaur. Rather than accepting his fate, Theseus, with the guidance of princess Ariadne, sought and defeated the Minotaur, cementing his position in Greek mythology as a warrior legend.

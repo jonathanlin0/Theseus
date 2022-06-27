@@ -5,7 +5,7 @@
 [ext_resource path="res://Enemies/Sprites/Slime/big_slime_pop_16.png" type="Texture" id=3]
 [ext_resource path="res://Misc/Health_Bar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Shaders/flash.tres" type="Shader" id=5]
-[ext_resource path="res://Sound Effects/Hit 1.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Enemies/Enemy_Abstract_Class.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ShaderMaterial" id=27]
 resource_local_to_scene = true
@@ -116,7 +116,7 @@ script = ExtResource( 2 )
 material = SubResource( 27 )
 frames = SubResource( 5 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -136,18 +136,6 @@ margin_right = 49.0
 margin_bottom = 18.0
 rect_scale = Vector2( 0.5, 0.4 )
 
-[node name="knockback" type="Timer" parent="."]
-wait_time = 0.5
-
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-
-[node name="flash_timer" type="Timer" parent="."]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
+[node name="Enemy_Abstract_Class" parent="." instance=ExtResource( 6 )]
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
-[connection signal="timeout" from="knockback" to="." method="_on_knockback_timeout"]
-[connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
-[connection signal="timeout" from="flash_timer" to="." method="_on_flash_timer_timeout"]

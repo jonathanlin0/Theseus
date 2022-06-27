@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Enemies/Sprites/Lizard/lizard_idle.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/Sprites/Lizard/lizard_spit.png" type="Texture" id=2]
@@ -8,28 +8,13 @@
 [ext_resource path="res://Misc/Health_Bar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Shaders/flash.tres" type="Shader" id=7]
 [ext_resource path="res://Sound Effects/Hit 1.mp3" type="AudioStream" id=8]
+[ext_resource path="res://Enemies/Enemy_Abstract_Class.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ShaderMaterial" id=24]
 resource_local_to_scene = true
 shader = ExtResource( 7 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 54, 25 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 54, 0, 54, 25 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 108, 0, 54, 25 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 162, 0, 54, 25 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 4 )
@@ -99,13 +84,24 @@ region = Rect2( 378, 0, 54, 25 )
 atlas = ExtResource( 2 )
 region = Rect2( 432, 0, 54, 25 )
 
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 54, 25 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 54, 0, 54, 25 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 108, 0, 54, 25 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 162, 0, 54, 25 )
+
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "idle",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
 "loop": true,
 "name": "death",
@@ -120,6 +116,11 @@ animations = [ {
 "loop": true,
 "name": "load_attack",
 "speed": 9.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "idle",
+"speed": 10.0
 } ]
 
 [sub_resource type="ConvexPolygonShape2D" id=23]
@@ -132,7 +133,7 @@ script = ExtResource( 5 )
 material = SubResource( 24 )
 frames = SubResource( 1 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -152,20 +153,10 @@ rect_scale = Vector2( 0.4, 0.4 )
 
 [node name="walking" type="Timer" parent="."]
 
-[node name="knockback" type="Timer" parent="."]
-
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-position = Vector2( -0.999999, 2.5 )
-scale = Vector2( 1.3, 0.45 )
-
-[node name="flash_timer" type="Timer" parent="."]
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 
+[node name="Enemy_Abstract_Class" parent="." instance=ExtResource( 9 )]
+
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="ShootingCooldown" to="." method="_on_ShootingCooldown_timeout"]
-[connection signal="timeout" from="knockback" to="." method="_on_knockback_timeout"]
-[connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
-[connection signal="timeout" from="flash_timer" to="." method="_on_flash_timer_timeout"]

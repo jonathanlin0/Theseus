@@ -18,6 +18,14 @@ var player_that_is_shooting = null
 var start_pos = Vector2(0,0)
 var start = true
 
+const EXPLOSION = preload("res://Particle_Effects/Explosion.tscn")
+
+var autoaim = false
+var enemy_to_hit = null
+
+# used in online multiplayer
+var to_be_killed = false
+
 func insert_player(player_obj):
 	player_that_is_shooting = player_obj
 
@@ -26,22 +34,34 @@ func _ready():
 	start_pos.y = global_position.y
 	
 	#print(global_position)
-	
-	if master_data.is_multiplayer == false:
+	if get_tree().get_current_scene().name == "Online_Multiplayer":
 		mouse_position = get_global_mouse_position()
 		
-		# need to offset from player's position
-		mouse_position.x -= master_data.player_x
-		mouse_position.y -= master_data.player_y
+		mouse_position.x -= master_data.online_multiplayer_player_x
+		mouse_position.y -= master_data.online_multiplayer_player_y
 		
-		# need to convert the triangle (x and y components) into a unit triangle to maintain a uniform net vector
 		unit_vector = master_data.get_unit_vector(mouse_position.x - position.x, mouse_position.y - position.y)
-	if master_data.is_multiplayer == true:
+		
+	
+	if master_data.is_multiplayer == false and get_tree().get_current_scene().name != "Online_Multiplayer":
+		if autoaim == false:
+			mouse_position = get_global_mouse_position()
+			
+			# need to offset from player's position
+			mouse_position.x -= master_data.player_x
+			mouse_position.y -= master_data.player_y
+			
+			# need to convert the triangle (x and y components) into a unit triangle to maintain a uniform net vector
+			unit_vector = master_data.get_unit_vector(mouse_position.x - position.x, mouse_position.y - position.y)
+		if autoaim == true:
+			unit_vector = master_data.get_unit_vector(enemy_to_hit.global_position.x - master_data.player_x_global, enemy_to_hit.global_position.y - master_data.player_y_global)
+	if master_data.is_multiplayer == true and get_tree().get_current_scene().name != "Online_Multiplayer":
 		
 		if player_to_hit == 1:
 			unit_vector = master_data.get_unit_vector(master_data.player_x_global - player_that_is_shooting.global_position.x, master_data.player_y_global - player_that_is_shooting.global_position.y)
 		if player_to_hit == 2:
 			unit_vector = master_data.get_unit_vector(master_data.player_x_global_p2 - player_that_is_shooting.global_position.x, master_data.player_y_global_p2 - player_that_is_shooting.global_position.y)
+
 		
 
 func hypotnuse(start, curr):
@@ -65,8 +85,16 @@ func _physics_process(delta):
 		velocity.x = unit_vector.x * master_data.fireball_speed * delta
 		velocity.y = unit_vector.y * master_data.fireball_speed * delta
 	
+	if get_tree().get_current_scene().name == "Online_Multiplayer":
+		get_parent().fireballs[get_instance_id()]["position"] = global_position
+		
+		
+	
 	translate(velocity)
-
+	
+func die():
+	to_be_killed = true
+	$AnimatedSprite.play("die")
 
 func _on_Fireball_body_entered(body):
 
@@ -78,6 +106,10 @@ func _on_Fireball_body_entered(body):
 					$AnimatedSprite.play("fireStop")
 					hitSomething = true
 					hit_enemies.append(body.name)
+					
+					#var explosion = EXPLOSION.instance()
+					#get_parent().add_child(explosion)
+					#explosion.global_position = global_position
 	if master_data.is_multiplayer == true:
 		if player_that_is_shooting.name == "Player":
 			if body.name == "Player2":
@@ -94,10 +126,18 @@ func _on_Fireball_body_entered(body):
 		#queue_free()
 
 func _on_AnimatedSprite_animation_finished():
-	#print("REEEE");
-	if hitSomething:
+
+	if to_be_killed == true:
+		if get_tree().get_current_scene().name == "Online_Multiplayer":
+			get_parent().fireballs.erase(get_instance_id())
+		queue_free()
+	elif hitSomething:
+		if get_tree().get_current_scene().name == "Online_Multiplayer":
+			get_parent().fireballs.erase(get_instance_id())
 		queue_free()
 
 
 func _on_VisibilityNotifier2D_screen_exited():
+	if get_tree().get_current_scene().name == "Online_Multiplayer":
+		get_parent().fireballs.erase(get_instance_id())
 	queue_free()

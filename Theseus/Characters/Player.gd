@@ -16,6 +16,7 @@ var sprint = false
 
 const FIREBALL = preload("res://Weapons/Fireball.tscn")
 const LIGHTNING = preload("res://Weapons/Lightning.tscn")
+const ICICLE = preload("res://Weapons/Icicle.tscn")
 
 var knockback = false
 var knockback_dir = "left"
@@ -25,6 +26,8 @@ var is_multiplayer = false
 
 var prev_music = master_data.music
 
+var temp = 0
+
 # creates a delay between the chest/sign alert text growing and shrinking
 var text_can_grow = true
 
@@ -33,11 +36,17 @@ var previous_health = master_data.health
 
 var is_dead = false
 
+var to_be_deleted_areas = []
+
+var enemies_to_be_checked = []
+
+
 func _ready():
+	
 	if master_data.level == 0:
 		$Music/boss_music.play()
 	else:
-		$Music/stage_music.play()
+		$Music/stage_music.play()	
 
 func _input(event):
 	
@@ -45,6 +54,8 @@ func _input(event):
 		pass
 
 func _physics_process(delta):
+	
+	
 	if prev_music != master_data.music:
 		prev_music = master_data.music
 		change_music()
@@ -53,12 +64,20 @@ func _physics_process(delta):
 		master_data.is_multiplayer = true
 		is_multiplayer = true
 	
+	if master_data.is_endless == true:
+		$Player_Camera.limit_top = 0
+		$Player_Camera.limit_bottom = 270
+		$Player_Camera.limit_left = 0
+		$Player_Camera.limit_right = 480
+	
 	if is_multiplayer == true:
 		# disable visibility of the hotbar
 		$Hotbar/Slot1.visible = false
 		$Hotbar/Slot2.visible = false
+		$Hotbar/Slot3.visible = false
 		$Hotbar/Fire_animation.visible = false
 		$Hotbar/lightning_animation.visible = false
+		$Hotbar/ice_animation.visible = false
 		$Hotbar/Select_border.visible = false
 		
 		# setting the limits of the camera so it doesn't move around during multiplayer
@@ -69,6 +88,7 @@ func _physics_process(delta):
 		
 		# disable visbility of the chest_detection text
 		$Object_Hints/CanvasLayer/Actual_Text.visible = false
+	
 	var speed = master_data.player_speed
 	
 	# update the master_data values
@@ -105,6 +125,10 @@ func _physics_process(delta):
 		sprint = false
 	
 	if master_data.health <= 0:
+		master_data.health = 0
+		$StatusBars/MarginContainer/VBoxContainer/HealthBar.max_value = master_data.max_health
+		$StatusBars/MarginContainer/VBoxContainer/HealthBar.value = master_data.health
+		$StatusBars/MarginContainer/VBoxContainer/HealthBar/HealthLabel.text = str(master_data.health) + "/" + str(master_data.max_health)
 		dead()
 	
 	if is_dead == false:
@@ -115,6 +139,10 @@ func _physics_process(delta):
 		master_data.player_y = position.y
 		master_data.player_x_global = global_position.x
 		master_data.player_y_global = global_position.y
+		
+		# make sure health is not negative
+		if master_data.health < 0:
+			master_data.health = 0
 		
 		# update the health & mana bars
 		
@@ -131,11 +159,15 @@ func _physics_process(delta):
 			master_data.selected_weapon = 1
 		if Input.is_action_pressed("ui_2"):
 			master_data.selected_weapon = 2
+		if Input.is_action_pressed("ui_3"):
+			master_data.selected_weapon = 3
 			
 		if master_data.selected_weapon == 1:
 			$Hotbar/Select_border.rect_position.x = 5
 		if master_data.selected_weapon == 2:
 			$Hotbar/Select_border.rect_position.x = 5 + 25
+		if master_data.selected_weapon == 3:
+			$Hotbar/Select_border.rect_position.x = 5 + 25 + 24
 		
 		if is_multiplayer == false:
 			# chest/sign detection text logic
@@ -327,9 +359,31 @@ func _physics_process(delta):
 						rad += PI
 					
 					lightning.rotate(rad)
+				
+				if master_data.selected_weapon == 3 and master_data.mana > master_data.icicle_cost:
+					
+					$Sound_Effects/Lightning.play()
+					
+					master_data.mana -= master_data.icicle_cost
+					
+					var icicle = ICICLE.instance()
+					get_parent().add_child(icicle)
+					icicle.position = $Weapon_Holder.global_position
+					
+					# rotate the icicle to face the direction of the mouse
+					var mouseX = get_local_mouse_position().x
+					var mouseY = get_local_mouse_position().y
+					
+					# icicle is backwards when x is neg
+					var rad = atan(mouseY/mouseX)
+					if mouseX<0:
+						rad += PI
+					
+					icicle.rotate(rad)
 		
-		if is_multiplayer == true:
-			if Input.is_action_just_pressed("ui_c"):
+		# autoaim shooting
+		if Input.is_action_just_pressed("ui_c"):
+			if is_multiplayer == true:
 				if master_data.selected_weapon == 1 and master_data.mana > master_data.fireball_cost:
 					
 					$Sound_Effects/Fireball.play()
@@ -354,6 +408,96 @@ func _physics_process(delta):
 						rad += PI
 					
 					fireball.rotate(rad)
+			else:
+				var close_enemies = []
+				for temp in $Enemy_Vision_Area.get_overlapping_bodies():
+					for enemy_name in master_data.enemy_names:
+						if temp.name.find(enemy_name) != -1 and temp.sees_player == true:
+							close_enemies.append(temp)
+				
+				var shortest_distance = 99999999
+				var closest_mob = null
+				
+				for mob in close_enemies:
+					var dif_x = global_position.x - mob.global_position.x
+					var dif_y = global_position.y - mob.global_position.y
+					var net_distance = abs(sqrt( (dif_x*dif_x) + (dif_y * dif_y)))
+				
+					if net_distance < shortest_distance:
+						shortest_distance = net_distance
+						closest_mob = mob
+				
+				if closest_mob != null:
+					if master_data.selected_weapon == 1 and master_data.mana > master_data.fireball_cost:
+					
+						$Sound_Effects/Fireball.play()
+						
+						master_data.mana -= master_data.fireball_cost
+						
+						var fireball = FIREBALL.instance()
+						fireball.autoaim = true
+						fireball.enemy_to_hit = closest_mob
+						get_parent().add_child(fireball)
+						fireball.position = $Weapon_Holder.global_position
+						
+						
+						# rotate the fireball to face the direction of the mouse
+						var mouseX = closest_mob.global_position.x
+						var mouseY = closest_mob.global_position.y
+						
+						# fireball is backwards when x is neg
+						var rad = atan((mouseY - global_position.y)/(mouseX - global_position.y))
+						if mouseX<0:
+							rad += PI
+						
+						fireball.rotate(rad)
+						
+					if master_data.selected_weapon == 2 and master_data.mana > master_data.lightning_cost:
+						
+						$Sound_Effects/Lightning.play()
+						
+						master_data.mana -= master_data.lightning_cost
+						
+						var lightning = LIGHTNING.instance()
+						lightning.autoaim = true
+						lightning.autoaim_enemy = closest_mob
+						get_parent().add_child(lightning)
+						lightning.position = $Weapon_Holder.global_position
+						
+						
+						# rotate the lightning to face the direction of the mouse
+						var mouseX = closest_mob.global_position.x
+						var mouseY = closest_mob.global_position.y
+						
+						# fireball is backwards when x is neg
+						var rad = atan((mouseY - global_position.y)/(mouseX - global_position.y))
+						if mouseX<0:
+							rad += PI
+						
+						lightning.rotate(rad)
+					
+					if master_data.selected_weapon == 3 and master_data.mana > master_data.icicle_cost:
+						
+						$Sound_Effects/Lightning.play()
+						
+						master_data.mana -= master_data.icicle_cost
+						
+						var icicle = ICICLE.instance()
+						icicle.autoaim = true
+						icicle.autoaim_enemy = closest_mob
+						get_parent().add_child(icicle)
+						icicle.position = $Weapon_Holder.global_position
+						
+						# rotate the icicle to face the direction of the mouse
+						var mouseX = closest_mob.global_position.x
+						var mouseY = closest_mob.global_position.y
+						
+						# fireball is backwards when x is neg
+						var rad = atan((mouseY - global_position.y)/(mouseX - global_position.y))
+						if mouseX<0:
+							rad += PI
+						
+						icicle.rotate(rad)
 		
 			
 		if master_data.health < previous_health:
@@ -362,6 +506,74 @@ func _physics_process(delta):
 			
 			
 		velocity = move_and_slide(velocity)
+	
+	# add all the enemies in the area to enemies_in_area
+	var enemies_in_area = []
+	var enemies_in_area_instance_ids = []
+	for obj in $Enemy_Vision_Area.get_overlapping_bodies():
+		if obj.name.find("Player") == -1 and enemies_in_area_instance_ids.find(obj.get_instance_id()) == -1:
+			var added = false
+			for known_enemy in master_data.enemy_names:
+				if obj.name.find(known_enemy) != -1 and added == false:
+					enemies_in_area.append(obj)
+					enemies_in_area_instance_ids.append(obj.get_instance_id())
+					added = true
+					
+	
+	# adds all current enemies in the area to the enemies_to_be_checked
+	for enemy in enemies_in_area:
+		if enemies_to_be_checked.find(enemy) == -1:
+			enemies_to_be_checked.append(enemy)
+	
+	# checks the earliest added enemy in enemies_to_be_checked to see if the enemy/player can see each other
+	# have to check the enemies like this one by one instead of all together in a single forloop because a RayShape2D can only check 1 object and its collisions per frame, so in each frame the following section of code checks the enemy vision
+
+	
+	if enemies_to_be_checked.size() > 0:
+		
+		var angle = 0
+		
+		var wr = weakref(enemies_to_be_checked[0])
+		if (wr.get_ref()):
+			# to compensate for enemies on the same x values (since can't divide by 0)
+			if (enemies_to_be_checked[0].global_position.x - global_position.x) == 0:
+				angle = atan((enemies_to_be_checked[0].global_position.y - global_position.y) / (0.000001))
+			else:
+				angle = atan((enemies_to_be_checked[0].global_position.y - global_position.y) / (enemies_to_be_checked[0].global_position.x - global_position.x))
+				
+			if enemies_to_be_checked[0].global_position.x - global_position.x < 0:
+				angle += PI
+				
+			var degs = rad2deg(angle)
+			$Enemy_Vision_RayShape/CollisionShape2D.rotation = angle - (PI/2)
+				
+			var enemy_vision_overlapping_bodies = $Enemy_Vision_RayShape.get_overlapping_bodies()
+				
+			# removes the player object from the list of overlapping bodies
+			for obj in enemy_vision_overlapping_bodies:
+				if obj.name.find("Player") != -1:
+					enemy_vision_overlapping_bodies.erase(obj)
+				
+
+			var wall_in_way = false
+			for obj in enemy_vision_overlapping_bodies:
+				var exists = false
+				for known_enemy in master_data.enemy_names:
+					if obj.name.find(known_enemy) != -1:
+						exists = true
+				if exists == false:
+					wall_in_way = true
+				
+			if wall_in_way:
+				enemies_to_be_checked[0].sees_player = false
+			else:
+				enemies_to_be_checked[0].sees_player = true
+				
+		enemies_to_be_checked.remove(0)
+		
+	
+
+	# end of physics process function
 
 func dead():
 	if master_data.is_multiplayer == false:
@@ -377,8 +589,10 @@ func flash():
 	# https://www.youtube.com/watch?v=ctevHwoRl24
 	$Sound_Effects/Hit.play()
 	$CharacterAnimatedSprite.material.set_shader_param("flash_modifier", 1)
+	$CharacterAnimatedSprite.material.set_shader_param("flash_color", master_data.colors["white"])
 	$SwordAnimation.material.set_shader_param("flash_modifier", 1)
-	$flash_timer.start()
+	$SwordAnimation.material.set_shader_param("flash_color", master_data.colors["white"])
+	$flash_timer.start(master_data.flash_time)
 	
 
 func _knockback(var dir, var powa):
@@ -423,3 +637,15 @@ func change_music():
 		$Music/stage_music.play()
 	if prev_music == "boss":
 		$Music/boss_music.play()
+
+
+func _on_Enemy_Vision_Area_body_exited(body):
+	for enemy in master_data.enemy_names:
+		if body.name.find(enemy) != -1:
+			body.sees_player = false
+
+
+func _on_Enemy_Vision_Area_body_entered(body):
+	for enemy in master_data.enemy_names:
+		if body.name.find(enemy) != -1:
+			enemies_to_be_checked.append(body)

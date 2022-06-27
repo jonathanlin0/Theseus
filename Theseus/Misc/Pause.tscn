@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Misc/Sprites/pause_resume.png" type="Texture" id=1]
 [ext_resource path="res://Misc/Sprites/pause_restart_hover.png" type="Texture" id=2]
@@ -11,9 +11,29 @@
 [ext_resource path="res://Misc/Sprites/pause_restart.png" type="Texture" id=9]
 [ext_resource path="res://Misc/Sprites/pause_controls_hover.png" type="Texture" id=10]
 [ext_resource path="res://Misc/Sprites/pause_resume_hover.png" type="Texture" id=11]
+[ext_resource path="res://Misc/Sprites/pause_menu_music_label.png" type="Texture" id=12]
+[ext_resource path="res://Misc/Sprites/pause_menu_sfx_label.png" type="Texture" id=13]
+[ext_resource path="res://Misc/Sprites/rain_drop.png" type="Texture" id=14]
+[ext_resource path="res://Misc/Sprites/dark_red_bar.png" type="Texture" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 15 )
+region_rect = Rect2( 0, 0, 100, 10 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+
+[sub_resource type="StyleBoxTexture" id=3]
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 15 )
+region_rect = Rect2( 0, 0, 100, 10 )
+
+[sub_resource type="StyleBoxTexture" id=6]
+
+[sub_resource type="StyleBoxTexture" id=7]
 
 [node name="PauseMenu" type="CanvasLayer"]
 layer = 100
@@ -112,7 +132,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MusicSlider" type="HSlider" parent="Pause"]
+margin_left = 356.0
+margin_top = 5.0
+margin_right = 475.0
+margin_bottom = 21.0
+custom_icons/grabber_highlight = ExtResource( 14 )
+custom_icons/grabber = ExtResource( 14 )
+custom_styles/slider = SubResource( 2 )
+custom_styles/grabber_area_highlight = SubResource( 4 )
+custom_styles/grabber_area = SubResource( 3 )
+max_value = 1.0
+step = 0.05
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicVolume" type="Sprite" parent="Pause"]
+position = Vector2( 332, 13 )
+texture = ExtResource( 12 )
+
+[node name="SFXSlider" type="HSlider" parent="Pause"]
+margin_left = 356.0
+margin_top = 25.0
+margin_right = 475.0
+margin_bottom = 42.0
+custom_icons/grabber_highlight = ExtResource( 14 )
+custom_icons/grabber = ExtResource( 14 )
+custom_styles/slider = SubResource( 5 )
+custom_styles/grabber_area_highlight = SubResource( 6 )
+custom_styles/grabber_area = SubResource( 7 )
+max_value = 1.0
+step = 0.05
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFXVolume" type="Sprite" parent="Pause"]
+position = Vector2( 338, 33 )
+texture = ExtResource( 13 )
+
 [connection signal="pressed" from="Pause/MarginContainer/VBoxContainer/Resume" to="Pause" method="_on_Resume_pressed"]
 [connection signal="pressed" from="Pause/MarginContainer/VBoxContainer/Restart" to="Pause" method="_on_Restart_pressed"]
 [connection signal="pressed" from="Pause/MarginContainer/VBoxContainer/Controls" to="Pause" method="_on_Controls_pressed"]
 [connection signal="pressed" from="Pause/MarginContainer/VBoxContainer/Exit" to="Pause" method="_on_Exit_pressed"]
+[connection signal="value_changed" from="Pause/MusicSlider" to="Pause" method="_on_MusicSlider_value_changed"]
+[connection signal="value_changed" from="Pause/SFXSlider" to="Pause" method="_on_SFXSlider_value_changed"]
