@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wings_rare.png-36da7de40142c67562861dda2d8a8e24.stex"
+path="res://.import/wings_rare.png-44dd6256758007c54219d02056de1d02.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Power_Ups/Icons/wings_rare.png"
-dest_files=[ "res://.import/wings_rare.png-36da7de40142c67562861dda2d8a8e24.stex" ]
+source_file="res://Power_Ups/icons/wings_rare.png"
+dest_files=[ "res://.import/wings_rare.png-44dd6256758007c54219d02056de1d02.stex" ]
 
 [params]
 

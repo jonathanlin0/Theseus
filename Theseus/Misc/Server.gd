@@ -4,7 +4,12 @@ var network = NetworkedMultiplayerENet.new()
 # the ip of 127.0.0.1 is local IP, so do not need VPS or another hosting platform to run the multiplayer game.
 # in other words, can develop on a single desktop computer for free
 # change the "ip" variable to the IP of the VPS if you want to run the server on a VPS
+
+# local IP
 var ip = "127.0.0.1"
+
+# hao's ip
+#var ip = "10.0.0.33"
 var port = 1909
 
 func _ready():
