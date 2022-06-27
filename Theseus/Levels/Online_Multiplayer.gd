@@ -87,7 +87,13 @@ func _ready():
 	
 	
 	if master_data.online_multiplayer_spawn_quadrant == 0:
-		current_player.position = $Player_Spawn_Location.global_position
+		
+		# if all 4 quadrants are taken up, then spawn in a random, predetermined location
+		var default_spawn_locations = $Default_Spawn_Locations.get_children()
+		randomize()
+		var rand_quad = default_spawn_locations[randi() % default_spawn_locations.size()]
+		current_player.position = rand_quad.global_position
+		
 	elif master_data.online_multiplayer_spawn_quadrant == 1:
 		current_player.position = $Quadrants/Q1.global_position
 	elif master_data.online_multiplayer_spawn_quadrant == 2:
@@ -97,84 +103,10 @@ func _ready():
 	elif master_data.online_multiplayer_spawn_quadrant == 4:
 		current_player.position = $Quadrants/Q4.global_position
 	
-	"""
-	if master_data.online_multiplayer_is_connected == false:
-		current_player.position = $Player_Spawn_Location.global_position
-
-	if master_data.online_multiplayer_players.keys().size() > 0 and master_data.online_multiplayer_is_connected:
-		
-		Server.fetch_players()
-		var avaliable_quads = $Quadrants.get_children()
-		
-		for given_player in master_data.online_multiplayer_players.keys():
-			if master_data.online_multiplayer_players[given_player].x > 240 and master_data.online_multiplayer_players[given_player].x < 480:
-				if master_data.online_multiplayer_players[given_player].y > 0 and master_data.online_multiplayer_players[given_player].y < 135:
-					avaliable_quads.erase($Quadrants/Q1)
-			if master_data.online_multiplayer_players[given_player].x > 0 and master_data.online_multiplayer_players[given_player].x < 240:
-				if master_data.online_multiplayer_players[given_player].y > 0 and master_data.online_multiplayer_players[given_player].y < 135:
-					avaliable_quads.erase($Quadrants/Q2)
-			if master_data.online_multiplayer_players[given_player].x > 0 and master_data.online_multiplayer_players[given_player].x < 240:
-				if master_data.online_multiplayer_players[given_player].y > 135 and master_data.online_multiplayer_players[given_player].y < 270:
-					avaliable_quads.erase($Quadrants/Q3)
-			if master_data.online_multiplayer_players[given_player].x > 240 and master_data.online_multiplayer_players[given_player].x < 480:
-				if master_data.online_multiplayer_players[given_player].y > 135 and master_data.online_multiplayer_players[given_player].y < 270:
-					avaliable_quads.erase($Quadrants/Q4)
-	
-	
-		if avaliable_quads.size() <= 0:
-			current_player.position = $Player_Spawn_Location.global_position
-		if avaliable_quads.size() > 0:
-			var rand_quad = avaliable_quads[randi() % avaliable_quads.size()]
-			current_player.position = rand_quad.global_position
-		
-		master_data.online_multiplayer_has_spawned = true
-	"""
 
 func _physics_process(delta):
-	$Ping.text = ("Ping: 10 ms")
 	
-	#if master_data.online_multiplayer_is_connected:
-#		master_data.online_multiplayer_has_spawned = true
-	"""
-	if master_data.online_multiplayer_has_spawned == false:
-		if master_data.online_multiplayer_is_connected == true:
-			Server.fetch_players()
-			var avaliable_quads = $Quadrants.get_children()
-			
-			current_player = ONLINE_PLAYER.instance()
-			add_child(current_player)
-			
-			if master_data.online_multiplayer_players.keys().size() <= 0:
-				current_player.position = $Player_Spawn_Location.global_position
-			
-			# if there are multiple enemies
-			if master_data.online_multiplayer_players.keys().size() > 0:
-				
-				print(master_data.online_multiplayer_players)
-				
-				for given_player in master_data.online_multiplayer_players.keys():
-					if master_data.online_multiplayer_players[given_player].x > 240 and master_data.online_multiplayer_players[given_player].x < 480:
-						if master_data.online_multiplayer_players[given_player].y > 0 and master_data.online_multiplayer_players[given_player].y < 135:
-							avaliable_quads.erase($Quadrants/Q1)
-					if master_data.online_multiplayer_players[given_player].x > 0 and master_data.online_multiplayer_players[given_player].x < 240:
-						if master_data.online_multiplayer_players[given_player].y > 0 and master_data.online_multiplayer_players[given_player].y < 135:
-							avaliable_quads.erase($Quadrants/Q2)
-					if master_data.online_multiplayer_players[given_player].x > 0 and master_data.online_multiplayer_players[given_player].x < 240:
-						if master_data.online_multiplayer_players[given_player].y > 135 and master_data.online_multiplayer_players[given_player].y < 270:
-							avaliable_quads.erase($Quadrants/Q3)
-					if master_data.online_multiplayer_players[given_player].x > 240 and master_data.online_multiplayer_players[given_player].x < 480:
-						if master_data.online_multiplayer_players[given_player].y > 135 and master_data.online_multiplayer_players[given_player].y < 270:
-							avaliable_quads.erase($Quadrants/Q4)
-				
-				
-				if avaliable_quads.size() <= 0:
-					current_player.position = $Player_Spawn_Location.global_position
-				if avaliable_quads.size() > 0:
-					var rand_quad = avaliable_quads[randi() % avaliable_quads.size()]
-					current_player.position = rand_quad.global_position
-				
-			master_data.online_multiplayer_has_spawned = true
-	"""
+	$Ping.text = ("Ping: 10 ms")
 	
 	if master_data.online_multiplayer_is_connected == false:
 		if OS.get_unix_time() % 3 == 0:
