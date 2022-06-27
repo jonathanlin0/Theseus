@@ -5,6 +5,7 @@
 [ext_resource path="res://Power_Ups/Chests/chest_rare_opening.png" type="Texture" id=3]
 [ext_resource path="res://Power_Ups/Chests/rare_chest.gd" type="Script" id=4]
 
+
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 48, 40 )

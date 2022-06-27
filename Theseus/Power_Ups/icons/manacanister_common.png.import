@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/manacanister_common.png-a30c1c60f53a0b6daa22cc4fb7cc32d7.stex"
+path="res://.import/manacanister_common.png-3bfb40d0d11c5e8cfe0c60fb10706897.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Power_Ups/icons/manacanister_common.png"
-dest_files=[ "res://.import/manacanister_common.png-a30c1c60f53a0b6daa22cc4fb7cc32d7.stex" ]
+source_file="res://Power_Ups/Icons/manacanister_common.png"
+dest_files=[ "res://.import/manacanister_common.png-3bfb40d0d11c5e8cfe0c60fb10706897.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wings_common.png-bcfb69bb42073d7051ae55f1de5d7539.stex"
+path="res://.import/wings_common.png-213a4a21d408e372dd821836f1aa7683.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Power_Ups/icons/wings_common.png"
-dest_files=[ "res://.import/wings_common.png-bcfb69bb42073d7051ae55f1de5d7539.stex" ]
+source_file="res://Power_Ups/Icons/wings_common.png"
+dest_files=[ "res://.import/wings_common.png-213a4a21d408e372dd821836f1aa7683.stex" ]
 
 [params]
 
