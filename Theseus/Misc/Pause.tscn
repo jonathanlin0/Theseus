@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Misc/Sprites/pause_resume.png" type="Texture" id=1]
 [ext_resource path="res://Misc/Sprites/pause_restart_hover.png" type="Texture" id=2]
@@ -15,8 +15,12 @@
 [ext_resource path="res://Misc/Sprites/pause_menu_sfx_label.png" type="Texture" id=13]
 [ext_resource path="res://Misc/Sprites/rain_drop.png" type="Texture" id=14]
 [ext_resource path="res://Misc/Sprites/dark_red_bar.png" type="Texture" id=15]
+[ext_resource path="res://Misc/Sprites/controls_2player.png" type="Texture" id=16]
 
 [sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 7 )
 
 [sub_resource type="StyleBoxTexture" id=2]
@@ -115,22 +119,25 @@ margin_right = 106.0
 margin_bottom = 270.0
 custom_fonts/font = SubResource( 1 )
 text = "Press ESC to exit"
-
-[node name="Label" type="Label" parent="Pause/Controls"]
-margin_top = 250.0
-margin_right = 106.0
-margin_bottom = 270.0
-custom_fonts/font = SubResource( 1 )
-text = "Press ESC to exit"
-
-[node name="Controls" type="TextureRect" parent="Pause"]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-texture = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Multiplayer_Controls" type="TextureRect" parent="Pause"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pause/Multiplayer_Controls"]
+margin_top = 250.0
+margin_right = 106.0
+margin_bottom = 270.0
+custom_fonts/font = SubResource( 8 )
+text = "Press ESC to exit"
 
 [node name="MusicSlider" type="HSlider" parent="Pause"]
 margin_left = 356.0
