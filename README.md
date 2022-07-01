@@ -1,4 +1,4 @@
-#**Theseus: a Legend’s Rising**
+# Theseus: a Legend’s Rising
 
 ![](readme_images/theseus_icon.png)
 
@@ -8,15 +8,15 @@ Future Business Leaders of America: Computer Game and Simulation Programming
 
 </br>
 
-#**Background Information**
+## Background Information
 
 Our game follows the story of Theseus and the Minotaur. In the Greek myth, fourteen-year-old Theseus was chosen by King Minos to be an annual sacrifice to the Minotaur, an abomination of a human with a bull’s head that was imprisoned in a labyrinth under Crete. The intricate labyrinth was constructed by Deadalus, a master engineer who was also responsible for the creation of the Minotaur. Rather than accepting his fate, Theseus, with the guidance of princess Ariadne, sought and defeated the Minotaur, cementing his position in Greek mythology as a warrior legend.
 
-#**Gameplay**
+## Gameplay
 
 The player plays as Theseus in his journey of traveling through the labyrinth to kill the Minotaur. To help gamify this experience, we added enemies (mythological Greek creatures, typical gaming monsters, etc) and bosses that the player faces in the mazes throughout the game.
 
-#**Controls**
+## Controls
 
 w | walk upward
 
@@ -38,7 +38,7 @@ Arrow up key | walk upward (player 2) Arrow down key | walk downward (player 2) 
 
 Enter key | shoot (player 2)
 
-#**Power-Ups: ![](readme_images/common_chest.png)![](readme_images/rare_chest.png)**
+## Power-Ups: ![](readme_images/common_chest.png)![](readme_images/rare_chest.png)
 
 - Power ups can be found in chests: 
 - Each power-up has two tiers: common and rare 
@@ -56,7 +56,7 @@ Enter key | shoot (player 2)
 
 - Buffs are calculated by (weapon base damage x (1 + the sum of each buff percentage))
 
-#**Story Mode (Singleplayer)**
+## Story Mode (Singleplayer)
 
 The story/singleplayer mode is structured in different levels. Each level is a maze, and the player moves from left to right. Within the maze, the player will face a variety of monsters and a boss at the end of each level. The player has to defeat the boss to move on to the next level.
 
@@ -141,11 +141,11 @@ There are 3 total mazes/levels in the game: The Nest, Glittering Scales, and the
   - The score is based on the total time taken for the player to complete the game.
   - The lower the score, the better.
 
-#**Endless Mode (Singleplayer)**
+## Endless Mode (Singleplayer)
 
 The Endless mode is an infinite dungeon where the player seeks to progress as far as possible. There are unlimited levels. The number of enemies that spawn each level are calculated using the formulas below. After defeating all the enemies on the screen, the next wave’s enemies increase in health and power ups drop on the ground to help the player.
 
-##**The Math**
+### The Math
 ![](readme_images/endless_mode_math.jpeg)*
 
 - The graph above displays the number of each enemy that will spawn each level
@@ -166,12 +166,12 @@ Endless Mode Formulas
 |Minotaur|0.5(x-25) {30<x<50}|
 
 
-#**Online Multiplayer Mode**
+## Online Multiplayer Mode
 
 - Online multiplayer allows people from across the world to battle each other in real time.
 - In a normal 1v1 Player v.s. Player game, the server processes 840 packets per second and maintains a ping of 10 milliseconds. After stress testing, the server can handle 50 concurrent players while still maintaining an acceptable ping.
 
-#**Online Multiplayer Server**
+## Online Multiplayer Server
 
 What
 
@@ -187,11 +187,11 @@ How
 - The server receives connections from clients - instances of Theseus. The server stores all the information that the clients are sending it, processes collisions, processes location data, and sends the information back to all the clients.
 - Our server is also configured so that it can be deployed on any Virtual Private Server (VPS), such as Amazon AWS, Microsoft Azure, and Google Cloud Platform.
 
-#**Local PvP Multiplayer Mode**
+## Local PvP Multiplayer Mode
 
 The Multiplayer mode is a PvP fireball-only environment where two players seek to defeat their opponent. Players get points for defeating their opponent. Players respawn with full health and mana. The two players use a different set of movement and weapon controls on the same keyboard to battle each other. An internet connection is **not** required for this mode.
 
-#**Database**
+## Database
 
 What
 
@@ -205,14 +205,14 @@ How
 
 - Our server is hosted for free on Repl. We used Django and Python to create an Application Programming Interface (API) to handle HTTP requests from the game. The game uses GET HTTP requests to communicate with the server.
 
-#**Why Godot**
+## Why Godot
 
 - Free and open source - Godot is both free and open source, allowing us to modify the game engine if needed. And since Godot is built using Godot, we can go into its source code and learn new things. There is also a very strong and healthy community around Godot always willing to help.
 - Copyright and intellectual property policy - We are given full rights to anything produced with the game engine. This means that there are no licensing fees, royalty fees, etc.
 - Lightweight - Godot is extremely lightweight compared to most game engines, such as Unity and Unreal Engine. With a size of less than 100 MB, we can easily download Godot on any computer and modify our game on the fly. Additionally, the game does not require heavy computing power to run.
 - Node system - The node system allows more effective organization and is a powerful tool for creating large scale games. We can create only one object for a type of enemy, and then easily work in a modular fashion to duplicate the same type of enemies across different levels. The node system was also utilized by our team to create custom abstract classes that we could add onto similar object classes.
 
-#**Asset Ownership**
+## Asset Ownership
 
 - All artwork, sprites, and animations are original to the team, made in Aseprite
 - All music is original to the team, made in Logic Pro
@@ -220,7 +220,7 @@ How
   - https://cymatics.fm/
   - https://mixkit.co/license/#sfxFree
 
-#**Platforms**
+## Platforms
 
 - Our game can run on MacOS, Windows, and Linux
 - Files needed
