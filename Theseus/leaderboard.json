@@ -1,20 +1,20 @@
 {
     "Team Members": "Jonathan Lin, Matthew Xu, Hao Zheng",
     "Leaderboard": {
-        "testinglol": {
+        "Person_1": {
             "start_time": "1646941925",
-            "end_time": "1646941930",
-            "time_elapsed": 5.0
+            "end_time": "1646943178",
+            "time_elapsed": 1253.0
         },
-        "jeff": {
+        "Jeff": {
             "start_time": "1646941925",
-            "end_time": "1646941935",
-            "time_elapsed": 10.0
+            "end_time": "1646943225",
+            "time_elapsed": 1300.0
         },
-        "yeett": {
+        "Brian": {
             "start_time": "1646941925",
-            "end_time": "1646941931",
-            "time_elapsed": 6.0
+            "end_time": "1646942525",
+            "time_elapsed": 600.0
         }
     }
 }

@@ -4,13 +4,14 @@ var dict = {}
 
 func _ready():
 	
-	# the leaderboard is first filled with local data
+	# fetch leaderboard data
 	var file = File.new()
 	file.open("res://leaderboard.json", File.READ)
 	var text = file.get_as_text()
 	dict = parse_json(text)
 	file.close()
 	
+
 	fill_leaderboard()
 	
 	$HTTPRequest_test.request("https://theseusleaderboardserver.jonathanlin04.repl.co/test")
@@ -65,6 +66,27 @@ func fill_leaderboard():
 		
 		$ScrollContainer/Label.text = display_text.substr(0, len(display_text) -1)
 
+func sync_leaderboard():
+	var file = File.new()
+	file.open("res://leaderboard.json", File.READ)
+	var text = file.get_as_text()
+	var local_dict = parse_json(text)
+	file.close()
+	
+	for username in local_dict["Leaderboard"].keys():
+		if dict["Leaderboard"].keys().find(username) == -1:
+			
+			
+			var URL = "https://theseusleaderboardserver.jonathanlin04.repl.co/"
+			
+			URL = URL + username + "/" + str((local_dict["Leaderboard"][username]["start_time"])) + "/" + str((local_dict["Leaderboard"][username]["end_time"]))
+
+			$HTTPRequest_sync.request(URL)
+	
+	var leaderboard_URL = "https://theseusleaderboardserver.jonathanlin04.repl.co/leaderboard"
+	
+	$HTTPRequest_leaderboard.request(leaderboard_URL)
+	
 func _on_HTTPRequest_test_request_completed(result, response_code, headers, body):
 	
 	# see if the returned statement is what it is supposed to be
@@ -80,4 +102,11 @@ func _on_HTTPRequest_leaderboard_request_completed(result, response_code, header
 	# check again to see if the received info is valid
 	if json != null:
 		dict = json
+		
 		fill_leaderboard()
+		
+		sync_leaderboard()
+
+
+func _on_HTTPRequest_sync_request_completed(result, response_code, headers, body):
+	pass # Replace with function body.

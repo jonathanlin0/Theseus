@@ -17,6 +17,7 @@ func _input(event):
 	if event.is_action_pressed("ui_cancel") and showing_controls == true:
 		showing_controls = false
 		$Controls.visible = false
+		$Multiplayer_Controls.visible = false
 
 func pause():
 	var new_pause_state = not get_tree().paused
@@ -54,7 +55,10 @@ func _on_Exit_pressed():
 
 func _on_Controls_pressed():
 	showing_controls = true
-	$Controls.visible = true
+	if get_tree().get_current_scene().name == "Multiplayer":
+		$Multiplayer_Controls.visible = true
+	else:
+		$Controls.visible = true
 
 func _on_MasterVolume_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear2db(value))
