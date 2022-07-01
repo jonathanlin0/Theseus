@@ -1,0 +1,70 @@
+{
+    "Team Members": "Jonathan Lin, Matthew Xu, Hao Zheng",
+    "Leaderboard": {
+        "BlueOnion": {
+            "start_time": "1646941925",
+            "end_time": "1646941935",
+            "time_elapsed": 10.0
+        },
+        "RedLeaf": {
+            "start_time": "1646941925",
+            "end_time": "1646941931",
+            "time_elapsed": 6.0
+        },
+        "PurpleLemon": {
+            "start_time": "1646941925",
+            "end_time": "1646941935",
+            "time_elapsed": 10.0
+        },
+        "GreenSky": {
+            "start_time": "0",
+            "end_time": "1647969249",
+            "time_elapsed": 1647969249.0
+        },
+        "Green_Onion": {
+            "start_time": "0",
+            "end_time": "1647972550",
+            "time_elapsed": 1647972550.0
+        },
+        "Hao_The_Bao": {
+            "start_time": "0",
+            "end_time": "1656011411",
+            "time_elapsed": 1656011411.0
+        },
+        "Zheng_John": {
+            "start_time": "1656011468",
+            "end_time": "1656011507",
+            "time_elapsed": 39.0
+        },
+        "Jonathan_Lin": {
+            "start_time": "1656223610",
+            "end_time": "1656223938",
+            "time_elapsed": 328.0
+        },
+        "matt": {
+            "start_time": "1656463887",
+            "end_time": "1656464124",
+            "time_elapsed": 237.0
+        },
+        "matt_yay": {
+            "start_time": "1656466817",
+            "end_time": "1656466952",
+            "time_elapsed": 135.0
+        },
+        "Person_1": {
+            "start_time": "1646941925",
+            "end_time": "1646943178",
+            "time_elapsed": 1253.0
+        },
+        "Jeff": {
+            "start_time": "1646941925",
+            "end_time": "1646943225",
+            "time_elapsed": 1300.0
+        },
+        "Brian": {
+            "start_time": "1646941925",
+            "end_time": "1646942525",
+            "time_elapsed": 600.0
+        }
+    }
+}

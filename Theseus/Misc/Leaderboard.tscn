@@ -89,5 +89,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HTTPRequest_sync" type="HTTPRequest" parent="."]
+
 [connection signal="request_completed" from="HTTPRequest_test" to="." method="_on_HTTPRequest_test_request_completed"]
 [connection signal="request_completed" from="HTTPRequest_leaderboard" to="." method="_on_HTTPRequest_leaderboard_request_completed"]
+[connection signal="request_completed" from="HTTPRequest_sync" to="." method="_on_HTTPRequest_sync_request_completed"]
