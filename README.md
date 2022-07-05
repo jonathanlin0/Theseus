@@ -205,6 +205,11 @@ How
 
 - Our server is hosted for free on Repl. We used Django and Python to create an Application Programming Interface (API) to handle HTTP requests from the game. The game uses GET HTTP requests to communicate with the server.
 
+## Source Code Layout
+- The folder `Theseus` contains the source code for the client (game).
+- The folder `Theseus_Leaderboard_Server` contains the code for the leaderboard database.
+- The folder `Theseus_Multiplayer_Server` contains the code for the online multiplayer server.
+
 ## Why Godot
 
 - Free and open source - Godot is both free and open source, allowing us to modify the game engine if needed. And since Godot is built using Godot, we can go into its source code and learn new things. There is also a very strong and healthy community around Godot always willing to help.
@@ -227,3 +232,19 @@ How
   - Windows: Theseus.exe and Theseus.pck
   - MacOS: Theseus.dmg
   - Linux: Theseus.x86\_64
+
+## How To Deploy Online Multiplayer
+
+### Local Area Network (LAN)
+- Run `Theseus_Multiplayer_Server.exe` on a Windows computer
+- Navigate to the `Server.gd` file of the Theseus client source code
+- Change the IP variable in `Server.gd` to the local IP address of your network
+- Export the client through Godot
+- Now running online multiplayer mode in the exported client from any computer connected to the same network will join the same server
+
+### Virtual Private Server (VPS)
+- Deploy `Theseus_Multiplayer_Server.exe` - the process will differ depending on the specific VPS
+- Navigate to the `Server.gd` file of the Theseus client source code
+- Change the IP variable in `Server.gd` to the IP address of your VPS
+- Export the client through Godot
+- Now running the new exported client will connect the server that is being hosted on your VPS
