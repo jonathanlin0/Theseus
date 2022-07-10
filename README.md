@@ -8,6 +8,21 @@ Future Business Leaders of America: Computer Game and Simulation Programming
 
 </br>
 
+## How to Run
+
+MacOS
+- Download `Theseus.dmg` from the above source code or download the entire project file
+- Open/run the `Theseus.dmg` file
+- Approve any security requests that your computer is requesting
+- Once the dmg file window opens, double click the Theseus game icon
+
+Windows
+- Download `Theseus.exe` and `Theseus.pck` from the above source code or download the entire project file
+- Ensure that `Theseus.exe` and `Theseus.pck` are in the same folder
+- Open/run the `Theseus.exe` file
+- Approve any security requests that your computer is requesting
+
+
 ## Background Information
 
 Our game follows the story of Theseus and the Minotaur. In the Greek myth, fourteen-year-old Theseus was chosen by King Minos to be an annual sacrifice to the Minotaur, an abomination of a human with a bull’s head that was imprisoned in a labyrinth under Crete. The intricate labyrinth was constructed by Deadalus, a master engineer who was also responsible for the creation of the Minotaur. Rather than accepting his fate, Theseus, with the guidance of princess Ariadne, sought and defeated the Minotaur, cementing his position in Greek mythology as a warrior legend.
