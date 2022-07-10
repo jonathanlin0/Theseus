@@ -43,11 +43,22 @@ w | walk upward
 
 a | walk left
 
-s | walk downward d | walk right
+s | walk downward
 
-1 | fireball weapon select 2 | lightning weapon select 3 | freeze weapon select
+d | walk right
 
-mouse left-click | shoot the ranged weapon mouse right-click | melee attack
+</br>
+
+1 | fireball weapon select
+
+2 | lightning weapon select
+
+3 | freeze weapon select
+
+mouse left-click | shoot the ranged weapon
+mouse right-click | melee attack
+
+</br>
 
 shift key | sprint
 
@@ -55,7 +66,10 @@ space key | interact with signs and chests
 
 ESC | pause the game
 
-Arrow up key | walk upward (player 2) Arrow down key | walk downward (player 2) Arrow right key | walk right (player 2) Arrow left key | walk left (player 2)
+Arrow up key | walk upward (player 2)
+Arrow down key | walk downward (player 2)
+Arrow right key | walk right (player 2)
+Arrow left key | walk left (player 2)
 
 Enter key | shoot (player 2)
 
