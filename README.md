@@ -22,6 +22,12 @@ Windows
 - Open/run the `Theseus.exe` file
 - Approve any security requests that your computer is requesting
 
+Linux
+- Ensure your Linux operating system is 64 bit
+- Download `Theseus.x86_64` from the above source code or download the entire project file
+- Open/run the `Theseus.x86_64` file
+- Approve any security requests that your computer is requesting
+
 
 ## Background Information
 
