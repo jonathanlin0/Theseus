@@ -21,6 +21,7 @@ func _ready():
 
 # this function is used to test the sending of data between the client and server
 func fetch_test_data():
+	# good tutorial for Godot network/server tutorial: https://www.youtube.com/watch?v=lnFN6YabFKg&list=PLZ-54sd-DMAKU8Neo5KsVmq8KtoDkfi4s&ab_channel=GameDevelopmentCenter
 	# rpc() calls every peer on the network
 	# rpc_id() allows you to call a specific peer on the network
 	# rpc and rpc_id communicates w server and waits for a response from them, latency for client to wait for response from server. ensures that server received signal and sent back another one
@@ -30,6 +31,9 @@ func fetch_test_data():
 	# 0 is everybody
 	# 1 is the server
 	# any other number is the specific peer you want to connect to
+	# found in 33:46 timestamp in tutorial
+	# rpc is like TCP
+	# rpc_unreliable is like UDP
 	rpc_id(1, "fetch_test_data")
 
 func fetch_connection():
