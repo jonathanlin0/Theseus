@@ -2,7 +2,9 @@
 
 ![](readme_images/theseus_icon.png)
 
-Jonathan Lin, Matthew Xu, and Hao Zheng James E. Taylor High School
+Jonathan Lin, Matthew Xu, and Hao Zheng
+
+James E. Taylor High School
 
 Future Business Leaders of America: Computer Game and Simulation Programming
 
