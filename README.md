@@ -8,6 +8,11 @@ James E. Taylor High School
 
 Future Business Leaders of America: Computer Game and Simulation Programming
 
+## Awards (2022)
+- FBLA Nationals 2nd Place
+- FBLA States 1st Place
+- FBLA Regionals 1st Place
+
 </br>
 
 ## How to Run
